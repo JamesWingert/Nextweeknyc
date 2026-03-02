@@ -1,0 +1,24 @@
+{
+  "weekOf": "2026-03-02",
+  "events": [
+    {
+      "id": "1",
+      "title": "The Godfather - 35mm Screening",
+      "venue": "Metrograph",
+      "date": "2026-03-05",
+      "time": "19:30",
+      "category": "Film",
+      "sourceUrl": "https://metrograph.com",
+      "description": "Francis Ford Coppola's masterpiece on 35mm",
+      "price": "$15"
+    },
+    {
+      "id": "2",
+      "title": "Van Gogh Experience",
+      "venue": "The Met",
+      "date": "2026-03-04",
+      "category": "Museums/Art",
+      "sourceUrl": "https://metmuseum.org"
+    }
+  ]
+}
