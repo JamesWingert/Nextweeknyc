@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Event, Category, EventsData } from '@/lib/types';
-import { format, parseISO } from 'date-fns';
+import { format, parseISO, isBefore, startOfDay } from 'date-fns';
 
 const categories: { key: Category; label: string; color: string }[] = [
   { key: 'Film', label: 'Film', color: '#ef4444' },
@@ -20,6 +20,7 @@ export default function Home() {
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
   const [viewMode, setViewMode] = useState<'list' | 'calendar'>('list');
   const [loading, setLoading] = useState(true);
+  const [today] = useState(() => startOfDay(new Date()));
 
   useEffect(() => {
     Promise.all([
@@ -31,13 +32,15 @@ export default function Home() {
       const uniqueEvents = allEvents.filter((event, index, self) => 
         index === self.findIndex(e => e.id === event.id)
       );
+      // Filter out past events
+      const futureEvents = uniqueEvents.filter(e => !isBefore(parseISO(e.date), today));
       setEventsData({
-        weekOf: generalData.weekOf || filmData.weekOf || '2026-03-03',
-        events: uniqueEvents
+        weekOf: generalData.weekOf || filmData.weekOf || '2026-03-09',
+        events: futureEvents
       });
       setLoading(false);
     }).catch(() => setLoading(false));
-  }, []);
+  }, [today]);
 
   const toggleCategory = (category: Category) => {
     setSelectedCategories(prev =>
@@ -68,7 +71,7 @@ export default function Home() {
             Week of {format(parseISO(eventsData.weekOf), 'MMMM d, yyyy')}
           </p>
         )}
-        <p className="text-neutral-500 text-sm mt-2">{filteredEvents.length} events found</p>
+        <p className="text-neutral-500 text-sm mt-2">{filteredEvents.length} upcoming events</p>
       </header>
 
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
@@ -172,7 +175,7 @@ function EventList({ events }: { events: Event[] }) {
       ))}
       
       {events.length === 0 && (
-        <p className="text-neutral-500 text-center py-12">No events found.</p>
+        <p className="text-neutral-500 text-center py-12">No upcoming events found.</p>
       )}
     </div>
   );
