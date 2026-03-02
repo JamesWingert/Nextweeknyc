@@ -3,24 +3,25 @@
  * Scrape NYC General Events
  *
  * Sources (8):
- *   - doNYC              (concerts, nightlife, comedy)
- *   - The Skint           (free/cheap events)
- *   - Time Out NY         (curated picks)
- *   - Secret NYC          (things to do)
- *   - Brooklyn Magazine   (Brooklyn events)
- *   - NYC Parks           (free outdoor events, all boroughs)
- *   - Eventbrite NYC      (community events, workshops, pop-ups)
- *   - Playbill            (Broadway + Off-Broadway)
+ *   - doNYC              (concerts, nightlife, comedy) — cheerio, per-day URLs
+ *   - The Skint           (free/cheap events) — cheerio, homepage + ongoing
+ *   - Time Out NY         (curated picks) — cheerio
+ *   - Secret NYC          (things to do) — cheerio
+ *   - Brooklyn Paper      (Brooklyn events) — cheerio
+ *   - NYC Parks           (free outdoor events) — cheerio
+ *   - Eventbrite NYC      (community events) — Playwright (JS-rendered)
+ *   - Playbill            (Broadway + Off-Broadway) — cheerio
+ *
+ * Uses cheerio (fetch+parse) by default, Playwright only where needed.
  *
  * Outputs JSON array to stdout. Pipe through validate-events.js:
  *   node scripts/scrape-general-events.js > /tmp/raw-events.json
  *   node scripts/validate-events.js /tmp/raw-events.json public/data/events.json
- *
- * Dynamic week: runs on Sunday, populates next Mon–Sun.
- * Override with WEEK_START / WEEK_END env vars (YYYY-MM-DD).
  */
 
-const { chromium } = require('playwright');
+const cheerio = require('cheerio');
+const https = require('https');
+const http = require('http');
 
 const events = [];
 
@@ -47,18 +48,104 @@ const WEEK = nextWeekRange();
 const RANGE = `${WEEK.start} to ${WEEK.end}`;
 console.error(`Week range: ${RANGE}`);
 
-async function withPage(browser, fn) {
-  const page = await browser.newPage();
-  page.setDefaultTimeout(20000);
-  try { await fn(page); } catch (e) { /* handled per-source */ } finally { await page.close(); }
+// ---------------------------------------------------------------------------
+// HTTP fetch helper (Node 18 compatible — no global fetch)
+// ---------------------------------------------------------------------------
+
+function fetchHTML(url, maxRedirects = 5) {
+  return new Promise((resolve, reject) => {
+    const mod = url.startsWith('https') ? https : http;
+    const timer = setTimeout(() => reject(new Error('Timeout after 20s')), 20000);
+    mod.get(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+      },
+    }, (res) => {
+      if ([301, 302, 303, 307, 308].includes(res.statusCode) && res.headers.location && maxRedirects > 0) {
+        clearTimeout(timer);
+        const next = res.headers.location.startsWith('http') ? res.headers.location : new URL(res.headers.location, url).href;
+        return fetchHTML(next, maxRedirects - 1).then(resolve).catch(reject);
+      }
+      let data = '';
+      res.on('data', c => data += c);
+      res.on('end', () => { clearTimeout(timer); resolve({ status: res.statusCode, html: data }); });
+      res.on('error', e => { clearTimeout(timer); reject(e); });
+    }).on('error', e => { clearTimeout(timer); reject(e); });
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Date helpers
+// ---------------------------------------------------------------------------
+
+function parseHumanDate(str) {
+  if (!str) return null;
+  const s = str.trim().replace(/\s+/g, ' ');
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  const isoMatch = s.match(/^(\d{4}-\d{2}-\d{2})[T ]/);
+  if (isoMatch) return isoMatch[1];
+
+  const MONTHS = {
+    jan:0,january:0,feb:1,february:1,mar:2,march:2,apr:3,april:3,
+    may:4,jun:5,june:5,jul:6,july:6,aug:7,august:7,sep:8,september:8,
+    oct:9,october:9,nov:10,november:10,dec:11,december:11
+  };
+
+  // "March 5, 2026" or "Mar 5"
+  const m1 = s.match(/^([a-z]+)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
+  if (m1) {
+    const mon = MONTHS[m1[1].toLowerCase()];
+    if (mon !== undefined) {
+      const day = parseInt(m1[2], 10);
+      const year = m1[3] ? parseInt(m1[3], 10) : new Date(WEEK.start).getFullYear();
+      const d = new Date(year, mon, day);
+      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    }
+  }
+
+  // "5 March 2026"
+  const m2 = s.match(/^(\d{1,2})\s+([a-z]+)(?:\s*,?\s*(\d{4}))?/i);
+  if (m2) {
+    const mon = MONTHS[m2[2].toLowerCase()];
+    if (mon !== undefined) {
+      const day = parseInt(m2[1], 10);
+      const year = m2[3] ? parseInt(m2[3], 10) : new Date(WEEK.start).getFullYear();
+      const d = new Date(year, mon, day);
+      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    }
+  }
+
+  // MM/DD/YYYY
+  const m3 = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+  if (m3) {
+    const d = new Date(parseInt(m3[3],10), parseInt(m3[1],10)-1, parseInt(m3[2],10));
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+
+  return null;
 }
 
 function push(items, venue, category, fallbackUrl) {
   items.forEach(item => {
+    let date = item.date || null;
+    if (date && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
+      if (date < WEEK.start || date > WEEK.end) date = RANGE;
+    } else if (date && /^\d{4}-\d{2}-\d{2}[T ]/.test(date)) {
+      const d = date.slice(0, 10);
+      date = (d >= WEEK.start && d <= WEEK.end) ? d : RANGE;
+    } else {
+      const parsed = parseHumanDate(date);
+      if (parsed && parsed >= WEEK.start && parsed <= WEEK.end) {
+        date = parsed;
+      } else {
+        date = RANGE;
+      }
+    }
     events.push({
       title: (item.title || '').trim(),
       venue: item.venue || venue,
-      date: item.date || RANGE,
+      date,
       category,
       url: item.link || item.url || fallbackUrl,
       ...(item.time ? { time: item.time } : {}),
@@ -68,203 +155,271 @@ function push(items, venue, category, fallbackUrl) {
 }
 
 // ---------------------------------------------------------------------------
-// Sources
+// Sources — cheerio-based
 // ---------------------------------------------------------------------------
 
-async function scrapeDoNYC(browser) {
-  await withPage(browser, async (page) => {
+async function scrapeDoNYC() {
+  // Per-day URLs: /events/YYYY/M/D — each page has events for that specific date
+  const startParts = WEEK.start.split('-').map(Number);
+  const startDate = new Date(startParts[0], startParts[1] - 1, startParts[2]);
+
+  for (let dayOffset = 0; dayOffset < 7; dayOffset++) {
+    const d = new Date(startDate);
+    d.setDate(startDate.getDate() + dayOffset);
+    const y = d.getFullYear(), m = d.getMonth() + 1, day = d.getDate();
+    const dateStr = `${y}-${String(m).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    const url = `https://donyc.com/events/${y}/${m}/${day}`;
+
     try {
-      await page.goto('https://donyc.com/events', { waitUntil: 'domcontentloaded' });
-      await page.waitForTimeout(4000);
-      const items = await page.evaluate(() => {
-        const r = [];
-        document.querySelectorAll('.event-card, .event, [class*="event"], .card').forEach(el => {
-          const t = el.querySelector('h2, h3, h4, .title, [class*="title"]')?.textContent?.trim();
-          const venue = el.querySelector('.venue, [class*="venue"]')?.textContent?.trim();
-          const link = el.querySelector('a')?.href;
-          if (t && t.length > 3) r.push({ title: t, venue, link });
-        });
-        return r.slice(0, 40);
+      const { html } = await fetchHTML(url);
+      const $ = cheerio.load(html);
+      const items = [];
+      $('.ds-listing').each((_, el) => {
+        const $el = $(el);
+        const title = $el.find('h3, .ds-listing-event-title').first().text().trim();
+        const venue = $el.find('.ds-venue-name').first().text().trim();
+        const link = $el.find('a').first().attr('href') || '';
+        const fullLink = link.startsWith('/') ? `https://donyc.com${link}` : link;
+        const time = $el.find('.ds-event-time').first().text().trim();
+        if (title && title.length > 3) items.push({ title, venue, link: fullLink, time, date: dateStr });
       });
-      push(items, 'doNYC', 'Other', 'https://donyc.com');
-      console.error(`doNYC: ${items.length}`);
-    } catch (e) { console.error('doNYC error:', e.message); }
-  });
+      push(items, 'doNYC', 'Other', url);
+      console.error(`doNYC ${dateStr}: ${items.length}`);
+    } catch (e) { console.error(`doNYC ${dateStr} error:`, e.message); }
+  }
 }
 
-async function scrapeTheSkint(browser) {
-  await withPage(browser, async (page) => {
-    try {
-      await page.goto('https://theskint.com/', { waitUntil: 'domcontentloaded' });
-      await page.waitForTimeout(4000);
-      const items = await page.evaluate(() => {
-        const r = [];
-        document.querySelectorAll('.event, .post, article, [class*="event"]').forEach(el => {
-          const t = el.querySelector('h2, h3, .entry-title, [class*="title"]')?.textContent?.trim();
-          const link = el.querySelector('a')?.href;
-          if (t && t.length > 3 && t.length < 120) r.push({ title: t, link });
-        });
-        return r.slice(0, 30);
-      });
-      push(items, 'The Skint', 'Other', 'https://theskint.com');
-      console.error(`The Skint: ${items.length}`);
-    } catch (e) { console.error('The Skint error:', e.message); }
-  });
+async function scrapeTheSkint() {
+  // Homepage — daily picks (blog-post style, titles contain date info)
+  try {
+    const { html } = await fetchHTML('https://theskint.com/');
+    const $ = cheerio.load(html);
+    const items = [];
+    $('article, .post').each((_, el) => {
+      const $el = $(el);
+      const title = $el.find('h2, h3, .entry-title').first().text().trim();
+      const link = $el.find('a').first().attr('href') || '';
+      if (title && title.length > 5 && title.length < 120) items.push({ title, link });
+    });
+    push(items, 'The Skint', 'Other', 'https://theskint.com');
+    console.error(`The Skint (home): ${items.length}`);
+  } catch (e) { console.error('The Skint home error:', e.message); }
+
+  // Ongoing events page — curated list of ongoing NYC events
+  try {
+    const { html } = await fetchHTML('https://theskint.com/ongoing-events/');
+    const $ = cheerio.load(html);
+    const items = [];
+    // Events are in paragraphs with bold titles and ► markers
+    $('.entry-content p').each((_, el) => {
+      const $el = $(el);
+      const text = $el.text().trim();
+      const bold = $el.find('b, strong').first().text().trim();
+      const link = $el.find('a').last().attr('href') || '';
+      if (bold && bold.length > 3 && bold.length < 100 && text.length > 10) {
+        items.push({ title: bold, link, description: text.slice(0, 200) });
+      }
+    });
+    push(items, 'The Skint', 'Other', 'https://theskint.com/ongoing-events/');
+    console.error(`The Skint (ongoing): ${items.length}`);
+  } catch (e) { console.error('The Skint ongoing error:', e.message); }
 }
 
-async function scrapeTimeOut(browser) {
-  await withPage(browser, async (page) => {
-    try {
-      await page.goto('https://www.timeout.com/newyork/things-to-do/this-week-in-new-york', { waitUntil: 'domcontentloaded' });
-      await page.waitForTimeout(4000);
-      const items = await page.evaluate(() => {
-        const r = [];
-        document.querySelectorAll('[data-testid*="event"], .event, [class*="eventCard"], article, h3').forEach(el => {
-          const t = el.querySelector('h3, h2, [data-testid*="title"], [class*="title"]')?.textContent?.trim() || el.textContent?.trim();
-          const venue = el.querySelector('[data-testid*="venue"], [class*="venue"]')?.textContent?.trim();
-          const link = el.closest('a')?.href || el.querySelector('a')?.href;
-          if (t && t.length > 5 && t.length < 120) r.push({ title: t, venue, link });
-        });
-        return r.slice(0, 30);
-      });
-      push(items, 'Time Out NY', 'Other', 'https://www.timeout.com/newyork');
-      console.error(`Time Out: ${items.length}`);
-    } catch (e) { console.error('Time Out error:', e.message); }
-  });
+async function scrapeTimeOut() {
+  // /things-to-do is the working URL (not /this-week-in-new-york which 404s)
+  try {
+    const { html } = await fetchHTML('https://www.timeout.com/newyork/things-to-do');
+    const $ = cheerio.load(html);
+    const items = [];
+    $('article, [class*="card"], [class*="tile"]').each((_, el) => {
+      const $el = $(el);
+      const title = $el.find('h2, h3, [class*="title"]').first().text().trim();
+      const link = $el.find('a').first().attr('href') || '';
+      const fullLink = link.startsWith('/') ? `https://www.timeout.com${link}` : link;
+      const rawDate = $el.find('time[datetime]').first().attr('datetime') || '';
+      if (title && title.length > 5 && title.length < 120) items.push({ title, link: fullLink, date: rawDate });
+    });
+    push(items, 'Time Out NY', 'Other', 'https://www.timeout.com/newyork/things-to-do');
+    console.error(`Time Out: ${items.length}`);
+  } catch (e) { console.error('Time Out error:', e.message); }
 }
 
-async function scrapeSecretNYC(browser) {
-  // Main events page
-  await withPage(browser, async (page) => {
-    try {
-      await page.goto('https://secretnyc.co/events/', { waitUntil: 'domcontentloaded' });
-      await page.waitForTimeout(3000);
-      try {
-        const btn = await page.$('button[class*="cookie"], button[id*="accept"], .accept-cookies');
-        if (btn) await btn.click();
-        await page.waitForTimeout(2000);
-      } catch (_) {}
-      const items = await page.evaluate(() => {
-        const r = [];
-        document.querySelectorAll('.event, article, [class*="event"], .post').forEach(el => {
-          const t = el.querySelector('h2, h3, .title, [class*="title"]')?.textContent?.trim();
-          const link = el.querySelector('a')?.href;
-          if (t && t.length > 5 && t.length < 120) r.push({ title: t, link });
-        });
-        return r.slice(0, 30);
-      });
-      push(items, 'Secret NYC', 'Other', 'https://secretnyc.co');
-      console.error(`Secret NYC (events): ${items.length}`);
-    } catch (e) { console.error('Secret NYC events error:', e.message); }
-  });
-
-  // Weekend roundup — great for Sunday runs, catches weekend + multi-day events
-  await withPage(browser, async (page) => {
-    try {
-      await page.goto('https://secretnyc.co/what-to-do-this-weekend-nyc/', { waitUntil: 'domcontentloaded' });
-      await page.waitForTimeout(3000);
-      try {
-        const btn = await page.$('button[class*="cookie"], button[id*="accept"], .accept-cookies');
-        if (btn) await btn.click();
-        await page.waitForTimeout(2000);
-      } catch (_) {}
-      const items = await page.evaluate(() => {
-        const r = [];
-        // Article-style page — grab headings and list items that look like event names
-        document.querySelectorAll('article h2, article h3, article li, .entry-content h2, .entry-content h3').forEach(el => {
-          const t = el.textContent?.trim();
-          const link = el.querySelector('a')?.href || el.closest('a')?.href;
-          if (t && t.length > 5 && t.length < 120) r.push({ title: t, link });
-        });
-        return r.slice(0, 30);
-      });
-      push(items, 'Secret NYC', 'Other', 'https://secretnyc.co/what-to-do-this-weekend-nyc/');
-      console.error(`Secret NYC (weekend): ${items.length}`);
-    } catch (e) { console.error('Secret NYC weekend error:', e.message); }
-  });
+async function scrapeSecretNYC() {
+  try {
+    const { html } = await fetchHTML('https://secretnyc.co/events/');
+    const $ = cheerio.load(html);
+    const items = [];
+    $('article, .event, .post').each((_, el) => {
+      const $el = $(el);
+      const title = $el.find('h2, h3, .title').first().text().trim();
+      const link = $el.find('a').first().attr('href') || '';
+      const rawDate = $el.find('time[datetime]').first().attr('datetime') || '';
+      if (title && title.length > 5 && title.length < 120) items.push({ title, link, date: rawDate });
+    });
+    push(items, 'Secret NYC', 'Other', 'https://secretnyc.co/events/');
+    console.error(`Secret NYC: ${items.length}`);
+  } catch (e) { console.error('Secret NYC error:', e.message); }
 }
 
-async function scrapeBrooklynMag(browser) {
-  await withPage(browser, async (page) => {
-    try {
-      await page.goto('https://brooklynmagazine.com/events/', { waitUntil: 'domcontentloaded' });
-      await page.waitForTimeout(4000);
-      const items = await page.evaluate(() => {
-        const r = [];
-        document.querySelectorAll('.event, article, [class*="event"]').forEach(el => {
-          const t = el.querySelector('h2, h3, .title, [class*="title"]')?.textContent?.trim();
-          const link = el.querySelector('a')?.href;
-          if (t && t.length > 3 && t.length < 120) r.push({ title: t, link });
-        });
-        return r.slice(0, 30);
-      });
-      push(items, 'Brooklyn Magazine', 'Other', 'https://brooklynmagazine.com');
-      console.error(`Brooklyn Magazine: ${items.length}`);
-    } catch (e) { console.error('Brooklyn Magazine error:', e.message); }
-  });
+async function scrapeBrooklynPaper() {
+  try {
+    const { html } = await fetchHTML('https://events.brooklynpaper.com/event/');
+    const $ = cheerio.load(html);
+    const items = [];
+    // Brooklyn Paper uses h2 date headers + h3 event titles
+    let currentDate = '';
+    $('h2, h3').each((_, el) => {
+      const $el = $(el);
+      const tag = $el.prop('tagName');
+      const text = $el.text().trim();
+      if (tag === 'H2') {
+        // Date header like "Monday March 2, 2026"
+        const parsed = parseHumanDate(text.replace(/^(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\s+/i, ''));
+        if (parsed) currentDate = parsed;
+      } else if (tag === 'H3' && text.length > 3 && text.length < 120) {
+        const link = $el.find('a').first().attr('href') || $el.closest('a').attr('href') || '';
+        items.push({ title: text, link, date: currentDate || '' });
+      }
+    });
+    push(items, 'Brooklyn Paper', 'Other', 'https://events.brooklynpaper.com');
+    console.error(`Brooklyn Paper: ${items.length}`);
+  } catch (e) { console.error('Brooklyn Paper error:', e.message); }
 }
 
-async function scrapeNYCParks(browser) {
-  await withPage(browser, async (page) => {
-    try {
-      await page.goto('https://www.nycgovparks.org/events', { waitUntil: 'domcontentloaded' });
-      await page.waitForTimeout(4000);
-      const items = await page.evaluate(() => {
-        const r = [];
-        document.querySelectorAll('[class*="event"], .card, article, tr, li').forEach(el => {
-          const t = el.querySelector('h2, h3, h4, a, .title, [class*="title"]')?.textContent?.trim();
-          const venue = el.querySelector('[class*="location"], [class*="park"]')?.textContent?.trim();
-          const link = el.querySelector('a')?.href;
-          if (t && t.length > 5 && t.length < 120) r.push({ title: t, venue, link });
-        });
-        return r.slice(0, 30);
+async function scrapeNYCParks() {
+  try {
+    const { html } = await fetchHTML('https://www.nycgovparks.org/events');
+    const $ = cheerio.load(html);
+    const items = [];
+    // NYC Parks has itemprop="startDate" with ISO dates
+    $('[itemtype*="Event"], .event_listing').each((_, el) => {
+      const $el = $(el);
+      const title = $el.find('[itemprop="name"], h3, h4').first().text().trim();
+      const venue = $el.find('[itemprop="location"], [class*="location"]').first().text().trim();
+      const link = $el.find('a').first().attr('href') || '';
+      const fullLink = link.startsWith('/') ? `https://www.nycgovparks.org${link}` : link;
+      const rawDate = $el.find('[itemprop="startDate"]').first().attr('content')
+        || $el.find('meta[itemprop="startDate"]').first().attr('content') || '';
+      if (title && title.length > 5 && title.length < 120) items.push({ title, venue, link: fullLink, date: rawDate });
+    });
+    // Fallback: generic event rows
+    if (items.length === 0) {
+      $('tr, [class*="event"]').each((_, el) => {
+        const $el = $(el);
+        const title = $el.find('a, h3, h4').first().text().trim();
+        const rawDate = $el.find('[class*="date"]').first().text().trim();
+        const link = $el.find('a').first().attr('href') || '';
+        const fullLink = link.startsWith('/') ? `https://www.nycgovparks.org${link}` : link;
+        if (title && title.length > 5 && title.length < 120) items.push({ title, link: fullLink, date: rawDate });
       });
-      push(items, 'NYC Parks', 'Outdoor/Parks', 'https://www.nycgovparks.org/events');
-      console.error(`NYC Parks: ${items.length}`);
-    } catch (e) { console.error('NYC Parks error:', e.message); }
-  });
+    }
+    push(items, 'NYC Parks', 'Outdoor/Parks', 'https://www.nycgovparks.org/events');
+    console.error(`NYC Parks: ${items.length}`);
+  } catch (e) { console.error('NYC Parks error:', e.message); }
 }
+
+async function scrapePlaybill() {
+  try {
+    const { html } = await fetchHTML('https://playbill.com/productions');
+    const $ = cheerio.load(html);
+    const items = [];
+    const seen = new Set();
+    // Playbill uses direct links to /production/ pages
+    $('a[href*="/production/"]').each((_, el) => {
+      const $el = $(el);
+      const title = $el.text().trim();
+      const link = $el.attr('href') || '';
+      const fullLink = link.startsWith('/') ? `https://playbill.com${link}` : link;
+      // Skip nav/footer links and dupes
+      if (title && title.length > 3 && title.length < 120
+          && !seen.has(title.toLowerCase())
+          && !/^(see all|view|more|production)/i.test(title)) {
+        seen.add(title.toLowerCase());
+        items.push({ title, link: fullLink });
+      }
+    });
+    push(items, 'Broadway', 'Theater', 'https://playbill.com/productions');
+    console.error(`Playbill: ${items.length}`);
+  } catch (e) { console.error('Playbill error:', e.message); }
+}
+
+// ---------------------------------------------------------------------------
+// Sources — Playwright (JS-rendered sites)
+// ---------------------------------------------------------------------------
 
 async function scrapeEventbrite(browser) {
-  await withPage(browser, async (page) => {
-    try {
-      await page.goto('https://www.eventbrite.com/d/ny--new-york/events--this-week/', { waitUntil: 'domcontentloaded' });
-      await page.waitForTimeout(5000);
-      const items = await page.evaluate(() => {
-        const r = [];
-        document.querySelectorAll('[class*="event-card"], [class*="search-event"], article, [data-testid*="event"]').forEach(el => {
-          const t = el.querySelector('h2, h3, h4, [class*="title"]')?.textContent?.trim();
-          const venue = el.querySelector('[class*="location"], [class*="venue"]')?.textContent?.trim();
-          const link = el.querySelector('a')?.href;
-          if (t && t.length > 5 && t.length < 120) r.push({ title: t, venue, link });
-        });
-        return r.slice(0, 25);
+  const page = await browser.newPage();
+  page.setDefaultTimeout(20000);
+  try {
+    await page.goto('https://www.eventbrite.com/d/ny--new-york/events--this-week/', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(5000);
+    const items = await page.evaluate(() => {
+      const r = [];
+      document.querySelectorAll('[class*="event-card"], [class*="search-event"], article, [data-testid*="event"]').forEach(el => {
+        const t = el.querySelector('h2, h3, h4, [class*="title"]')?.textContent?.trim();
+        const venue = el.querySelector('[class*="location"], [class*="venue"]')?.textContent?.trim();
+        const link = el.querySelector('a')?.href;
+        const dateEl = el.querySelector('time[datetime], [class*="date"]');
+        const date = dateEl?.getAttribute('datetime') || dateEl?.textContent?.trim() || '';
+        if (t && t.length > 5 && t.length < 120) r.push({ title: t, venue, link, date });
       });
-      push(items, 'Eventbrite', 'Other', 'https://www.eventbrite.com');
-      console.error(`Eventbrite: ${items.length}`);
-    } catch (e) { console.error('Eventbrite error:', e.message); }
-  });
+      return r.slice(0, 25);
+    });
+    push(items, 'Eventbrite', 'Other', 'https://www.eventbrite.com');
+    console.error(`Eventbrite: ${items.length}`);
+  } catch (e) { console.error('Eventbrite error:', e.message); }
+  finally { await page.close(); }
 }
 
-async function scrapePlaybill(browser) {
-  await withPage(browser, async (page) => {
-    try {
-      await page.goto('https://playbill.com/productions', { waitUntil: 'domcontentloaded' });
-      await page.waitForTimeout(4000);
-      const items = await page.evaluate(() => {
-        const r = [];
-        document.querySelectorAll('[class*="production"], [class*="show"], .card, article, h2, h3').forEach(el => {
-          const t = el.querySelector('h2, h3, h4, .title, [class*="title"]')?.textContent?.trim() || el.textContent?.trim();
-          const venue = el.querySelector('[class*="venue"], [class*="theater"]')?.textContent?.trim();
-          const link = el.closest('a')?.href || el.querySelector('a')?.href;
-          if (t && t.length > 3 && t.length < 120) r.push({ title: t, venue, link });
-        });
-        return r.slice(0, 30);
-      });
-      push(items, 'Broadway', 'Theater', 'https://playbill.com/productions');
-      console.error(`Playbill: ${items.length}`);
-    } catch (e) { console.error('Playbill error:', e.message); }
-  });
+// ---------------------------------------------------------------------------
+// Source tracking & report
+// ---------------------------------------------------------------------------
+
+const sourceLog = [];
+
+async function runSource(name, fn, browserOrNull) {
+  const before = events.length;
+  const start = Date.now();
+  let error = null;
+  try {
+    if (browserOrNull) await fn(browserOrNull);
+    else await fn();
+  } catch (e) {
+    error = e.message;
+  }
+  const count = events.length - before;
+  const elapsed = ((Date.now() - start) / 1000).toFixed(1);
+  const datesExtracted = events.slice(before).filter(e => e.date && !e.date.includes(' to ')).length;
+  sourceLog.push({ name, count, datesExtracted, elapsed, error });
+}
+
+function printReport() {
+  console.error('\n' + '='.repeat(70));
+  console.error('SCRAPE REPORT — General Events');
+  console.error('='.repeat(70));
+  console.error(`Week: ${RANGE}`);
+  console.error(`Total events: ${events.length}`);
+  console.error('-'.repeat(70));
+  console.error('Source'.padEnd(25) + 'Items'.padEnd(8) + 'Dates'.padEnd(8) + 'Time'.padEnd(8) + 'Method'.padEnd(10) + 'Status');
+  console.error('-'.repeat(70));
+  let failures = 0, zeroResults = 0;
+  const jsNames = new Set(['Eventbrite']);
+  for (const s of sourceLog) {
+    const status = s.error ? `ERROR: ${s.error.slice(0, 35)}` : (s.count === 0 ? '⚠ ZERO' : '✓ OK');
+    if (s.error) failures++;
+    if (s.count === 0 && !s.error) zeroResults++;
+    const method = jsNames.has(s.name) ? 'JS' : 'cheerio';
+    console.error(
+      s.name.padEnd(25) + String(s.count).padEnd(8) + String(s.datesExtracted).padEnd(8) +
+      (s.elapsed + 's').padEnd(8) + method.padEnd(10) + status
+    );
+  }
+  console.error('-'.repeat(70));
+  if (failures > 0) console.error(`⛔ ${failures} source(s) had errors`);
+  if (zeroResults > 0) console.error(`⚠  ${zeroResults} source(s) returned zero items`);
+  const totalDates = sourceLog.reduce((n, s) => n + s.datesExtracted, 0);
+  console.error(`📅 ${totalDates}/${events.length} events have specific dates`);
+  console.error('='.repeat(70) + '\n');
 }
 
 // ---------------------------------------------------------------------------
@@ -272,19 +427,27 @@ async function scrapePlaybill(browser) {
 // ---------------------------------------------------------------------------
 
 (async () => {
-  const browser = await chromium.launch({ headless: true });
+  // Cheerio sources (fast, no browser)
+  await runSource('doNYC', scrapeDoNYC);
+  await runSource('The Skint', scrapeTheSkint);
+  await runSource('Time Out NY', scrapeTimeOut);
+  await runSource('Secret NYC', scrapeSecretNYC);
+  await runSource('Brooklyn Paper', scrapeBrooklynPaper);
+  await runSource('NYC Parks', scrapeNYCParks);
+  await runSource('Playbill', scrapePlaybill);
 
-  await scrapeDoNYC(browser);
-  await scrapeTheSkint(browser);
-  await scrapeTimeOut(browser);
-  await scrapeSecretNYC(browser);
-  await scrapeBrooklynMag(browser);
-  await scrapeNYCParks(browser);
-  await scrapeEventbrite(browser);
-  await scrapePlaybill(browser);
+  // Playwright sources (only Eventbrite truly needs JS)
+  let browser = null;
+  try {
+    const { chromium } = require('playwright');
+    browser = await chromium.launch({ headless: true });
+    await runSource('Eventbrite', scrapeEventbrite, browser);
+  } catch (e) {
+    console.error('Playwright unavailable, skipping JS sources:', e.message);
+  } finally {
+    if (browser) await browser.close();
+  }
 
-  await browser.close();
-
-  console.error(`\nTotal: ${events.length} general events for ${RANGE}`);
+  printReport();
   console.log(JSON.stringify(events, null, 2));
 })();
