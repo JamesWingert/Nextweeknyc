@@ -1,643 +1,658 @@
-{
-  "weekOf": "2026-03-09",
-  "events": [
-    {
-      "id": "skint-carnegie-mcp-march9",
-      "title": "Manhattan Concert Productions at Carnegie Hall",
-      "venue": "Carnegie Hall (Stern Auditorium)",
-      "date": "2026-03-09",
-      "time": "8:00 PM",
-      "category": "Classical Music",
-      "sourceUrl": "https://theskint.com/",
-      "description": "The series opens in Stern Auditorium with an evening spanning Mozart, contemporary choral masterworks, and gospel-inspired triumphs. Featuring Young musicians from Suzuki Music Academy and Cesar Chavez Academy, Octavo Series Chorus, and Festival Octavo Series Chorus performing works by Runestad, Vaughan Williams, Mozart, and Richard Smallwood's Total Praise.",
-      "price": "$9 with promo code CLB53914"
-    },
-    {
-      "id": "donyc-mitski-march9",
-      "title": "Mitski: Nothing's About to Happen to Me Tour",
-      "venue": "The Shed at Hudson Yards",
-      "date": "2026-03-09",
-      "time": "8:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/09",
-      "description": "The indie-pop priestess returns to NYC for the final night of her six-night residency supporting her eighth studio album. Featuring theatrical precision and raw, folk-punk intensity.",
-      "price": "$46+"
-    },
-    {
-      "id": "donyc-moth-storyslam-march9",
-      "title": "The Moth Storyslam",
-      "venue": "The Bell House",
-      "date": "2026-03-09",
-      "time": "8:00 PM",
-      "category": "Storytelling",
-      "sourceUrl": "https://donyc.com/events/2026/03/09",
-      "description": "True stories told live without notes. A competitive storytelling event where performers share personal tales based on a theme.",
-      "price": "$42"
-    },
-    {
-      "id": "donyc-nets-grizzlies-march9",
-      "title": "Brooklyn Nets vs. Memphis Grizzlies",
-      "venue": "Barclays Center",
-      "date": "2026-03-09",
-      "time": "7:30 PM",
-      "category": "Sports",
-      "sourceUrl": "https://donyc.com/events/2026/03/09",
-      "description": "NBA basketball action as the Brooklyn Nets take on the Memphis Grizzlies at home.",
-      "price": "$16+"
-    },
-    {
-      "id": "donyc-dizzy-gillespie-march9",
-      "title": "Dizzy Gillespie All-Stars",
-      "venue": "Blue Note Jazz Club",
-      "date": "2026-03-09",
-      "time": "8:00 PM",
-      "category": "Jazz",
-      "sourceUrl": "https://donyc.com/events/2026/03/09",
-      "description": "Celebrating the legacy of Dizzy Gillespie with an all-star lineup of jazz musicians at the iconic Blue Note.",
-      "price": "$14+"
-    },
-    {
-      "id": "donyc-golden-classical-march9",
-      "title": "Golden Classical Music Awards Ceremony",
-      "venue": "Carnegie Hall",
-      "date": "2026-03-09",
-      "time": "7:00 PM",
-      "category": "Classical Music",
-      "sourceUrl": "https://donyc.com/events/2026/03/09",
-      "description": "Annual awards ceremony celebrating excellence in classical music performance and education.",
-      "price": "$8+"
-    },
-    {
-      "id": "donyc-burnout-paradise-march9",
-      "title": "Burnout Paradise",
-      "venue": "Astor Place Theatre",
-      "date": "2026-03-09",
-      "time": "7:00 PM",
-      "category": "Theater",
-      "sourceUrl": "https://donyc.com/events/2026/03/09",
-      "description": "An immersive theatrical experience running through June 28, exploring themes of modern exhaustion and renewal.",
-      "price": "$340"
-    },
-    {
-      "id": "donyc-jesse-malin-march9",
-      "title": "Jesse Malin's Silver Manhattan",
-      "venue": "Bowery Palace",
-      "date": "2026-03-09",
-      "time": "8:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/09",
-      "description": "The former D Generation frontman presents his Silver Manhattan show, running through March 29.",
-      "price": "$148"
-    },
-    {
-      "id": "donyc-gabi-hartmann-march9",
-      "title": "Gabi Hartmann",
-      "venue": "Le Poisson Rouge",
-      "date": "2026-03-09",
-      "time": "7:30 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/09",
-      "description": "Live music performance at the iconic downtown venue Le Poisson Rouge.",
-      "price": "$80"
-    },
-    {
-      "id": "donyc-lykn-march9",
-      "title": "Lykn",
-      "venue": "Music Hall of Williamsburg",
-      "date": "2026-03-09",
-      "time": "5:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/09",
-      "description": "Live performance at Music Hall of Williamsburg.",
-      "price": "$68"
-    },
-    {
-      "id": "donyc-barz-exam-march9",
-      "title": "NYC Barz Exam: Karl Dice Raw Jenkins + more",
-      "venue": "Mercury Lounge",
-      "date": "2026-03-09",
-      "time": "6:00 PM",
-      "category": "Hip Hop",
-      "sourceUrl": "https://donyc.com/events/2026/03/09",
-      "description": "Hip hop showcase featuring Karl Dice Raw Jenkins and more.",
-      "price": "$66"
-    },
-    {
-      "id": "donyc-rainbow-kitten-march10",
-      "title": "Rainbow Kitten Surprise: bones North American Tour",
-      "venue": "Brooklyn Paramount",
-      "date": "2026-03-10",
-      "time": "7:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/10",
-      "description": "Alternative rock band Rainbow Kitten Surprise brings their energetic live show to Brooklyn on their North American tour.",
-      "price": "$42+"
-    },
-    {
-      "id": "donyc-tedeschi-trucks-march10",
-      "title": "Tedeschi Trucks Band",
-      "venue": "Beacon Theatre",
-      "date": "2026-03-10",
-      "time": "7:30 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/10",
-      "description": "The Grammy-winning blues-rock powerhouse led by Susan Tedeschi and Derek Trucks performs at the historic Beacon Theatre.",
-      "price": "$65+"
-    },
-    {
-      "id": "donyc-chris-dave-march10",
-      "title": "Chris Dave X DJ Jazzy Jeff X Savion Glover",
-      "venue": "Blue Note Jazz Club",
-      "date": "2026-03-10",
-      "time": "8:00 PM",
-      "category": "Jazz",
-      "sourceUrl": "https://donyc.com/events/2026/03/10",
-      "description": "An incredible collaboration between legendary drummer Chris Dave, turntablist DJ Jazzy Jeff, and tap dance master Savion Glover.",
-      "price": "$89+"
-    },
-    {
-      "id": "donyc-bad-omens-march10",
-      "title": "Bad Omens: Do You Feel Love North American Tour",
-      "venue": "Prudential Center",
-      "date": "2026-03-10",
-      "time": "7:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/10",
-      "description": "Metalcore band Bad Omens brings their North American tour to Newark's Prudential Center.",
-      "price": "$33+"
-    },
-    {
-      "id": "donyc-josman-march10",
-      "title": "Josman",
-      "venue": "Le Poisson Rouge",
-      "date": "2026-03-10",
-      "time": "8:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/10",
-      "description": "French rapper and hip-hop artist Josman performs live in NYC.",
-      "price": "$80"
-    },
-    {
-      "id": "donyc-nets-pistons-march10",
-      "title": "Brooklyn Nets vs. Detroit Pistons",
-      "venue": "Barclays Center",
-      "date": "2026-03-10",
-      "time": "7:30 PM",
-      "category": "Sports",
-      "sourceUrl": "https://donyc.com/events/2026/03/10",
-      "description": "NBA basketball as the Brooklyn Nets face the Detroit Pistons at home.",
-      "price": "$16+"
-    },
-    {
-      "id": "donyc-janeane-garofalo-march10",
-      "title": "Janeane Garofalo, Emil Wakim, Alex English & More",
-      "venue": "The Stand",
-      "date": "2026-03-10",
-      "time": "8:00 PM",
-      "category": "Comedy",
-      "sourceUrl": "https://donyc.com/events/2026/03/10",
-      "description": "A night of stand-up comedy featuring comedy legend Janeane Garofalo and rising stars.",
-      "price": "$44"
-    },
-    {
-      "id": "donyc-cafe-wha-march11",
-      "title": "The Cafe Wha? House Band",
-      "venue": "Cafe Wha?",
-      "date": "2026-03-11",
-      "time": "9:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/11",
-      "description": "Live music from the legendary Cafe Wha? House Band in Greenwich Village.",
-      "price": "$91"
-    },
-    {
-      "id": "donyc-eli-march11",
-      "title": "Eli",
-      "venue": "Le Poisson Rouge",
-      "date": "2026-03-11",
-      "time": "8:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/11",
-      "description": "Live performance at Le Poisson Rouge.",
-      "price": "$81"
-    },
-    {
-      "id": "donyc-orbit-culture-march11",
-      "title": "Orbit Culture, Ov Sulfur, Atlas",
-      "venue": "The Gramercy Theatre",
-      "date": "2026-03-11",
-      "time": "7:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/11",
-      "description": "Death metal and metalcore showcase featuring Swedish band Orbit Culture.",
-      "price": "$63"
-    },
-    {
-      "id": "donyc-sun-ra-march11",
-      "title": "Sun Ra Arkestra",
-      "venue": "TV Eye",
-      "date": "2026-03-11",
-      "time": "6:30 PM",
-      "category": "Jazz",
-      "sourceUrl": "https://donyc.com/events/2026/03/11",
-      "description": "Legendary avant-garde jazz ensemble led by Marshall Allen.",
-      "price": "$35"
-    },
-    {
-      "id": "donyc-john-medeski-march12",
-      "title": "John Medeski, Stanton Moore, Nels Cline & Skerik",
-      "venue": "Brooklyn Bowl",
-      "date": "2026-03-12",
-      "time": "8:00 PM",
-      "category": "Jazz/Funk",
-      "sourceUrl": "https://donyc.com/events/2026/03/12",
-      "description": "An all-star improvisational quartet featuring keyboardist John Medeski, drummer Stanton Moore, guitarist Nels Cline, and saxophonist Skerik.",
-      "price": "$141"
-    },
-    {
-      "id": "donyc-dan-peggy-reeder-march12",
-      "title": "Dan & Peggy Reeder w/ Isaac Stalling",
-      "venue": "Le Poisson Rouge",
-      "date": "2026-03-12",
-      "time": "7:30 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/12",
-      "description": "Live performance at Le Poisson Rouge.",
-      "price": "$86"
-    },
-    {
-      "id": "donyc-unbroken-chain-march12",
-      "title": "Unbroken Chain: A Celebration of Phil Lesh",
-      "venue": "The Capitol Theatre",
-      "date": "2026-03-12",
-      "time": "6:30 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/12",
-      "description": "A celebration of the life and music of Grateful Dead bassist Phil Lesh, benefiting Sweet Relief. Features special guest performances.",
-      "price": "$69+"
-    },
-    {
-      "id": "donyc-katatonia-march12",
-      "title": "Katatonia - Waking State of North America 2026",
-      "venue": "Elsewhere",
-      "date": "2026-03-12",
-      "time": "7:00 PM",
-      "category": "Metal",
-      "sourceUrl": "https://donyc.com/events/2026/03/12",
-      "description": "Swedish progressive metal band Katatonia on their North American tour with Rivers of Nihil.",
-      "price": "$56"
-    },
-    {
-      "id": "donyc-rainbow-kitten-march13",
-      "title": "Rainbow Kitten Surprise: bones North American Tour",
-      "venue": "The Wellmont Theater",
-      "date": "2026-03-13",
-      "time": "8:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/13",
-      "description": "Alternative rock band Rainbow Kitten Surprise in New Jersey.",
-      "price": "$342"
-    },
-    {
-      "id": "donyc-st-lucia-march13",
-      "title": "St. Lucia",
-      "venue": "White Eagle Hall",
-      "date": "2026-03-13",
-      "time": "8:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/13",
-      "description": "Electronic pop artist St. Lucia in Jersey City.",
-      "price": "$125"
-    },
-    {
-      "id": "donyc-steve-earle-march13",
-      "title": "Steve Earle, Margaret Glaspy",
-      "venue": "The Gramercy Theatre",
-      "date": "2026-03-13",
-      "time": "7:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/13",
-      "description": "Legendary singer-songwriter Steve Earle in solo acoustic performance with opener Margaret Glaspy.",
-      "price": "$89"
-    },
-    {
-      "id": "donyc-lights-march13",
-      "title": "Lights: COME GET YOUR GIRL TOUR 2026",
-      "venue": "Irving Plaza",
-      "date": "2026-03-13",
-      "time": "7:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/13",
-      "description": "Canadian electropop artist Lights on her North American tour.",
-      "price": "$88"
-    },
-    {
-      "id": "donyc-sunsquabi-march13",
-      "title": "SunSquabi & Manic Focus",
-      "venue": "Brooklyn Bowl",
-      "date": "2026-03-13",
-      "time": "8:00 PM",
-      "category": "Electronic/Funk",
-      "sourceUrl": "https://donyc.com/events/2026/03/13",
-      "description": "Live electronic funk from Colorado's SunSquabi with Chicago's Manic Focus.",
-      "price": "$85"
-    },
-    {
-      "id": "donyc-bbno-march13",
-      "title": "bbno$, jungle bobby",
-      "venue": "Terminal 5",
-      "date": "2026-03-13",
-      "time": "7:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/13",
-      "description": "Canadian rapper bbno$ brings his viral hits to Terminal 5.",
-      "price": "$80"
-    },
-    {
-      "id": "donyc-new-edition-march14",
-      "title": "New Edition with Boyz II Men & Toni Braxton",
-      "venue": "Barclays Center",
-      "date": "2026-03-14",
-      "time": "8:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/14",
-      "description": "Legendary R&B group New Edition teams up with Boyz II Men and Toni Braxton for an unforgettable night of classic hits.",
-      "price": "$166+"
-    },
-    {
-      "id": "donyc-artemas-march14",
-      "title": "Artemas with Henry Morris and Ellah Boh",
-      "venue": "Terminal 5",
-      "date": "2026-03-14",
-      "time": "7:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/14",
-      "description": "Alt-pop sensation Artemas brings his moody, synth-heavy sound to Terminal 5 on the LOVERCORE tour. Known for viral hit 'i like the way you kiss me'.",
-      "price": "$94+"
-    },
-    {
-      "id": "donyc-st-lucia-march14",
-      "title": "St. Lucia (Two Sets)",
-      "venue": "Brooklyn Steel",
-      "date": "2026-03-14",
-      "time": "7:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/14",
-      "description": "Electronic pop artist St. Lucia performs two sets at Brooklyn Steel, featuring his signature synth-pop sound.",
-      "price": "$189+"
-    },
-    {
-      "id": "donyc-hanabie-march14",
-      "title": "HANABIE - North America Tour 2026",
-      "venue": "Brooklyn Bowl",
-      "date": "2026-03-14",
-      "time": "7:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/14",
-      "description": "Japanese metalcore band HANABIE brings their high-energy show to Brooklyn Bowl on their North American tour.",
-      "price": "$78+"
-    },
-    {
-      "id": "donyc-summer-set-march14",
-      "title": "The Summer Set",
-      "venue": "Irving Plaza",
-      "date": "2026-03-14",
-      "time": "6:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/14",
-      "description": "Pop-rock band The Summer Set performs at Irving Plaza.",
-      "price": "$60+"
-    },
-    {
-      "id": "donyc-unbroken-chain-march14",
-      "title": "Unbroken Chain: A Celebration of Phil Lesh",
-      "venue": "The Capitol Theatre",
-      "date": "2026-03-14",
-      "time": "6:30 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/14",
-      "description": "A celebration of the life and music of Grateful Dead bassist Phil Lesh, benefiting Sweet Relief. Features special guest performances.",
-      "price": "$71+"
-    },
-    {
-      "id": "donyc-west-village-stpats-march14",
-      "title": "West Village St. Patrick's Day Bar Fest",
-      "venue": "Le Poisson Rouge",
-      "date": "2026-03-14",
-      "time": "8:00 PM",
-      "category": "Holiday/Festival",
-      "sourceUrl": "https://donyc.com/events/2026/03/14",
-      "description": "Celebrate St. Patrick's Day early in the West Village with music, drinks, and Irish cheer.",
-      "price": "$80"
-    },
-    {
-      "id": "donyc-jerrod-carmichael-march14",
-      "title": "Jerrod Carmichael On Stage In Brooklyn",
-      "venue": "The Bell House",
-      "date": "2026-03-14",
-      "time": "8:00 PM",
-      "category": "Comedy",
-      "sourceUrl": "https://donyc.com/events/2026/03/14",
-      "description": "Comedian and actor Jerrod Carmichael performs stand-up at The Bell House.",
-      "price": "$42"
-    },
-    {
-      "id": "donyc-cornelia-murr-march14",
-      "title": "Cornelia Murr",
-      "venue": "Music Hall of Williamsburg",
-      "date": "2026-03-14",
-      "time": "7:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/14",
-      "description": "Indie folk artist Cornelia Murr performs at Music Hall of Williamsburg.",
-      "price": "$77+"
-    },
-    {
-      "id": "donyc-rock-roll-playhouse-march14",
-      "title": "The Rock and Roll Playhouse: Music of Coldplay for Kids",
-      "venue": "Brooklyn Bowl",
-      "date": "2026-03-14",
-      "time": "12:00 PM",
-      "category": "Family",
-      "sourceUrl": "https://donyc.com/events/2026/03/14",
-      "description": "Family-friendly concert featuring the music of Coldplay performed for kids and parents alike.",
-      "price": "$81+"
-    },
-    {
-      "id": "donyc-tedeschi-trucks-march14",
-      "title": "Tedeschi Trucks Band",
-      "venue": "Beacon Theatre",
-      "date": "2026-03-14",
-      "time": "7:30 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/14",
-      "description": "The Grammy-winning blues-rock powerhouse at Beacon Theatre.",
-      "price": "$65+"
-    },
-    {
-      "id": "donyc-patti-labelle-march14",
-      "title": "Patti Labelle - The 80/65 Tour",
-      "venue": "Flagstar at Westbury Music Fair",
-      "date": "2026-03-14",
-      "time": "8:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://donyc.com/events/2026/03/14",
-      "description": "The Godmother of Soul celebrates her 80th birthday and 65 years in music with an unforgettable evening of hits.",
-      "price": "$50+"
-    },
-    {
-      "id": "timeout-flamenco-festival",
-      "title": "Flamenco Festival 2026",
-      "venue": "Various NYC Venues",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Various times",
-      "category": "Dance",
-      "sourceUrl": "https://www.timeout.com/newyork/dance/flamenco-festival-2025",
-      "description": "The annual Flamenco Festival returns for its 25th edition, showcasing a wide range of variations on the Spanish form at a dozen New York venues including New York City Center, Jazz at Lincoln Center, and Joe's Pub. Features over 80 participants from 16 companies including Manuel Liñán, Eva Yerbabuena, Sara Baras, and more.",
-      "price": "Varies by venue"
-    },
-    {
-      "id": "timeout-vessel-reopening",
-      "title": "Vessel at Hudson Yards Reopening",
-      "venue": "Hudson Yards",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "11:00 AM - 7:00 PM",
-      "category": "Attraction",
-      "sourceUrl": "https://www.timeout.com/newyork/attractions/vessel-at-hudson-yards",
-      "description": "The 150-foot-tall honeycomb-shaped structure reopens with daily access. NYC residents can get free Thursday reservations with proof of ID.",
-      "price": "Free for residents on Thursdays, otherwise TBD"
-    },
-    {
-      "id": "timeout-nyicff",
-      "title": "New York International Children's Film Festival",
-      "venue": "IFC Center, SVA, Scandinavia House",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Various times",
-      "category": "Film",
-      "sourceUrl": "https://www.timeout.com/newyork/movies/new-york-international-childrens-film-festival-1",
-      "description": "30th edition of the festival featuring kid-friendly programming including Disney and Pixar's Hoppers, Remaining Native, and award-winning animated shorts.",
-      "price": "Varies"
-    },
-    {
-      "id": "timeout-survivor-exhibit",
-      "title": "Outwit, Outplay, Outlast: Celebrating 50 Seasons of Survivor",
-      "venue": "The Paley Center for Media",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Various times",
-      "category": "Exhibition",
-      "sourceUrl": "https://www.paleycenter.org/events/paleyexhibit-survivor50",
-      "description": "Immersive exhibit celebrating 50 seasons of Survivor with actual items from the show including immunity idols, torches, and behind-the-scenes photos.",
-      "price": "Museum admission"
-    },
-    {
-      "id": "timeout-dance-reflections",
-      "title": "Dance Reflections by Van Cleef & Arpels Festival",
-      "venue": "BAM, The Joyce Theater, New York Live Arts, NYC Center",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Various times",
-      "category": "Dance",
-      "sourceUrl": "https://www.timeout.com/newyork/things-to-do/dance-reflections-by-van-cleef-arpels-festival",
-      "description": "Five-week festival presenting performances and workshops exploring dance across generations, geographies and styles. Features Merce Cunningham, Trisha Brown, Anne Teresa De Keersmaeker, and more.",
-      "price": "Varies"
-    },
-    {
-      "id": "timeout-ballet-exhibit",
-      "title": "Ballet Photography Exhibit at Leica Gallery",
-      "venue": "Leica Gallery New York",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Gallery hours",
-      "category": "Photography",
-      "sourceUrl": "https://www.timeout.com/newyork/things-to-do/ballet-at-leica-gallery-new-york",
-      "description": "Photography exhibit featuring never-before-seen photographs of Misty Copeland in her final ABT performance, plus work by Henry Leutwyler, Diana Markosian and Kylie Shea.",
-      "price": "Free"
-    },
-    {
-      "id": "timeout-every-brilliant-thing",
-      "title": "Every Brilliant Thing",
-      "venue": "Broadway Theater",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Various times",
-      "category": "Theater",
-      "sourceUrl": "https://www.timeout.com/newyork/theater/every-brilliant-thing-1",
-      "description": "Daniel Radcliffe stars in the Broadway premiere of Duncan Macmillan's interactive dark comedy about a British man who makes lists of the world's good things.",
-      "price": "TBD"
-    },
-    {
-      "id": "timeout-ringling",
-      "title": "Ringling Bros. and Barnum & Bailey: The Greatest Show on Earth",
-      "venue": "UBS Arena",
-      "date": "2026-03-06 to 2026-03-08",
-      "time": "Various times",
-      "category": "Circus",
-      "sourceUrl": "https://www.timeout.com/newyork/news/the-circus-is-back-in-town-012226",
-      "description": "The reimagined, all-human spectacle returns with Colombian acro-salsa troupe, U.S. contortionists, and Chinese acrobatic performers.",
-      "price": "Varies"
-    },
-    {
-      "id": "skint-tale-storytelling",
-      "title": "Tale Storytelling Show",
-      "venue": "The Red Room at KGB Bar",
-      "date": "2026-03-09",
-      "time": "7:00 PM",
-      "category": "Storytelling",
-      "sourceUrl": "https://theskint.com/",
-      "description": "Harmon León hosts an evening of performances by some of the city's best storytellers.",
-      "price": "$15 (save $8 with code 'discountskint')"
-    },
-    {
-      "id": "skint-johnny-cash-bash",
-      "title": "Johnny Cash 94th Birthday Bash",
-      "venue": "Littlefield",
-      "date": "2026-03-09",
-      "time": "9:00 PM",
-      "category": "Concert",
-      "sourceUrl": "https://theskint.com/",
-      "description": "Alex Battles + The Whisky Rebellion perform the music of the Man in Black.",
-      "price": "$15+"
-    },
-    {
-      "id": "lc-resistance-march10",
-      "title": "Resistance: The Power of Change",
-      "venue": "Lincoln Center",
-      "date": "2026-03-10",
-      "time": "7:00 PM",
-      "category": "Talk",
-      "sourceUrl": "https://www.lincolncenter.org/lincoln-center-at-home/calendar",
-      "description": "Variations on America discussion series exploring resistance and change in collaboration with New York Philharmonic.",
-      "price": "TBA"
-    },
-    {
-      "id": "lc-choreography-march12",
-      "title": "Virginia B. Toulmin Foundation Evening for Female Choreography",
-      "venue": "New York Public Library for the Performing Arts",
-      "date": "2026-03-12",
-      "time": "6:30 PM",
-      "category": "Talk",
-      "sourceUrl": "https://www.lincolncenter.org/lincoln-center-at-home/calendar",
-      "description": "Evening celebrating female choreography at Lincoln Center.",
-      "price": "TBA"
-    },
-    {
-      "id": "lc-vaya-march13",
-      "title": "Álvaro Benavides Group",
-      "venue": "Lincoln Center",
-      "date": "2026-03-13",
-      "time": "7:30 PM",
-      "category": "Music",
-      "sourceUrl": "https://www.lincolncenter.org/lincoln-center-at-home/calendar",
-      "description": "¡VAYA! series presents Latin music at Lincoln Center.",
-      "price": "TBA"
-    },
-    {
-      "id": "lc-mas-tropical-march14",
-      "title": "Más Tropical with QUITAPENAS",
-      "venue": "Lincoln Center",
-      "date": "2026-03-14",
-      "time": "11:00 AM",
-      "category": "Family",
-      "sourceUrl": "https://www.lincolncenter.org/lincoln-center-at-home/calendar",
-      "description": "Kids and family program featuring tropical music.",
-      "price": "TBA"
-    }
-  ]
-}
+[
+  {
+    "id": "astor-place-theatre-burnout-paradise-1",
+    "title": "Burnout Paradise",
+    "venue": "Astor Place Theatre",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/18/burnout-paradise-tickets"
+  },
+  {
+    "id": "donyc-burnout-paradise-4",
+    "title": "Burnout Paradise",
+    "venue": "doNYC",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com"
+  },
+  {
+    "id": "bowery-palace-jesse-malin-s-silver-manhattan-5",
+    "title": "Jesse Malin's Silver Manhattan",
+    "venue": "Bowery Palace",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/19/jesse-malins-silver-manhattan-tickets"
+  },
+  {
+    "id": "donyc-jesse-malin-s-silver-manhattan-6",
+    "title": "Jesse Malin's Silver Manhattan",
+    "venue": "doNYC",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com"
+  },
+  {
+    "id": "dostuffathome-pwl-rewind-mark-rose-2-help-from-above-aired-9",
+    "title": "PWL ReWind: MARK ROSE 2 \"Help From Above\" Aired",
+    "venue": "#DoStuffAtHome",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2024/6/17/pwl-rewind-mark-rose-2-help-from-above-aired-tickets"
+  },
+  {
+    "id": "donyc-pwl-rewind-mark-rose-2-help-from-above-aired-10",
+    "title": "PWL ReWind: MARK ROSE 2 \"Help From Above\" Aired",
+    "venue": "doNYC",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com"
+  },
+  {
+    "id": "dostuffathome-pwl-rewind-edwin-evers-advanced-plastics-from-a-z-aired-11",
+    "title": "PWL ReWind: EDWIN EVERS \"Advanced Plastics From A-Z\" Aired",
+    "venue": "#DoStuffAtHome",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2024/6/17/pwl-rewind-edwin-evers-advanced-plastics-from-a-z-aired-tickets"
+  },
+  {
+    "id": "donyc-pwl-rewind-edwin-evers-advanced-plastics-from-a-z-aired-12",
+    "title": "PWL ReWind: EDWIN EVERS \"Advanced Plastics From A-Z\" Aired",
+    "venue": "doNYC",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com"
+  },
+  {
+    "id": "dostuffathome-pwl-rewind-shaw-grigsby-spinnerbaits-and-bank-fishing-aired-13",
+    "title": "PWL ReWind: SHAW GRIGSBY \"SPINNERBAITS and BANK FISHING!\" Aired",
+    "venue": "#DoStuffAtHome",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2024/6/17/pwl-rewind-shaw-grigsby-spinnerbaits-and-bank-fishing-aired-tickets"
+  },
+  {
+    "id": "donyc-pwl-rewind-shaw-grigsby-spinnerbaits-and-bank-fishing-aired-14",
+    "title": "PWL ReWind: SHAW GRIGSBY \"SPINNERBAITS and BANK FISHING!\" Aired",
+    "venue": "doNYC",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com"
+  },
+  {
+    "id": "the-paley-center-for-media-survivor-exhibit-15",
+    "title": "Survivor Exhibit",
+    "venue": "The Paley Center for Media",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/20/survivor-exhibit-the-paley-museum-tickets"
+  },
+  {
+    "id": "donyc-survivor-exhibit-16",
+    "title": "Survivor Exhibit",
+    "venue": "doNYC",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com"
+  },
+  {
+    "id": "ace-hotel-reflect-to-project-multimedia-installation-17",
+    "title": "Reflect To Project: Multimedia Installation",
+    "venue": "Ace Hotel",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/24/reflect-to-project-multimedia-installation-tickets"
+  },
+  {
+    "id": "donyc-reflect-to-project-multimedia-installation-18",
+    "title": "Reflect To Project: Multimedia Installation",
+    "venue": "doNYC",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com"
+  },
+  {
+    "id": "good-judy-bitch-you-better-sing-hosted-by-leslie-19",
+    "title": "Bitch, You Better Sing! hosted by Leslie",
+    "venue": "Good Judy",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/1/11/bitch-you-better-sing-hosted-by-leslie-tickets"
+  },
+  {
+    "id": "donyc-bitch-you-better-sing-hosted-by-leslie-20",
+    "title": "Bitch, You Better Sing! hosted by Leslie",
+    "venue": "doNYC",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com"
+  },
+  {
+    "id": "dostuffathome-free-mp3-support-for-children-for-higher-brain-function-deve-21",
+    "title": "(Free MP3) Support for Children for Higher Brain Function/Development | Mas Sajady Public Service Program",
+    "venue": "#DoStuffAtHome",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2024/3/12/free-mp3-support-for-children-for-higher-brain-function-development-mas-sajady-public-service-program-tickets"
+  },
+  {
+    "id": "donyc-free-mp3-support-for-children-for-higher-brain-function-deve-22",
+    "title": "(Free MP3) Support for Children for Higher Brain Function/Development | Mas Sajady Public Service Program",
+    "venue": "doNYC",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com"
+  },
+  {
+    "id": "virtual-music-festival-crystals-gemstone-jewelry-holistic-healing-tools-more-for-we-23",
+    "title": "CRYSTALS, GEMSTONE JEWELRY, HOLISTIC HEALING TOOLS & MORE for Wellness!!",
+    "venue": "Virtual Music Festival",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2022/1/29/crystals-gemstone-jewelry-holistic-healing-tools-more-for-wellness-tickets"
+  },
+  {
+    "id": "donyc-crystals-gemstone-jewelry-holistic-healing-tools-more-for-we-24",
+    "title": "CRYSTALS, GEMSTONE JEWELRY, HOLISTIC HEALING TOOLS & MORE for Wellness!!",
+    "venue": "doNYC",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com"
+  },
+  {
+    "id": "carmine-s-italian-restaurant-the-murder-mystery-co-speakeasy-die-softly-25",
+    "title": "The Murder Mystery Co.\n    Speakeasy, Die Softly",
+    "venue": "Carmine's Italian Restaurant",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/13/speakeasy-die-softly-tickets"
+  },
+  {
+    "id": "donyc-speakeasy-die-softly-26",
+    "title": "Speakeasy, Die Softly",
+    "venue": "doNYC",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com"
+  },
+  {
+    "id": "dostuffathome-pmp-application-step-by-step-and-personal-coaching-pmbok-6-27",
+    "title": "PMP Application Step-by-Step and Personal Coaching (PMBOK 6)",
+    "venue": "#DoStuffAtHome",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2023/9/28/pmp-application-step-by-step-and-personal-coaching-pmbok-6-tickets"
+  },
+  {
+    "id": "donyc-pmp-application-step-by-step-and-personal-coaching-pmbok-6-28",
+    "title": "PMP Application Step-by-Step and Personal Coaching (PMBOK 6)",
+    "venue": "doNYC",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com"
+  },
+  {
+    "id": "dostuffathome-dell-29",
+    "title": "Dell",
+    "venue": "#DoStuffAtHome",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2023/9/28/dell-tickets"
+  },
+  {
+    "id": "donyc-dell-30",
+    "title": "Dell",
+    "venue": "doNYC",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com"
+  },
+  {
+    "id": "449-la-brunch-not-live-jazz-soul-31",
+    "title": "Brunch Not! Live Jazz/Soul",
+    "venue": "449 LA",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2023/9/29/brunch-not-live-jazz-soul-tickets"
+  },
+  {
+    "id": "donyc-brunch-not-live-jazz-soul-32",
+    "title": "Brunch Not! Live Jazz/Soul",
+    "venue": "doNYC",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com"
+  },
+  {
+    "id": "dostuffathome-u-sell-my-stuff-llc-merchandise-submission-33",
+    "title": "U Sell My Stuff, LLC - Merchandise Submission",
+    "venue": "#DoStuffAtHome",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2024/4/15/u-sell-my-stuff-llc-merchandise-submission-tickets"
+  },
+  {
+    "id": "donyc-u-sell-my-stuff-llc-merchandise-submission-34",
+    "title": "U Sell My Stuff, LLC - Merchandise Submission",
+    "venue": "doNYC",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com"
+  },
+  {
+    "id": "museum-of-food-drink-mofad-presents-street-food-city-35",
+    "title": "MOFAD PRESENTS:\n    Street Food City",
+    "venue": "Museum of Food & Drink",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/1/15/street-food-city-tickets"
+  },
+  {
+    "id": "donyc-street-food-city-36",
+    "title": "Street Food City",
+    "venue": "doNYC",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com"
+  },
+  {
+    "id": "virtual-music-festival-7-family-peak-challenge-37",
+    "title": "7 Family Peak Challenge",
+    "venue": "Virtual Music Festival",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2022/1/29/7-family-peak-challenge-tickets"
+  },
+  {
+    "id": "donyc-7-family-peak-challenge-38",
+    "title": "7 Family Peak Challenge",
+    "venue": "doNYC",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com"
+  },
+  {
+    "id": "dostuffathome-group-travel-advisor-39",
+    "title": "Group travel Advisor",
+    "venue": "#DoStuffAtHome",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2023/9/28/group-travel-advisor-tickets"
+  },
+  {
+    "id": "the-skint-three-nights-of-extraordinary-music-at-carnegie-hall-lincoln-40",
+    "title": "THREE NIGHTS OF EXTRAORDINARY MUSIC AT CARNEGIE HALL & LINCOLN CENTER — $9 TICKETS (SPONSORED)",
+    "venue": "The Skint",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://theskint.com/three-nights-of-extraordinary-music-at-carnegie-hall-lincoln-center-9-tickets-sponsored/"
+  },
+  {
+    "id": "the-skint-one-show-two-comedic-titans-three-nights-only-sponsored-42",
+    "title": "ONE SHOW. TWO COMEDIC TITANS. THREE NIGHTS ONLY! (SPONSORED)",
+    "venue": "The Skint",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://theskint.com/one-show-two-comedic-titans-three-nights-only-sponsored/"
+  },
+  {
+    "id": "time-out-ny-one-of-the-oldest-italian-restaurants-in-nyc-is-closing-at-t-43",
+    "title": "One of the oldest Italian restaurants in NYC is closing at the end of the week",
+    "venue": "Time Out NY",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://www.timeout.com/newyork/news/one-of-the-oldest-italian-restaurants-in-nyc-is-closing-at-the-end-of-the-week-022326"
+  },
+  {
+    "id": "time-out-ny-11-insane-pictures-of-nyc-during-the-massive-blizzard-of-202-45",
+    "title": "11 insane pictures of NYC during the massive blizzard of 2026",
+    "venue": "Time Out NY",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://www.timeout.com/newyork/news/11-insane-pictures-of-nyc-during-the-massive-blizzard-of-2026-022326"
+  },
+  {
+    "id": "time-out-ny-nyc-is-under-a-travel-ban-until-noon-here-is-what-that-actua-47",
+    "title": "NYC is under a travel ban until noon: here is what that actually means",
+    "venue": "Time Out NY",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://www.timeout.com/newyork/news/nyc-is-under-a-travel-ban-until-noon-here-is-what-that-actually-means-022326"
+  },
+  {
+    "id": "time-out-ny-the-tin-building-down-by-the-seaport-has-officially-shut-dow-49",
+    "title": "The Tin Building down by the Seaport has officially shut down and will be replaced by the Balloon Museum",
+    "venue": "Time Out NY",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://www.timeout.com/newyork/news/the-tin-building-down-by-the-seaport-has-officially-shut-down-and-will-be-replaced-by-the-balloon-museum-022426"
+  },
+  {
+    "id": "time-out-ny-this-tiny-nyc-cafe-was-just-named-one-of-the-world-s-best-co-51",
+    "title": "This tiny NYC cafe was just named one of the world’s best coffee shops",
+    "venue": "Time Out NY",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://www.timeout.com/newyork/news/this-tiny-nyc-cafe-was-just-named-one-of-the-worlds-best-coffee-shops-022026"
+  },
+  {
+    "id": "time-out-ny-you-can-get-paid-up-to-28-to-help-the-city-shovel-the-insane-53",
+    "title": "You can get paid up to $28 to help the city shovel the insane amounts of snow right now",
+    "venue": "Time Out NY",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://www.timeout.com/newyork/news/you-can-get-paid-up-to-28-to-help-the-city-shovel-the-insane-amounts-of-snow-right-now-022326"
+  },
+  {
+    "id": "time-out-ny-the-best-things-to-do-in-nyc-this-weekend-55",
+    "title": "The best things to do in NYC this weekend",
+    "venue": "Time Out NY",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://www.timeout.com/newyork/things-to-do/things-to-do-in-nyc-this-weekend"
+  },
+  {
+    "id": "time-out-ny-or-esh-is-the-new-it-restaurant-that-everyone-in-nyc-is-tryi-57",
+    "title": "Or’esh is the new it-restaurant that everyone in NYC is trying to get into",
+    "venue": "Time Out NY",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://www.timeout.com/newyork/news/oresh-is-the-new-it-restaurant-that-everyone-in-nyc-is-trying-to-get-into-022026"
+  },
+  {
+    "id": "time-out-ny-you-got-older-59",
+    "title": "You Got Older",
+    "venue": "Time Out NY",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://www.timeout.com/newyork/theater/you-got-older-review-revival-alia-shawkat-peter-friedman-clare-barron"
+  },
+  {
+    "id": "time-out-ny-until-apr-12-2026-61",
+    "title": "Until Apr 12, 2026",
+    "venue": "Time Out NY",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://www.timeout.com/newyork"
+  },
+  {
+    "id": "time-out-ny-new-and-upcoming-broadway-shows-headed-to-nyc-in-2026-62",
+    "title": "New and upcoming Broadway shows headed to NYC in 2026",
+    "venue": "Time Out NY",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://www.timeout.com/newyork/theater/upcoming-broadway-shows-coming-to-nyc-2026"
+  },
+  {
+    "id": "secret-nyc-10-events-local-nyers-would-actually-enjoy-in-times-square-64",
+    "title": "10 Events Local NYers Would Actually Enjoy In Times Square",
+    "venue": "Secret NYC",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://secretnyc.co/author/justine-golata/"
+  },
+  {
+    "id": "nyc-parks-translate-65",
+    "title": "Translate",
+    "venue": "NYC Parks",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events#google_translate_div"
+  },
+  {
+    "id": "nyc-parks-accessibility-66",
+    "title": "Accessibility",
+    "venue": "NYC Parks",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/accessibility"
+  },
+  {
+    "id": "nyc-parks-get-email-updates-67",
+    "title": "Get email updates",
+    "venue": "NYC Parks",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/news/newsletters"
+  },
+  {
+    "id": "nyc-parks-contact-us-68",
+    "title": "Contact us",
+    "venue": "NYC Parks",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/contact-parks"
+  },
+  {
+    "id": "nyc-parks-for-business-69",
+    "title": "For Business",
+    "venue": "NYC Parks",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/opportunities/business"
+  },
+  {
+    "id": "nyc-parks-jobs-at-parks-70",
+    "title": "Jobs at Parks",
+    "venue": "NYC Parks",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/opportunities/jobs"
+  },
+  {
+    "id": "nyc-parks-facilities-71",
+    "title": "Facilities",
+    "venue": "NYC Parks",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/facilities"
+  },
+  {
+    "id": "nyc-parks-programs-73",
+    "title": "Programs",
+    "venue": "NYC Parks",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/programs"
+  },
+  {
+    "id": "nyc-parks-permits-74",
+    "title": "Permits",
+    "venue": "NYC Parks",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/permits"
+  },
+  {
+    "id": "nyc-parks-get-involved-75",
+    "title": "Get Involved",
+    "venue": "NYC Parks",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/menu/opportunities"
+  },
+  {
+    "id": "nyc-parks-translate-this-page-76",
+    "title": "Translate this page",
+    "venue": "NYC Parks",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events#google_translate_div"
+  },
+  {
+    "id": "eventbrite-friday-night-lights-everyone-free-b4-12am-w-rsvp-at-mama-tac-77",
+    "title": "Friday Night Lights Everyone FREE B4 12am w/RSVP at Mama Taco Bk",
+    "venue": "Eventbrite",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/friday-night-lights-everyone-free-b4-12am-wrsvp-at-mama-taco-bk-tickets-1977459767396?aff=ebdssbdestsearch"
+  },
+  {
+    "id": "eventbrite-90s-2000s-hip-hop-r-b-party-everyone-free-w-rsvp-85",
+    "title": "90s & 2000s Hip-Hop & R&B Party | Everyone Free w/ RSVP",
+    "venue": "Eventbrite",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/90s-2000s-hip-hop-rb-party-everyone-free-w-rsvp-tickets-1981480280860?aff=ebdssbdestsearch"
+  },
+  {
+    "id": "eventbrite-retro-games-4-ny-93",
+    "title": "Retro Games 4 NY",
+    "venue": "Eventbrite",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/retro-games-4-ny-tickets-1980758885146?aff=ebdssbdestsearch"
+  },
+  {
+    "id": "eventbrite-salon-du-chocolat-nyc-2026-101",
+    "title": "SALON DU CHOCOLAT NYC 2026",
+    "venue": "Eventbrite",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/salon-du-chocolat-nyc-2026-tickets-1367292571889?aff=ebdssbdestsearch"
+  },
+  {
+    "id": "broadway-site-navigation-102",
+    "title": "Site Navigation",
+    "venue": "Broadway",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/productions"
+  },
+  {
+    "id": "broadway-what-s-playing-on-broadway-and-beyond-103",
+    "title": "What’s Playing on Broadway and Beyond",
+    "venue": "Broadway",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/productions"
+  },
+  {
+    "id": "broadway-playbill-editorial-104",
+    "title": "Playbill Editorial",
+    "venue": "Broadway",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/productions"
+  },
+  {
+    "id": "broadway-industry-resources-105",
+    "title": "Industry Resources",
+    "venue": "Broadway",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/productions"
+  },
+  {
+    "id": "broadway-more-from-playbill-106",
+    "title": "More from Playbill",
+    "venue": "Broadway",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/productions"
+  },
+  {
+    "id": "broadway-the-great-gatsby-107",
+    "title": "The Great Gatsby",
+    "venue": "Broadway",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/the-great-gatsby-broadway-broadway-theatre-2024"
+  },
+  {
+    "id": "broadway-the-lion-king-109",
+    "title": "The Lion King",
+    "venue": "Broadway",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/the-lion-king-new-amsterdam-theatre-vault-0000008729"
+  },
+  {
+    "id": "broadway-death-becomes-her-111",
+    "title": "Death Becomes Her",
+    "venue": "Broadway",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/death-becomes-her-broadway-lunt-fontanne-theatre-2024"
+  },
+  {
+    "id": "broadway-operation-mincemeat-113",
+    "title": "Operation Mincemeat",
+    "venue": "Broadway",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/operation-mincemeat-broadway-john-golden-theatre-2025"
+  },
+  {
+    "id": "broadway-wicked-115",
+    "title": "Wicked",
+    "venue": "Broadway",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/wicked-broadway-gershwin-theatre-2003"
+  },
+  {
+    "id": "broadway-two-strangers-carry-a-cake-across-new-york-117",
+    "title": "Two Strangers (Carry a Cake Across New York)",
+    "venue": "Broadway",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/two-strangers-carry-a-cake-across-new-york-broadway-longacre-theatre-2025"
+  },
+  {
+    "id": "broadway-six-the-musical-119",
+    "title": "SIX: The Musical",
+    "venue": "Broadway",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/six-the-musicallena-horne-theatre-2021-2022"
+  },
+  {
+    "id": "broadway-chess-121",
+    "title": "Chess",
+    "venue": "Broadway",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/chess-broadway-imperial-theatre-2025"
+  },
+  {
+    "id": "broadway-just-in-time-123",
+    "title": "Just in Time",
+    "venue": "Broadway",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/just-in-time-broadway-circle-in-the-square-theatre-2025"
+  },
+  {
+    "id": "broadway-hadestown-125",
+    "title": "Hadestown",
+    "venue": "Broadway",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/hadestownwalter-kerr-theatre-2018-2019"
+  },
+  {
+    "id": "broadway-harry-potter-and-the-cursed-child-127",
+    "title": "Harry Potter and the Cursed Child",
+    "venue": "Broadway",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/harry-potter-and-the-cursed-childlyric-theatre-2017-2018"
+  },
+  {
+    "id": "broadway-aladdin-129",
+    "title": "Aladdin",
+    "venue": "Broadway",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/aladdin-new-amsterdam-theatre-vault-0000014037"
+  },
+  {
+    "id": "broadway-oh-mary-131",
+    "title": "Oh, Mary!",
+    "venue": "Broadway",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/oh-mary-broadway-lyceum-theatre-2024"
+  }
+]
