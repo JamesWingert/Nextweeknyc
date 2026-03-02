@@ -2,18 +2,62 @@
 
 import { useState, useEffect } from 'react';
 import { Event, Category, EventsData } from '@/lib/types';
-import { format, parseISO, isBefore, startOfDay, addDays } from 'date-fns';
+import type { RawEvent } from '@/lib/types';
+import { format, isBefore, startOfDay, addDays } from 'date-fns';
+
+// --- Date helpers ---
+
+function toDate(s: string): Date {
+  const [y, m, d] = s.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+
+function toStr(d: Date): string {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+function isDateRange(date: string): boolean {
+  return date.includes(' to ');
+}
+
+function parseDateRange(date: string): { start: Date; end: Date } | null {
+  if (!isDateRange(date)) return null;
+  const [s, e] = date.split(' to ').map(d => d.trim());
+  return { start: toDate(s), end: toDate(e) };
+}
+
+function getDateLabel(date: string): string {
+  if (!isDateRange(date)) return format(toDate(date), 'EEEE, MMMM d');
+  const range = parseDateRange(date);
+  if (!range) return date;
+  if (range.start.getMonth() === range.end.getMonth()) {
+    return `${format(range.start, 'MMM d')} – ${format(range.end, 'd')}`;
+  }
+  return `${format(range.start, 'MMM d')} – ${format(range.end, 'MMM d')}`;
+}
+
+function isEventFuture(eventDate: string, today: Date): boolean {
+  if (isDateRange(eventDate)) {
+    const range = parseDateRange(eventDate);
+    if (!range) return false;
+    return !isBefore(range.end, today);
+  }
+  return !isBefore(toDate(eventDate), today);
+}
+
+// --- Category config ---
 
 const categoryConfig: { key: Category; label: string; bg: string; text: string; dot: string }[] = [
   { key: 'Film', label: 'Film', bg: '#fde8e8', text: '#b91c1c', dot: '#ef4444' },
-  { key: 'Museum Exhibition', label: 'Museums', bg: '#ede9fe', text: '#6d28d9', dot: '#8b5cf6' },
-  { key: 'Museums/Art', label: 'Art', bg: '#ede9fe', text: '#6d28d9', dot: '#a78bfa' },
+  { key: 'Art', label: 'Art & Museums', bg: '#ede9fe', text: '#6d28d9', dot: '#8b5cf6' },
   { key: 'Classical Music', label: 'Classical', bg: '#dbeafe', text: '#1d4ed8', dot: '#3b82f6' },
   { key: 'Ballet', label: 'Ballet', bg: '#fce7f3', text: '#be185d', dot: '#ec4899' },
   { key: 'Opera', label: 'Opera', bg: '#fef3c7', text: '#92400e', dot: '#f59e0b' },
   { key: 'Dance', label: 'Dance', bg: '#d1fae5', text: '#065f46', dot: '#10b981' },
   { key: 'Jazz', label: 'Jazz', bg: '#e0e7ff', text: '#3730a3', dot: '#6366f1' },
+  { key: 'Theater', label: 'Theater', bg: '#fef3c7', text: '#78350f', dot: '#d97706' },
   { key: 'Music/Performing Arts', label: 'Performing Arts', bg: '#fce7f3', text: '#9d174d', dot: '#f472b6' },
+  { key: 'Family', label: 'Family', bg: '#fce7f3', text: '#9d174d', dot: '#f472b6' },
   { key: 'Talk', label: 'Talks', bg: '#f3e8ff', text: '#7e22ce', dot: '#a855f7' },
   { key: 'Food/Drink', label: 'Food & Drink', bg: '#ffedd5', text: '#c2410c', dot: '#f97316' },
   { key: 'Shopping/Markets', label: 'Markets', bg: '#dcfce7', text: '#166534', dot: '#22c55e' },
@@ -22,9 +66,29 @@ const categoryConfig: { key: Category; label: string; bg: string; text: string; 
   { key: 'Other', label: 'Other', bg: '#f3f4f6', text: '#4b5563', dot: '#9ca3af' },
 ];
 
+/** Map messy scraped category names → canonical Category keys */
+const categoryAliases: Record<string, Category> = {
+  'art': 'Art',
+  'museums/art': 'Art',
+  'museum exhibition': 'Art',
+  'museum': 'Art',
+  'classical': 'Classical Music',
+  'classical music': 'Classical Music',
+  'general': 'Other',
+};
+
 function getCategoryStyle(category: Category) {
   return categoryConfig.find(c => c.key === category) || categoryConfig[categoryConfig.length - 1];
 }
+
+function normalizeCategory(raw: string): Category {
+  const alias = categoryAliases[raw.toLowerCase()];
+  if (alias) return alias;
+  const match = categoryConfig.find(c => c.key.toLowerCase() === raw.toLowerCase());
+  return match ? match.key : 'Other';
+}
+
+// --- Main component ---
 
 export default function Home() {
   const [eventsData, setEventsData] = useState<EventsData>({ weekOf: '', events: [] });
@@ -35,32 +99,46 @@ export default function Home() {
 
   useEffect(() => {
     Promise.all([
-      fetch('/data/events.json').then(r => r.json()).catch(() => ({ weekOf: '', events: [] })),
-      fetch('/data/film_museum_events.json').then(r => r.json()).catch(() => ({ weekOf: '', events: [] }))
-    ]).then(([generalData, filmData]) => {
-      const allEvents = [...generalData.events, ...filmData.events];
-      const uniqueEvents = allEvents.filter((event: Event, index: number, self: Event[]) =>
-        index === self.findIndex(e => e.id === event.id)
-      );
-      const futureEvents = uniqueEvents.filter((e: Event) => !isBefore(parseISO(e.date), today));
-      setEventsData({
-        weekOf: generalData.weekOf || filmData.weekOf || '2026-03-09',
-        events: futureEvents
+      fetch('/data/events.json').then(r => r.json()).catch(() => []),
+      fetch('/data/film_museum_events.json').then(r => r.json()).catch(() => [])
+    ]).then(([raw1, raw2]) => {
+      // Support both formats: raw array or { weekOf, events }
+      const arr1: RawEvent[] = Array.isArray(raw1) ? raw1 : (raw1.events || []);
+      const arr2: RawEvent[] = Array.isArray(raw2) ? raw2 : (raw2.events || []);
+      const weekOf = (!Array.isArray(raw1) && raw1.weekOf) || (!Array.isArray(raw2) && raw2.weekOf) || '2026-03-09';
+
+      const allRaw = [...arr1, ...arr2];
+      // Dedupe by title+venue+date
+      const seen = new Set<string>();
+      const unique = allRaw.filter(e => {
+        const key = `${e.title}|${e.venue}|${e.date}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
       });
+
+      // Map raw → Event
+      const processed: Event[] = unique
+        .map((e, i) => ({
+          id: `evt-${i}`,
+          title: e.title,
+          venue: e.venue,
+          date: e.date,
+          category: normalizeCategory(e.category),
+          sourceUrl: e.url || '',
+        }))
+        .filter(e => isEventFuture(e.date, today));
+
+      setEventsData({ weekOf, events: processed });
       setLoading(false);
     }).catch(() => setLoading(false));
   }, [today]);
 
-  const toggleCategory = (category: Category) => {
-    setSelectedCategories(prev =>
-      prev.includes(category)
-        ? prev.filter(c => c !== category)
-        : [...prev, category]
-    );
-  };
-
   const presentCategories = Array.from(new Set(eventsData.events.map(e => e.category)));
   const visibleCategoryConfig = categoryConfig.filter(c => presentCategories.includes(c.key));
+  const deduped = visibleCategoryConfig.filter((c, i, arr) =>
+    arr.findIndex(x => x.label === c.label) === i
+  );
 
   const filteredEvents = selectedCategories.length > 0
     ? eventsData.events.filter(e => selectedCategories.includes(e.category))
@@ -74,27 +152,20 @@ export default function Home() {
     );
   }
 
+  const weekStart = toDate(eventsData.weekOf || '2026-03-09');
   const weekLabel = eventsData.weekOf
-    ? format(parseISO(eventsData.weekOf), 'MMM d') + ' – ' + format(addDays(parseISO(eventsData.weekOf), 6), 'MMM d, yyyy')
+    ? format(weekStart, 'MMM d') + ' – ' + format(addDays(weekStart, 6), 'MMM d, yyyy')
     : '';
 
   return (
     <main style={{ minHeight: '100vh', padding: '2rem 1.5rem', maxWidth: '72rem', margin: '0 auto' }}>
-      {/* Header */}
       <header style={{ marginBottom: '2rem' }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.75rem', flexWrap: 'wrap' }}>
           <h1 style={{ fontSize: '2rem', fontWeight: 700, letterSpacing: '-0.02em', color: '#1a1a2e' }}>
             Next Week NYC
           </h1>
           {weekLabel && (
-            <span style={{
-              fontSize: '0.875rem',
-              fontWeight: 500,
-              color: '#e07a5f',
-              background: '#fde8e8',
-              padding: '0.25rem 0.75rem',
-              borderRadius: '999px',
-            }}>
+            <span style={{ fontSize: '0.875rem', fontWeight: 500, color: '#e07a5f', background: '#fde8e8', padding: '0.25rem 0.75rem', borderRadius: '999px' }}>
               {weekLabel}
             </span>
           )}
@@ -104,57 +175,42 @@ export default function Home() {
         </p>
       </header>
 
-      {/* Controls */}
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', marginBottom: '1.5rem' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-          {visibleCategoryConfig.map(({ key, label, bg, text, dot }) => {
-            const isActive = selectedCategories.includes(key);
+          {deduped.map(({ key, label, bg, text, dot }) => {
+            const matchingKeys = categoryConfig.filter(c => c.label === label).map(c => c.key);
+            const isActive = matchingKeys.some(k => selectedCategories.includes(k));
             return (
               <button
                 key={key}
-                onClick={() => toggleCategory(key)}
+                onClick={() => {
+                  setSelectedCategories(prev => {
+                    if (isActive) return prev.filter(c => !matchingKeys.includes(c));
+                    return [...prev, ...matchingKeys.filter(k => !prev.includes(k))];
+                  });
+                }}
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.375rem',
-                  padding: '0.375rem 0.75rem',
-                  borderRadius: '999px',
-                  fontSize: '0.8125rem',
-                  fontWeight: 500,
+                  display: 'flex', alignItems: 'center', gap: '0.375rem',
+                  padding: '0.375rem 0.75rem', borderRadius: '999px', fontSize: '0.8125rem', fontWeight: 500,
                   border: isActive ? `1.5px solid ${dot}` : '1.5px solid #e8e4de',
-                  background: isActive ? bg : '#fff',
-                  color: isActive ? text : '#8888a0',
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease',
+                  background: isActive ? bg : '#fff', color: isActive ? text : '#8888a0',
+                  cursor: 'pointer', transition: 'all 0.15s ease',
                 }}
               >
-                <span style={{
-                  width: '8px', height: '8px', borderRadius: '50%',
-                  background: isActive ? dot : '#d1d1d1',
-                }} />
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: isActive ? dot : '#d1d1d1' }} />
                 {label}
               </button>
             );
           })}
         </div>
-
-        <div style={{
-          display: 'flex',
-          background: '#f0ece6',
-          borderRadius: '0.5rem',
-          padding: '3px',
-        }}>
+        <div style={{ display: 'flex', background: '#f0ece6', borderRadius: '0.5rem', padding: '3px' }}>
           {(['category', 'calendar'] as const).map(mode => (
             <button
               key={mode}
               onClick={() => setViewMode(mode)}
               style={{
-                padding: '0.4rem 1rem',
-                borderRadius: '0.375rem',
-                fontSize: '0.8125rem',
-                fontWeight: 500,
-                border: 'none',
-                cursor: 'pointer',
+                padding: '0.4rem 1rem', borderRadius: '0.375rem', fontSize: '0.8125rem', fontWeight: 500,
+                border: 'none', cursor: 'pointer',
                 background: viewMode === mode ? '#fff' : 'transparent',
                 color: viewMode === mode ? '#1a1a2e' : '#8888a0',
                 boxShadow: viewMode === mode ? '0 1px 3px rgba(0,0,0,0.08)' : 'none',
@@ -176,21 +232,16 @@ export default function Home() {
   );
 }
 
+// --- Shared UI ---
+
 function CategoryTag({ category }: { category: Category }) {
   const style = getCategoryStyle(category);
   return (
     <span style={{
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: '0.25rem',
-      fontSize: '0.6875rem',
-      fontWeight: 600,
-      padding: '0.2rem 0.5rem',
-      borderRadius: '999px',
-      background: style.bg,
-      color: style.text,
-      letterSpacing: '0.01em',
-      textTransform: 'uppercase',
+      display: 'inline-flex', alignItems: 'center', gap: '0.25rem',
+      fontSize: '0.6875rem', fontWeight: 600, padding: '0.2rem 0.5rem',
+      borderRadius: '999px', background: style.bg, color: style.text,
+      letterSpacing: '0.01em', textTransform: 'uppercase',
     }}>
       <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: style.dot }} />
       {style.label}
@@ -198,21 +249,29 @@ function CategoryTag({ category }: { category: Category }) {
   );
 }
 
-function EventCard({ event }: { event: Event }) {
+function DateBadge({ date }: { date: string }) {
+  if (!isDateRange(date)) return null;
+  return (
+    <span style={{
+      display: 'inline-flex', alignItems: 'center', gap: '0.25rem',
+      fontSize: '0.6875rem', fontWeight: 500, padding: '0.15rem 0.5rem',
+      borderRadius: '999px', background: '#e0e7ff', color: '#3730a3',
+    }}>
+      📅 {getDateLabel(date)}
+    </span>
+  );
+}
+
+function EventCard({ event, showDate }: { event: Event; showDate?: boolean }) {
   return (
     <a
       href={event.sourceUrl}
       target="_blank"
       rel="noopener noreferrer"
       style={{
-        display: 'block',
-        padding: '1rem 1.25rem',
-        background: '#fff',
-        borderRadius: '0.75rem',
-        border: '1px solid #e8e4de',
-        textDecoration: 'none',
-        color: 'inherit',
-        transition: 'all 0.15s ease',
+        display: 'block', padding: '1rem 1.25rem', background: '#fff',
+        borderRadius: '0.75rem', border: '1px solid #e8e4de',
+        textDecoration: 'none', color: 'inherit', transition: 'all 0.15s ease',
       }}
       onMouseEnter={e => {
         e.currentTarget.style.borderColor = '#d1ccc4';
@@ -229,10 +288,9 @@ function EventCard({ event }: { event: Event }) {
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.375rem', flexWrap: 'wrap' }}>
             <CategoryTag category={event.category} />
-            {event.time && (
-              <span style={{ fontSize: '0.75rem', color: '#8888a0' }}>
-                {event.time}
-              </span>
+            {showDate && <DateBadge date={event.date} />}
+            {event.time && event.time !== 'TBA' && (
+              <span style={{ fontSize: '0.75rem', color: '#8888a0' }}>{event.time}</span>
             )}
           </div>
           <h4 style={{ fontWeight: 600, fontSize: '0.9375rem', color: '#1a1a2e', marginBottom: '0.25rem' }}>
@@ -240,15 +298,11 @@ function EventCard({ event }: { event: Event }) {
           </h4>
           <p style={{ fontSize: '0.8125rem', color: '#4a4a68', margin: 0 }}>{event.venue}</p>
         </div>
-        {event.price && (
+        {event.price && event.price !== 'TBA' && (
           <span style={{
-            fontSize: '0.75rem',
-            fontWeight: 600,
-            color: '#4a4a68',
-            background: '#f5f2ed',
-            padding: '0.25rem 0.625rem',
-            borderRadius: '0.375rem',
-            whiteSpace: 'nowrap',
+            fontSize: '0.75rem', fontWeight: 600, color: '#4a4a68',
+            background: '#f5f2ed', padding: '0.25rem 0.625rem',
+            borderRadius: '0.375rem', whiteSpace: 'nowrap',
           }}>
             {event.price}
           </span>
@@ -256,14 +310,8 @@ function EventCard({ event }: { event: Event }) {
       </div>
       {event.description && (
         <p style={{
-          fontSize: '0.8125rem',
-          color: '#8888a0',
-          marginTop: '0.5rem',
-          lineHeight: 1.5,
-          display: '-webkit-box',
-          WebkitLineClamp: 2,
-          WebkitBoxOrient: 'vertical',
-          overflow: 'hidden',
+          fontSize: '0.8125rem', color: '#8888a0', marginTop: '0.5rem', lineHeight: 1.5,
+          display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
         }}>
           {event.description}
         </p>
@@ -272,63 +320,84 @@ function EventCard({ event }: { event: Event }) {
   );
 }
 
+// --- Category (List) View ---
+
 function EventList({ events }: { events: Event[] }) {
-  const grouped = events.reduce((acc, event) => {
+  const singleDay = events.filter(e => !isDateRange(e.date));
+  const multiDay = events.filter(e => isDateRange(e.date));
+
+  const grouped = singleDay.reduce((acc, event) => {
     if (!acc[event.category]) acc[event.category] = {};
     if (!acc[event.category][event.date]) acc[event.category][event.date] = [];
     acc[event.category][event.date].push(event);
     return acc;
   }, {} as Record<string, Record<string, Event[]>>);
 
-  const sortedCategories = Object.keys(grouped).sort();
+  const multiGrouped = multiDay.reduce((acc, event) => {
+    if (!acc[event.category]) acc[event.category] = [];
+    acc[event.category].push(event);
+    return acc;
+  }, {} as Record<string, Event[]>);
+
+  const allCategories = Array.from(new Set([...Object.keys(grouped), ...Object.keys(multiGrouped)])).sort();
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
-      {sortedCategories.map(category => {
+      {allCategories.map(category => {
         const style = getCategoryStyle(category as Category);
+        const singleEntries = grouped[category]
+          ? Object.entries(grouped[category]).sort(([a], [b]) => a.localeCompare(b))
+          : [];
+        const multiEntries = multiGrouped[category] || [];
+        const totalCount = singleEntries.reduce((n, [, evts]) => n + evts.length, 0) + multiEntries.length;
+
         return (
           <section key={category}>
             <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.625rem',
-              marginBottom: '1.25rem',
-              paddingBottom: '0.75rem',
-              borderBottom: '2px solid #f0ece6',
+              display: 'flex', alignItems: 'center', gap: '0.625rem',
+              marginBottom: '1.25rem', paddingBottom: '0.75rem', borderBottom: '2px solid #f0ece6',
             }}>
-              <span style={{
-                width: '12px', height: '12px', borderRadius: '50%',
-                background: style.dot,
-              }} />
+              <span style={{ width: '12px', height: '12px', borderRadius: '50%', background: style.dot }} />
               <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#1a1a2e', margin: 0 }}>
                 {style.label}
               </h2>
               <span style={{ fontSize: '0.8125rem', color: '#8888a0', fontWeight: 400 }}>
-                ({Object.values(grouped[category]).flat().length})
+                ({totalCount})
               </span>
             </div>
 
-            {Object.entries(grouped[category])
-              .sort(([a], [b]) => a.localeCompare(b))
-              .map(([date, dayEvents]) => (
-                <div key={date} style={{ marginBottom: '1.25rem' }}>
-                  <h3 style={{
-                    fontSize: '0.8125rem',
-                    fontWeight: 600,
-                    color: '#8888a0',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em',
-                    marginBottom: '0.75rem',
-                  }}>
-                    {format(parseISO(date), 'EEEE, MMMM d')}
-                  </h3>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    {dayEvents.map(event => (
-                      <EventCard key={event.id} event={event} />
-                    ))}
-                  </div>
+            {multiEntries.length > 0 && (
+              <div style={{ marginBottom: '1.25rem' }}>
+                <h3 style={{
+                  fontSize: '0.8125rem', fontWeight: 600, color: '#3730a3',
+                  textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.75rem',
+                  display: 'flex', alignItems: 'center', gap: '0.375rem',
+                }}>
+                  <span style={{ fontSize: '0.875rem' }}>🗓</span> Multiple Days
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  {multiEntries.map(event => (
+                    <EventCard key={event.id} event={event} showDate />
+                  ))}
                 </div>
-              ))}
+              </div>
+            )}
+
+            {singleEntries.map(([date, dayEvents]) => (
+              <div key={date} style={{ marginBottom: '1.25rem' }}>
+                <h3 style={{
+                  fontSize: '0.8125rem', fontWeight: 600, color: '#8888a0',
+                  textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.75rem',
+                }}>
+                  {format(toDate(date), 'EEEE, MMMM d')}
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  {dayEvents.map(event => (
+                    <EventCard key={event.id} event={event} />
+                  ))}
+                </div>
+              </div>
+            ))}
           </section>
         );
       })}
@@ -342,140 +411,166 @@ function EventList({ events }: { events: Event[] }) {
   );
 }
 
-function CalendarView({ events, weekOf }: { events: Event[]; weekOf: string }) {
-  const weekStart = parseISO(weekOf);
-  const days = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
+// --- Calendar View ---
 
-  const formatDate = (d: Date) => d.toISOString().split('T')[0];
-  const todayStr = new Date().toISOString().split('T')[0];
+function CalendarView({ events, weekOf }: { events: Event[]; weekOf: string }) {
+  const [showAllWeek, setShowAllWeek] = useState(true);
+  const weekStart = toDate(weekOf || '2026-03-09');
+  const days = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
+  const todayStr = toStr(new Date());
+
+  const multiDayEvents = events.filter(e => isDateRange(e.date));
+  const singleDayEvents = events.filter(e => !isDateRange(e.date));
+
+  const multiByCategory = multiDayEvents.reduce((acc, e) => {
+    if (!acc[e.category]) acc[e.category] = [];
+    acc[e.category].push(e);
+    return acc;
+  }, {} as Record<string, Event[]>);
 
   return (
-    <div style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(7, 1fr)',
-      gap: '0.5rem',
-    }}>
-      {days.map(day => {
-        const dayStr = formatDate(day);
-        const dayEvents = events.filter(e => e.date === dayStr);
-        const isToday = dayStr === todayStr;
-
-        // Group events by category for this day
-        const byCategory = dayEvents.reduce((acc, e) => {
-          if (!acc[e.category]) acc[e.category] = [];
-          acc[e.category].push(e);
-          return acc;
-        }, {} as Record<string, Event[]>);
-
-        return (
-          <div
-            key={dayStr}
+    <div>
+      {multiDayEvents.length > 0 && (
+        <div style={{
+          marginBottom: '1rem', background: '#fff', borderRadius: '0.75rem',
+          border: '1px solid #e0e7ff', overflow: 'hidden',
+        }}>
+          <button
+            onClick={() => setShowAllWeek(prev => !prev)}
             style={{
-              minHeight: '200px',
-              background: isToday ? '#fef9f3' : '#fff',
-              borderRadius: '0.75rem',
-              padding: '0.75rem',
-              border: isToday ? '2px solid #e07a5f' : '1px solid #e8e4de',
+              width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+              padding: '0.75rem 1rem', background: '#eef2ff', border: 'none',
+              cursor: 'pointer', fontSize: '0.875rem', fontWeight: 600, color: '#3730a3',
             }}
           >
-            <div style={{
-              textAlign: 'center',
-              marginBottom: '0.625rem',
-              paddingBottom: '0.5rem',
-              borderBottom: '1px solid #f0ece6',
-            }}>
-              <div style={{
-                fontSize: '0.6875rem',
-                fontWeight: 600,
-                color: '#8888a0',
-                textTransform: 'uppercase',
-                letterSpacing: '0.05em',
-              }}>
-                {format(day, 'EEE')}
-              </div>
-              <div style={{
-                fontSize: '1.5rem',
-                fontWeight: 700,
-                color: isToday ? '#e07a5f' : '#1a1a2e',
-                lineHeight: 1.2,
-              }}>
-                {format(day, 'd')}
-              </div>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
-              {Object.entries(byCategory).map(([cat, catEvents]) => {
+            <span>🗓 Playing all week ({multiDayEvents.length})</span>
+            <span style={{ fontSize: '0.75rem', color: '#6366f1' }}>
+              {showAllWeek ? '▲ Hide' : '▼ Show'}
+            </span>
+          </button>
+          {showAllWeek && (
+            <div style={{ padding: '0.75rem 1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              {Object.entries(multiByCategory).map(([cat, catEvents]) => {
                 const catStyle = getCategoryStyle(cat as Category);
                 return (
                   <div key={cat}>
-                    {catEvents.map(event => (
-                      <a
-                        key={event.id}
-                        href={event.sourceUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                          display: 'block',
-                          padding: '0.375rem 0.5rem',
-                          borderRadius: '0.375rem',
-                          fontSize: '0.6875rem',
-                          textDecoration: 'none',
-                          color: 'inherit',
-                          background: catStyle.bg,
-                          borderLeft: `3px solid ${catStyle.dot}`,
-                          marginBottom: '0.25rem',
-                          transition: 'opacity 0.15s ease',
-                        }}
-                        onMouseEnter={e => { e.currentTarget.style.opacity = '0.8'; }}
-                        onMouseLeave={e => { e.currentTarget.style.opacity = '1'; }}
-                      >
-                        <div style={{
-                          fontWeight: 600,
-                          color: '#1a1a2e',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          whiteSpace: 'nowrap',
-                        }}>
-                          {event.title}
-                        </div>
-                        <div style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.25rem',
-                          marginTop: '0.125rem',
-                        }}>
-                          <span style={{
-                            fontSize: '0.5625rem',
-                            fontWeight: 700,
-                            color: catStyle.text,
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.03em',
-                          }}>
-                            {catStyle.label}
-                          </span>
-                          {event.time && (
-                            <>
-                              <span style={{ color: '#d1d1d1' }}>·</span>
-                              <span style={{ color: '#8888a0' }}>{event.time}</span>
-                            </>
-                          )}
-                        </div>
-                      </a>
-                    ))}
+                    <div style={{
+                      fontSize: '0.6875rem', fontWeight: 700, color: catStyle.text,
+                      textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.375rem',
+                      display: 'flex', alignItems: 'center', gap: '0.25rem',
+                    }}>
+                      <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: catStyle.dot }} />
+                      {catStyle.label}
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '0.375rem' }}>
+                      {catEvents.map(event => (
+                        <a
+                          key={event.id}
+                          href={event.sourceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            display: 'block', padding: '0.375rem 0.625rem',
+                            borderRadius: '0.375rem', fontSize: '0.75rem',
+                            textDecoration: 'none', color: '#1a1a2e',
+                            background: catStyle.bg, borderLeft: `3px solid ${catStyle.dot}`,
+                            transition: 'opacity 0.15s ease',
+                            overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                          }}
+                          onMouseEnter={e => { e.currentTarget.style.opacity = '0.75'; }}
+                          onMouseLeave={e => { e.currentTarget.style.opacity = '1'; }}
+                          title={`${event.title} — ${event.venue}`}
+                        >
+                          <span style={{ fontWeight: 600 }}>{event.title}</span>
+                          <span style={{ color: '#8888a0', marginLeft: '0.375rem', fontSize: '0.6875rem' }}>{event.venue}</span>
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 );
               })}
-              {dayEvents.length === 0 && (
-                <p style={{ fontSize: '0.75rem', color: '#c4c0b8', textAlign: 'center', margin: '1rem 0' }}>
-                  No events
-                </p>
-              )}
             </div>
-          </div>
-        );
-      })}
+          )}
+        </div>
+      )}
 
-      {/* Responsive fallback for mobile */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '0.5rem' }}>
+        {days.map(day => {
+          const dayStr = toStr(day);
+          const dayEvents = singleDayEvents.filter(e => e.date === dayStr);
+          const isToday = dayStr === todayStr;
+          const byCategory = dayEvents.reduce((acc, e) => {
+            if (!acc[e.category]) acc[e.category] = [];
+            acc[e.category].push(e);
+            return acc;
+          }, {} as Record<string, Event[]>);
+
+          return (
+            <div
+              key={dayStr}
+              style={{
+                minHeight: '200px', background: isToday ? '#fef9f3' : '#fff',
+                borderRadius: '0.75rem', padding: '0.75rem',
+                border: isToday ? '2px solid #e07a5f' : '1px solid #e8e4de',
+              }}
+            >
+              <div style={{ textAlign: 'center', marginBottom: '0.625rem', paddingBottom: '0.5rem', borderBottom: '1px solid #f0ece6' }}>
+                <div style={{ fontSize: '0.6875rem', fontWeight: 600, color: '#8888a0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  {format(day, 'EEE')}
+                </div>
+                <div style={{ fontSize: '1.5rem', fontWeight: 700, color: isToday ? '#e07a5f' : '#1a1a2e', lineHeight: 1.2 }}>
+                  {format(day, 'd')}
+                </div>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
+                {Object.entries(byCategory).map(([cat, catEvents]) => {
+                  const catStyle = getCategoryStyle(cat as Category);
+                  return (
+                    <div key={cat}>
+                      {catEvents.map(event => (
+                        <a
+                          key={event.id}
+                          href={event.sourceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            display: 'block', padding: '0.375rem 0.5rem',
+                            borderRadius: '0.375rem', fontSize: '0.6875rem',
+                            textDecoration: 'none', color: 'inherit',
+                            background: catStyle.bg, borderLeft: `3px solid ${catStyle.dot}`,
+                            marginBottom: '0.25rem', transition: 'opacity 0.15s ease',
+                          }}
+                          onMouseEnter={e => { e.currentTarget.style.opacity = '0.8'; }}
+                          onMouseLeave={e => { e.currentTarget.style.opacity = '1'; }}
+                        >
+                          <div style={{ fontWeight: 600, color: '#1a1a2e', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                            {event.title}
+                          </div>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: '0.125rem' }}>
+                            <span style={{ fontSize: '0.5625rem', fontWeight: 700, color: catStyle.text, textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                              {catStyle.label}
+                            </span>
+                            {event.time && event.time !== 'TBA' && (
+                              <>
+                                <span style={{ color: '#d1d1d1' }}>·</span>
+                                <span style={{ color: '#8888a0' }}>{event.time}</span>
+                              </>
+                            )}
+                          </div>
+                        </a>
+                      ))}
+                    </div>
+                  );
+                })}
+                {dayEvents.length === 0 && (
+                  <p style={{ fontSize: '0.75rem', color: '#c4c0b8', textAlign: 'center', margin: '1rem 0' }}>No events</p>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
       <style>{`
         @media (max-width: 768px) {
           div[style*="grid-template-columns: repeat(7"] {

@@ -1,25 +1,36 @@
+/** Raw shape from the scraped JSON files (arrays in public/data/) */
+export interface RawEvent {
+  title: string;
+  venue: string;
+  date: string;       // "YYYY-MM-DD" or "YYYY-MM-DD to YYYY-MM-DD"
+  category: string;
+  url: string;
+}
+
+/** Normalised event used by the UI */
 export interface Event {
   id: string;
   title: string;
   venue: string;
   date: string;
-  time?: string;
   category: Category;
   sourceUrl: string;
+  time?: string;
   description?: string;
   price?: string;
 }
 
 export type Category =
   | 'Film'
-  | 'Museums/Art'
-  | 'Museum Exhibition'
-  | 'Music/Performing Arts'
+  | 'Art'
   | 'Classical Music'
   | 'Ballet'
   | 'Opera'
   | 'Dance'
   | 'Jazz'
+  | 'Theater'
+  | 'Music/Performing Arts'
+  | 'Family'
   | 'Talk'
   | 'Food/Drink'
   | 'Shopping/Markets'
