@@ -448,6 +448,14 @@
     "sourceUrl": "https://whitney.org/exhibitions/untitled-america"
   },
   {
+    "id": "guggenheim-the-frank-lloyd-wright-building-99",
+    "title": "The Frank Lloyd Wright Building",
+    "venue": "Guggenheim",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Art",
+    "sourceUrl": "https://www.guggenheim.org/exhibitions"
+  },
+  {
     "id": "new-museum-new-humans-memories-of-the-future-107",
     "title": "New Humans: Memories of the Future",
     "venue": "New Museum",
@@ -472,6 +480,14 @@
     "sourceUrl": "https://www.newmuseum.org/exhibition/facade-tschabalala-self-art-lovers/"
   },
   {
+    "id": "japan-society-calendar-view-show-filters-128",
+    "title": "Calendar View Show filters",
+    "venue": "Japan Society",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Art",
+    "sourceUrl": "https://japansociety.org/events-and-exhibitions/#"
+  },
+  {
     "id": "the-frick-collection-fran-ois-boucher-the-arts-and-sciences-astronomy-and-hydraul-140",
     "title": "François Boucher, The Arts and Sciences: Astronomy and Hydraulics, ca. 1760",
     "venue": "The Frick Collection",
@@ -494,6 +510,126 @@
     "date": "2026-03-09 to 2026-03-15",
     "category": "Classical Music",
     "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/grazinyte-tyla-conducts-elgar-and-schumann/"
+  },
+  {
+    "id": "metropolitan-opera-the-amazing-adventures-of-kavalier-clay-is-not-on-sale-learn-176",
+    "title": "The Amazing Adventures of Kavalier & Clay is not on sale, learn more about this production",
+    "venue": "Metropolitan Opera",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Opera",
+    "sourceUrl": "https://www.metopera.org/season/2025-26-season/the-amazing-adventures-of-kavalier--clay/"
+  },
+  {
+    "id": "metropolitan-opera-andrea-ch-nier-is-not-on-sale-learn-more-about-this-producti-177",
+    "title": "Andrea Chénier is not on sale, learn more about this production",
+    "venue": "Metropolitan Opera",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Opera",
+    "sourceUrl": "https://www.metopera.org/season/2025-26-season/andrea-chenier/"
+  },
+  {
+    "id": "metropolitan-opera-arabella-is-not-on-sale-learn-more-about-this-production-178",
+    "title": "Arabella is not on sale, learn more about this production",
+    "venue": "Metropolitan Opera",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Opera",
+    "sourceUrl": "https://www.metopera.org/season/2025-26-season/arabella/"
+  },
+  {
+    "id": "metropolitan-opera-la-boh-me-buy-tickets-and-learn-more-about-this-production-179",
+    "title": "La Bohème Buy Tickets and learn more about this production",
+    "venue": "Metropolitan Opera",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Opera",
+    "sourceUrl": "https://www.metopera.org/season/2025-26-season/la-boheme/"
+  },
+  {
+    "id": "metropolitan-opera-carmen-is-not-on-sale-learn-more-about-this-production-180",
+    "title": "Carmen is not on sale, learn more about this production",
+    "venue": "Metropolitan Opera",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Opera",
+    "sourceUrl": "https://www.metopera.org/season/2025-26-season/carmen/"
+  },
+  {
+    "id": "metropolitan-opera-don-giovanni-is-not-on-sale-learn-more-about-this-production-181",
+    "title": "Don Giovanni is not on sale, learn more about this production",
+    "venue": "Metropolitan Opera",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Opera",
+    "sourceUrl": "https://www.metopera.org/season/2025-26-season/don-giovanni/"
+  },
+  {
+    "id": "metropolitan-opera-eugene-onegin-buy-tickets-and-learn-more-about-this-producti-182",
+    "title": "Eugene Onegin Buy Tickets and learn more about this production",
+    "venue": "Metropolitan Opera",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Opera",
+    "sourceUrl": "https://www.metopera.org/season/2025-26-season/eugene-onegin/"
+  },
+  {
+    "id": "metropolitan-opera-la-fille-du-r-giment-is-not-on-sale-learn-more-about-this-pr-183",
+    "title": "La Fille du Régiment is not on sale, learn more about this production",
+    "venue": "Metropolitan Opera",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Opera",
+    "sourceUrl": "https://www.metopera.org/season/2025-26-season/la-fille-du-regiment/"
+  },
+  {
+    "id": "metropolitan-opera-innocence-buy-tickets-and-learn-more-about-this-production-184",
+    "title": "Innocence Buy Tickets and learn more about this production",
+    "venue": "Metropolitan Opera",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Opera",
+    "sourceUrl": "https://www.metopera.org/season/2025-26-season/innocence/"
+  },
+  {
+    "id": "metropolitan-opera-laffont-grand-finals-concert-buy-tickets-and-learn-more-abou-185",
+    "title": "Laffont Grand Finals Concert Buy Tickets and learn more about this production",
+    "venue": "Metropolitan Opera",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Opera",
+    "sourceUrl": "https://www.metopera.org/season/2025-26-special-presentation/laffont-grand-finals-concert/"
+  },
+  {
+    "id": "metropolitan-opera-madama-butterfly-buy-tickets-and-learn-more-about-this-produ-186",
+    "title": "Madama Butterfly Buy Tickets and learn more about this production",
+    "venue": "Metropolitan Opera",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Opera",
+    "sourceUrl": "https://www.metopera.org/season/2025-26-season/madama-butterfly/"
+  },
+  {
+    "id": "metropolitan-opera-the-magic-flute-holiday-presentation-is-not-on-sale-learn-mo-187",
+    "title": "The Magic Flute—Holiday Presentation is not on sale, learn more about this production",
+    "venue": "Metropolitan Opera",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Opera",
+    "sourceUrl": "https://www.metopera.org/season/2025-26-season/the-magic-flute/"
+  },
+  {
+    "id": "metropolitan-opera-the-met-orchestra-at-carnegie-hall-is-not-on-sale-learn-more-188",
+    "title": "The Met Orchestra at Carnegie Hall is not on sale, learn more about this production",
+    "venue": "Metropolitan Opera",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Opera",
+    "sourceUrl": "https://www.metopera.org/season/2025-26-special-presentation/chamber-concert/"
+  },
+  {
+    "id": "metropolitan-opera-porgy-and-bess-is-not-on-sale-learn-more-about-this-producti-189",
+    "title": "Porgy and Bess is not on sale, learn more about this production",
+    "venue": "Metropolitan Opera",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Opera",
+    "sourceUrl": "https://www.metopera.org/season/2025-26-season/porgy-and-bess/"
+  },
+  {
+    "id": "metropolitan-opera-i-puritani-is-not-on-sale-learn-more-about-this-production-190",
+    "title": "I Puritani is not on sale, learn more about this production",
+    "venue": "Metropolitan Opera",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Opera",
+    "sourceUrl": "https://www.metopera.org/season/2025-26-season/i-puritani/"
   },
   {
     "id": "new-york-city-ballet-all-balanchine-iii-201",
