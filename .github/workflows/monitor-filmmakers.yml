@@ -30,3 +30,10 @@ jobs:
           NODE_ENV: production
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_USER_ID: ${{ secrets.TELEGRAM_USER_ID }}
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          curl -s "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d "chat_id=${{ secrets.TELEGRAM_USER_ID }}" \
+            -d "text=❌ Filmmaker monitor failed! Check https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
