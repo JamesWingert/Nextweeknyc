@@ -111,21 +111,26 @@ export default function Home() {
       // Dedupe by title+venue+date
       const seen = new Set<string>();
       const unique = allRaw.filter(e => {
-        const key = `${e.title}|${e.venue}|${e.date}`;
+        const title = e.title || e.name || '';
+        const venue = e.venue || e.location || '';
+        const key = `${title}|${venue}|${e.date}`;
         if (seen.has(key)) return false;
         seen.add(key);
         return true;
       });
 
-      // Map raw → Event
+      // Map raw → Event (handle field name variants from different scrapers)
       const processed: Event[] = unique
         .map((e, i) => ({
-          id: `evt-${i}`,
-          title: e.title,
-          venue: e.venue,
+          id: e.id || `evt-${i}`,
+          title: (e.title || e.name || '').trim(),
+          venue: (e.venue || e.location || '').trim(),
           date: e.date,
-          category: normalizeCategory(e.category),
-          sourceUrl: e.url || '',
+          category: normalizeCategory(e.category || e.type || 'Other'),
+          sourceUrl: (e.sourceUrl || e.url || e.link || '').trim(),
+          ...(e.time ? { time: e.time } : {}),
+          ...(e.description ? { description: e.description } : {}),
+          ...(e.price ? { price: e.price } : {}),
         }))
         .filter(e => isEventFuture(e.date, today));
 

@@ -1,10 +1,20 @@
-/** Raw shape from the scraped JSON files (arrays in public/data/) */
+/** Raw shape from the scraped JSON files (arrays in public/data/).
+ *  Scrapers may use different field names — the UI normalizes on load. */
 export interface RawEvent {
-  title: string;
-  venue: string;
-  date: string;       // "YYYY-MM-DD" or "YYYY-MM-DD to YYYY-MM-DD"
-  category: string;
-  url: string;
+  title?: string;
+  name?: string;
+  venue?: string;
+  location?: string;
+  date: string;           // "YYYY-MM-DD" or "YYYY-MM-DD to YYYY-MM-DD"
+  category?: string;
+  type?: string;
+  url?: string;
+  sourceUrl?: string;
+  link?: string;
+  id?: string;
+  time?: string;
+  description?: string;
+  price?: string;
 }
 
 /** Normalised event used by the UI */
