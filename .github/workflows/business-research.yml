@@ -1,0 +1,42 @@
+name: Weekly Business Research Report
+
+on:
+  schedule:
+    # Friday at 12pm EST (5pm UTC) - Research report
+    - cron: '0 17 * * 5'
+  workflow_dispatch:
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Business Research
+        run: node scripts/business-research.js
+        env:
+          NODE_ENV: production
+          BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_USER_ID: ${{ secrets.TELEGRAM_USER_ID }}
+
+      - name: Commit research log
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add research/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update research findings [skip ci]"
+            git push
+          fi

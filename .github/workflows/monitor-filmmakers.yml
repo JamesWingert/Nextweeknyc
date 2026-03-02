@@ -1,0 +1,32 @@
+name: Monitor Ethan Hawke & Park Chan-wook NYC Events
+
+on:
+  schedule:
+    # Daily at 9am EST (2pm UTC)
+    - cron: '0 14 * * *'
+  workflow_dispatch:
+
+jobs:
+  monitor-filmmakers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright
+        run: npx playwright install chromium
+
+      - name: Check for Ethan Hawke & Park Chan-wook Events
+        run: node scripts/monitor-filmmakers.js
+        env:
+          NODE_ENV: production
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_USER_ID: ${{ secrets.TELEGRAM_USER_ID }}

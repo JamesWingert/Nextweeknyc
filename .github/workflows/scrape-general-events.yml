@@ -1,0 +1,45 @@
+name: Scrape NYC General Events
+
+on:
+  schedule:
+    # Every Sunday at 7pm EST (12am UTC Monday) - General events
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+jobs:
+  scrape-general:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright
+        run: npx playwright install chromium
+
+      - name: Scrape General Events
+        run: node scripts/scrape-general-events.js > /tmp/raw-general.json
+        env:
+          NODE_ENV: production
+
+      - name: Validate and normalize
+        run: node scripts/validate-events.js /tmp/raw-general.json public/data/events.json
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/data/events.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update general events [skip ci]"
+            git push
+          fi
