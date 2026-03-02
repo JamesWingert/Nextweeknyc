@@ -2,14 +2,15 @@ name: Scrape Weekly Events
 
 on:
   schedule:
-    # Every Sunday at 6am UTC (1am EST) — gives you data for the upcoming week
+    # Every Sunday at 6am UTC (1am EST)
+    # Scrapers auto-calculate next Mon–Sun week range
     - cron: '0 6 * * 0'
   workflow_dispatch: # manual trigger from GitHub UI
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30  # more sources = more time needed
 
     steps:
       - uses: actions/checkout@v4
@@ -21,38 +22,39 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # -------------------------------------------------------
-      # TODO: Replace these with your actual scraper commands.
-      # Each scraper should output a JSON file (array of events).
-      # The validate step below will normalize the schema.
-      # -------------------------------------------------------
-      - name: Run events scraper
-        id: scrape-events
+      - name: Install Playwright browsers
+        run: npx playwright install chromium --with-deps
+
+      - name: Run general events scraper (8 sources)
+        run: node scripts/scrape-general-events.js > /tmp/raw-events.json 2>/tmp/scrape-general.log || true
+
+      - name: Run film/arts scraper (24 sources)
+        run: node scripts/scrape-film-arts.js > /tmp/raw-film.json 2>/tmp/scrape-film.log || true
+
+      - name: Show scraper logs
+        if: always()
         run: |
-          # Example: node scripts/scrape-events.js > /tmp/raw-events.json
-          echo "Replace this with your scraper command"
-          # For now, skip if no scraper exists
-          if [ -f scripts/scrape-events.js ]; then
-            node scripts/scrape-events.js > /tmp/raw-events.json
+          echo "=== General Events Log ==="
+          cat /tmp/scrape-general.log || true
+          echo ""
+          echo "=== Film/Arts Log ==="
+          cat /tmp/scrape-film.log || true
+
+      - name: Validate and normalize general events
+        run: |
+          if [ -s /tmp/raw-events.json ]; then
+            node scripts/validate-events.js /tmp/raw-events.json public/data/events.json
           else
-            echo "No scraper found, skipping events.json"
-            cp public/data/events.json /tmp/raw-events.json
+            echo "General scraper produced no output, keeping existing data"
           fi
 
-      - name: Run film/museum scraper
-        id: scrape-film
+      - name: Validate and normalize film/arts events
         run: |
-          if [ -f scripts/scrape-film-museum.js ]; then
-            node scripts/scrape-film-museum.js > /tmp/raw-film.json
+          if [ -s /tmp/raw-film.json ]; then
+            node scripts/validate-events.js /tmp/raw-film.json public/data/film_museum_events.json
           else
-            echo "No scraper found, skipping film_museum_events.json"
-            cp public/data/film_museum_events.json /tmp/raw-film.json
+            echo "Film/arts scraper produced no output, keeping existing data"
           fi
-
-      - name: Validate and normalize events
-        run: |
-          node scripts/validate-events.js /tmp/raw-events.json public/data/events.json
-          node scripts/validate-events.js /tmp/raw-film.json public/data/film_museum_events.json
 
       - name: Commit updated data
         run: |

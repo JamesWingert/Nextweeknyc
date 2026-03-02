@@ -39,6 +39,7 @@ export type Category =
   | 'Dance'
   | 'Jazz'
   | 'Theater'
+  | 'Comedy'
   | 'Music/Performing Arts'
   | 'Family'
   | 'Talk'
@@ -46,6 +47,7 @@ export type Category =
   | 'Shopping/Markets'
   | 'Cars & Coffee'
   | 'Chinatown/Flushing/LIC'
+  | 'Outdoor/Parks'
   | 'Other';
 
 export interface EventsData {
