@@ -10,14 +10,21 @@ export interface Event {
   price?: string;
 }
 
-export type Category = 
-  | 'Film' 
-  | 'Museums/Art' 
-  | 'Music/Performing Arts' 
-  | 'Food/Drink' 
-  | 'Shopping/Markets' 
-  | 'Cars & Coffee' 
-  | 'Chinatown/Flushing/LIC' 
+export type Category =
+  | 'Film'
+  | 'Museums/Art'
+  | 'Museum Exhibition'
+  | 'Music/Performing Arts'
+  | 'Classical Music'
+  | 'Ballet'
+  | 'Opera'
+  | 'Dance'
+  | 'Jazz'
+  | 'Talk'
+  | 'Food/Drink'
+  | 'Shopping/Markets'
+  | 'Cars & Coffee'
+  | 'Chinatown/Flushing/LIC'
   | 'Other';
 
 export interface EventsData {
