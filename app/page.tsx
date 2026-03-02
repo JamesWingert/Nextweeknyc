@@ -143,7 +143,14 @@ export default function Home() {
       // Support both formats: raw array or { weekOf, events }
       const arr1: RawEvent[] = Array.isArray(raw1) ? raw1 : (raw1.events || []);
       const arr2: RawEvent[] = Array.isArray(raw2) ? raw2 : (raw2.events || []);
-      const weekOf = (!Array.isArray(raw1) && raw1.weekOf) || (!Array.isArray(raw2) && raw2.weekOf) || '2026-03-09';
+      // Dynamic week: derive Monday of the current week from today
+      const now = new Date();
+      const dow = now.getDay(); // 0=Sun
+      const diffToMon = dow === 0 ? -6 : 1 - dow;
+      const monday = new Date(now);
+      monday.setDate(now.getDate() + diffToMon);
+      const defaultWeekOf = toStr(monday);
+      const weekOf = (!Array.isArray(raw1) && raw1.weekOf) || (!Array.isArray(raw2) && raw2.weekOf) || defaultWeekOf;
 
       const allRaw = [...arr1, ...arr2];
       // Dedupe by title+venue+date
@@ -458,7 +465,13 @@ function EventList({ events }: { events: Event[] }) {
 
 function CalendarView({ events, weekOf }: { events: Event[]; weekOf: string }) {
   const [showAllWeek, setShowAllWeek] = useState(true);
-  const weekStart = toDate(weekOf || '2026-03-09');
+  // Dynamic fallback: Monday of the current week
+  const now = new Date();
+  const dow = now.getDay();
+  const diffToMon = dow === 0 ? -6 : 1 - dow;
+  const fallbackMon = new Date(now);
+  fallbackMon.setDate(now.getDate() + diffToMon);
+  const weekStart = toDate(weekOf || toStr(fallbackMon));
   const days = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
   const todayStr = toStr(new Date());
 

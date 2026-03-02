@@ -40,14 +40,6 @@
     "sourceUrl": "https://metrograph.com"
   },
   {
-    "id": "metrograph-introduction-by-cinema-tehran-founder-arya-ghavamian-on-sund-5",
-    "title": "Introduction by Cinema Tehran founder Arya Ghavamian on Sunday, February 8th",
-    "venue": "Metrograph",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Film",
-    "sourceUrl": "https://metrograph.com"
-  },
-  {
     "id": "metrograph-comrades-almost-a-love-storypeter-chan-1996-118min-35mm-7-00-6",
     "title": "Comrades: Almost a Love StoryPeter Chan / 1996 / 118min / 35mm 7:00pm",
     "venue": "Metrograph",
@@ -192,22 +184,6 @@
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004699"
   },
   {
-    "id": "film-forum-sidebar-26",
-    "title": "Sidebar",
-    "venue": "Film Forum",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Film",
-    "sourceUrl": "https://filmforum.org/now-playing"
-  },
-  {
-    "id": "film-forum-now-playing-27",
-    "title": "Now Playing",
-    "venue": "Film Forum",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Film",
-    "sourceUrl": "https://filmforum.org/now_playing"
-  },
-  {
     "id": "film-forum-satyajit-ray-s-days-and-nights-in-the-forest-28",
     "title": "Satyajit Ray’s DAYS AND NIGHTS IN THE FOREST",
     "venue": "Film Forum",
@@ -264,14 +240,6 @@
     "sourceUrl": "https://filmforum.org/series/film-forum-jr.-series-page#now-playing"
   },
   {
-    "id": "film-forum-coming-soon-35",
-    "title": "Coming Soon",
-    "venue": "Film Forum",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Film",
-    "sourceUrl": "https://filmforum.org/coming_soon"
-  },
-  {
     "id": "film-forum-ida-lupino-s-the-bigamist-36",
     "title": "Ida Lupino's THE BIGAMIST",
     "venue": "Film Forum",
@@ -310,14 +278,6 @@
     "date": "2026-03-09 to 2026-03-15",
     "category": "Film",
     "sourceUrl": "https://filmforum.org/film/the-bellboy-ffjr-2026"
-  },
-  {
-    "id": "ifc-center-special-events-45",
-    "title": "Special Events",
-    "venue": "IFC Center",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Film",
-    "sourceUrl": "https://www.ifccenter.com"
   },
   {
     "id": "ifc-center-ghost-elephants-46",
@@ -424,52 +384,12 @@
     "sourceUrl": "https://www.ifccenter.com/series/shudder-showcase-2026/"
   },
   {
-    "id": "museum-of-the-moving-image-why-have-i-been-blocked-67",
-    "title": "Why have I been blocked?",
-    "venue": "Museum of the Moving Image",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Film",
-    "sourceUrl": "https://movingimage.us"
-  },
-  {
-    "id": "museum-of-the-moving-image-what-can-i-do-to-resolve-this-68",
-    "title": "What can I do to resolve this?",
-    "venue": "Museum of the Moving Image",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Film",
-    "sourceUrl": "https://movingimage.us"
-  },
-  {
-    "id": "the-met-all-exhibitions-are-free-with-museum-admission-69",
-    "title": "All exhibitions are free with Museum admission.",
-    "venue": "The Met",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.metmuseum.org/exhibitions"
-  },
-  {
-    "id": "the-met-current-exhibitions-70",
-    "title": "Current Exhibitions",
-    "venue": "The Met",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.metmuseum.org/exhibitions"
-  },
-  {
     "id": "the-met-seeing-silence-the-paintings-of-helene-schjerfbeck-72",
     "title": "Seeing Silence: The Paintings of Helene Schjerfbeck",
     "venue": "The Met",
     "date": "2026-03-09 to 2026-03-15",
     "category": "Art",
     "sourceUrl": "https://www.metmuseum.org/exhibitions/seeing-silence-the-paintings-of-helene-schjerfbeck"
-  },
-  {
-    "id": "the-met-through-april-5-74",
-    "title": "Through April 5",
-    "venue": "The Met",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.metmuseum.org/exhibitions"
   },
   {
     "id": "the-met-spectrum-of-desire-love-sex-and-gender-in-the-middle-ages-75",
@@ -480,14 +400,6 @@
     "sourceUrl": "https://www.metmuseum.org/exhibitions/spectrum-of-desire-love-sex-and-gender-in-the-middle-ages"
   },
   {
-    "id": "the-met-through-march-29-77",
-    "title": "Through March 29",
-    "venue": "The Met",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.metmuseum.org/exhibitions"
-  },
-  {
     "id": "the-met-the-genesis-facade-commission-jeffrey-gibson-the-animal-that-78",
     "title": "The Genesis Facade Commission: Jeffrey Gibson, The Animal That Therefore I Am",
     "venue": "The Met",
@@ -496,36 +408,12 @@
     "sourceUrl": "https://www.metmuseum.org/exhibitions/the-facade-commission-jeffrey-gibson"
   },
   {
-    "id": "the-met-through-june-9-80",
-    "title": "Through June 9",
-    "venue": "The Met",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.metmuseum.org/exhibitions"
-  },
-  {
     "id": "the-met-view-finding-selections-from-the-walther-collection-81",
     "title": "View Finding: Selections from The Walther Collection",
     "venue": "The Met",
     "date": "2026-03-09 to 2026-03-15",
     "category": "Art",
     "sourceUrl": "https://www.metmuseum.org/exhibitions/view-finding-selections-from-the-walther-collection"
-  },
-  {
-    "id": "the-met-through-may-3-83",
-    "title": "Through May 3",
-    "venue": "The Met",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.metmuseum.org/exhibitions"
-  },
-  {
-    "id": "moma-verification-successful-waiting-for-www-moma-org-to-respond-85",
-    "title": "Verification successful. Waiting for www.moma.org to respond",
-    "venue": "MoMA",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.moma.org/calendar"
   },
   {
     "id": "whitney-museum-mabel-dwight-cool-head-warm-heart-86",
@@ -538,14 +426,6 @@
   {
     "id": "whitney-museum-high-wire-calder-s-circus-at-100-90",
     "title": "High Wire: Calder’s Circus at 100",
-    "venue": "Whitney Museum",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://whitney.org/exhibitions/calders-circus"
-  },
-  {
-    "id": "whitney-museum-last-chance-91",
-    "title": "Last chance",
     "venue": "Whitney Museum",
     "date": "2026-03-09 to 2026-03-15",
     "category": "Art",
@@ -566,78 +446,6 @@
     "date": "2026-03-09 to 2026-03-15",
     "category": "Art",
     "sourceUrl": "https://whitney.org/exhibitions/untitled-america"
-  },
-  {
-    "id": "guggenheim-limited-time-discounted-admission-96",
-    "title": "Limited-time Discounted Admission",
-    "venue": "Guggenheim",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.guggenheim.org/exhibitions"
-  },
-  {
-    "id": "guggenheim-prepare-to-visit-97",
-    "title": "Prepare to Visit",
-    "venue": "Guggenheim",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.guggenheim.org/exhibitions"
-  },
-  {
-    "id": "guggenheim-visitor-information-98",
-    "title": "Visitor Information",
-    "venue": "Guggenheim",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.guggenheim.org/exhibitions"
-  },
-  {
-    "id": "guggenheim-the-frank-lloyd-wright-building-99",
-    "title": "The Frank Lloyd Wright Building",
-    "venue": "Guggenheim",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.guggenheim.org/exhibitions"
-  },
-  {
-    "id": "guggenheim-exhibitions-on-view-100",
-    "title": "Exhibitions on View",
-    "venue": "Guggenheim",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.guggenheim.org/exhibitions"
-  },
-  {
-    "id": "guggenheim-upcoming-exhibitions-101",
-    "title": "Upcoming Exhibitions",
-    "venue": "Guggenheim",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.guggenheim.org/exhibitions"
-  },
-  {
-    "id": "guggenheim-past-exhibitions-102",
-    "title": "Past Exhibitions",
-    "venue": "Guggenheim",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.guggenheim.org/exhibitions#past"
-  },
-  {
-    "id": "guggenheim-performance-series-104",
-    "title": "Performance Series",
-    "venue": "Guggenheim",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.guggenheim.org/exhibitions"
-  },
-  {
-    "id": "new-museum-upcoming-exhibitions-106",
-    "title": "Upcoming Exhibitions",
-    "venue": "New Museum",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.newmuseum.org"
   },
   {
     "id": "new-museum-new-humans-memories-of-the-future-107",
@@ -664,164 +472,12 @@
     "sourceUrl": "https://www.newmuseum.org/exhibition/facade-tschabalala-self-art-lovers/"
   },
   {
-    "id": "neue-galerie-german-masterworks-from-the-neue-galerieongoing-116",
-    "title": "German Masterworks from the Neue GalerieOngoing",
-    "venue": "Neue Galerie",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.neuegalerie.org/exhibitions/germanmasterworks"
-  },
-  {
-    "id": "neue-galerie-dagobert-peche-ornamental-geniusoct-9-2025-may-4-2026-117",
-    "title": "Dagobert Peche: Ornamental GeniusOct 9, 2025 — May 4, 2026",
-    "venue": "Neue Galerie",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.neuegalerie.org/exhibitions/dagobertpeche"
-  },
-  {
-    "id": "neue-galerie-austrian-masterworks-from-the-neue-galerieongoing-118",
-    "title": "Austrian Masterworks from the Neue GalerieOngoing",
-    "venue": "Neue Galerie",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.neuegalerie.org/exhibitions/austrianmasterworks"
-  },
-  {
-    "id": "neue-galerie-egon-schiele-portrait-of-dr-erwin-von-grafffeb-12-may-4-2026-119",
-    "title": "Egon Schiele: Portrait of Dr. Erwin von GraffFeb 12 — May 4, 2026",
-    "venue": "Neue Galerie",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://www.neuegalerie.org/exhibitions/schiele-and-graff"
-  },
-  {
-    "id": "asia-society-why-have-i-been-blocked-122",
-    "title": "Why have I been blocked?",
-    "venue": "Asia Society",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://asiasociety.org/new-york/events"
-  },
-  {
-    "id": "asia-society-what-can-i-do-to-resolve-this-123",
-    "title": "What can I do to resolve this?",
-    "venue": "Asia Society",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://asiasociety.org/new-york/events"
-  },
-  {
-    "id": "japan-society-events-exhibitions-124",
-    "title": "Events & Exhibitions",
-    "venue": "Japan Society",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://japansociety.org/events-and-exhibitions/#primary"
-  },
-  {
-    "id": "japan-society-calendar-view-129",
-    "title": "Calendar View",
-    "venue": "Japan Society",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://japansociety.org/events-and-exhibitions/#"
-  },
-  {
-    "id": "japan-society-show-filters-130",
-    "title": "Show filters",
-    "venue": "Japan Society",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://japansociety.org/events-and-exhibitions/#"
-  },
-  {
-    "id": "japan-society-beginner-english-trial-lesson-135",
-    "title": "初級向け 英会話体験講座 Beginner English Trial Lesson",
-    "venue": "Japan Society",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://japansociety.org/events/english-trial-lesson-march3/"
-  },
-  {
-    "id": "japan-society-language-center-137",
-    "title": "Language Center",
-    "venue": "Japan Society",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Art",
-    "sourceUrl": "https://japansociety.org/events_categories/language-center"
-  },
-  {
     "id": "the-frick-collection-fran-ois-boucher-the-arts-and-sciences-astronomy-and-hydraul-140",
     "title": "François Boucher, The Arts and Sciences: Astronomy and Hydraulics, ca. 1760",
     "venue": "The Frick Collection",
     "date": "2026-03-09 to 2026-03-15",
     "category": "Art",
     "sourceUrl": "https://collections.frick.org/objects/53/the-arts-and-sciences-astronomy-and-hydraulics"
-  },
-  {
-    "id": "new-york-philharmonic-concerts-tickets-142",
-    "title": "Concerts & Tickets",
-    "venue": "New York Philharmonic",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://nyphil.org/calendar"
-  },
-  {
-    "id": "new-york-philharmonic-education-143",
-    "title": "Education",
-    "venue": "New York Philharmonic",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://nyphil.org/calendar"
-  },
-  {
-    "id": "new-york-philharmonic-support-us-144",
-    "title": "Support Us",
-    "venue": "New York Philharmonic",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://nyphil.org/calendar"
-  },
-  {
-    "id": "new-york-philharmonic-explore-145",
-    "title": "Explore",
-    "venue": "New York Philharmonic",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://nyphil.org/calendar"
-  },
-  {
-    "id": "new-york-philharmonic-about-us-146",
-    "title": "About Us",
-    "venue": "New York Philharmonic",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://nyphil.org/calendar"
-  },
-  {
-    "id": "new-york-philharmonic-narrow-your-choices-147",
-    "title": "Narrow Your Choices:",
-    "venue": "New York Philharmonic",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://nyphil.org/calendar"
-  },
-  {
-    "id": "new-york-philharmonic-edit-your-filters-148",
-    "title": "Edit Your Filters:",
-    "venue": "New York Philharmonic",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://nyphil.org/calendar"
-  },
-  {
-    "id": "new-york-philharmonic-no-events-were-found-that-match-your-criteria-149",
-    "title": "No events were found that match your criteria.",
-    "venue": "New York Philharmonic",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://nyphil.org/calendar"
   },
   {
     "id": "new-york-philharmonic-mirga-gra-inyt-tyla-emanuel-ax-151",
@@ -832,292 +488,12 @@
     "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/mirga-grazinyte-tyla-and-emanuel-ax/"
   },
   {
-    "id": "new-york-philharmonic-program-to-include-152",
-    "title": "Program To Include",
-    "venue": "New York Philharmonic",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://nyphil.org/calendar"
-  },
-  {
-    "id": "new-york-philharmonic-artists-153",
-    "title": "Artists",
-    "venue": "New York Philharmonic",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://nyphil.org/calendar"
-  },
-  {
     "id": "new-york-philharmonic-gra-inyt-tyla-conducts-elgar-schumann-154",
     "title": "Gražinytė-Tyla Conducts Elgar & Schumann",
     "venue": "New York Philharmonic",
     "date": "2026-03-09 to 2026-03-15",
     "category": "Classical Music",
     "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/grazinyte-tyla-conducts-elgar-and-schumann/"
-  },
-  {
-    "id": "carnegie-hall-location-158",
-    "title": "Location",
-    "venue": "Carnegie Hall",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "javascript:void()"
-  },
-  {
-    "id": "carnegie-hall-clear-selections-162",
-    "title": "Clear Selections",
-    "venue": "Carnegie Hall",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://www.carnegiehall.org/calendar"
-  },
-  {
-    "id": "carnegie-hall-event-type-163",
-    "title": "Event Type",
-    "venue": "Carnegie Hall",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://www.carnegiehall.org/calendar"
-  },
-  {
-    "id": "carnegie-hall-carnegie-hall-presents-265-164",
-    "title": "Carnegie Hall Presents (265)",
-    "venue": "Carnegie Hall",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://www.carnegiehall.org/calendar"
-  },
-  {
-    "id": "carnegie-hall-genre-165",
-    "title": "Genre",
-    "venue": "Carnegie Hall",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://www.carnegiehall.org/calendar"
-  },
-  {
-    "id": "carnegie-hall-baroque-early-music-13-166",
-    "title": "Baroque / Early Music (13)",
-    "venue": "Carnegie Hall",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://www.carnegiehall.org/calendar"
-  },
-  {
-    "id": "carnegie-hall-instrument-167",
-    "title": "Instrument",
-    "venue": "Carnegie Hall",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://www.carnegiehall.org/calendar"
-  },
-  {
-    "id": "carnegie-hall-clarinet-1-168",
-    "title": "Clarinet (1)",
-    "venue": "Carnegie Hall",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://www.carnegiehall.org/calendar"
-  },
-  {
-    "id": "carnegie-hall-ticket-price-169",
-    "title": "Ticket Price",
-    "venue": "Carnegie Hall",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://www.carnegiehall.org/calendar"
-  },
-  {
-    "id": "carnegie-hall-date-171",
-    "title": "Date",
-    "venue": "Carnegie Hall",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "javascript:void()"
-  },
-  {
-    "id": "carnegie-hall-calendar-view-173",
-    "title": "Calendar View",
-    "venue": "Carnegie Hall",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Classical Music",
-    "sourceUrl": "https://www.carnegiehall.org/events#calendar"
-  },
-  {
-    "id": "metropolitan-opera-the-amazing-adventures-of-kavalier-clay-is-not-on-sale-learn-176",
-    "title": "The Amazing Adventures of Kavalier & Clay\n\n\n                         is not on sale, learn more about this production",
-    "venue": "Metropolitan Opera",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Opera",
-    "sourceUrl": "https://www.metopera.org/season/2025-26-season/the-amazing-adventures-of-kavalier--clay/"
-  },
-  {
-    "id": "metropolitan-opera-andrea-ch-nier-is-not-on-sale-learn-more-about-this-producti-177",
-    "title": "Andrea Chénier\n\n\n                         is not on sale, learn more about this production",
-    "venue": "Metropolitan Opera",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Opera",
-    "sourceUrl": "https://www.metopera.org/season/2025-26-season/andrea-chenier/"
-  },
-  {
-    "id": "metropolitan-opera-arabella-is-not-on-sale-learn-more-about-this-production-178",
-    "title": "Arabella\n\n\n                         is not on sale, learn more about this production",
-    "venue": "Metropolitan Opera",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Opera",
-    "sourceUrl": "https://www.metopera.org/season/2025-26-season/arabella/"
-  },
-  {
-    "id": "metropolitan-opera-la-boh-me-buy-tickets-and-learn-more-about-this-production-179",
-    "title": "La Bohème\n\n\n                        Buy Tickets and learn more about this production",
-    "venue": "Metropolitan Opera",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Opera",
-    "sourceUrl": "https://www.metopera.org/season/2025-26-season/la-boheme/"
-  },
-  {
-    "id": "metropolitan-opera-carmen-is-not-on-sale-learn-more-about-this-production-180",
-    "title": "Carmen\n\n\n                         is not on sale, learn more about this production",
-    "venue": "Metropolitan Opera",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Opera",
-    "sourceUrl": "https://www.metopera.org/season/2025-26-season/carmen/"
-  },
-  {
-    "id": "metropolitan-opera-don-giovanni-is-not-on-sale-learn-more-about-this-production-181",
-    "title": "Don Giovanni\n\n\n                         is not on sale, learn more about this production",
-    "venue": "Metropolitan Opera",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Opera",
-    "sourceUrl": "https://www.metopera.org/season/2025-26-season/don-giovanni/"
-  },
-  {
-    "id": "metropolitan-opera-eugene-onegin-buy-tickets-and-learn-more-about-this-producti-182",
-    "title": "Eugene Onegin\n\n\n                        Buy Tickets and learn more about this production",
-    "venue": "Metropolitan Opera",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Opera",
-    "sourceUrl": "https://www.metopera.org/season/2025-26-season/eugene-onegin/"
-  },
-  {
-    "id": "metropolitan-opera-la-fille-du-r-giment-is-not-on-sale-learn-more-about-this-pr-183",
-    "title": "La Fille du Régiment\n\n\n                         is not on sale, learn more about this production",
-    "venue": "Metropolitan Opera",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Opera",
-    "sourceUrl": "https://www.metopera.org/season/2025-26-season/la-fille-du-regiment/"
-  },
-  {
-    "id": "metropolitan-opera-innocence-buy-tickets-and-learn-more-about-this-production-184",
-    "title": "Innocence\n\n\n                        Buy Tickets and learn more about this production",
-    "venue": "Metropolitan Opera",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Opera",
-    "sourceUrl": "https://www.metopera.org/season/2025-26-season/innocence/"
-  },
-  {
-    "id": "metropolitan-opera-laffont-grand-finals-concert-buy-tickets-and-learn-more-abou-185",
-    "title": "Laffont Grand Finals Concert\n\n\n                        Buy Tickets and learn more about this production",
-    "venue": "Metropolitan Opera",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Opera",
-    "sourceUrl": "https://www.metopera.org/season/2025-26-special-presentation/laffont-grand-finals-concert/"
-  },
-  {
-    "id": "metropolitan-opera-madama-butterfly-buy-tickets-and-learn-more-about-this-produ-186",
-    "title": "Madama Butterfly\n\n\n                        Buy Tickets and learn more about this production",
-    "venue": "Metropolitan Opera",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Opera",
-    "sourceUrl": "https://www.metopera.org/season/2025-26-season/madama-butterfly/"
-  },
-  {
-    "id": "metropolitan-opera-the-magic-flute-holiday-presentation-is-not-on-sale-learn-mo-187",
-    "title": "The Magic Flute—Holiday Presentation\n\n\n                         is not on sale, learn more about this production",
-    "venue": "Metropolitan Opera",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Opera",
-    "sourceUrl": "https://www.metopera.org/season/2025-26-season/the-magic-flute/"
-  },
-  {
-    "id": "metropolitan-opera-the-met-orchestra-at-carnegie-hall-is-not-on-sale-learn-more-188",
-    "title": "The Met Orchestra at Carnegie Hall\n\n\n                         is not on sale, learn more about this production",
-    "venue": "Metropolitan Opera",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Opera",
-    "sourceUrl": "https://www.metopera.org/season/2025-26-special-presentation/chamber-concert/"
-  },
-  {
-    "id": "metropolitan-opera-porgy-and-bess-is-not-on-sale-learn-more-about-this-producti-189",
-    "title": "Porgy and Bess\n\n\n                         is not on sale, learn more about this production",
-    "venue": "Metropolitan Opera",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Opera",
-    "sourceUrl": "https://www.metopera.org/season/2025-26-season/porgy-and-bess/"
-  },
-  {
-    "id": "metropolitan-opera-i-puritani-is-not-on-sale-learn-more-about-this-production-190",
-    "title": "I Puritani\n\n\n                         is not on sale, learn more about this production",
-    "venue": "Metropolitan Opera",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Opera",
-    "sourceUrl": "https://www.metopera.org/season/2025-26-season/i-puritani/"
-  },
-  {
-    "id": "american-ballet-theatre-filter-categories-193",
-    "title": "FILTER CATEGORIES",
-    "venue": "American Ballet Theatre",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Ballet",
-    "sourceUrl": "https://www.abt.org/performances/"
-  },
-  {
-    "id": "american-ballet-theatre-search-abt-195",
-    "title": "Search ABT",
-    "venue": "American Ballet Theatre",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Ballet",
-    "sourceUrl": "https://www.abt.org/performances/"
-  },
-  {
-    "id": "american-ballet-theatre-do-not-sell-or-share-my-personal-data-196",
-    "title": "Do Not Sell or Share My Personal Data",
-    "venue": "American Ballet Theatre",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Ballet",
-    "sourceUrl": "https://www.abt.org/performances/"
-  },
-  {
-    "id": "american-ballet-theatre-manage-consent-preferences-197",
-    "title": "Manage Consent Preferences",
-    "venue": "American Ballet Theatre",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Ballet",
-    "sourceUrl": "https://www.abt.org/performances/"
-  },
-  {
-    "id": "american-ballet-theatre-cookie-list-198",
-    "title": "Cookie List",
-    "venue": "American Ballet Theatre",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Ballet",
-    "sourceUrl": "https://www.abt.org/performances/"
-  },
-  {
-    "id": "new-york-city-ballet-unfortunately-it-looks-like-you-are-using-an-outdated-browse-199",
-    "title": "Unfortunately, it looks like you are using an outdated browser.",
-    "venue": "New York City Ballet",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Ballet",
-    "sourceUrl": "https://www.nycballet.com"
-  },
-  {
-    "id": "new-york-city-ballet-spring-2026apr-21-may-31-200",
-    "title": "Spring 2026APr 21 - May 31",
-    "venue": "New York City Ballet",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Ballet",
-    "sourceUrl": "https://www.nycballet.com"
   },
   {
     "id": "new-york-city-ballet-all-balanchine-iii-201",
@@ -1174,14 +550,6 @@
     "date": "2026-03-09 to 2026-03-15",
     "category": "Ballet",
     "sourceUrl": "https://www.nycballet.com/season-and-tickets/spring-2026/all-bach"
-  },
-  {
-    "id": "new-york-city-ballet-sensory-friendly-performance-208",
-    "title": "Sensory-Friendly Performance",
-    "venue": "New York City Ballet",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Ballet",
-    "sourceUrl": "https://www.nycballet.com/season-and-tickets/spring-2026/sensory-friendly-performance-2"
   },
   {
     "id": "new-york-city-ballet-copp-lia-209",
@@ -1248,115 +616,11 @@
     "sourceUrl": "https://www.joyce.org/performances/flamenco-vivo-carlota-santana-fs5q"
   },
   {
-    "id": "david-geffen-hall-mirga-gra-inyt-tyla-emanuel-ax-232",
-    "title": "Mirga Gražinytė-Tyla & Emanuel Ax",
-    "venue": "David Geffen Hall",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/mirga-grazinyte-tyla-and-emanuel-ax/"
-  },
-  {
     "id": "lincoln-center-the-violin-today-238",
     "title": "The Violin Today",
     "venue": "Lincoln Center",
     "date": "2026-03-09 to 2026-03-15",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.chambermusicsociety.org/our-concerts/at-lincoln-center/lectures/the-violin-today-2/"
-  },
-  {
-    "id": "virtual-on-zoom-lincoln-center-moments-244",
-    "title": "Lincoln Center Moments",
-    "venue": "Virtual on Zoom",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.lincolncenter.org/series/accessibility-at-lincoln-center/s/Lincoln%20Center%20Moments"
-  },
-  {
-    "id": "92ny-class-registration-portal-251",
-    "title": "Class Registration Portal",
-    "venue": "92NY",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://register.92ny.org/s/registration"
-  },
-  {
-    "id": "92ny-members-save-254",
-    "title": "Members Save",
-    "venue": "92NY",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.92ny.org/whats-on/events?hierarchicalMenu%5BEventMenu.lvl0%5D%5B0%5D=Concerts"
-  },
-  {
-    "id": "92ny-filter-257",
-    "title": "Filter",
-    "venue": "92NY",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.92ny.org/whats-on/events"
-  },
-  {
-    "id": "92ny-event-type-260",
-    "title": "Event Type",
-    "venue": "92NY",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.92ny.org/whats-on/events"
-  },
-  {
-    "id": "92ny-adults-263",
-    "title": "Adults",
-    "venue": "92NY",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.92ny.org/whats-on/events"
-  },
-  {
-    "id": "92ny-multigenerational-264",
-    "title": "Multigenerational",
-    "venue": "92NY",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.92ny.org/whats-on/events"
-  },
-  {
-    "id": "92ny-seniors-265",
-    "title": "Seniors",
-    "venue": "92NY",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.92ny.org/whats-on/events"
-  },
-  {
-    "id": "92ny-1-year-266",
-    "title": "< 1 Year",
-    "venue": "92NY",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.92ny.org/whats-on/events"
-  },
-  {
-    "id": "92ny-1-year-267",
-    "title": "1 Year",
-    "venue": "92NY",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.92ny.org/whats-on/events"
-  },
-  {
-    "id": "92ny-2-years-268",
-    "title": "2 Years",
-    "venue": "92NY",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.92ny.org/whats-on/events"
-  },
-  {
-    "id": "92ny-3-years-269",
-    "title": "3 Years",
-    "venue": "92NY",
-    "date": "2026-03-09 to 2026-03-15",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.92ny.org/whats-on/events"
   }
 ]
