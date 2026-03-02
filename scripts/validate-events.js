@@ -130,7 +130,7 @@ const ARTICLE_PATTERNS = [
 
 // Imperative "suggestion" titles — not real event names
 const IMPERATIVE_PATTERNS = [
-  /^[\u201c\u201d\u2018\u2019"'`]?(catch|check out|head to|hit the|warm up|visit|stop by|join|sing|see a|get |celebrate|embark|laugh|headline|secure|satisfy|snag|step into|grocery shop)/i,
+  /^[\u201c\u201d\u2018\u2019"'`]?(catch a |check out|head to|hit the|warm up|visit |stop by|join the|sing |see a |get tickets|celebrate|embark|laugh-out-loud|headline|secure your|satisfy|step into|grocery shop)/i,
 ];
 
 // Single generic words/phrases that aren't event names
@@ -165,7 +165,6 @@ const SHORT_JUNK_PHRASES = [
   /^(baroque|clarinet|instrument)\b.*\(\d+\)$/i,  // "Baroque / Early Music (13)"
   /^[a-z \/]+\(\d+\)$/i,  // "Carnegie Hall Presents (265)"
   /^no events were found/i,
-  /^the frank lloyd wright building$/i,
   /^(narrow|edit) your\b/i,
   /^(instrument|visitor information)$/i,
   /^(sensory-friendly performance)$/i,
@@ -202,8 +201,8 @@ function isJunkTitle(title) {
   const letters = (t.match(/[a-zA-Z]/g) || []).length;
   if (letters / t.length < 0.4) return true;
 
-  // Contains newlines (scraped multi-element text)
-  if (/\n/.test(t)) return true;
+  // Contains newlines after cleaning (shouldn't happen, but safety check)
+  // Note: newlines are cleaned in validateEvent before this is called
 
   // Check against junk patterns
   for (const pat of JUNK_PATTERNS) {
@@ -238,8 +237,8 @@ function validateEvent(raw, index) {
     return { valid: false, errors: [`[${index}] not an object`] };
   }
 
-  const title = (raw.title || raw.name || '').trim();
-  const venue = (raw.venue || raw.location || '').trim();
+  const title = (raw.title || raw.name || '').replace(/\s*\n\s*/g, ' ').trim();
+  const venue = (raw.venue || raw.location || '').replace(/\s*\n\s*/g, ' ').trim();
   const date = (raw.date || '').trim();
   const category = (raw.category || raw.type || 'General').trim();
   const sourceUrl = (raw.sourceUrl || raw.url || raw.link || '').trim();
