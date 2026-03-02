@@ -1,511 +1,1423 @@
-{
-  "weekOf": "2026-03-09",
-  "events": [
-    {
-      "id": "metrograph-paris-texas",
-      "title": "Paris, Texas",
-      "venue": "Metrograph",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Various times",
-      "category": "film",
-      "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000581",
-      "description": "Wim Wenders / 1984 / 145min / DCP",
-      "price": "TBA"
-    },
-    {
-      "id": "metrograph-klute",
-      "title": "Klute",
-      "venue": "Metrograph",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Various times",
-      "category": "film",
-      "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000329",
-      "description": "Alan J. Pakula / 1971 / 114min / 35mm",
-      "price": "TBA"
-    },
-    {
-      "id": "metrograph-diary-country-priest",
-      "title": "Diary of a Country Priest",
-      "venue": "Metrograph",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Various times",
-      "category": "film",
-      "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000872",
-      "description": "Robert Bresson / 1951 / 115min / DCP",
-      "price": "TBA"
-    },
-    {
-      "id": "metrograph-holy-girl",
-      "title": "The Holy Girl",
-      "venue": "Metrograph",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Various times",
-      "category": "film",
-      "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004705",
-      "description": "Lucrecia Martel / 2004 / 106min / 35mm - Part of Sex is Confusion series",
-      "price": "TBA"
-    },
-    {
-      "id": "metrograph-irma-vep",
-      "title": "Irma Vep",
-      "venue": "Metrograph",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Various times",
-      "category": "film",
-      "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000516",
-      "description": "Olivier Assayas / 1996 / 99min / DCP",
-      "price": "TBA"
-    },
-    {
-      "id": "metrograph-pinocchio",
-      "title": "Pinocchio (1940)",
-      "venue": "Metrograph",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Various times",
-      "category": "film",
-      "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004730",
-      "description": "Wilfred Jackson, Norman T. Ferguson, T. Hee / 1940 / 88min / 35mm IB-Technicolor print courtesy of Library of Congress",
-      "price": "TBA"
-    },
-    {
-      "id": "metrograph-player",
-      "title": "The Player",
-      "venue": "Metrograph",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Various times",
-      "category": "film",
-      "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999003399",
-      "description": "Robert Altman / 1992 / 124min / DCP",
-      "price": "TBA"
-    },
-    {
-      "id": "metrograph-stalker",
-      "title": "Stalker",
-      "venue": "Metrograph",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Various times",
-      "category": "film",
-      "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001012",
-      "description": "Andrei Tarkovsky / 1979 / 163min / DCP",
-      "price": "TBA"
-    },
-    {
-      "id": "metrograph-inland-empire",
-      "title": "Inland Empire",
-      "venue": "Metrograph",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Various times",
-      "category": "film",
-      "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004189",
-      "description": "David Lynch / 2006 / 180min / 4K DCP",
-      "price": "TBA"
-    },
-    {
-      "id": "metrograph-dead-man",
-      "title": "Dead Man",
-      "venue": "Metrograph",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Various times",
-      "category": "film",
-      "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000299",
-      "description": "Jim Jarmusch / 1995 / 121min / DCP",
-      "price": "TBA"
-    },
-    {
-      "id": "metrograph-raise-red-lantern",
-      "title": "Raise the Red Lantern",
-      "venue": "Metrograph",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Various times",
-      "category": "film",
-      "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004742",
-      "description": "Yimou Zhang / 1991 / 125min / 35mm",
-      "price": "TBA"
-    },
-    {
-      "id": "ifc-1",
-      "title": "Pictures of Ghosts",
-      "venue": "IFC Center",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "TBA",
-      "category": "film",
-      "sourceUrl": "https://www.ifccenter.com/",
-      "description": "",
-      "price": "TBA"
-    },
-    {
-      "id": "ifc-2",
-      "title": "Sirat",
-      "venue": "IFC Center",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "TBA",
-      "category": "film",
-      "sourceUrl": "https://www.ifccenter.com/",
-      "description": "",
-      "price": "TBA"
-    },
-    {
-      "id": "ifc-3",
-      "title": "A Life Illuminated",
-      "venue": "IFC Center",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "TBA",
-      "category": "film",
-      "sourceUrl": "https://www.ifccenter.com/",
-      "description": "",
-      "price": "TBA"
-    },
-    {
-      "id": "ifc-4",
-      "title": "The Ugly Stepsister",
-      "venue": "IFC Center",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "TBA",
-      "category": "film",
-      "sourceUrl": "https://www.ifccenter.com/",
-      "description": "",
-      "price": "TBA"
-    },
-    {
-      "id": "ifc-5",
-      "title": "Dolly",
-      "venue": "IFC Center",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "TBA",
-      "category": "film",
-      "sourceUrl": "https://www.ifccenter.com/",
-      "description": "",
-      "price": "TBA"
-    },
-    {
-      "id": "ifc-6",
-      "title": "Pompei: Below the Clouds",
-      "venue": "IFC Center",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "TBA",
-      "category": "film",
-      "sourceUrl": "https://www.ifccenter.com/",
-      "description": "",
-      "price": "TBA"
-    },
-    {
-      "id": "ifc-7",
-      "title": "Ghost Elephants",
-      "venue": "IFC Center",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "TBA",
-      "category": "film",
-      "sourceUrl": "https://www.ifccenter.com/",
-      "description": "",
-      "price": "TBA"
-    },
-    {
-      "id": "ifc-8",
-      "title": "Live-Action Oscar-Nominated Shorts 2026",
-      "venue": "IFC Center",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "TBA",
-      "category": "film",
-      "sourceUrl": "https://www.ifccenter.com/",
-      "description": "",
-      "price": "TBA"
-    },
-    {
-      "id": "ifc-9",
-      "title": "Doc Program B: Oscar-Nominated Shorts 2026",
-      "venue": "IFC Center",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "TBA",
-      "category": "film",
-      "sourceUrl": "https://www.ifccenter.com/",
-      "description": "",
-      "price": "TBA"
-    },
-    {
-      "id": "ifc-10",
-      "title": "Doc Program A: Oscar- Nominated Shorts 2026",
-      "venue": "IFC Center",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "TBA",
-      "category": "film",
-      "sourceUrl": "https://www.ifccenter.com/",
-      "description": "",
-      "price": "TBA"
-    },
-    {
-      "id": "ifc-11",
-      "title": "Animated Oscar-Nominated Shorts 2026",
-      "venue": "IFC Center",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "TBA",
-      "category": "film",
-      "sourceUrl": "https://www.ifccenter.com/",
-      "description": "",
-      "price": "TBA"
-    },
-    {
-      "id": "ifc-12",
-      "title": "Nirvanna: The Band The Show The Movie",
-      "venue": "IFC Center",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "TBA",
-      "category": "film",
-      "sourceUrl": "https://www.ifccenter.com/",
-      "description": "",
-      "price": "TBA"
-    },
-    {
-      "id": "ifc-13",
-      "title": "Late Night Favorites: Spring 2026",
-      "venue": "IFC Center",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "TBA",
-      "category": "film",
-      "sourceUrl": "https://www.ifccenter.com/",
-      "description": "",
-      "price": "TBA"
-    },
-    {
-      "id": "ifc-14",
-      "title": "THE 2026 OSCAR®- NOMINATED SHORTS",
-      "venue": "IFC Center",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "TBA",
-      "category": "film",
-      "sourceUrl": "https://www.ifccenter.com/",
-      "description": "",
-      "price": "TBA"
-    },
-    {
-      "id": "ifc-15",
-      "title": "Short Attention Span Cinema: NYICFF Shorts 2026",
-      "venue": "IFC Center",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "TBA",
-      "category": "film",
-      "sourceUrl": "https://www.ifccenter.com/",
-      "description": "",
-      "price": "TBA"
-    },
-    {
-      "id": "lc-tristan-march9",
-      "title": "Wagner's Tristan und Isolde",
-      "venue": "The Metropolitan Opera at Lincoln Center",
-      "date": "2026-03-09",
-      "time": "6:30 PM",
-      "category": "opera",
-      "sourceUrl": "https://www.metopera.org/season/2025-26-season/tristan-und-isolde/",
-      "description": "Wagner's epic opera of love and death",
-      "price": "TBA"
-    },
-    {
-      "id": "lc-madama-butterfly-march10",
-      "title": "Puccini's Madama Butterfly",
-      "venue": "The Metropolitan Opera at Lincoln Center",
-      "date": "2026-03-10",
-      "time": "7:00 PM",
-      "category": "opera",
-      "sourceUrl": "https://www.metopera.org/season/2025-26-season/madama-butterfly/",
-      "description": "Puccini's tragic tale of love and betrayal",
-      "price": "TBA"
-    },
-    {
-      "id": "lc-ragtime-march9",
-      "title": "Ragtime",
-      "venue": "Lincoln Center Theater",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Various times",
-      "category": "theater",
-      "sourceUrl": "https://lct.org/shows/ragtime/",
-      "description": "Tony-winning musical weaving together three families in turn-of-the-century America",
-      "price": "TBA"
-    },
-    {
-      "id": "lc-nightside-march9",
-      "title": "Night Side Songs",
-      "venue": "Lincoln Center Theater",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Various times",
-      "category": "theater",
-      "sourceUrl": "https://lct.org/shows/night-side-songs/",
-      "description": "A new musical exploring the world of hospice care",
-      "price": "TBA"
-    },
-    {
-      "id": "lc-othello-march10",
-      "title": "Othello - American Ballet Theatre",
-      "venue": "David H. Koch Theater at Lincoln Center",
-      "date": "2026-03-10",
-      "time": "7:30 PM",
-      "category": "dance",
-      "sourceUrl": "https://www.davidhkochtheater.com/tickets-and-events/american-ballet-theatre-at-85-spring",
-      "description": "American Ballet Theatre presents Shakespeare's tragic tale through dance",
-      "price": "TBA"
-    },
-    {
-      "id": "lc-dudamel-march12",
-      "title": "Dudamel Conducts Eroica & The People United…",
-      "venue": "David Geffen Hall at Lincoln Center",
-      "date": "2026-03-12",
-      "time": "7:30 PM",
-      "category": "classical",
-      "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/dudamel-conducts-eroica-and-the-people-united/",
-      "description": "Gustavo Dudamel conducts Beethoven's Eroica Symphony",
-      "price": "TBA"
-    },
-    {
-      "id": "lc-mozartiana-march13",
-      "title": "Mozartiana & Firebird - American Ballet Theatre",
-      "venue": "David H. Koch Theater at Lincoln Center",
-      "date": "2026-03-13",
-      "time": "7:30 PM",
-      "category": "dance",
-      "sourceUrl": "https://www.davidhkochtheater.com/tickets-and-events/american-ballet-theatre-at-85-spring",
-      "description": "ABT presents Balanchine's Mozartiana and Stravinsky's Firebird",
-      "price": "TBA"
-    },
-    {
-      "id": "lc-jazz-march12",
-      "title": "African Routes: Danilo Pérez & Godwin Louis with Wynton Marsalis",
-      "venue": "Jazz at Lincoln Center",
-      "date": "2026-03-12",
-      "time": "7:30 PM",
-      "category": "jazz",
-      "sourceUrl": "https://ticketing.jazz.org/18735/18736",
-      "description": "The JLCO with Wynton Marsalis explores African musical roots",
-      "price": "TBA"
-    },
-    {
-      "id": "lc-inspector-march15",
-      "title": "Inspector Pulse Discovers Magical Mystical Moonlight",
-      "venue": "Chamber Music Society of Lincoln Center",
-      "date": "2026-03-15",
-      "time": "2:00 PM",
-      "category": "family",
-      "sourceUrl": "https://www.chambermusicsociety.org/our-concerts/at-lincoln-center/family-programs/25-26/magical-mystical-moonlight/",
-      "description": "Family concert introducing children to classical music",
-      "price": "TBA"
-    },
-    {
-      "id": "moma-doc-fortnight",
-      "title": "Doc Fortnight 2026",
-      "venue": "Museum of Modern Art (MoMA)",
-      "date": "2026-03-09 to 2026-03-12",
-      "time": "Various times",
-      "category": "film",
-      "sourceUrl": "https://www.moma.org/calendar/",
-      "description": "MoMA's annual festival of international nonfiction film marks its 25th year with 33 new nonfiction films",
-      "price": "$14 general, $12 seniors, $10 students"
-    },
-    {
-      "id": "moma-evening-mark-jenkin",
-      "title": "An Evening with Mark Jenkin",
-      "venue": "Museum of Modern Art (MoMA)",
-      "date": "2026-03-09",
-      "time": "7:00 PM",
-      "category": "film",
-      "sourceUrl": "https://www.moma.org/calendar/events/11245",
-      "description": "Special evening with filmmaker Mark Jenkin",
-      "price": "$14 general, $12 seniors, $10 students"
-    },
-    {
-      "id": "moma-sight-lines",
-      "title": "Doc Fortnight Shorts 2: Sight Lines",
-      "venue": "Museum of Modern Art (MoMA)",
-      "date": "2026-03-09",
-      "time": "4:30 PM",
-      "category": "film",
-      "sourceUrl": "https://www.moma.org/calendar/events/11247",
-      "description": "Documentary shorts program with conversation with Monica Moraru and Sophie Sabet",
-      "price": "$14 general, $12 seniors, $10 students"
-    },
-    {
-      "id": "met-schjerfbeck",
-      "title": "Seeing Silence: The Paintings of Helene Schjerfbeck",
-      "venue": "The Metropolitan Museum of Art",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Ongoing",
-      "category": "art",
-      "sourceUrl": "https://www.metmuseum.org/exhibitions",
-      "description": "First North American survey of the Finnish painter's work",
-      "price": "Pay what you wish"
-    },
-    {
-      "id": "met-spectrum-desire",
-      "title": "Spectrum of Desire: Love, Sex, and Gender in the Middle Ages",
-      "venue": "The Metropolitan Museum of Art",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Ongoing",
-      "category": "art",
-      "sourceUrl": "https://www.metmuseum.org/exhibitions",
-      "description": "Explores representations of love and sexuality in medieval art",
-      "price": "Pay what you wish"
-    },
-    {
-      "id": "met-gibson",
-      "title": "The Genesis Facade Commission: Jeffrey Gibson, The Animal That Therefore I Am",
-      "venue": "The Metropolitan Museum of Art",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Ongoing",
-      "category": "art",
-      "sourceUrl": "https://www.metmuseum.org/exhibitions",
-      "description": "Contemporary artist Jeffrey Gibson's installation on The Met's facade",
-      "price": "Pay what you wish"
-    },
-    {
-      "id": "met-walther",
-      "title": "View Finding: Selections from The Walther Collection",
-      "venue": "The Metropolitan Museum of Art",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Ongoing",
-      "category": "art",
-      "sourceUrl": "https://www.metmuseum.org/exhibitions",
-      "description": "Contemporary photography from the Walther Collection",
-      "price": "Pay what you wish"
-    },
-    {
-      "id": "met-morrison",
-      "title": "The Magical City: George Morrison's New York",
-      "venue": "The Metropolitan Museum of Art",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Ongoing",
-      "category": "art",
-      "sourceUrl": "https://www.metmuseum.org/exhibitions",
-      "description": "Explores the Native American artist's relationship with New York City",
-      "price": "Pay what you wish"
-    },
-    {
-      "id": "met-impressions",
-      "title": "Impressions of the Imagination: New Medieval Beasts in Print",
-      "venue": "The Metropolitan Museum of Art",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Ongoing",
-      "category": "art",
-      "sourceUrl": "https://www.metmuseum.org/exhibitions",
-      "description": "Medieval bestiary imagery in prints",
-      "price": "Pay what you wish"
-    },
-    {
-      "id": "met-horse",
-      "title": "Celebrating the Year of the Horse",
-      "venue": "The Metropolitan Museum of Art",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Ongoing",
-      "category": "art",
-      "sourceUrl": "https://www.metmuseum.org/exhibitions",
-      "description": "Artworks celebrating the Lunar New Year of the Horse",
-      "price": "Pay what you wish"
-    },
-    {
-      "id": "met-bassman",
-      "title": "Lillian Bassman: Bazaar and Beyond",
-      "venue": "The Metropolitan Museum of Art",
-      "date": "2026-03-09 to 2026-03-15",
-      "time": "Ongoing",
-      "category": "art",
-      "sourceUrl": "https://www.metmuseum.org/exhibitions",
-      "description": "Fashion photography from the legendary Harper's Bazaar photographer",
-      "price": "Pay what you wish"
-    }
-  ]
-}
+[
+  {
+    "title": "Satyajit Ray’s DAYS AND NIGHTS IN THE FOREST",
+    "venue": "Film Forum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://filmforum.org/film/days-and-nights-in-the-forest"
+  },
+  {
+    "title": "BILLY PRESTON: THAT’S THE WAY GOD PLANNED IT",
+    "venue": "Film Forum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://filmforum.org/film/billy-preston-thats-the-way-god-planned-it"
+  },
+  {
+    "title": "CALLE MALAGA",
+    "venue": "Film Forum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://filmforum.org/film/calle-malaga"
+  },
+  {
+    "title": "NATCHEZ",
+    "venue": "Film Forum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://filmforum.org/film/natchez"
+  },
+  {
+    "title": "Giuseppe De Santis’ BITTER RICE",
+    "venue": "Film Forum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://filmforum.org/film/bitter-rice"
+  },
+  {
+    "title": "THE VOICE OF HIND RAJAB",
+    "venue": "Film Forum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://filmforum.org/film/the-voice-of-hind-rajab"
+  },
+  {
+    "title": "FILM FORUM Jr.",
+    "venue": "Film Forum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://filmforum.org/series/film-forum-jr.-series-page#now-playing"
+  },
+  {
+    "title": "Ida Lupino's THE BIGAMIST",
+    "venue": "Film Forum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://filmforum.org/film/the-bigamist"
+  },
+  {
+    "title": "SHOES",
+    "venue": "Film Forum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://filmforum.org/film/shoes-tenement-stories"
+  },
+  {
+    "title": "ANDRÉ IS AN IDIOT",
+    "venue": "Film Forum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://filmforum.org/film/andre-is-an-idiot"
+  },
+  {
+    "title": "AGNÈS VARDA: A COMPREHENSIVE RETROSPECTIVE",
+    "venue": "Film Forum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://filmforum.org/series/agnes-varda-a-comprehensive-retrospective"
+  },
+  {
+    "title": "THE BELLBOY",
+    "venue": "Film Forum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://filmforum.org/film/the-bellboy-ffjr-2026"
+  },
+  {
+    "title": "Martin and Lewis in MONEY FROM HOME in 3-D!",
+    "venue": "Film Forum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://filmforum.org/film/money-from-home"
+  },
+  {
+    "title": "TWO PROSECUTORS",
+    "venue": "Film Forum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://filmforum.org/film/two-prosecutors"
+  },
+  {
+    "title": "KONTINENTAL ‘25",
+    "venue": "Film Forum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://filmforum.org/film/kontinental-25"
+  },
+  {
+    "title": "And the Roots of Rhythm Remain Presented by Joe Boyd",
+    "venue": "Film Forum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://filmforum.org/film/and-the-roots-of-rhythm-remainpresented-by-joe-boyd"
+  },
+  {
+    "title": "Tabitha Jackson named director of Film Forum",
+    "venue": "Film Forum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://filmforum.org/do-not-enter-or-modify-or-erase/client-uploads/Tabitha_Jackson_-_Film_Forum_Leadership_Press_Release_2-2-2026.pdf"
+  },
+  {
+    "title": "Purchase Artwork by Cindy Sherman, Support Film Forum",
+    "venue": "Film Forum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://filmforum.org/more/cindy-sherman-art"
+  },
+  {
+    "title": "Special Events",
+    "venue": "IFC Center",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://ifccenter.com/"
+  },
+  {
+    "title": "Ghost Elephants",
+    "venue": "IFC Center",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://www.ifccenter.com/films/ghost-elephants/"
+  },
+  {
+    "title": "The Ugly Stepsister",
+    "venue": "IFC Center",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://www.ifccenter.com/films/the-ugly-stepsister/"
+  },
+  {
+    "title": "Live-Action Oscar-Nominated Shorts 2026",
+    "venue": "IFC Center",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://www.ifccenter.com/films/live-action-oscar-nominated-shorts-2026/"
+  },
+  {
+    "title": "Doc Program B: Oscar-Nominated Shorts 2026",
+    "venue": "IFC Center",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://www.ifccenter.com/films/doc-program-b-oscar-nominated-shorts-2026/"
+  },
+  {
+    "title": "Doc Program A: Oscar- Nominated Shorts 2026",
+    "venue": "IFC Center",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://www.ifccenter.com/films/doc-program-a-oscar-nominated-shorts-2026/"
+  },
+  {
+    "title": "Animated Oscar-Nominated Shorts 2026",
+    "venue": "IFC Center",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://www.ifccenter.com/films/animated-oscar-nominated-shorts-2026/"
+  },
+  {
+    "title": "Nirvanna: The Band The Show The Movie",
+    "venue": "IFC Center",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://www.ifccenter.com/films/nirvanna-the-band-the-show-the-movie/"
+  },
+  {
+    "title": "Late Night Favorites: Spring 2026",
+    "venue": "IFC Center",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://www.ifccenter.com/series/late-night-favorites-spring-2026/"
+  },
+  {
+    "title": "THE 2026 OSCAR®- NOMINATED SHORTS",
+    "venue": "IFC Center",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://www.ifccenter.com/series/the-2026-oscar-nominated-shorts/"
+  },
+  {
+    "title": "Short Attention Span Cinema: NYICFF Shorts 2026",
+    "venue": "IFC Center",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://www.ifccenter.com/series/short-attention-span-cinema-nyicff-shorts-2026/"
+  },
+  {
+    "title": "Waverly Midnights: And the Oscar Goes To…",
+    "venue": "IFC Center",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://www.ifccenter.com/series/waverly-midnights-and-the-oscar-goes-to/"
+  },
+  {
+    "title": "Shudder Showcase 2026",
+    "venue": "IFC Center",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://www.ifccenter.com/series/shudder-showcase-2026/"
+  },
+  {
+    "title": "Seeing Silence: The Paintings of Helene Schjerfbeck",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/seeing-silence-the-paintings-of-helene-schjerfbeck"
+  },
+  {
+    "title": "Spectrum of Desire: Love, Sex, and Gender in the Middle Ages",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/spectrum-of-desire-love-sex-and-gender-in-the-middle-ages"
+  },
+  {
+    "title": "The Genesis Facade Commission: Jeffrey Gibson, The Animal That Therefore I Am",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/the-facade-commission-jeffrey-gibson"
+  },
+  {
+    "title": "View Finding: Selections from The Walther Collection",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/view-finding-selections-from-the-walther-collection"
+  },
+  {
+    "title": "The Magical City: George Morrison’s New York",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/the-magical-city-george-morrison-s-new-york"
+  },
+  {
+    "title": "Impressions of the Imagination: New Medieval Beasts in Print",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/impressions-of-the-imagination-new-medieval-beasts-in-print"
+  },
+  {
+    "title": "Celebrating the Year of the Horse",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/celebrating-the-year-of-the-horse"
+  },
+  {
+    "title": "Lillian Bassman: Bazaar and Beyond",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/lillian-bassman-bazaar-and-beyond"
+  },
+  {
+    "title": "Emily Sargent: Portrait of a Family",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/emily-sargent-portrait-of-a-family"
+  },
+  {
+    "title": "The Jousting Armor of Philip I of Castile",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/the-jousting-armor-of-philip-i-of-castile"
+  },
+  {
+    "title": "Household Gods: Hindu Devotional Prints, 1860–1930",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/household-gods-hindu-devotional-prints-1860-1930"
+  },
+  {
+    "title": "Revolution!",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/revolution"
+  },
+  {
+    "title": "The Infinite Artistry of Japanese Ceramics",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/the-infinite-artistry-of-japanese-ceramics"
+  },
+  {
+    "title": "Fanmania",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/fanmania"
+  },
+  {
+    "title": "Making It Modern: European Ceramics from the Martin Eidelberg Collection",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/making-it-modern-european-ceramics-from-the-martin-eidelberg-collection"
+  },
+  {
+    "title": "Iba Ndiaye: Between Latitude and Longitude",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/iba-n-diaye-between-latitude-and-longitude"
+  },
+  {
+    "title": "Afterlives: Contemporary Art in the Byzantine Crypt",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/afterlives-contemporary-art-in-the-byzantine-crypt"
+  },
+  {
+    "title": "A Passion for Jade: The Bishop Collection",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/passion-for-jade"
+  },
+  {
+    "title": "Embracing Color: Enamel in Chinese Decorative Arts, 1300–1900",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/embracing-color"
+  },
+  {
+    "title": "Wedding Attire: Three Cultures, One Celebration",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/wedding-attire-three-cultures-one-celebration"
+  },
+  {
+    "title": "Defensive Display: Shields from The Met Collection",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/defensive-display-shields-from-the-met-collection"
+  },
+  {
+    "title": "Cycladic Art",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/cycladic-art"
+  },
+  {
+    "title": "Art of Native America: The Charles and Valerie Diker Collection",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/art-of-native-america-diker-collection"
+  },
+  {
+    "title": "Renaissance Masterpieces of Judaica: The Mishneh Torah and The Rothschild Mahzor",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/renaissance-masterpieces"
+  },
+  {
+    "title": "Michael Lin: Pentachrome",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/michael-lin-pentachrome"
+  },
+  {
+    "title": "Before Yesterday We Could Fly: An Afrofuturist Period Room",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/afrofuturist-period-room"
+  },
+  {
+    "title": "Flip Sides: Seeing Korean Art Anew",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/flip-sides-seeing-korean-art-anew"
+  },
+  {
+    "title": "Raphael: Sublime Poetry",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/raphael-sublime-poetry"
+  },
+  {
+    "title": "Gothic by Design: The Dawn of Architectural Draftsmanship",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/gothic-by-design-the-dawn-of-architectural-draftsmanship"
+  },
+  {
+    "title": "Costume Art",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/costume-art"
+  },
+  {
+    "title": "Creatures of Myth and Imagination: Europe and the Americas",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/creatures-of-myth-and-imagination-europe-and-the-americas"
+  },
+  {
+    "title": "Musical Bodies",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/musical-bodies"
+  },
+  {
+    "title": "A King’s Carpet: Louis XIV and the Savonnerie",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/a-kings-carpet-louis-xiv-and-the-savonnerie"
+  },
+  {
+    "title": "The Genesis Facade Commission: Liu Wei",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/the-genesis-facade-commission-liu-wei"
+  },
+  {
+    "title": "Krasner and Pollock: Past Continuous",
+    "venue": "The Met",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.metmuseum.org/exhibitions/krasner-and-pollock-past-continuous"
+  },
+  {
+    "title": "Gabriele Münter: Contours of a World",
+    "venue": "Guggenheim",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.guggenheim.org/exhibition/gabriele-munter"
+  },
+  {
+    "title": "Collection in Focus | Robert Rauschenberg: Life Can’t Be Stopped",
+    "venue": "Guggenheim",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.guggenheim.org/exhibition/collection-in-focus-robert-rauschenberg-life-cant-be-stopped"
+  },
+  {
+    "title": "Collection in Focus | Modern European Currents",
+    "venue": "Guggenheim",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.guggenheim.org/exhibition/collection-in-focus-modern-european-currents"
+  },
+  {
+    "title": "Thannhauser Collection",
+    "venue": "Guggenheim",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.guggenheim.org/exhibition/thannhauser-collection"
+  },
+  {
+    "title": "A Year with Children 2026",
+    "venue": "Guggenheim",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.guggenheim.org/exhibition/a-year-with-children-2026"
+  },
+  {
+    "title": "Carol Bove",
+    "venue": "Guggenheim",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.guggenheim.org/exhibition/carol-bove"
+  },
+  {
+    "title": "Guggenheim Pop",
+    "venue": "Guggenheim",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.guggenheim.org/exhibition/guggenheim-pop"
+  },
+  {
+    "title": "Collection in Focus | Zidane, a 21st century portrait",
+    "venue": "Guggenheim",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.guggenheim.org/exhibition/collection-in-focus-zidane-a-21st-century-portrait"
+  },
+  {
+    "title": "Taryn Simon",
+    "venue": "Guggenheim",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.guggenheim.org/exhibition/taryn-simon"
+  },
+  {
+    "title": "Rashid Johnson: A Poem for Deep Thinkers",
+    "venue": "Guggenheim",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.guggenheim.org/exhibition/rashid-johnson-a-poem-for-deep-thinkers"
+  },
+  {
+    "title": "Collection in Focus | Beatriz Milhazes: Rigor and Beauty",
+    "venue": "Guggenheim",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.guggenheim.org/exhibition/beatriz-milhazes"
+  },
+  {
+    "title": "Collection in Focus | The Reach of Faith Ringgold",
+    "venue": "Guggenheim",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.guggenheim.org/exhibition/faith-ringgold"
+  },
+  {
+    "title": "By Way Of: Material and Motion in the Guggenheim Collection",
+    "venue": "Guggenheim",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.guggenheim.org/exhibition/by-way-of-material-and-motion-in-the-guggenheim-collection"
+  },
+  {
+    "title": "Collection in Focus | Piet Mondrian: Ever further",
+    "venue": "Guggenheim",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.guggenheim.org/exhibition/piet-mondrian-even-further"
+  },
+  {
+    "title": "Harmony and Dissonance: Orphism in Paris, 1910–1930",
+    "venue": "Guggenheim",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.guggenheim.org/exhibition/harmony-and-dissonance-orphism-in-paris-1910-1930"
+  },
+  {
+    "title": "Jenny Holzer: Light Line",
+    "venue": "Guggenheim",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://www.guggenheim.org/exhibition/jenny-holzer"
+  },
+  {
+    "title": "Caché",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999003131"
+  },
+  {
+    "title": "Le Plaisir",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004708"
+  },
+  {
+    "title": "The Stranger and the Fog",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004675"
+  },
+  {
+    "title": "Comrades: Almost a Love Story",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999000076"
+  },
+  {
+    "title": "Somersault",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004698"
+  },
+  {
+    "title": "Punch-Drunk Love",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999000594"
+  },
+  {
+    "title": "El Sur",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004686"
+  },
+  {
+    "title": "The Wind Will Carry Us",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004695"
+  },
+  {
+    "title": "The Silence",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999003929"
+  },
+  {
+    "title": "The Earrings of Madame de...",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999001228"
+  },
+  {
+    "title": "Cure",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999003864"
+  },
+  {
+    "title": "Re-Wind",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004699"
+  },
+  {
+    "title": "The Lovers on the Bridge",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999001693"
+  },
+  {
+    "title": "The Reckless Moment",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999001229"
+  },
+  {
+    "title": "Harmonica",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004674"
+  },
+  {
+    "title": "Lola Montès",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999000107"
+  },
+  {
+    "title": "The Search",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004682"
+  },
+  {
+    "title": "Klute",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999000329"
+  },
+  {
+    "title": "Can She Bake a Cherry Pie?",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004697"
+  },
+  {
+    "title": "In the Mood for Love",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999000517"
+  },
+  {
+    "title": "The Runner",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004694"
+  },
+  {
+    "title": "Inside the Yellow Cocoon Shell",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999003605"
+  },
+  {
+    "title": "Perfect Blue",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999001649"
+  },
+  {
+    "title": "A New Love in Tokyo",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004654"
+  },
+  {
+    "title": "Sunset Boulevard",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999001579"
+  },
+  {
+    "title": "Diary of a Country Priest",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999000872"
+  },
+  {
+    "title": "Stalker",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999001012"
+  },
+  {
+    "title": "The Unbearable Lightness of Being",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004497"
+  },
+  {
+    "title": "Demonlover",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999000709"
+  },
+  {
+    "title": "Sukiyaki Western Django",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004712"
+  },
+  {
+    "title": "The Taking of Power by Louis XIV",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004713"
+  },
+  {
+    "title": "Rendez-vous",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004714"
+  },
+  {
+    "title": "Cowboy Bebop: The Movie",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999000723"
+  },
+  {
+    "title": "Mauvais Sang",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999001771"
+  },
+  {
+    "title": "The English Patient",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004715"
+  },
+  {
+    "title": "The Milky Way",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999000778"
+  },
+  {
+    "title": "Certified Copy",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999003797"
+  },
+  {
+    "title": "Weekend",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999001800"
+  },
+  {
+    "title": "Once Upon a Time in Hollywood",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004716"
+  },
+  {
+    "title": "Nostalghia",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004203"
+  },
+  {
+    "title": "I Want to Talk About Duras",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004717"
+  },
+  {
+    "title": "Public Housing",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004718"
+  },
+  {
+    "title": "The Competition",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999001829"
+  },
+  {
+    "title": "Paris, Texas",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999000581"
+  },
+  {
+    "title": "By The Time It Gets Dark",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999002975"
+  },
+  {
+    "title": "The Holy Girl",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004705"
+  },
+  {
+    "title": "Irma Vep",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999000516"
+  },
+  {
+    "title": "Distant",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004696"
+  },
+  {
+    "title": "Memoria",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999003117"
+  },
+  {
+    "title": "A Real Young Girl",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004706"
+  },
+  {
+    "title": "La ronde",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004700"
+  },
+  {
+    "title": "Mala Noche",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999002813"
+  },
+  {
+    "title": "The Heroic Trio",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999000514"
+  },
+  {
+    "title": "Angel's Egg",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004558"
+  },
+  {
+    "title": "Ed Wood",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999003417"
+  },
+  {
+    "title": "Queen of Katwe",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004719"
+  },
+  {
+    "title": "Code Unknown",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999002367"
+  },
+  {
+    "title": "The Girl With the Hatbox",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004720"
+  },
+  {
+    "title": "Camille Claudel 1915",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004726"
+  },
+  {
+    "title": "In a Lonely Place",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999001065"
+  },
+  {
+    "title": "The House on Trubnaya",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004721"
+  },
+  {
+    "title": "Battle Royale",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999001953"
+  },
+  {
+    "title": "Miss Mend",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004722"
+  },
+  {
+    "title": "Kill Bill: Vol. 1",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004723"
+  },
+  {
+    "title": "Kill Bill: Vol. 2",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004724"
+  },
+  {
+    "title": "The Bad and the Beautiful",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004725"
+  },
+  {
+    "title": "Ghost Dog: The Way of the Samurai",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999001440"
+  },
+  {
+    "title": "Four Adventures of Reinette and Mirabelle",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999000659"
+  },
+  {
+    "title": "Kiss Me Deadly",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999000432"
+  },
+  {
+    "title": "The Most Terrible Time in My Life",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004728"
+  },
+  {
+    "title": "The Stairway to a Distant Past",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004729"
+  },
+  {
+    "title": "High Life",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999002108"
+  },
+  {
+    "title": "Inherent Vice",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999001238"
+  },
+  {
+    "title": "Maps to the Stars",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999002655"
+  },
+  {
+    "title": "Murray Center Class of '25: Award-winning Shorts",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004731"
+  },
+  {
+    "title": "Pinocchio",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004730"
+  },
+  {
+    "title": "Future of Documentary: Secret Screening & Panel",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004732"
+  },
+  {
+    "title": "The Player",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999003399"
+  },
+  {
+    "title": "Maidan",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999002533"
+  },
+  {
+    "title": "Outskirts",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004733"
+  },
+  {
+    "title": "The Trap",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004734"
+  },
+  {
+    "title": "By the Bluest of Seas",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004735"
+  },
+  {
+    "title": "Inland Empire",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004189"
+  },
+  {
+    "title": "The Invasion preceded by Paleontology Lesson",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004736"
+  },
+  {
+    "title": "Let the Sunshine In",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999003597"
+  },
+  {
+    "title": "Goodbye, Dragon Inn",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999000006"
+  },
+  {
+    "title": "Dead Man",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999000299"
+  },
+  {
+    "title": "The Seventh Seal",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999001970"
+  },
+  {
+    "title": "Red Sorghum",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004739"
+  },
+  {
+    "title": "Clouds of Sils Maria",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999002785"
+  },
+  {
+    "title": "Allegro Non Troppo",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004740"
+  },
+  {
+    "title": "Zodiac",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004741"
+  },
+  {
+    "title": "Downtown 81",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999002127"
+  },
+  {
+    "title": "Raise the Red Lantern",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004742"
+  },
+  {
+    "title": "The Old Jockey",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004743"
+  },
+  {
+    "title": "The Story of Qiu Ju",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004744"
+  },
+  {
+    "title": "ACE Presents Cool Hand Luke",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004745"
+  },
+  {
+    "title": "Made in Hong Kong",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999002313"
+  },
+  {
+    "title": "Point Blank",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999000587"
+  },
+  {
+    "title": "Fantasia",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004578"
+  },
+  {
+    "title": "Secret Agent",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004746"
+  },
+  {
+    "title": "Once Upon a Night preceded by A Priceless Head",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004747"
+  },
+  {
+    "title": "The Darjeeling Limited",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004748"
+  },
+  {
+    "title": "Ju Dou",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004738"
+  },
+  {
+    "title": "No Other Choice",
+    "venue": "Metrograph",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Film",
+    "url": "https://metrograph.com/film/?vista_film_id=9999004749"
+  },
+  {
+    "title": "Mabel Dwight: Cool Head, Warm Heart",
+    "venue": "Whitney Museum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://whitney.org/exhibitions/mabel-dwight"
+  },
+  {
+    "title": "High Wire: Calder’s Circus at 100",
+    "venue": "Whitney Museum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://whitney.org/exhibitions/calders-circus"
+  },
+  {
+    "title": "Claes Oldenburg: Drawn from Life",
+    "venue": "Whitney Museum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://whitney.org/exhibitions/claes-oldenburg"
+  },
+  {
+    "title": "“Untitled” (America)",
+    "venue": "Whitney Museum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://whitney.org/exhibitions/untitled-america"
+  },
+  {
+    "title": "Dyani White Hawk: Nourish",
+    "venue": "Whitney Museum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://whitney.org/exhibitions/nourish"
+  },
+  {
+    "title": "Leo Castañeda: Camoflux Recall Grotto",
+    "venue": "Whitney Museum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://whitney.org/exhibitions/camoflux-recall-grotto"
+  },
+  {
+    "title": "Taína H. Cruz: I Saw the Future and It Smiled Back",
+    "venue": "Whitney Museum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://whitney.org/exhibitions/taina-h-cruz"
+  },
+  {
+    "title": "Whitney Biennial 2026",
+    "venue": "Whitney Museum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://whitney.org/exhibitions/2026-biennial"
+  },
+  {
+    "title": "Roy Lichtenstein",
+    "venue": "Whitney Museum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://whitney.org/exhibitions/lichtenstein"
+  },
+  {
+    "title": "Memo Akten & Katie Hofstadter: The Thinking Ocean",
+    "venue": "Whitney Museum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://whitney.org/exhibitions/the-thinking-ocean"
+  },
+  {
+    "title": "Robert Nideffer: 12 Years in Azeroth – The Journey Begins",
+    "venue": "Whitney Museum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://whitney.org/exhibitions/12-years-in-azeroth"
+  },
+  {
+    "title": "Frank WANG Yefeng: The Levitating Perils #2",
+    "venue": "Whitney Museum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://whitney.org/exhibitions/frank-wang-yefeng"
+  },
+  {
+    "title": "INFANT: BANNED SKILLS",
+    "venue": "Whitney Museum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://whitney.org/exhibitions/banned-skills"
+  },
+  {
+    "title": "Nancy Baker Cahill: CENTO",
+    "venue": "Whitney Museum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://whitney.org/exhibitions/cento"
+  },
+  {
+    "title": "David Hammons: Day’s End",
+    "venue": "Whitney Museum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://whitney.org/exhibitions/david-hammons-days-end"
+  },
+  {
+    "title": "Rashid Johnson: New Poetry",
+    "venue": "Whitney Museum",
+    "date": "2026-03-09 to 2026-03-15",
+    "category": "Museum",
+    "url": "https://whitney.org/exhibitions/rashid-johnson-new-poetry"
+  }
+]
