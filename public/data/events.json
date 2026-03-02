@@ -112,25 +112,14 @@
       "price": "$17"
     },
     {
-      "id": "ifc-late-night-house-2026",
-      "title": "Late Night Favorites: House (1977)",
-      "venue": "IFC Center",
-      "date": "2026-03-06",
-      "time": "11:59 PM",
-      "category": "Film",
-      "sourceUrl": "https://www.ifccenter.com/series/late-night-favorites-spring-2026/",
-      "description": "Nobuhiko Obayashi's cult horror classic. Part of Late Night Favorites series.",
-      "price": "$17"
-    },
-    {
       "id": "lincoln-center-nyphil-march9-2026",
-      "title": "New York Philharmonic - Mirga Gražinytė-Tyla & Emanuel Ax",
+      "title": "New York Philharmonic - Mirga Gra\u017einyt\u0117-Tyla & Emanuel Ax",
       "venue": "David Geffen Hall, Lincoln Center",
       "date": "2026-03-09",
       "time": "7:30 PM",
       "category": "Classical Music",
       "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/mirga-grazinyte-tyla-and-emanuel-ax/",
-      "description": "The NY Phil welcomes Mirga Gražinytė-Tyla and pianist Emanuel Ax for an evening of classical masterworks.",
+      "description": "The NY Phil welcomes Mirga Gra\u017einyt\u0117-Tyla and pianist Emanuel Ax for an evening of classical masterworks.",
       "price": "$96-$283"
     },
     {
@@ -229,7 +218,7 @@
       "time": "10:30 AM - 6:00 PM",
       "category": "Museum Exhibition",
       "sourceUrl": "https://whitney.org/exhibitions/2026-biennial",
-      "description": "The 82nd edition of the Whitney Biennial—the longest-running survey of contemporary American art—features 56 artists, duos, and collectives. Free for 25 and under. Opening coincides with Free Second Sunday.",
+      "description": "The 82nd edition of the Whitney Biennial\u2014the longest-running survey of contemporary American art\u2014features 56 artists, duos, and collectives. Free for 25 and under. Opening coincides with Free Second Sunday.",
       "price": "$30 (Free for 25 and under)"
     },
     {
@@ -245,13 +234,13 @@
     },
     {
       "id": "guggenheim-gabriele-munter-2026",
-      "title": "Gabriele Münter: Contours of a World",
+      "title": "Gabriele M\u00fcnter: Contours of a World",
       "venue": "Solomon R. Guggenheim Museum",
       "date": "2026-03-09",
       "time": "11:00 AM - 6:00 PM",
       "category": "Museum Exhibition",
       "sourceUrl": "https://www.guggenheim.org/exhibition/gabriele-munter",
-      "description": "Exhibition of works by German Expressionist painter Gabriele Münter.",
+      "description": "Exhibition of works by German Expressionist painter Gabriele M\u00fcnter.",
       "price": "$30"
     },
     {
@@ -262,7 +251,7 @@
       "time": "10:30 AM - 5:30 PM",
       "category": "Museum Exhibition",
       "sourceUrl": "https://press.moma.org/exhibition/frida-and-diego-the-last-dream/",
-      "description": "Exhibition of key works from MoMA's collection by Frida Kahlo and Diego Rivera, presented in conjunction with the Metropolitan Opera's premiere of El Último Sueño de Frida y Diego.",
+      "description": "Exhibition of key works from MoMA's collection by Frida Kahlo and Diego Rivera, presented in conjunction with the Metropolitan Opera's premiere of El \u00daltimo Sue\u00f1o de Frida y Diego.",
       "price": "$30"
     },
     {
@@ -310,17 +299,6 @@
       "price": "$25"
     },
     {
-      "id": "frick-isaac-mizrahi-2026",
-      "title": "Live at the Frick: Isaac Mizrahi in Conversation with Aimee Ng",
-      "venue": "The Frick Collection",
-      "date": "2026-03-06",
-      "time": "6:00 PM",
-      "category": "Talk",
-      "sourceUrl": "https://www.frick.org/calendar",
-      "description": "Fashion designer Isaac Mizrahi in conversation with Aimee Ng. SOLD OUT.",
-      "price": "Free with admission"
-    },
-    {
       "id": "met-museum-raphael-2026",
       "title": "Raphael: Sublime Poetry (Preview Week)",
       "venue": "The Metropolitan Museum of Art",
@@ -330,50 +308,6 @@
       "sourceUrl": "https://www.metmuseum.org/exhibitions/raphael-sublime-poetry",
       "description": "First comprehensive exhibition on Raphael in the USA, featuring over 200 works. Opens March 29, 2026.",
       "price": "$30"
-    },
-    {
-      "id": "92ny-uptown-rhythm-march3-2026",
-      "title": "Uptown Rhythm Dance Festival - Donnetta Jackson / MADD Mixtape, Maria Torres",
-      "venue": "92NY (92nd Street Y)",
-      "date": "2026-03-03",
-      "time": "7:00 PM",
-      "category": "Dance",
-      "sourceUrl": "https://www.92ny.org/event/uptown-rhythm-dance-festival",
-      "description": "Featuring Donnetta Jackson / MADD Mixtape, Maria Torres, Nelida Tirado, Liliana Morales & Leah Banales. Co-curated by Alison Manning & Michelle Dorrance.",
-      "price": "$25-$40"
-    },
-    {
-      "id": "92ny-uptown-rhythm-march4-2026",
-      "title": "Uptown Rhythm Dance Festival - Chelsea Hoy, Fritzlyn Hector, Irene Koloseus",
-      "venue": "92NY (92nd Street Y)",
-      "date": "2026-03-04",
-      "time": "7:00 PM",
-      "category": "Dance",
-      "sourceUrl": "https://www.92ny.org/event/uptown-rhythm-dance-festival",
-      "description": "Featuring Chelsea Hoy, Fritzlyn Hector, Irene Koloseus, and Mai Lê Hô's LayeRhythm.",
-      "price": "$25-$40"
-    },
-    {
-      "id": "92ny-ladies-shoe-march4-2026",
-      "title": "Ladies in the Shoe Performances",
-      "venue": "92NY (92nd Street Y)",
-      "date": "2026-03-04",
-      "time": "7:00 PM",
-      "category": "Dance",
-      "sourceUrl": "https://www.92ny.org/event/uptown-rhythm-dance-festival",
-      "description": "Tap performances conceived and directed by Dormeshia. Featuring Demi Remick, Josette Wiggin, Amanda Castro, Claudia Rahardjinato, Dormeshia.",
-      "price": "$25-$40"
-    },
-    {
-      "id": "92ny-uptown-rhythm-guggenheim-march8-2026",
-      "title": "Uptown Rhythm Dance Festival at Guggenheim - Kukai Dantza",
-      "venue": "Guggenheim Museum",
-      "date": "2026-03-08",
-      "time": "7:00 PM",
-      "category": "Dance",
-      "sourceUrl": "https://www.92ny.org/event/uptown-rhythm-dance-festival",
-      "description": "Featuring Kukai Dantza: Nire Txokotik and Xianix Barrera: Quebrada at the Peter B. Lewis Theater.",
-      "price": "$35"
     },
     {
       "id": "92ny-rotunda-dance-march9-2026",
@@ -429,17 +363,6 @@
       "sourceUrl": "https://filmforum.org/",
       "description": "Independent and repertory cinema in the South Village.",
       "price": "$17"
-    },
-    {
-      "id": "lincoln-center-chamber-music-march8-2026",
-      "title": "Chamber Music Society - The Violin Today",
-      "venue": "Lincoln Center",
-      "date": "2026-03-08",
-      "time": "6:30 PM",
-      "category": "Classical Music",
-      "sourceUrl": "https://www.chambermusicsociety.org/",
-      "description": "Lecture on The Violin Today.",
-      "price": "$35"
     },
     {
       "id": "lincoln-center-jazz-afrobeat-2026",
