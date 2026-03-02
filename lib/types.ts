@@ -5,7 +5,7 @@ export interface RawEvent {
   name?: string;
   venue?: string;
   location?: string;
-  date: string;           // "YYYY-MM-DD" or "YYYY-MM-DD to YYYY-MM-DD"
+  date: string | null;    // "YYYY-MM-DD", "YYYY-MM-DD to YYYY-MM-DD", or null
   category?: string;
   type?: string;
   url?: string;
@@ -22,7 +22,7 @@ export interface Event {
   id: string;
   title: string;
   venue: string;
-  date: string;
+  date: string | null;
   category: Category;
   sourceUrl: string;
   time?: string;

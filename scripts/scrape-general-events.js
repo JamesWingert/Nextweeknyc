@@ -26,27 +26,24 @@ const http = require('http');
 const events = [];
 
 // ---------------------------------------------------------------------------
-// Week calculation — next Monday through Sunday
+// Date range — current month + next month
 // ---------------------------------------------------------------------------
 
-function nextWeekRange() {
+function monthRange() {
   const now = new Date();
-  const day = now.getDay(); // 0=Sun
-  const daysUntilMon = day === 0 ? 1 : (8 - day);
-  const mon = new Date(now);
-  mon.setDate(now.getDate() + daysUntilMon);
-  const sun = new Date(mon);
-  sun.setDate(mon.getDate() + 6);
+  const y = now.getFullYear(), m = now.getMonth();
   const fmt = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  const start = new Date(y, m, 1);
+  const end = new Date(y, m + 2, 0);
   return {
-    start: process.env.WEEK_START || fmt(mon),
-    end:   process.env.WEEK_END   || fmt(sun),
+    start: process.env.MONTH_START || fmt(start),
+    end:   process.env.MONTH_END   || fmt(end),
   };
 }
 
-const WEEK = nextWeekRange();
+const WEEK = monthRange(); // kept as WEEK for minimal code churn
 const RANGE = `${WEEK.start} to ${WEEK.end}`;
-console.error(`Week range: ${RANGE}`);
+console.error(`Date range: ${RANGE}`);
 
 // ---------------------------------------------------------------------------
 // HTTP fetch helper (Node 18 compatible — no global fetch)
@@ -91,6 +88,7 @@ function parseHumanDate(str) {
     may:4,jun:5,june:5,jul:6,july:6,aug:7,august:7,sep:8,september:8,
     oct:9,october:9,nov:10,november:10,dec:11,december:11
   };
+  const year = new Date(WEEK.start).getFullYear();
 
   // "March 5, 2026" or "Mar 5"
   const m1 = s.match(/^([a-z]+)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
@@ -98,9 +96,8 @@ function parseHumanDate(str) {
     const mon = MONTHS[m1[1].toLowerCase()];
     if (mon !== undefined) {
       const day = parseInt(m1[2], 10);
-      const year = m1[3] ? parseInt(m1[3], 10) : new Date(WEEK.start).getFullYear();
-      const d = new Date(year, mon, day);
-      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      const y = m1[3] ? parseInt(m1[3], 10) : year;
+      return `${y}-${String(mon+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
     }
   }
 
@@ -110,17 +107,48 @@ function parseHumanDate(str) {
     const mon = MONTHS[m2[2].toLowerCase()];
     if (mon !== undefined) {
       const day = parseInt(m2[1], 10);
-      const year = m2[3] ? parseInt(m2[3], 10) : new Date(WEEK.start).getFullYear();
-      const d = new Date(year, mon, day);
-      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      const y = m2[3] ? parseInt(m2[3], 10) : year;
+      return `${y}-${String(mon+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    }
+  }
+
+  // "Tue 3 Mar 2026" or "Mon 10 Mar"
+  const m4 = s.match(/^(?:mon|tue|wed|thu|fri|sat|sun)\w*\s+(\d{1,2})\s+([a-z]+)(?:\s+(\d{4}))?/i);
+  if (m4) {
+    const mon = MONTHS[m4[2].toLowerCase()];
+    if (mon !== undefined) {
+      const day = parseInt(m4[1], 10);
+      const y = m4[3] ? parseInt(m4[3], 10) : year;
+      return `${y}-${String(mon+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    }
+  }
+
+  // "Tue Mar 10" or "Wed Mar 4"
+  const m5 = s.match(/^(?:mon|tue|wed|thu|fri|sat|sun)\w*\s+([a-z]+)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
+  if (m5) {
+    const mon = MONTHS[m5[1].toLowerCase()];
+    if (mon !== undefined) {
+      const day = parseInt(m5[2], 10);
+      const y = m5[3] ? parseInt(m5[3], 10) : year;
+      return `${y}-${String(mon+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    }
+  }
+
+  // "Monday March 2, 2026"
+  const m6 = s.match(/^(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)\s+([a-z]+)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
+  if (m6) {
+    const mon = MONTHS[m6[1].toLowerCase()];
+    if (mon !== undefined) {
+      const day = parseInt(m6[2], 10);
+      const y = m6[3] ? parseInt(m6[3], 10) : year;
+      return `${y}-${String(mon+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
     }
   }
 
   // MM/DD/YYYY
   const m3 = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
   if (m3) {
-    const d = new Date(parseInt(m3[3],10), parseInt(m3[1],10)-1, parseInt(m3[2],10));
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    return `${m3[3]}-${String(parseInt(m3[1],10)).padStart(2,'0')}-${String(parseInt(m3[2],10)).padStart(2,'0')}`;
   }
 
   return null;
@@ -129,18 +157,18 @@ function parseHumanDate(str) {
 function push(items, venue, category, fallbackUrl) {
   items.forEach(item => {
     let date = item.date || null;
+    // Try to normalize to YYYY-MM-DD
     if (date && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
-      if (date < WEEK.start || date > WEEK.end) date = RANGE;
+      // Already ISO — keep as-is
     } else if (date && /^\d{4}-\d{2}-\d{2}[T ]/.test(date)) {
-      const d = date.slice(0, 10);
-      date = (d >= WEEK.start && d <= WEEK.end) ? d : RANGE;
-    } else {
-      const parsed = parseHumanDate(date);
-      if (parsed && parsed >= WEEK.start && parsed <= WEEK.end) {
-        date = parsed;
-      } else {
-        date = RANGE;
+      date = date.slice(0, 10);
+    } else if (date) {
+      let parsed = parseHumanDate(date);
+      if (!parsed) {
+        const startPart = date.split(/\s*[-–—]\s*|\s+to\s+|\s+and\s+/i)[0]?.trim();
+        if (startPart && startPart !== date) parsed = parseHumanDate(startPart);
       }
+      date = parsed || null;
     }
     events.push({
       title: (item.title || '').trim(),
@@ -159,11 +187,11 @@ function push(items, venue, category, fallbackUrl) {
 // ---------------------------------------------------------------------------
 
 async function scrapeDoNYC() {
-  // Per-day URLs: /events/YYYY/M/D — each page has events for that specific date
-  const startParts = WEEK.start.split('-').map(Number);
-  const startDate = new Date(startParts[0], startParts[1] - 1, startParts[2]);
+  // Per-day URLs: /events/YYYY/M/D — scrape next 14 days from today
+  const now = new Date();
+  const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-  for (let dayOffset = 0; dayOffset < 7; dayOffset++) {
+  for (let dayOffset = 0; dayOffset < 14; dayOffset++) {
     const d = new Date(startDate);
     d.setDate(startDate.getDate() + dayOffset);
     const y = d.getFullYear(), m = d.getMonth() + 1, day = d.getDate();
@@ -389,7 +417,7 @@ async function runSource(name, fn, browserOrNull) {
   }
   const count = events.length - before;
   const elapsed = ((Date.now() - start) / 1000).toFixed(1);
-  const datesExtracted = events.slice(before).filter(e => e.date && !e.date.includes(' to ')).length;
+  const datesExtracted = events.slice(before).filter(e => e.date && /^\d{4}-\d{2}-\d{2}$/.test(e.date)).length;
   sourceLog.push({ name, count, datesExtracted, elapsed, error });
 }
 
@@ -397,7 +425,7 @@ function printReport() {
   console.error('\n' + '='.repeat(70));
   console.error('SCRAPE REPORT — General Events');
   console.error('='.repeat(70));
-  console.error(`Week: ${RANGE}`);
+  console.error(`Date range: ${RANGE}`);
   console.error(`Total events: ${events.length}`);
   console.error('-'.repeat(70));
   console.error('Source'.padEnd(25) + 'Items'.padEnd(8) + 'Dates'.padEnd(8) + 'Time'.padEnd(8) + 'Method'.padEnd(10) + 'Status');

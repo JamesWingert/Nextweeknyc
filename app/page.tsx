@@ -36,7 +36,8 @@ function getDateLabel(date: string): string {
   return `${format(range.start, 'MMM d')} – ${format(range.end, 'MMM d')}`;
 }
 
-function isEventFuture(eventDate: string, today: Date): boolean {
+function isEventFuture(eventDate: string | null, today: Date): boolean {
+  if (!eventDate) return true; // null-date events are always shown (ongoing/TBD)
   if (isDateRange(eventDate)) {
     const range = parseDateRange(eventDate);
     if (!range) return false;
@@ -143,42 +144,14 @@ export default function Home() {
       // Support both formats: raw array or { weekOf, events }
       const arr1: RawEvent[] = Array.isArray(raw1) ? raw1 : (raw1.events || []);
       const arr2: RawEvent[] = Array.isArray(raw2) ? raw2 : (raw2.events || []);
-      // Derive weekOf from the data: find the earliest date across all events,
-      // then snap to its Monday. Falls back to current week's Monday.
       const allRaw = [...arr1, ...arr2];
-      const explicitWeekOf = (!Array.isArray(raw1) && raw1.weekOf) || (!Array.isArray(raw2) && raw2.weekOf);
-      let weekOf: string;
-      if (explicitWeekOf) {
-        weekOf = explicitWeekOf;
-      } else {
-        // Scan event dates to find the week the data covers
-        let earliest: string | null = null;
-        for (const e of allRaw) {
-          const d = (e.date || '').trim();
-          // For ranges like "2026-03-09 to 2026-03-15", take the start
-          const dateStr = d.includes(' to ') ? d.split(' to ')[0] : d;
-          if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
-            if (!earliest || dateStr < earliest) earliest = dateStr;
-          }
-        }
-        if (earliest) {
-          // Snap to Monday of that week
-          const d = toDate(earliest);
-          const dow = d.getDay();
-          const diffToMon = dow === 0 ? -6 : 1 - dow;
-          const mon = new Date(d);
-          mon.setDate(d.getDate() + diffToMon);
-          weekOf = toStr(mon);
-        } else {
-          // Fallback: current week's Monday
-          const now = new Date();
-          const dow = now.getDay();
-          const diffToMon = dow === 0 ? -6 : 1 - dow;
-          const mon = new Date(now);
-          mon.setDate(now.getDate() + diffToMon);
-          weekOf = toStr(mon);
-        }
-      }
+
+      // With monthly data, weekOf = current week's Monday (always based on today)
+      const now = new Date();
+      const dow = now.getDay();
+      const diffToMon = dow === 0 ? -6 : 1 - dow;
+      const mon = new Date(now.getFullYear(), now.getMonth(), now.getDate() + diffToMon);
+      const weekOf = toStr(mon);
 
       // Dedupe by title+venue+date
       const seen = new Set<string>();
@@ -197,7 +170,7 @@ export default function Home() {
           id: e.id || `evt-${i}`,
           title: (e.title || e.name || '').trim(),
           venue: (e.venue || e.location || '').trim(),
-          date: e.date,
+          date: e.date || null,
           category: normalizeCategory(e.category || e.type || 'Other'),
           sourceUrl: (e.sourceUrl || e.url || e.link || '').trim(),
           ...(e.time ? { time: e.time } : {}),
@@ -237,7 +210,7 @@ export default function Home() {
   return (
     <main style={{ minHeight: '100vh', padding: '2rem 1.5rem', maxWidth: '72rem', margin: '0 auto' }}>
       <header style={{ marginBottom: '2rem' }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.75rem', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.75rem', flexWrap: 'wrap' as const }}>
           <h1 style={{ fontSize: '2rem', fontWeight: 700, letterSpacing: '-0.02em', color: '#1a1a2e' }}>
             Next Week NYC
           </h1>
@@ -248,12 +221,12 @@ export default function Home() {
           )}
         </div>
         <p style={{ color: '#8888a0', fontSize: '0.875rem', marginTop: '0.5rem' }}>
-          {filteredEvents.length} event{filteredEvents.length !== 1 ? 's' : ''} this week
+          {filteredEvents.length} upcoming event{filteredEvents.length !== 1 ? 's' : ''}
         </p>
       </header>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', marginBottom: '1.5rem' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap' as const, alignItems: 'center', justifyContent: 'space-between', gap: '1rem', marginBottom: '1.5rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem' }}>
           {deduped.map(({ key, label, bg, text, dot }) => {
             const matchingKeys = categoryConfig.filter(c => c.label === label).map(c => c.key);
             const isActive = matchingKeys.some(k => selectedCategories.includes(k));
@@ -326,8 +299,8 @@ function CategoryTag({ category }: { category: Category }) {
   );
 }
 
-function DateBadge({ date }: { date: string }) {
-  if (!isDateRange(date)) return null;
+function DateBadge({ date }: { date: string | null }) {
+  if (!date || !isDateRange(date)) return null;
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: '0.25rem',
@@ -350,12 +323,12 @@ function EventCard({ event, showDate }: { event: Event; showDate?: boolean }) {
         borderRadius: '0.75rem', border: '1px solid #e8e4de',
         textDecoration: 'none', color: 'inherit', transition: 'all 0.15s ease',
       }}
-      onMouseEnter={e => {
+      onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
         e.currentTarget.style.borderColor = '#d1ccc4';
         e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
         e.currentTarget.style.transform = 'translateY(-1px)';
       }}
-      onMouseLeave={e => {
+      onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
         e.currentTarget.style.borderColor = '#e8e4de';
         e.currentTarget.style.boxShadow = 'none';
         e.currentTarget.style.transform = 'none';
@@ -363,7 +336,7 @@ function EventCard({ event, showDate }: { event: Event; showDate?: boolean }) {
     >
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.75rem' }}>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.375rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.375rem', flexWrap: 'wrap' as const }}>
             <CategoryTag category={event.category} />
             {showDate && <DateBadge date={event.date} />}
             {event.time && event.time !== 'TBA' && (
@@ -400,13 +373,14 @@ function EventCard({ event, showDate }: { event: Event; showDate?: boolean }) {
 // --- Category (List) View ---
 
 function EventList({ events }: { events: Event[] }) {
-  const singleDay = events.filter(e => !isDateRange(e.date));
-  const multiDay = events.filter(e => isDateRange(e.date));
+  const singleDay = events.filter(e => e.date && !isDateRange(e.date));
+  const multiDay = events.filter(e => e.date && isDateRange(e.date));
+  const noDate = events.filter(e => !e.date);
 
   const grouped = singleDay.reduce((acc, event) => {
     if (!acc[event.category]) acc[event.category] = {};
-    if (!acc[event.category][event.date]) acc[event.category][event.date] = [];
-    acc[event.category][event.date].push(event);
+    if (!acc[event.category][event.date!]) acc[event.category][event.date!] = [];
+    acc[event.category][event.date!].push(event);
     return acc;
   }, {} as Record<string, Record<string, Event[]>>);
 
@@ -416,17 +390,28 @@ function EventList({ events }: { events: Event[] }) {
     return acc;
   }, {} as Record<string, Event[]>);
 
-  const allCategories = Array.from(new Set([...Object.keys(grouped), ...Object.keys(multiGrouped)])).sort();
+  const noDateGrouped = noDate.reduce((acc, event) => {
+    if (!acc[event.category]) acc[event.category] = [];
+    acc[event.category].push(event);
+    return acc;
+  }, {} as Record<string, Event[]>);
+
+  const allCategories = Array.from(new Set([
+    ...Object.keys(grouped),
+    ...Object.keys(multiGrouped),
+    ...Object.keys(noDateGrouped),
+  ])).sort();
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '2.5rem' }}>
       {allCategories.map(category => {
         const style = getCategoryStyle(category as Category);
         const singleEntries = grouped[category]
           ? Object.entries(grouped[category]).sort(([a], [b]) => a.localeCompare(b))
           : [];
         const multiEntries = multiGrouped[category] || [];
-        const totalCount = singleEntries.reduce((n, [, evts]) => n + evts.length, 0) + multiEntries.length;
+        const noDateEntries = noDateGrouped[category] || [];
+        const totalCount = singleEntries.reduce((n, [, evts]) => n + evts.length, 0) + multiEntries.length + noDateEntries.length;
 
         return (
           <section key={category}>
@@ -452,9 +437,26 @@ function EventList({ events }: { events: Event[] }) {
                 }}>
                   <span style={{ fontSize: '0.875rem' }}>🗓</span> Multiple Days
                 </h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '0.5rem' }}>
                   {multiEntries.map(event => (
                     <EventCard key={event.id} event={event} showDate />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {noDateEntries.length > 0 && (
+              <div style={{ marginBottom: '1.25rem' }}>
+                <h3 style={{
+                  fontSize: '0.8125rem', fontWeight: 600, color: '#8888a0',
+                  textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.75rem',
+                  display: 'flex', alignItems: 'center', gap: '0.375rem',
+                }}>
+                  <span style={{ fontSize: '0.875rem' }}>📌</span> Ongoing / Date TBD
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '0.5rem' }}>
+                  {noDateEntries.map(event => (
+                    <EventCard key={event.id} event={event} />
                   ))}
                 </div>
               </div>
@@ -468,7 +470,7 @@ function EventList({ events }: { events: Event[] }) {
                 }}>
                   {format(toDate(date), 'EEEE, MMMM d')}
                 </h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '0.5rem' }}>
                   {dayEvents.map(event => (
                     <EventCard key={event.id} event={event} />
                   ))}
@@ -504,8 +506,8 @@ function CalendarView({ events, weekOf }: { events: Event[]; weekOf: string }) {
   const days = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
   const todayStr = toStr(new Date());
 
-  const multiDayEvents = events.filter(e => isDateRange(e.date));
-  const singleDayEvents = events.filter(e => !isDateRange(e.date));
+  const multiDayEvents = events.filter(e => e.date && isDateRange(e.date));
+  const singleDayEvents = events.filter(e => e.date && !isDateRange(e.date));
 
   const multiByCategory = multiDayEvents.reduce((acc, e) => {
     if (!acc[e.category]) acc[e.category] = [];
@@ -534,7 +536,7 @@ function CalendarView({ events, weekOf }: { events: Event[]; weekOf: string }) {
             </span>
           </button>
           {showAllWeek && (
-            <div style={{ padding: '0.75rem 1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <div style={{ padding: '0.75rem 1rem', display: 'flex', flexDirection: 'column' as const, gap: '0.5rem' }}>
               {Object.entries(multiByCategory).map(([cat, catEvents]) => {
                 const catStyle = getCategoryStyle(cat as Category);
                 return (
@@ -562,8 +564,8 @@ function CalendarView({ events, weekOf }: { events: Event[]; weekOf: string }) {
                             transition: 'opacity 0.15s ease',
                             overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                           }}
-                          onMouseEnter={e => { e.currentTarget.style.opacity = '0.75'; }}
-                          onMouseLeave={e => { e.currentTarget.style.opacity = '1'; }}
+                          onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => { e.currentTarget.style.opacity = '0.75'; }}
+                          onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => { e.currentTarget.style.opacity = '1'; }}
                           title={`${event.title} — ${event.venue}`}
                         >
                           <span style={{ fontWeight: 600 }}>{event.title}</span>
@@ -599,7 +601,7 @@ function CalendarView({ events, weekOf }: { events: Event[]; weekOf: string }) {
                 border: isToday ? '2px solid #e07a5f' : '1px solid #e8e4de',
               }}
             >
-              <div style={{ textAlign: 'center', marginBottom: '0.625rem', paddingBottom: '0.5rem', borderBottom: '1px solid #f0ece6' }}>
+              <div style={{ textAlign: 'center' as const, marginBottom: '0.625rem', paddingBottom: '0.5rem', borderBottom: '1px solid #f0ece6' }}>
                 <div style={{ fontSize: '0.6875rem', fontWeight: 600, color: '#8888a0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                   {format(day, 'EEE')}
                 </div>
@@ -607,7 +609,7 @@ function CalendarView({ events, weekOf }: { events: Event[]; weekOf: string }) {
                   {format(day, 'd')}
                 </div>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '0.375rem' }}>
                 {Object.entries(byCategory).map(([cat, catEvents]) => {
                   const catStyle = getCategoryStyle(cat as Category);
                   return (
@@ -625,8 +627,8 @@ function CalendarView({ events, weekOf }: { events: Event[]; weekOf: string }) {
                             background: catStyle.bg, borderLeft: `3px solid ${catStyle.dot}`,
                             marginBottom: '0.25rem', transition: 'opacity 0.15s ease',
                           }}
-                          onMouseEnter={e => { e.currentTarget.style.opacity = '0.8'; }}
-                          onMouseLeave={e => { e.currentTarget.style.opacity = '1'; }}
+                          onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => { e.currentTarget.style.opacity = '0.8'; }}
+                          onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => { e.currentTarget.style.opacity = '1'; }}
                         >
                           <div style={{ fontWeight: 600, color: '#1a1a2e', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                             {event.title}

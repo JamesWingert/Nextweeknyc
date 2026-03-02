@@ -25,24 +25,26 @@ const http = require('http');
 const events = [];
 
 // ---------------------------------------------------------------------------
-// Week calculation
+// Date range — current month + next month
 // ---------------------------------------------------------------------------
 
-function nextWeekRange() {
+function monthRange() {
   const now = new Date();
-  const day = now.getDay();
-  const daysUntilMon = day === 0 ? 1 : (8 - day);
-  const mon = new Date(now);
-  mon.setDate(now.getDate() + daysUntilMon);
-  const sun = new Date(mon);
-  sun.setDate(mon.getDate() + 6);
+  const y = now.getFullYear(), m = now.getMonth();
   const fmt = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  return { start: process.env.WEEK_START || fmt(mon), end: process.env.WEEK_END || fmt(sun) };
+  // Start: 1st of current month
+  const start = new Date(y, m, 1);
+  // End: last day of next month
+  const end = new Date(y, m + 2, 0);
+  return {
+    start: process.env.MONTH_START || fmt(start),
+    end:   process.env.MONTH_END   || fmt(end),
+  };
 }
 
-const WEEK = nextWeekRange();
+const WEEK = monthRange(); // kept as WEEK for minimal code churn
 const RANGE = `${WEEK.start} to ${WEEK.end}`;
-console.error(`Week range: ${RANGE}`);
+console.error(`Date range: ${RANGE}`);
 
 // ---------------------------------------------------------------------------
 // HTTP fetch (Node 18 compatible)
@@ -87,24 +89,59 @@ function parseHumanDate(str) {
     may:4,jun:5,june:5,jul:6,july:6,aug:7,august:7,sep:8,september:8,
     oct:9,october:9,nov:10,november:10,dec:11,december:11
   };
+  const year = new Date(WEEK.start).getFullYear();
+
+  // "March 5, 2026" or "Mar 5" or "Mar 5, 2026"
   const m1 = s.match(/^([a-z]+)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
   if (m1) {
     const mon = MONTHS[m1[1].toLowerCase()];
     if (mon !== undefined) {
       const day = parseInt(m1[2], 10);
-      const year = m1[3] ? parseInt(m1[3], 10) : new Date(WEEK.start).getFullYear();
-      return `${year}-${String(mon+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+      const y = m1[3] ? parseInt(m1[3], 10) : year;
+      return `${y}-${String(mon+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
     }
   }
+  // "5 March 2026" or "5 Mar"
   const m2 = s.match(/^(\d{1,2})\s+([a-z]+)(?:\s*,?\s*(\d{4}))?/i);
   if (m2) {
     const mon = MONTHS[m2[2].toLowerCase()];
     if (mon !== undefined) {
       const day = parseInt(m2[1], 10);
-      const year = m2[3] ? parseInt(m2[3], 10) : new Date(WEEK.start).getFullYear();
-      return `${year}-${String(mon+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+      const y = m2[3] ? parseInt(m2[3], 10) : year;
+      return `${y}-${String(mon+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
     }
   }
+  // "Tue 3 Mar 2026" or "Mon 10 Mar"
+  const m4 = s.match(/^(?:mon|tue|wed|thu|fri|sat|sun)\w*\s+(\d{1,2})\s+([a-z]+)(?:\s+(\d{4}))?/i);
+  if (m4) {
+    const mon = MONTHS[m4[2].toLowerCase()];
+    if (mon !== undefined) {
+      const day = parseInt(m4[1], 10);
+      const y = m4[3] ? parseInt(m4[3], 10) : year;
+      return `${y}-${String(mon+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    }
+  }
+  // "Tue Mar 10" or "Wed Mar 4"
+  const m5 = s.match(/^(?:mon|tue|wed|thu|fri|sat|sun)\w*\s+([a-z]+)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
+  if (m5) {
+    const mon = MONTHS[m5[1].toLowerCase()];
+    if (mon !== undefined) {
+      const day = parseInt(m5[2], 10);
+      const y = m5[3] ? parseInt(m5[3], 10) : year;
+      return `${y}-${String(mon+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    }
+  }
+  // "Monday March 2, 2026"
+  const m6 = s.match(/^(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)\s+([a-z]+)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
+  if (m6) {
+    const mon = MONTHS[m6[1].toLowerCase()];
+    if (mon !== undefined) {
+      const day = parseInt(m6[2], 10);
+      const y = m6[3] ? parseInt(m6[3], 10) : year;
+      return `${y}-${String(mon+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    }
+  }
+  // MM/DD/YYYY
   const m3 = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
   if (m3) {
     return `${m3[3]}-${String(parseInt(m3[1],10)).padStart(2,'0')}-${String(parseInt(m3[2],10)).padStart(2,'0')}`;
@@ -115,18 +152,20 @@ function parseHumanDate(str) {
 function push(items, venue, category, fallbackUrl) {
   items.forEach(item => {
     let date = item.date || null;
+    // Try to normalize to YYYY-MM-DD
     if (date && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
-      if (date < WEEK.start || date > WEEK.end) date = RANGE;
+      // Already ISO — keep as-is
     } else if (date && /^\d{4}-\d{2}-\d{2}[T ]/.test(date)) {
-      const d = date.slice(0, 10);
-      date = (d >= WEEK.start && d <= WEEK.end) ? d : RANGE;
-    } else {
-      const parsed = parseHumanDate(date);
-      if (parsed && parsed >= WEEK.start && parsed <= WEEK.end) {
-        date = parsed;
-      } else {
-        date = RANGE;
+      date = date.slice(0, 10);
+    } else if (date) {
+      // Try parsing the full string
+      let parsed = parseHumanDate(date);
+      // If that fails, try the start of a range ("Tue Mar 10 - Sun Mar 15")
+      if (!parsed) {
+        const startPart = date.split(/\s*[-–—]\s*|\s+to\s+|\s+and\s+/i)[0]?.trim();
+        if (startPart && startPart !== date) parsed = parseHumanDate(startPart);
       }
+      date = parsed || null;
     }
     events.push({
       title: (item.title || '').trim(),
@@ -144,24 +183,29 @@ function push(items, venue, category, fallbackUrl) {
 // CHEERIO SOURCES — Film
 // ---------------------------------------------------------------------------
 
-async function scrapeFilmForum() {
+async function scrapeFilmForum(browser) {
+  const page = await browser.newPage();
+  page.setDefaultTimeout(15000);
   try {
-    const { html } = await fetchHTML('https://filmforum.org/now-playing');
-    const $ = cheerio.load(html);
-    const items = [];
-    // Film Forum uses .film-title links inside film blocks
-    $('a[href*="/film/"]').each((_, el) => {
-      const title = $(el).text().trim();
-      const link = $(el).attr('href') || '';
-      const fullLink = link.startsWith('/') ? `https://filmforum.org${link}` : link;
-      if (title && title.length > 3 && title.length < 100) items.push({ title, link: fullLink });
+    await page.goto('https://filmforum.org/', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(4000);
+    const items = await page.evaluate(() => {
+      const r = [], seen = new Set();
+      // Grab all unique film links on the homepage
+      document.querySelectorAll('a[href*="/film/"]').forEach(el => {
+        const t = el.textContent?.trim();
+        if (t && t.length > 3 && t.length < 120 && !seen.has(t.toLowerCase())
+            && !/^(watch trailer|see all|more|film forum)/i.test(t)) {
+          seen.add(t.toLowerCase());
+          r.push({ title: t, link: el.href || '' });
+        }
+      });
+      return r.slice(0, 25);
     });
-    // Dedupe by title
-    const seen = new Set();
-    const deduped = items.filter(i => { const k = i.title.toLowerCase(); if (seen.has(k)) return false; seen.add(k); return true; });
-    push(deduped, 'Film Forum', 'Film', 'https://filmforum.org/now-playing');
-    console.error(`Film Forum: ${deduped.length}`);
+    push(items, 'Film Forum', 'Film', 'https://filmforum.org');
+    console.error(`Film Forum: ${items.length}`);
   } catch (e) { console.error('Film Forum error:', e.message); }
+  finally { await page.close(); }
 }
 
 async function scrapeIFC() {
@@ -325,7 +369,6 @@ async function scrapeMetrograph(browser) {
 }
 
 async function scrapeGuggenheim(browser) {
-  // Guggenheim is a JS SPA — needs Playwright
   const page = await browser.newPage();
   page.setDefaultTimeout(15000);
   try {
@@ -333,11 +376,17 @@ async function scrapeGuggenheim(browser) {
     await page.waitForTimeout(5000);
     const items = await page.evaluate(() => {
       const r = [], seen = new Set();
+      // Each exhibition card has a[href*="/exhibition/"] and time[datetime]
       document.querySelectorAll('a[href*="/exhibition/"]').forEach(el => {
         const t = el.textContent?.trim();
+        // Find sibling/nearby time element with datetime
+        const card = el.closest('article, [class*="card"], li, div');
+        const timeEl = card?.querySelector('time[datetime]');
+        const dateText = timeEl?.textContent?.trim() || '';
+        const dateAttr = timeEl?.getAttribute('datetime') || '';
         if (t && t.length > 3 && t.length < 120 && !seen.has(t.toLowerCase())) {
           seen.add(t.toLowerCase());
-          r.push({ title: t, link: el.href });
+          r.push({ title: t, link: el.href, date: dateAttr || dateText });
         }
       });
       return r.slice(0, 15);
@@ -416,19 +465,20 @@ async function scrapeNYPhil(browser) {
     await page.goto('https://nyphil.org/calendar', { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(5000);
     const items = await page.evaluate(() => {
-      const r = [], seen = new Set();
-      document.querySelectorAll('a[href*="/concerts-tickets/"]').forEach(el => {
-        const t = el.textContent?.trim();
-        const dateEl = el.closest('[class*="event"], [class*="concert"], [class*="row"]')
-          ?.querySelector('[class*="date"]');
-        const rawDate = dateEl?.textContent?.trim() || '';
-        if (t && t.length > 5 && t.length < 150 && !seen.has(t.toLowerCase())
-            && !/^(concerts|calendar|tickets)/i.test(t)) {
-          seen.add(t.toLowerCase());
-          r.push({ title: t, link: el.href, date: rawDate });
+      const r = [];
+      // Each li.calendar-performance has date-holder + details with title
+      document.querySelectorAll('li.calendar-performance').forEach(el => {
+        const dateHolder = el.querySelector('.calendar-performance__date-holder');
+        const rawDate = dateHolder?.textContent?.trim().replace(/\s+/g, ' ') || '';
+        const titleEl = el.querySelector('.calendar-performance__title') || el.querySelector('a[href*="/concerts-tickets/"]');
+        const t = titleEl?.textContent?.trim();
+        const link = el.querySelector('a[href*="/concerts-tickets/"]')?.href || '';
+        if (t && t.length > 3 && t.length < 150
+            && !/^(concerts|calendar|tickets|subscriptions|special offers)/i.test(t)) {
+          r.push({ title: t, link, date: rawDate });
         }
       });
-      return r.slice(0, 20);
+      return r.slice(0, 30);
     });
     push(items, 'New York Philharmonic', 'Classical Music', 'https://nyphil.org/calendar');
     console.error(`NY Philharmonic: ${items.length}`);
@@ -438,50 +488,108 @@ async function scrapeNYPhil(browser) {
 
 async function scrapeCarnegieHall(browser) {
   const page = await browser.newPage();
-  page.setDefaultTimeout(20000);
+  page.setDefaultTimeout(35000);
   try {
-    await page.goto('https://www.carnegiehall.org/calendar', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(6000);
-    const items = await page.evaluate(() => {
-      const r = [], seen = new Set();
-      // Carnegie Hall renders h3 titles for events, links are # anchors
-      // Grab h3 elements that look like event names
-      document.querySelectorAll('h3').forEach(el => {
-        const t = el.textContent?.trim();
-        const parent = el.closest('a, [class*="event"], [class*="card"], div');
-        const link = parent?.querySelector('a')?.href || el.closest('a')?.href || '';
-        if (t && t.length > 5 && t.length < 150 && !seen.has(t.toLowerCase())
-            && !/^(calendar|filter|search|subscribe|upcoming|location|event type|genre|date|march|february|january)/i.test(t)) {
-          seen.add(t.toLowerCase());
-          r.push({ title: t, link: link || 'https://www.carnegiehall.org/calendar' });
-        }
-      });
-      return r.slice(0, 25);
+    // Carnegie Hall is a heavy client-side app — intercept XHR/fetch for event data
+    let apiData = null;
+    page.on('response', async (response) => {
+      const url = response.url();
+      const ct = response.headers()['content-type'] || '';
+      if (ct.includes('json') && (url.includes('event') || url.includes('calendar') || url.includes('api'))) {
+        try {
+          const text = await response.text();
+          const json = JSON.parse(text);
+          // Look for arrays of events
+          const arr = Array.isArray(json) ? json : (json.events || json.data || json.results || json.items || null);
+          if (Array.isArray(arr) && arr.length > 0 && !apiData) apiData = arr;
+        } catch(e) {}
+      }
     });
-    push(items, 'Carnegie Hall', 'Classical Music', 'https://www.carnegiehall.org/calendar');
-    console.error(`Carnegie Hall: ${items.length}`);
+    await page.goto('https://www.carnegiehall.org/calendar', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(12000);
+
+    if (apiData && apiData.length > 0) {
+      const items = apiData.slice(0, 30).map(e => ({
+        title: e.title || e.name || e.eventTitle || '',
+        link: e.url || e.link || e.detailUrl || 'https://www.carnegiehall.org/calendar',
+        date: e.date || e.startDate || e.eventDate || e.performanceDate || '',
+        time: e.time || e.startTime || '',
+      })).filter(e => e.title.length > 3);
+      push(items, 'Carnegie Hall', 'Classical Music', 'https://www.carnegiehall.org/calendar');
+      console.error(`Carnegie Hall (API): ${items.length}`);
+    } else {
+      // Fallback: try to scrape rendered h3 titles
+      const items = await page.evaluate(() => {
+        const r = [], seen = new Set();
+        document.querySelectorAll('h3, [class*="event-title"]').forEach(el => {
+          const t = el.textContent?.trim();
+          if (!t || t.length < 5 || t.length > 150) return;
+          if (/^(calendar|filter|search|subscribe|upcoming|location|event type|genre|date)/i.test(t)) return;
+          const link = el.closest('a')?.href || el.parentElement?.querySelector('a')?.href || '';
+          if (!seen.has(t.toLowerCase())) {
+            seen.add(t.toLowerCase());
+            r.push({ title: t, link: link || 'https://www.carnegiehall.org/calendar' });
+          }
+        });
+        return r.slice(0, 25);
+      });
+      push(items, 'Carnegie Hall', 'Classical Music', 'https://www.carnegiehall.org/calendar');
+      console.error(`Carnegie Hall (DOM): ${items.length}`);
+    }
   } catch (e) { console.error('Carnegie Hall error:', e.message); }
   finally { await page.close(); }
 }
 
 async function scrapeMetOpera(browser) {
-  // /calendar/ works (not /season/ which is Cloudflare-blocked)
   const page = await browser.newPage();
-  page.setDefaultTimeout(15000);
+  page.setDefaultTimeout(30000);
   try {
     await page.goto('https://www.metopera.org/calendar/', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(8000);
+    // Click "All Events" to get the list view
+    await page.evaluate(() => {
+      const links = Array.from(document.querySelectorAll('a, button, [ng-click]'));
+      for (const l of links) {
+        if (l.textContent?.trim().includes('All Events')) { l.click(); break; }
+      }
+    });
     await page.waitForTimeout(5000);
     const items = await page.evaluate(() => {
       const r = [], seen = new Set();
-      document.querySelectorAll('a[href*="/season/"]').forEach(a => {
-        const t = a.textContent?.trim();
-        if (t && t.length > 3 && t.length < 120 && !seen.has(t.toLowerCase())
-            && !/^(season|calendar|filter|2025|2026)/i.test(t)) {
-          seen.add(t.toLowerCase());
-          r.push({ title: t, link: a.href });
+      const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+      const year = new Date().getFullYear();
+      const body = document.body.innerText;
+      const lines = body.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+      let currentDate = '';
+      for (const line of lines) {
+        // Date header: "SAT, MAR 7" or "MON, MAR 9"
+        const dm = line.match(/^(?:MON|TUE|WED|THU|FRI|SAT|SUN),?\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\s+(\d{1,2})$/i);
+        if (dm) {
+          const mon = MONTHS[dm[1].toLowerCase()];
+          if (mon !== undefined) {
+            currentDate = `${year}-${String(mon+1).padStart(2,'0')}-${String(parseInt(dm[2],10)).padStart(2,'0')}`;
+          }
+          continue;
         }
-      });
-      return r.slice(0, 15);
+        if (!currentDate) continue;
+        if (line.length < 4 || line.length > 150) continue;
+        // Skip known non-title lines
+        if (/^(ON STAGE|ON RADIO|IN CINEMAS|BACKSTAGE|ALL EVENTS|ONSTAGE|Page|Date|Previous|Next|Enter|Filter|Subscribe|Buy|View|Calendar|FIND STATION|MORE PERFORMANCE|LAST PERFORMANCE|TO |SuMoTu|PrevNext)/i.test(line)) continue;
+        if (/^\d{1,2}:\d{2}\s*(AM|PM)$/i.test(line)) continue;
+        // Skip ALL CAPS lines (composer names like "RICHARD WAGNER", "GIACOMO PUCCINI")
+        if (/^[A-Z\s.,'()-]+$/.test(line) && line.length < 50) continue;
+        // Skip cast/conductor lines (contain semicolons)
+        if (line.includes(';')) continue;
+        // Skip "APPLICABLE NOT" type lines
+        if (/^APPLICABLE/i.test(line)) continue;
+        // This should be an event title
+        const key = line.toLowerCase();
+        if (!seen.has(key)) {
+          seen.add(key);
+          r.push({ title: line, date: currentDate, link: 'https://www.metopera.org/calendar/' });
+        }
+      }
+      return r.slice(0, 25);
     });
     push(items, 'Metropolitan Opera', 'Opera', 'https://www.metopera.org/calendar/');
     console.error(`Met Opera: ${items.length}`);
@@ -497,14 +605,18 @@ async function scrapeNYCB(browser) {
     await page.waitForTimeout(4000);
     const items = await page.evaluate(() => {
       const r = [], seen = new Set();
-      // NYCB uses h3.season-slide__title and links to /season-and-tickets/spring-2026/
-      document.querySelectorAll('.season-slide__title, a[href*="/season-and-tickets/"]').forEach(el => {
-        const t = el.textContent?.trim();
-        const link = el.closest('a')?.href || el.querySelector('a')?.href || '';
+      // Each slide has .season-slide__title + .season-slide__start-date / __end-date
+      document.querySelectorAll('[class*="season-slide"]').forEach(el => {
+        const titleEl = el.querySelector('.season-slide__title, h3');
+        const t = titleEl?.textContent?.trim();
+        const startDate = el.querySelector('.season-slide__start-date')?.textContent?.trim() || '';
+        const endDate = el.querySelector('.season-slide__end-date')?.textContent?.trim() || '';
+        const link = el.querySelector('a')?.href || '';
+        const dateStr = startDate + (endDate ? ' - ' + endDate : '');
         if (t && t.length > 3 && t.length < 120 && !seen.has(t.toLowerCase())
             && !/^(season|tickets|subscribe|spring|winter|fall)/i.test(t)) {
           seen.add(t.toLowerCase());
-          r.push({ title: t, link });
+          r.push({ title: t, link, date: dateStr });
         }
       });
       return r.slice(0, 15);
@@ -523,15 +635,19 @@ async function scrapeJoyce(browser) {
     await page.waitForTimeout(4000);
     const items = await page.evaluate(() => {
       const r = [];
-      document.querySelectorAll('a[href*="/performances/"]').forEach(a => {
-        const t = a.textContent?.trim();
-        const dateEl = a.closest('[class*="event"], [class*="card"]')?.querySelector('[class*="date"]');
-        const rawDate = dateEl?.textContent?.trim().replace(/\s+/g, ' ') || '';
-        if (t && t.length > 3 && t.length < 120 && !/^(performances|agenda)/i.test(t)) {
-          r.push({ title: t, link: a.href, date: rawDate });
+      // Each .eventCard has h3.title for name, a.desc for link, .top-date > .start for date
+      document.querySelectorAll('.eventCard, [class*="eventCard"]').forEach(card => {
+        const titleEl = card.querySelector('h3.title, h3, [class*="title"]');
+        const t = titleEl?.textContent?.trim();
+        const linkEl = card.querySelector('a.desc, a.image, a[href*="/performances/"]');
+        const link = linkEl?.href || card.querySelector('a')?.href || '';
+        const startDate = card.querySelector('.top-date .start')?.textContent?.trim() || '';
+        const endDate = card.querySelector('.top-date .end')?.textContent?.trim() || '';
+        const rawDate = startDate + (endDate ? ' - ' + endDate : '');
+        if (t && t.length > 2 && t.length < 120 && !/^(performances|agenda)/i.test(t)) {
+          r.push({ title: t, link, date: rawDate });
         }
       });
-      // Dedupe
       const seen = new Set();
       return r.filter(i => { const k = i.title.toLowerCase(); if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, 15);
     });
@@ -568,6 +684,34 @@ async function scrapeLincolnCenter(browser) {
   finally { await page.close(); }
 }
 
+async function scrapeMovingImage(browser) {
+  const page = await browser.newPage();
+  page.setDefaultTimeout(15000);
+  try {
+    await page.goto('https://movingimage.org/whats-on/events/', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(4000);
+    const items = await page.evaluate(() => {
+      const r = [], seen = new Set();
+      document.querySelectorAll('a[href*="/event/"], a[href*="/events/"], article, [class*="event"]').forEach(el => {
+        const titleEl = el.querySelector('h2, h3, h4, [class*="title"]') || (el.tagName === 'A' ? el : null);
+        const t = titleEl?.textContent?.trim();
+        const link = el.closest('a')?.href || el.querySelector('a')?.href || '';
+        const dateEl = el.querySelector('time, [class*="date"]');
+        const rawDate = dateEl?.getAttribute('datetime') || dateEl?.textContent?.trim() || '';
+        if (t && t.length > 5 && t.length < 120 && !seen.has(t.toLowerCase())
+            && !/^(events?|calendar|what.s on|filter)/i.test(t)) {
+          seen.add(t.toLowerCase());
+          r.push({ title: t, link, date: rawDate });
+        }
+      });
+      return r.slice(0, 20);
+    });
+    push(items, 'Museum of the Moving Image', 'Film', 'https://movingimage.org/whats-on/events/');
+    console.error(`Moving Image: ${items.length}`);
+  } catch (e) { console.error('Moving Image error:', e.message); }
+  finally { await page.close(); }
+}
+
 async function scrape92NY(browser) {
   const page = await browser.newPage();
   page.setDefaultTimeout(15000);
@@ -598,9 +742,9 @@ async function scrape92NY(browser) {
 
 const sourceLog = [];
 const JS_SOURCES = new Set([
-  'Metrograph', 'The Frick', 'Guggenheim', 'New Museum', 'Japan Society',
+  'Film Forum', 'Metrograph', 'The Frick', 'Guggenheim', 'New Museum', 'Japan Society',
   'NY Philharmonic', 'Carnegie Hall', 'Met Opera', 'NYCB',
-  'Joyce Theater', 'Lincoln Center', '92NY'
+  'Joyce Theater', 'Lincoln Center', 'Moving Image', '92NY'
 ]);
 
 async function runSource(name, fn, browserOrNull) {
@@ -615,7 +759,7 @@ async function runSource(name, fn, browserOrNull) {
   }
   const count = events.length - before;
   const elapsed = ((Date.now() - start) / 1000).toFixed(1);
-  const datesExtracted = events.slice(before).filter(e => e.date && !e.date.includes(' to ')).length;
+  const datesExtracted = events.slice(before).filter(e => e.date && /^\d{4}-\d{2}-\d{2}$/.test(e.date)).length;
   sourceLog.push({ name, count, datesExtracted, elapsed, error });
 }
 
@@ -623,7 +767,7 @@ function printReport() {
   console.error('\n' + '='.repeat(70));
   console.error('SCRAPE REPORT — Film/Arts');
   console.error('='.repeat(70));
-  console.error(`Week: ${RANGE}`);
+  console.error(`Date range: ${RANGE}`);
   console.error(`Total events: ${events.length}`);
   console.error('-'.repeat(70));
   console.error('Source'.padEnd(25) + 'Items'.padEnd(8) + 'Dates'.padEnd(8) + 'Time'.padEnd(8) + 'Method'.padEnd(10) + 'Status');
@@ -648,7 +792,6 @@ function printReport() {
   console.error('  Brooklyn Museum — Vercel Security Checkpoint');
   console.error('  MoMA — Cloudflare (try /calendar/exhibitions)');
   console.error('  Asia Society — Cloudflare');
-  console.error('  Moving Image — Cloudflare');
   console.error('  Queens Museum — 403 Forbidden');
   console.error('='.repeat(70) + '\n');
 }
@@ -659,7 +802,6 @@ function printReport() {
 
 (async () => {
   // Cheerio sources (fast, no browser needed)
-  await runSource('Film Forum', scrapeFilmForum);
   await runSource('IFC Center', scrapeIFC);
   await runSource('The Met', scrapeTheMet);
   await runSource('Whitney', scrapeWhitney);
@@ -672,6 +814,7 @@ function printReport() {
     const { chromium } = require('playwright');
     browser = await chromium.launch({ headless: true });
 
+    await runSource('Film Forum', scrapeFilmForum, browser);
     await runSource('Metrograph', scrapeMetrograph, browser);
     await runSource('The Frick', scrapeFrick, browser);
     await runSource('Guggenheim', scrapeGuggenheim, browser);
@@ -683,6 +826,7 @@ function printReport() {
     await runSource('NYCB', scrapeNYCB, browser);
     await runSource('Joyce Theater', scrapeJoyce, browser);
     await runSource('Lincoln Center', scrapeLincolnCenter, browser);
+    await runSource('Moving Image', scrapeMovingImage, browser);
     await runSource('92NY', scrape92NY, browser);
   } catch (e) {
     console.error('Playwright unavailable, skipping JS sources:', e.message);

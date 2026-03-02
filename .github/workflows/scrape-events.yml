@@ -1,16 +1,15 @@
-name: Scrape Weekly Events
+name: Scrape Events (Mon/Thu)
 
 on:
   schedule:
-    # Every Sunday at 6am UTC (1am EST)
-    # Scrapers auto-calculate next Mon–Sun week range
-    - cron: '0 6 * * 0'
+    # Monday and Thursday at 6am UTC (1am EST)
+    - cron: '0 6 * * 1,4'
   workflow_dispatch: # manual trigger from GitHub UI
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    timeout-minutes: 30  # more sources = more time needed
+    timeout-minutes: 30
 
     steps:
       - uses: actions/checkout@v4
@@ -64,7 +63,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "chore: update weekly event data [skip ci]"
+            git commit -m "chore: update event data [skip ci]"
             git push
           fi
 

@@ -249,7 +249,8 @@ function validateEvent(raw, index) {
 
   if (!title) errors.push(`[${index}] missing title`);
   if (isJunkTitle(title)) errors.push(`[${index}] junk title: "${title.slice(0, 60)}"`);
-  if (!date) errors.push(`[${index}] missing date`);
+  // Allow events with null/empty dates — they won't show on specific calendar days
+  // but are still valid (e.g. ongoing exhibitions, events with unparseable dates)
   if (date && !isValidDate(date)) errors.push(`[${index}] invalid date format: "${date}"`);
 
   if (errors.length > 0) return { valid: false, errors };
