@@ -134,6 +134,7 @@ async function scrapeTimeOut(browser) {
 }
 
 async function scrapeSecretNYC(browser) {
+  // Main events page
   await withPage(browser, async (page) => {
     try {
       await page.goto('https://secretnyc.co/events/', { waitUntil: 'domcontentloaded' });
@@ -153,8 +154,33 @@ async function scrapeSecretNYC(browser) {
         return r.slice(0, 30);
       });
       push(items, 'Secret NYC', 'Other', 'https://secretnyc.co');
-      console.error(`Secret NYC: ${items.length}`);
-    } catch (e) { console.error('Secret NYC error:', e.message); }
+      console.error(`Secret NYC (events): ${items.length}`);
+    } catch (e) { console.error('Secret NYC events error:', e.message); }
+  });
+
+  // Weekend roundup — great for Sunday runs, catches weekend + multi-day events
+  await withPage(browser, async (page) => {
+    try {
+      await page.goto('https://secretnyc.co/what-to-do-this-weekend-nyc/', { waitUntil: 'domcontentloaded' });
+      await page.waitForTimeout(3000);
+      try {
+        const btn = await page.$('button[class*="cookie"], button[id*="accept"], .accept-cookies');
+        if (btn) await btn.click();
+        await page.waitForTimeout(2000);
+      } catch (_) {}
+      const items = await page.evaluate(() => {
+        const r = [];
+        // Article-style page — grab headings and list items that look like event names
+        document.querySelectorAll('article h2, article h3, article li, .entry-content h2, .entry-content h3').forEach(el => {
+          const t = el.textContent?.trim();
+          const link = el.querySelector('a')?.href || el.closest('a')?.href;
+          if (t && t.length > 5 && t.length < 120) r.push({ title: t, link });
+        });
+        return r.slice(0, 30);
+      });
+      push(items, 'Secret NYC', 'Other', 'https://secretnyc.co/what-to-do-this-weekend-nyc/');
+      console.error(`Secret NYC (weekend): ${items.length}`);
+    } catch (e) { console.error('Secret NYC weekend error:', e.message); }
   });
 }
 
