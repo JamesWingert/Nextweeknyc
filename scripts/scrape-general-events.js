@@ -271,6 +271,7 @@ async function scrapeDoNYC() {
 }
 
 async function scrapeTheSkint() {
+  const year = new Date(WEEK.start).getFullYear();
   // Homepage — daily picks (blog-post style, titles contain date info)
   try {
     const { html } = await fetchHTML('https://theskint.com/');
@@ -280,7 +281,15 @@ async function scrapeTheSkint() {
       const $el = $(el);
       const title = $el.find('h2, h3, .entry-title').first().text().trim();
       const link = $el.find('a').first().attr('href') || '';
-      if (title && title.length > 5 && title.length < 120) items.push({ title, link });
+      if (title && title.length > 5 && title.length < 120) {
+        // Try to extract date from title: "FRI-MON, 2/27-3/2: SKINT WEEKEND"
+        let dateText = '';
+        const mmddMatch = title.match(/(\d{1,2})\/(\d{1,2})/);
+        if (mmddMatch) {
+          dateText = `${year}-${String(parseInt(mmddMatch[1],10)).padStart(2,'0')}-${String(parseInt(mmddMatch[2],10)).padStart(2,'0')}`;
+        }
+        items.push({ title, link, date: dateText });
+      }
     });
     push(items, 'The Skint', 'Other', 'https://theskint.com');
     console.error(`The Skint (home): ${items.length}`);
@@ -291,6 +300,8 @@ async function scrapeTheSkint() {
     const { html } = await fetchHTML('https://theskint.com/ongoing-events/');
     const $ = cheerio.load(html);
     const items = [];
+    const fmt = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const today = fmt(new Date());
     // Events are in paragraphs with bold titles and ► markers
     $('.entry-content p').each((_, el) => {
       const $el = $(el);
@@ -298,7 +309,14 @@ async function scrapeTheSkint() {
       const bold = $el.find('b, strong').first().text().trim();
       const link = $el.find('a').last().attr('href') || '';
       if (bold && bold.length > 3 && bold.length < 100 && text.length > 10) {
-        items.push({ title: bold, link, description: text.slice(0, 200) });
+        // Extract "thru 3/8" or "thru 3/30" dates from text
+        let dateText = '';
+        const thruMatch = text.match(/thru\s+(\d{1,2})\/(\d{1,2})/i);
+        if (thruMatch) {
+          const endDate = `${year}-${String(parseInt(thruMatch[1],10)).padStart(2,'0')}-${String(parseInt(thruMatch[2],10)).padStart(2,'0')}`;
+          dateText = `${today} to ${endDate}`;
+        }
+        items.push({ title: bold, link, description: text.slice(0, 200), date: dateText });
       }
     });
     push(items, 'The Skint', 'Other', 'https://theskint.com/ongoing-events/');
@@ -438,41 +456,57 @@ async function scrapeEventbrite(browser) {
   page.setDefaultTimeout(20000);
   try {
     await page.goto('https://www.eventbrite.com/d/ny--new-york/events--this-week/', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(6000);
     const items = await page.evaluate(() => {
-      const r = [];
+      const r = [], seen = new Set();
       const now = new Date();
       const fmt = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
       const DAYS = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
 
       document.querySelectorAll('[class*="event-card"], [class*="search-event"], article, [data-testid*="event"]').forEach(el => {
         const t = el.querySelector('h2, h3, h4, [class*="title"]')?.textContent?.trim();
+        if (!t || t.length < 5 || t.length > 120) return;
+        const key = t.toLowerCase();
+        if (seen.has(key)) return;
+        seen.add(key);
+
         const venue = el.querySelector('[class*="location"], [class*="venue"]')?.textContent?.trim();
         const link = el.querySelector('a')?.href;
-        const dateEl = el.querySelector('time[datetime], [class*="date"], p');
-        let dateRaw = dateEl?.getAttribute('datetime') || dateEl?.textContent?.trim() || '';
 
-        // Parse relative dates: "Today", "Tomorrow", "Friday", "Saturday • 10:00 PM"
-        let dateText = dateRaw;
-        const lower = dateRaw.toLowerCase().split('•')[0].trim();
-        if (lower === 'today') {
-          dateText = fmt(now);
-        } else if (lower === 'tomorrow') {
-          const tom = new Date(now); tom.setDate(tom.getDate() + 1);
-          dateText = fmt(tom);
-        } else {
-          // "Friday", "Saturday" etc — find next occurrence
-          const dayIdx = DAYS.indexOf(lower);
-          if (dayIdx >= 0) {
-            const today = now.getDay();
-            let diff = dayIdx - today;
-            if (diff <= 0) diff += 7;
-            const target = new Date(now); target.setDate(target.getDate() + diff);
-            dateText = fmt(target);
+        // Date is in a <p> tag like "Friday • 10:00 PM" or "Saturday • 9:00 PM"
+        // Scan all p tags in the card for day-of-week patterns
+        let dateText = '';
+        el.querySelectorAll('p').forEach(p => {
+          if (dateText) return;
+          const pText = p.textContent?.trim() || '';
+          // "Friday • 10:00 PM" or "Tomorrow • 7:00 PM" or "Today • 9:00 AM"
+          const parts = pText.split('\u2022'); // bullet •
+          if (parts.length < 2) return;
+          const dayPart = parts[0].trim().toLowerCase();
+          if (dayPart === 'today') {
+            dateText = fmt(now);
+          } else if (dayPart === 'tomorrow') {
+            const tom = new Date(now); tom.setDate(tom.getDate() + 1);
+            dateText = fmt(tom);
+          } else {
+            const dayIdx = DAYS.indexOf(dayPart);
+            if (dayIdx >= 0) {
+              const today = now.getDay();
+              let diff = dayIdx - today;
+              if (diff <= 0) diff += 7;
+              const target = new Date(now); target.setDate(target.getDate() + diff);
+              dateText = fmt(target);
+            }
           }
+        });
+
+        // Also try time[datetime] as fallback
+        if (!dateText) {
+          const timeEl = el.querySelector('time[datetime]');
+          if (timeEl) dateText = timeEl.getAttribute('datetime') || '';
         }
 
-        if (t && t.length > 5 && t.length < 120) r.push({ title: t, venue, link, date: dateText });
+        r.push({ title: t, venue, link, date: dateText });
       });
       return r.slice(0, 25);
     });
