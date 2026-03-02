@@ -22,13 +22,21 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/data/events.json')
-      .then(res => res.json())
-      .then((data: EventsData) => {
-        setEventsData(data);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
+    Promise.all([
+      fetch('/data/events.json').then(r => r.json()).catch(() => ({ weekOf: '', events: [] })),
+      fetch('/data/film_museum_events.json').then(r => r.json()).catch(() => ({ weekOf: '', events: [] }))
+    ]).then(([generalData, filmData]) => {
+      const allEvents = [...generalData.events, ...filmData.events];
+      // Remove duplicates by id
+      const uniqueEvents = allEvents.filter((event, index, self) => 
+        index === self.findIndex(e => e.id === event.id)
+      );
+      setEventsData({
+        weekOf: generalData.weekOf || filmData.weekOf || '2026-03-03',
+        events: uniqueEvents
+      });
+      setLoading(false);
+    }).catch(() => setLoading(false));
   }, []);
 
   const toggleCategory = (category: Category) => {
@@ -60,6 +68,7 @@ export default function Home() {
             Week of {format(parseISO(eventsData.weekOf), 'MMMM d, yyyy')}
           </p>
         )}
+        <p className="text-neutral-500 text-sm mt-2">{filteredEvents.length} events found</p>
       </header>
 
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
@@ -100,13 +109,16 @@ export default function Home() {
         </div>
       </div>
 
-      <EventList events={filteredEvents} />
+      {viewMode === 'list' ? (
+        <EventList events={filteredEvents} />
+      ) : (
+        <CalendarView events={filteredEvents} weekOf={eventsData.weekOf} />
+      )}
     </main>
   );
 }
 
 function EventList({ events }: { events: Event[] }) {
-  // Group by category → date
   const grouped = events.reduce((acc, event) => {
     if (!acc[event.category]) acc[event.category] = {};
     if (!acc[event.category][event.date]) acc[event.category][event.date] = [];
@@ -162,6 +174,65 @@ function EventList({ events }: { events: Event[] }) {
       {events.length === 0 && (
         <p className="text-neutral-500 text-center py-12">No events found.</p>
       )}
+    </div>
+  );
+}
+
+function CalendarView({ events, weekOf }: { events: Event[]; weekOf: string }) {
+  const categoryColors: Record<Category, string> = {
+    'Film': '#ef4444',
+    'Museums/Art': '#8b5cf6',
+    'Music/Performing Arts': '#ec4899',
+    'Food/Drink': '#f97316',
+    'Shopping/Markets': '#22c55e',
+    'Cars & Coffee': '#06b6d4',
+    'Chinatown/Flushing/LIC': '#eab308',
+    'Other': '#6b7280',
+  };
+
+  const weekStart = parseISO(weekOf);
+  const days = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(weekStart);
+    d.setDate(d.getDate() + i);
+    return d;
+  });
+
+  const formatDate = (d: Date) => d.toISOString().split('T')[0];
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-7 gap-2">
+      {days.map(day => {
+        const dayStr = formatDate(day);
+        const dayEvents = events.filter(e => e.date === dayStr);
+        
+        return (
+          <div key={dayStr} className="min-h-[150px] bg-neutral-900 rounded-lg p-3">
+            <div className="text-sm font-medium text-neutral-400 mb-2 border-b border-neutral-800 pb-2">
+              {format(day, 'EEE')}
+              <span className="block text-lg text-white">{format(day, 'd')}</span>
+            </div>
+            
+            <div className="space-y-2">
+              {dayEvents.map(event => (
+                <a
+                  key={event.id}
+                  href={event.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block p-2 rounded text-xs hover:opacity-80 transition-opacity"
+                  style={{ 
+                    backgroundColor: categoryColors[event.category] + '30', 
+                    borderLeft: `3px solid ${categoryColors[event.category]}` 
+                  }}
+                >
+                  <div className="font-medium text-white truncate">{event.title}</div>
+                  <div className="text-neutral-400 truncate">{event.venue}</div>
+                </a>
+              ))}
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
