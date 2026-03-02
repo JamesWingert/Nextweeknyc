@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Event, Category, EventsData } from '@/lib/types';
-import { format, parseISO, isBefore, startOfDay } from 'date-fns';
+import { format, parseISO, isBefore, startOfDay, addDays } from 'date-fns';
 
 const categoryConfig: { key: Category; label: string; bg: string; text: string; dot: string }[] = [
   { key: 'Film', label: 'Film', bg: '#fde8e8', text: '#b91c1c', dot: '#ef4444' },
@@ -75,7 +75,7 @@ export default function Home() {
   }
 
   const weekLabel = eventsData.weekOf
-    ? format(parseISO(eventsData.weekOf), 'MMM d') + ' – ' + format(new Date(new Date(eventsData.weekOf).getTime() + 6 * 86400000), 'MMM d, yyyy')
+    ? format(parseISO(eventsData.weekOf), 'MMM d') + ' – ' + format(addDays(parseISO(eventsData.weekOf), 6), 'MMM d, yyyy')
     : '';
 
   return (
@@ -344,11 +344,7 @@ function EventList({ events }: { events: Event[] }) {
 
 function CalendarView({ events, weekOf }: { events: Event[]; weekOf: string }) {
   const weekStart = parseISO(weekOf);
-  const days = Array.from({ length: 7 }, (_, i) => {
-    const d = new Date(weekStart);
-    d.setDate(d.getDate() + i);
-    return d;
-  });
+  const days = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
 
   const formatDate = (d: Date) => d.toISOString().split('T')[0];
   const todayStr = new Date().toISOString().split('T')[0];
