@@ -86,7 +86,7 @@ function parseHumanDate(str) {
 
   const MONTHS = {
     jan:0,january:0,feb:1,february:1,mar:2,march:2,apr:3,april:3,
-    may:4,jun:5,june:5,jul:6,july:6,aug:7,august:7,sep:8,september:8,
+    may:4,jun:5,june:5,jul:6,july:6,aug:7,august:7,sep:8,sept:8,september:8,
     oct:9,october:9,nov:10,november:10,dec:11,december:11
   };
   const year = new Date(WEEK.start).getFullYear();
@@ -121,8 +121,8 @@ function parseHumanDate(str) {
       return `${y}-${String(mon+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
     }
   }
-  // "Tue Mar 10" or "Wed Mar 4"
-  const m5 = s.match(/^(?:mon|tue|wed|thu|fri|sat|sun)\w*\s+([a-z]+)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
+  // "Tue Mar 10" or "Wed Mar 4" or "Thu, Mar 12, 2026"
+  const m5 = s.match(/^(?:mon|tue|wed|thu|fri|sat|sun)\w*,?\s+([a-z]+)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
   if (m5) {
     const mon = MONTHS[m5[1].toLowerCase()];
     if (mon !== undefined) {
@@ -131,8 +131,8 @@ function parseHumanDate(str) {
       return `${y}-${String(mon+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
     }
   }
-  // "Monday March 2, 2026"
-  const m6 = s.match(/^(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)\s+([a-z]+)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
+  // "Monday March 2, 2026" or "Monday, March 2, 2026"
+  const m6 = s.match(/^(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday),?\s+([a-z]+)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
   if (m6) {
     const mon = MONTHS[m6[1].toLowerCase()];
     if (mon !== undefined) {
@@ -146,24 +146,90 @@ function parseHumanDate(str) {
   if (m3) {
     return `${m3[3]}-${String(parseInt(m3[1],10)).padStart(2,'0')}-${String(parseInt(m3[2],10)).padStart(2,'0')}`;
   }
+  // Unix timestamp (seconds) — e.g. from data-date attributes
+  if (/^\d{9,11}$/.test(s)) {
+    const d = new Date(parseInt(s, 10) * 1000);
+    if (!isNaN(d.getTime())) {
+      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    }
+  }
+  return null;
+}
+
+/**
+ * Parse "Through {date}" / "thru {date}" / "Ongoing" / "Oct 9, 2025 — May 4, 2026"
+ * Returns "YYYY-MM-DD to YYYY-MM-DD" range string, or null.
+ */
+function parseThrough(str) {
+  if (!str) return null;
+  const s = str.trim().replace(/\s+/g, ' ');
+  const year = new Date(WEEK.start).getFullYear();
+  const fmt = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  const today = fmt(new Date());
+
+  // "Through April 5, 2026" / "thru March 12" / "through Sept"
+  const throughMatch = s.match(/(?:through|thru)\s+(.+)/i);
+  if (throughMatch) {
+    const endStr = throughMatch[1].trim();
+    const endDate = parseHumanDate(endStr);
+    if (endDate) return `${today} to ${endDate}`;
+    // "Through Sept" — just month, assume end of that month
+    const MONTHS = {jan:0,january:0,feb:1,february:1,mar:2,march:2,apr:3,april:3,may:4,jun:5,june:5,jul:6,july:6,aug:7,august:7,sep:8,sept:8,september:8,oct:9,october:9,nov:10,november:10,dec:11,december:11};
+    const monMatch = endStr.match(/^([a-z]+)$/i);
+    if (monMatch) {
+      const mon = MONTHS[monMatch[1].toLowerCase()];
+      if (mon !== undefined) {
+        const lastDay = new Date(year, mon + 1, 0);
+        return `${today} to ${fmt(lastDay)}`;
+      }
+    }
+    return null;
+  }
+
+  // "Oct 9, 2025 — May 4, 2026" or "Feb 12 - Apr 30, 2026"
+  const rangeParts = s.split(/\s*[–—]\s*|\s+to\s+/i);
+  if (rangeParts.length === 2) {
+    const startDate = parseHumanDate(rangeParts[0].trim());
+    const endDate = parseHumanDate(rangeParts[1].trim());
+    if (startDate && endDate) return `${startDate} to ${endDate}`;
+    // If only end parses (e.g. "Ongoing — May 4, 2026"), use today as start
+    if (!startDate && endDate) return `${today} to ${endDate}`;
+  }
+
+  // "Ongoing" — no specific date, return null (will show as "Date TBD")
+  if (/^ongoing$/i.test(s)) return null;
+
   return null;
 }
 
 function push(items, venue, category, fallbackUrl) {
   items.forEach(item => {
     let date = item.date || null;
-    // Try to normalize to YYYY-MM-DD
-    if (date && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
-      // Already ISO — keep as-is
+    // Already a valid range?
+    if (date && /^\d{4}-\d{2}-\d{2} to \d{4}-\d{2}-\d{2}$/.test(date)) {
+      // Keep as-is
+    }
+    // Already ISO single date?
+    else if (date && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
+      // Keep as-is
     } else if (date && /^\d{4}-\d{2}-\d{2}[T ]/.test(date)) {
       date = date.slice(0, 10);
     } else if (date) {
-      // Try parsing the full string
-      let parsed = parseHumanDate(date);
-      // If that fails, try the start of a range ("Tue Mar 10 - Sun Mar 15")
+      // Try "Through..." / range pattern first
+      let parsed = parseThrough(date);
       if (!parsed) {
-        const startPart = date.split(/\s*[-–—]\s*|\s+to\s+|\s+and\s+/i)[0]?.trim();
-        if (startPart && startPart !== date) parsed = parseHumanDate(startPart);
+        // Try single date
+        parsed = parseHumanDate(date);
+      }
+      if (!parsed) {
+        // Try the start of a range ("Tue Mar 10 - Sun Mar 15")
+        const parts = date.split(/\s*[-–—]\s*|\s+to\s+|\s+and\s+/i);
+        if (parts.length >= 2) {
+          const startD = parseHumanDate(parts[0].trim());
+          const endD = parseHumanDate(parts[parts.length - 1].trim());
+          if (startD && endD) parsed = `${startD} to ${endD}`;
+          else if (startD) parsed = startD;
+        }
       }
       date = parsed || null;
     }
@@ -197,7 +263,18 @@ async function scrapeFilmForum(browser) {
         if (t && t.length > 3 && t.length < 120 && !seen.has(t.toLowerCase())
             && !/^(watch trailer|see all|more|film forum)/i.test(t)) {
           seen.add(t.toLowerCase());
-          r.push({ title: t, link: el.href || '' });
+          // Look for date context near the link
+          const container = el.closest('article, [class*="card"], li, div, section, [class*="film"]');
+          const containerText = container?.textContent?.replace(/\s+/g, ' ')?.trim() || '';
+          let dateText = '';
+          // "March 5 - March 12" or "March 5" or "through March 12"
+          const throughMatch = containerText.match(/(through\s+[A-Za-z]+(?:\s+\d{1,2})?(?:\s*,?\s*\d{4})?)/i);
+          if (throughMatch) dateText = throughMatch[1];
+          if (!dateText) {
+            const dateMatch = containerText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}(?:\s*[-–—]\s*(?:(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+)?\d{1,2})?(?:\s*,?\s*\d{4})?)/i);
+            if (dateMatch) dateText = dateMatch[1];
+          }
+          r.push({ title: t, link: el.href || '', date: dateText });
         }
       });
       return r.slice(0, 25);
@@ -210,14 +287,43 @@ async function scrapeFilmForum(browser) {
 
 async function scrapeIFC() {
   try {
-    const { html } = await fetchHTML('https://www.ifccenter.com');
+    // Use the showtimes page which has per-day structure
+    const { html } = await fetchHTML('https://www.ifccenter.com/showtimes/');
     const $ = cheerio.load(html);
     const items = [];
-    $('a[href*="/films/"], a[href*="/series/"]').each((_, el) => {
-      const title = $(el).text().trim();
-      const link = $(el).attr('href') || '';
+    const MONTHS = {jan:0,january:0,feb:1,february:1,mar:2,march:2,apr:3,april:3,may:4,jun:5,june:5,jul:6,july:6,aug:7,august:7,sep:8,sept:8,september:8,oct:9,october:9,nov:10,november:10,dec:11,december:11};
+    const year = new Date(WEEK.start).getFullYear();
+    let currentDate = '';
+
+    // IFC showtimes page has day headers like "Mon Mar 2" and film titles below
+    $('h2, h3, h4, .showtime-day, [class*="day-header"]').each((_, el) => {
+      const $el = $(el);
+      const text = $el.text().trim();
+      // Day header: "Mon Mar 2" or "Monday, March 2"
+      const dayMatch = text.match(/(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\w*,?\s+([A-Za-z]+)\s+(\d{1,2})/i);
+      if (dayMatch) {
+        const mon = MONTHS[dayMatch[1].toLowerCase()];
+        if (mon !== undefined) {
+          currentDate = `${year}-${String(mon+1).padStart(2,'0')}-${String(parseInt(dayMatch[2],10)).padStart(2,'0')}`;
+        }
+      }
+    });
+
+    // Also try the main page for film links with dates
+    const { html: mainHtml } = await fetchHTML('https://www.ifccenter.com');
+    const $main = cheerio.load(mainHtml);
+    $main('a[href*="/films/"], a[href*="/series/"]').each((_, el) => {
+      const title = $main(el).text().trim();
+      const link = $main(el).attr('href') || '';
       const fullLink = link.startsWith('/') ? `https://www.ifccenter.com${link}` : link;
-      if (title && title.length > 3 && title.length < 100) items.push({ title, link: fullLink });
+      // Look for date in parent container
+      const container = $main(el).closest('li, article, div, [class*="film"]');
+      const containerText = container.length ? container.text().replace(/\s+/g, ' ').trim() : '';
+      let dateText = '';
+      const dateMatch = containerText.match(/((?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\w*,?\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2})/i);
+      if (dateMatch) dateText = dateMatch[1];
+      if (!dateText && currentDate) dateText = currentDate;
+      if (title && title.length > 3 && title.length < 100) items.push({ title, link: fullLink, date: dateText });
     });
     const seen = new Set();
     const deduped = items.filter(i => { const k = i.title.toLowerCase(); if (seen.has(k)) return false; seen.add(k); return true; });
@@ -235,13 +341,24 @@ async function scrapeTheMet() {
     const { html } = await fetchHTML('https://www.metmuseum.org/exhibitions');
     const $ = cheerio.load(html);
     const items = [];
-    $('[class*="exhibition"], .card, .tile').each((_, el) => {
+    $('[class*="exhibition"], .card, .tile, article').each((_, el) => {
       const $el = $(el);
       const title = $el.find('h2, h3, h4, [class*="title"]').first().text().trim();
       const link = $el.find('a').first().attr('href') || '';
       const fullLink = link.startsWith('/') ? `https://www.metmuseum.org${link}` : link;
+      // Date info: look for "Through {date}" or date range in card text
+      const cardText = $el.text().replace(/\s+/g, ' ').trim();
+      let dateText = '';
+      // "Through April 5, 2026" or "Through September"
+      const throughMatch = cardText.match(/(through\s+[A-Za-z]+(?:\s+\d{1,2})?(?:\s*,?\s*\d{4})?)/i);
+      if (throughMatch) dateText = throughMatch[1];
+      // "Month DD, YYYY–Month DD, YYYY" range
+      if (!dateText) {
+        const rangeMatch = cardText.match(/([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})\s*[–—-]\s*([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})/);
+        if (rangeMatch) dateText = `${rangeMatch[1]} – ${rangeMatch[2]}`;
+      }
       if (title && title.length > 3 && title.length < 120 && !/^Exhibitions$/i.test(title))
-        items.push({ title, link: fullLink });
+        items.push({ title, link: fullLink, date: dateText });
     });
     const seen = new Set();
     const deduped = items.filter(i => { const k = i.title.toLowerCase(); if (seen.has(k)) return false; seen.add(k); return true; });
@@ -255,12 +372,21 @@ async function scrapeWhitney() {
     const { html } = await fetchHTML('https://whitney.org/exhibitions');
     const $ = cheerio.load(html);
     const items = [];
-    $('[class*="exhibition"], .card').each((_, el) => {
+    $('[class*="exhibition"], .card, article, [class*="listing"]').each((_, el) => {
       const $el = $(el);
       const title = $el.find('h2, h3, h4, [class*="title"]').first().text().trim();
       const link = $el.find('a').first().attr('href') || '';
       const fullLink = link.startsWith('/') ? `https://whitney.org${link}` : link;
-      if (title && title.length > 3 && title.length < 120) items.push({ title, link: fullLink });
+      // Date info: "Through Mar 9, 2026" or date range in card text
+      const cardText = $el.text().replace(/\s+/g, ' ').trim();
+      let dateText = '';
+      const throughMatch = cardText.match(/(through\s+[A-Za-z]+(?:\s+\d{1,2})?(?:\s*,?\s*\d{4})?)/i);
+      if (throughMatch) dateText = throughMatch[1];
+      if (!dateText) {
+        const rangeMatch = cardText.match(/([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})\s*[–—-]\s*([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})/);
+        if (rangeMatch) dateText = `${rangeMatch[1]} – ${rangeMatch[2]}`;
+      }
+      if (title && title.length > 3 && title.length < 120) items.push({ title, link: fullLink, date: dateText });
     });
     const seen = new Set();
     const deduped = items.filter(i => { const k = i.title.toLowerCase(); if (seen.has(k)) return false; seen.add(k); return true; });
@@ -275,17 +401,31 @@ async function scrapeNeueGalerie() {
     const $ = cheerio.load(html);
     const items = [];
     const seen = new Set();
-    // Exhibition links at a[href*="/exhibitions/"]
     $('a[href*="/exhibitions/"]').each((_, el) => {
       const $el = $(el);
       const title = $el.text().trim();
       const link = $el.attr('href') || '';
       const fullLink = link.startsWith('/') ? `https://www.neuegalerie.org${link}` : link;
+      // Look for date in sibling/nearby elements
+      const container = $el.closest('li, article, div, [class*="exhibition"]');
+      const dateEl = container.length ? container.find('[class*="date"]').first().text().trim() : '';
+      // Also check text after the link for date patterns
+      const containerText = container.length ? container.text().replace(/\s+/g, ' ').trim() : '';
+      let dateText = dateEl;
+      if (!dateText) {
+        // "Oct 9, 2025 — May 4, 2026" or "Ongoing"
+        const rangeMatch = containerText.match(/([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})\s*[–—]\s*([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})/);
+        if (rangeMatch) dateText = `${rangeMatch[1]} – ${rangeMatch[2]}`;
+        else {
+          const throughMatch = containerText.match(/(through\s+[A-Za-z]+(?:\s+\d{1,2})?(?:\s*,?\s*\d{4})?)/i);
+          if (throughMatch) dateText = throughMatch[1];
+        }
+      }
       if (title && title.length > 5 && title.length < 120
           && !seen.has(title.toLowerCase())
           && !/^(exhibitions?|current|upcoming|past|view all)/i.test(title)) {
         seen.add(title.toLowerCase());
-        items.push({ title, link: fullLink });
+        items.push({ title, link: fullLink, date: dateText });
       }
     });
     push(items, 'Neue Galerie', 'Art', 'https://www.neuegalerie.org/exhibitions');
@@ -306,7 +446,17 @@ async function scrapeFrick(browser) {
         if (t && t.length > 5 && t.length < 120 && !seen.has(t.toLowerCase())
             && !/^(exhibitions?|current|upcoming|past|virtual|view|read more|all past|explore)/i.test(t)) {
           seen.add(t.toLowerCase());
-          r.push({ title: t, link: el.href });
+          // Look for date in parent container
+          const card = el.closest('article, [class*="card"], li, div, section');
+          const cardText = card?.textContent?.replace(/\s+/g, ' ')?.trim() || '';
+          let dateText = '';
+          const throughMatch = cardText.match(/(through\s+[A-Za-z]+(?:\s+\d{1,2})?(?:\s*,?\s*\d{4})?)/i);
+          if (throughMatch) dateText = throughMatch[1];
+          if (!dateText) {
+            const rangeMatch = cardText.match(/([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})\s*[–—-]\s*([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})/);
+            if (rangeMatch) dateText = `${rangeMatch[1]} – ${rangeMatch[2]}`;
+          }
+          r.push({ title: t, link: el.href, date: dateText });
         }
       });
       return r;
@@ -318,20 +468,52 @@ async function scrapeFrick(browser) {
 }
 
 async function scrapeBAM() {
-  // BAM root page has .eventInfo blocks with event data
   try {
     const { html } = await fetchHTML('https://www.bam.org');
     const $ = cheerio.load(html);
     const items = [];
-    $('.eventInfo').each((_, el) => {
+    // BAM uses blocks with class patterns like bam-block-2x4, bam-block-2x2, etc.
+    // Each block has a title (h2/h3) and a date element with class containing "date"
+    // Strategy: find all date-containing elements, then find the nearest title
+    $('[class*="date"]').each((_, el) => {
       const $el = $(el);
-      const parent = $el.parent();
-      const title = parent.find('h2, h3').first().text().trim();
-      const link = parent.closest('a').attr('href') || parent.find('a').first().attr('href') || '';
+      const dateText = $el.text().trim();
+      if (!dateText || dateText.length > 60 || /^(date|filter)/i.test(dateText)) return;
+      // Skip hover duplicates and mobile duplicates
+      const cls = $el.attr('class') || '';
+      if (cls.includes('hover') || cls.includes('mobile')) return;
+      // Walk up to find the containing block
+      const block = $el.closest('[class*="bam-block"], [class*="module"], article, [class*="event"], a[href]');
+      if (!block.length) return;
+      const title = block.find('h2, h3, h4, [class*="title"]').first().text().trim();
+      const link = block.closest('a').attr('href') || block.find('a').first().attr('href') || '';
       const fullLink = link.startsWith('/') ? `https://www.bam.org${link}` : link;
-      const dateText = parent.find('[class*="date"]').first().text().trim();
-      if (title && title.length > 3 && title.length < 120) items.push({ title, link: fullLink, date: dateText });
+      if (title && title.length > 3 && title.length < 120) {
+        items.push({ title, link: fullLink, date: dateText });
+      }
     });
+    // Fallback: also grab eventInfo blocks
+    if (items.length < 5) {
+      $('.eventInfo, [class*="eventInfo"]').each((_, el) => {
+        const $el = $(el);
+        const container = $el.closest('a, article, [class*="card"], li, div').first();
+        const title = container.find('h2, h3, h4, [class*="title"]').first().text().trim()
+          || $el.find('h2, h3, h4').first().text().trim();
+        const link = container.closest('a').attr('href') || container.find('a').first().attr('href') || '';
+        const fullLink = link.startsWith('/') ? `https://www.bam.org${link}` : link;
+        // Extract date from the parent text
+        const parentText = container.text().replace(/\s+/g, ' ').trim();
+        let dateText = '';
+        // "Thu, Mar 12, 2026" or "Feb 27—Mar 3, 2026" or "Apr 19—May 17, 2026"
+        const dateMatch = parentText.match(/((?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\w*,?\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\s+\d{1,2}(?:\s*,?\s*\d{4})?)/i);
+        if (dateMatch) dateText = dateMatch[1];
+        if (!dateText) {
+          const rangeMatch = parentText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\s+\d{1,2})\s*[\u2014\u2013-]\s*((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\s+\d{1,2}(?:\s*,?\s*\d{4})?)/i);
+          if (rangeMatch) dateText = `${rangeMatch[1]}\u2014${rangeMatch[2]}`;
+        }
+        if (title && title.length > 3 && title.length < 120) items.push({ title, link: fullLink, date: dateText });
+      });
+    }
     const seen = new Set();
     const deduped = items.filter(i => { const k = i.title.toLowerCase(); if (seen.has(k)) return false; seen.add(k); return true; });
     push(deduped, 'BAM', 'Music/Performing Arts', 'https://www.bam.org');
@@ -351,13 +533,40 @@ async function scrapeMetrograph(browser) {
     await page.waitForTimeout(4000);
     const items = await page.evaluate(() => {
       const r = [], seen = new Set();
-      document.querySelectorAll('[class*="film"], [class*="screening"], .calendar-item, a[href*="/film/"]').forEach(el => {
-        const t = el.querySelector('h2, h3, .title, [class*="title"]')?.textContent?.trim()
+      const MONTHS = {jan:0,january:0,feb:1,february:1,mar:2,march:2,apr:3,april:3,may:4,jun:5,june:5,jul:6,july:6,aug:7,august:7,sep:8,sept:8,september:8,oct:9,october:9,nov:10,november:10,dec:11,december:11};
+      const year = new Date().getFullYear();
+
+      // The selected day tab has the current date — "Today March 2" or "Tuesday March 3"
+      // Find the selected day-selector-day to get the date for all films shown
+      let currentDate = '';
+      const selectedDay = document.querySelector('.day-selector-day.selected, a.day-selector-day.selected');
+      if (selectedDay) {
+        const monthEl = selectedDay.textContent?.replace(/\s+/g, ' ')?.trim() || '';
+        // "TodayMarch2" or "TuesdayMarch3" — extract month + day
+        const dayMatch = monthEl.match(/(January|February|March|April|May|June|July|August|September|October|November|December)\s*(\d{1,2})/i);
+        if (dayMatch) {
+          const mon = MONTHS[dayMatch[1].toLowerCase()];
+          if (mon !== undefined) {
+            currentDate = `${year}-${String(mon+1).padStart(2,'0')}-${String(parseInt(dayMatch[2],10)).padStart(2,'0')}`;
+          }
+        }
+      }
+      // Fallback: use today's date
+      if (!currentDate) {
+        const now = new Date();
+        currentDate = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+      }
+
+      // Films are shown as links to /film/ pages
+      document.querySelectorAll('[class*="film"], [class*="screening"], a[href*="/film/"]').forEach(el => {
+        const titleEl = el.querySelector('h2, h3, h4, .title, [class*="title"]');
+        const t = titleEl?.textContent?.trim()
           || (el.tagName === 'A' ? el.textContent?.trim() : '');
         const link = el.closest('a')?.href || el.querySelector('a')?.href || '';
-        if (t && t.length > 3 && t.length < 100 && !seen.has(t.toLowerCase())) {
+        if (t && t.length > 3 && t.length < 100 && !seen.has(t.toLowerCase())
+            && !/^(calendar|schedule|today|this week|view calendar|sign in|showtimes)/i.test(t)) {
           seen.add(t.toLowerCase());
-          r.push({ title: t, link });
+          r.push({ title: t, link, date: currentDate });
         }
       });
       return r.slice(0, 30);
@@ -376,17 +585,32 @@ async function scrapeGuggenheim(browser) {
     await page.waitForTimeout(5000);
     const items = await page.evaluate(() => {
       const r = [], seen = new Set();
-      // Each exhibition card has a[href*="/exhibition/"] and time[datetime]
+      // Each exhibition card — look for links + nearby date text
       document.querySelectorAll('a[href*="/exhibition/"]').forEach(el => {
         const t = el.textContent?.trim();
-        // Find sibling/nearby time element with datetime
-        const card = el.closest('article, [class*="card"], li, div');
+        const card = el.closest('article, [class*="card"], li, div, section');
+        // Try time[datetime] first
         const timeEl = card?.querySelector('time[datetime]');
-        const dateText = timeEl?.textContent?.trim() || '';
-        const dateAttr = timeEl?.getAttribute('datetime') || '';
+        let dateText = timeEl?.getAttribute('datetime') || timeEl?.textContent?.trim() || '';
+        // If no time element, look for "Through {date}" in card text
+        if (!dateText && card) {
+          const cardText = card.textContent?.replace(/\s+/g, ' ')?.trim() || '';
+          const throughMatch = cardText.match(/(through\s+[A-Za-z]+(?:\s+\d{1,2})?(?:\s*,?\s*\d{4})?)/i);
+          if (throughMatch) dateText = throughMatch[1];
+          // Also try "Month DD, YYYY–Month DD, YYYY"
+          if (!dateText) {
+            const rangeMatch = cardText.match(/([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})\s*[–—-]\s*([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})/);
+            if (rangeMatch) dateText = `${rangeMatch[1]} – ${rangeMatch[2]}`;
+          }
+          // "Month DD–Month DD, YYYY" (shared year)
+          if (!dateText) {
+            const sharedYearMatch = cardText.match(/([A-Z][a-z]+\s+\d{1,2})\s*[–—-]\s*([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})/);
+            if (sharedYearMatch) dateText = `${sharedYearMatch[1]} – ${sharedYearMatch[2]}`;
+          }
+        }
         if (t && t.length > 3 && t.length < 120 && !seen.has(t.toLowerCase())) {
           seen.add(t.toLowerCase());
-          r.push({ title: t, link: el.href, date: dateAttr || dateText });
+          r.push({ title: t, link: el.href, date: dateText });
         }
       });
       return r.slice(0, 15);
@@ -411,7 +635,17 @@ async function scrapeNewMuseum(browser) {
         if (t && t.length > 5 && t.length < 120 && !seen.has(t.toLowerCase())
             && !/^(exhibitions?|view|see all)/i.test(t)) {
           seen.add(t.toLowerCase());
-          r.push({ title: t, link: el.href });
+          // Look for date in parent container
+          const card = el.closest('article, [class*="card"], li, div, section');
+          const cardText = card?.textContent?.replace(/\s+/g, ' ')?.trim() || '';
+          let dateText = '';
+          const throughMatch = cardText.match(/(through\s+[A-Za-z]+(?:\s+\d{1,2})?(?:\s*,?\s*\d{4})?)/i);
+          if (throughMatch) dateText = throughMatch[1];
+          if (!dateText) {
+            const rangeMatch = cardText.match(/([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})\s*[–—-]\s*([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})/);
+            if (rangeMatch) dateText = `${rangeMatch[1]} – ${rangeMatch[2]}`;
+          }
+          r.push({ title: t, link: el.href, date: dateText });
         }
       });
       // Fallback: h2/h3 headings
@@ -422,7 +656,12 @@ async function scrapeNewMuseum(browser) {
           if (t && t.length > 5 && t.length < 120 && !seen.has(t.toLowerCase())
               && !/^(exhibitions?|current|upcoming|past)/i.test(t)) {
             seen.add(t.toLowerCase());
-            r.push({ title: t, link });
+            const card = el.closest('article, [class*="card"], li, div, section');
+            const cardText = card?.textContent?.replace(/\s+/g, ' ')?.trim() || '';
+            let dateText = '';
+            const throughMatch = cardText.match(/(through\s+[A-Za-z]+(?:\s+\d{1,2})?(?:\s*,?\s*\d{4})?)/i);
+            if (throughMatch) dateText = throughMatch[1];
+            r.push({ title: t, link, date: dateText });
           }
         });
       }
@@ -447,7 +686,19 @@ async function scrapeJapanSociety(browser) {
         if (t && t.length > 5 && t.length < 120 && !seen.has(t.toLowerCase())
             && !/^(events|calendar|show filter)/i.test(t)) {
           seen.add(t.toLowerCase());
-          r.push({ title: t, link: el.href });
+          // Look for date in parent card text
+          const card = el.closest('article, [class*="card"], li, div, section');
+          const cardText = card?.textContent?.replace(/\s+/g, ' ')?.trim() || '';
+          let dateText = '';
+          // "Mar 3, 2026, 10:30 am" or "March 15, 2026"
+          const dateMatch = cardText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2},?\s*\d{4})/i);
+          if (dateMatch) dateText = dateMatch[1];
+          // Also try "Through {date}"
+          if (!dateText) {
+            const throughMatch = cardText.match(/(through\s+[A-Za-z]+(?:\s+\d{1,2})?(?:\s*,?\s*\d{4})?)/i);
+            if (throughMatch) dateText = throughMatch[1];
+          }
+          r.push({ title: t, link: el.href, date: dateText });
         }
       });
       return r.slice(0, 15);
@@ -490,7 +741,6 @@ async function scrapeCarnegieHall(browser) {
   const page = await browser.newPage();
   page.setDefaultTimeout(35000);
   try {
-    // Carnegie Hall is a heavy client-side app — intercept XHR/fetch for event data
     let apiData = null;
     page.on('response', async (response) => {
       const url = response.url();
@@ -499,14 +749,16 @@ async function scrapeCarnegieHall(browser) {
         try {
           const text = await response.text();
           const json = JSON.parse(text);
-          // Look for arrays of events
           const arr = Array.isArray(json) ? json : (json.events || json.data || json.results || json.items || null);
           if (Array.isArray(arr) && arr.length > 0 && !apiData) apiData = arr;
         } catch(e) {}
       }
     });
     await page.goto('https://www.carnegiehall.org/calendar', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(12000);
+    await page.waitForTimeout(8000);
+    // Scroll to trigger lazy loading
+    await page.evaluate(() => window.scrollBy(0, 2000));
+    await page.waitForTimeout(4000);
 
     if (apiData && apiData.length > 0) {
       const items = apiData.slice(0, 30).map(e => ({
@@ -518,17 +770,31 @@ async function scrapeCarnegieHall(browser) {
       push(items, 'Carnegie Hall', 'Classical Music', 'https://www.carnegiehall.org/calendar');
       console.error(`Carnegie Hall (API): ${items.length}`);
     } else {
-      // Fallback: try to scrape rendered h3 titles
+      // DOM fallback — try to extract dates from text near event titles
       const items = await page.evaluate(() => {
         const r = [], seen = new Set();
-        document.querySelectorAll('h3, [class*="event-title"]').forEach(el => {
+        const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,sept:8,oct:9,nov:10,dec:11};
+        const year = new Date().getFullYear();
+
+        // Look for event cards/rows with title + date
+        document.querySelectorAll('h3, [class*="event-title"], [class*="listing"], article, [class*="card"]').forEach(el => {
           const t = el.textContent?.trim();
           if (!t || t.length < 5 || t.length > 150) return;
-          if (/^(calendar|filter|search|subscribe|upcoming|location|event type|genre|date)/i.test(t)) return;
-          const link = el.closest('a')?.href || el.parentElement?.querySelector('a')?.href || '';
-          if (!seen.has(t.toLowerCase())) {
-            seen.add(t.toLowerCase());
-            r.push({ title: t, link: link || 'https://www.carnegiehall.org/calendar' });
+          if (/^(calendar|filter|search|subscribe|upcoming|location|event type|genre|date|narrow|edit)/i.test(t)) return;
+
+          // Look for date in parent/sibling context
+          const card = el.closest('article, [class*="card"], li, div, a');
+          const cardText = card?.textContent?.replace(/\s+/g, ' ')?.trim() || '';
+          let dateText = '';
+          const dateMatch = cardText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\s+\d{1,2}(?:\s*,?\s*\d{4})?)/i);
+          if (dateMatch) dateText = dateMatch[1];
+
+          const title = el.querySelector('a')?.textContent?.trim() || t.slice(0, 100);
+          const link = el.closest('a')?.href || el.querySelector('a')?.href || 'https://www.carnegiehall.org/calendar';
+
+          if (title.length > 4 && !seen.has(title.toLowerCase())) {
+            seen.add(title.toLowerCase());
+            r.push({ title, link, date: dateText });
           }
         });
         return r.slice(0, 25);
@@ -714,10 +980,13 @@ async function scrapeMovingImage(browser) {
 
 async function scrape92NY(browser) {
   const page = await browser.newPage();
-  page.setDefaultTimeout(15000);
+  page.setDefaultTimeout(20000);
   try {
     await page.goto('https://www.92ny.org/whats-on/events', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(6000);
+    // Scroll to trigger lazy loading
+    await page.evaluate(() => window.scrollBy(0, 2000));
+    await page.waitForTimeout(3000);
     const items = await page.evaluate(() => {
       const r = [], seen = new Set();
       document.querySelectorAll('a[href*="/event/"]').forEach(a => {
@@ -725,7 +994,13 @@ async function scrape92NY(browser) {
         if (t && t.length > 5 && t.length < 150 && !seen.has(t.toLowerCase())
             && !/^(members|in person|virtual|save)/i.test(t)) {
           seen.add(t.toLowerCase());
-          r.push({ title: t, link: a.href });
+          // Look for date in parent card
+          const card = a.closest('article, [class*="card"], li, div, section');
+          const cardText = card?.textContent?.replace(/\s+/g, ' ')?.trim() || '';
+          let dateText = '';
+          const dateMatch = cardText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}(?:\s*,?\s*\d{4})?)/i);
+          if (dateMatch) dateText = dateMatch[1];
+          r.push({ title: t, link: a.href, date: dateText });
         }
       });
       return r.slice(0, 20);
@@ -759,7 +1034,7 @@ async function runSource(name, fn, browserOrNull) {
   }
   const count = events.length - before;
   const elapsed = ((Date.now() - start) / 1000).toFixed(1);
-  const datesExtracted = events.slice(before).filter(e => e.date && /^\d{4}-\d{2}-\d{2}$/.test(e.date)).length;
+  const datesExtracted = events.slice(before).filter(e => e.date && (/^\d{4}-\d{2}-\d{2}$/.test(e.date) || /^\d{4}-\d{2}-\d{2} to \d{4}-\d{2}-\d{2}$/.test(e.date))).length;
   sourceLog.push({ name, count, datesExtracted, elapsed, error });
 }
 

@@ -85,7 +85,7 @@ function parseHumanDate(str) {
 
   const MONTHS = {
     jan:0,january:0,feb:1,february:1,mar:2,march:2,apr:3,april:3,
-    may:4,jun:5,june:5,jul:6,july:6,aug:7,august:7,sep:8,september:8,
+    may:4,jun:5,june:5,jul:6,july:6,aug:7,august:7,sep:8,sept:8,september:8,
     oct:9,october:9,nov:10,november:10,dec:11,december:11
   };
   const year = new Date(WEEK.start).getFullYear();
@@ -123,8 +123,8 @@ function parseHumanDate(str) {
     }
   }
 
-  // "Tue Mar 10" or "Wed Mar 4"
-  const m5 = s.match(/^(?:mon|tue|wed|thu|fri|sat|sun)\w*\s+([a-z]+)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
+  // "Tue Mar 10" or "Wed Mar 4" or "Thu, Mar 12, 2026"
+  const m5 = s.match(/^(?:mon|tue|wed|thu|fri|sat|sun)\w*,?\s+([a-z]+)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
   if (m5) {
     const mon = MONTHS[m5[1].toLowerCase()];
     if (mon !== undefined) {
@@ -134,8 +134,8 @@ function parseHumanDate(str) {
     }
   }
 
-  // "Monday March 2, 2026"
-  const m6 = s.match(/^(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)\s+([a-z]+)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
+  // "Monday March 2, 2026" or "Monday, March 2, 2026"
+  const m6 = s.match(/^(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday),?\s+([a-z]+)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
   if (m6) {
     const mon = MONTHS[m6[1].toLowerCase()];
     if (mon !== undefined) {
@@ -151,22 +151,75 @@ function parseHumanDate(str) {
     return `${m3[3]}-${String(parseInt(m3[1],10)).padStart(2,'0')}-${String(parseInt(m3[2],10)).padStart(2,'0')}`;
   }
 
+  // Unix timestamp (seconds) — e.g. from data-date attributes
+  if (/^\d{9,11}$/.test(s)) {
+    const d = new Date(parseInt(s, 10) * 1000);
+    if (!isNaN(d.getTime())) {
+      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Parse "Through {date}" / date ranges into "YYYY-MM-DD to YYYY-MM-DD" format.
+ */
+function parseThrough(str) {
+  if (!str) return null;
+  const s = str.trim().replace(/\s+/g, ' ');
+  const year = new Date(WEEK.start).getFullYear();
+  const fmt = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  const today = fmt(new Date());
+
+  const throughMatch = s.match(/(?:through|thru)\s+(.+)/i);
+  if (throughMatch) {
+    const endDate = parseHumanDate(throughMatch[1].trim());
+    if (endDate) return `${today} to ${endDate}`;
+    const MONTHS = {jan:0,january:0,feb:1,february:1,mar:2,march:2,apr:3,april:3,may:4,jun:5,june:5,jul:6,july:6,aug:7,august:7,sep:8,sept:8,september:8,oct:9,october:9,nov:10,november:10,dec:11,december:11};
+    const monMatch = throughMatch[1].trim().match(/^([a-z]+)$/i);
+    if (monMatch) {
+      const mon = MONTHS[monMatch[1].toLowerCase()];
+      if (mon !== undefined) {
+        const lastDay = new Date(year, mon + 1, 0);
+        return `${today} to ${fmt(lastDay)}`;
+      }
+    }
+    return null;
+  }
+
+  const rangeParts = s.split(/\s*[–—]\s*|\s+to\s+/i);
+  if (rangeParts.length === 2) {
+    const startDate = parseHumanDate(rangeParts[0].trim());
+    const endDate = parseHumanDate(rangeParts[1].trim());
+    if (startDate && endDate) return `${startDate} to ${endDate}`;
+    if (!startDate && endDate) return `${today} to ${endDate}`;
+  }
+
+  if (/^ongoing$/i.test(s)) return null;
   return null;
 }
 
 function push(items, venue, category, fallbackUrl) {
   items.forEach(item => {
     let date = item.date || null;
-    // Try to normalize to YYYY-MM-DD
-    if (date && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
-      // Already ISO — keep as-is
+    if (date && /^\d{4}-\d{2}-\d{2} to \d{4}-\d{2}-\d{2}$/.test(date)) {
+      // Already a valid range — keep
+    } else if (date && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
+      // Already ISO — keep
     } else if (date && /^\d{4}-\d{2}-\d{2}[T ]/.test(date)) {
       date = date.slice(0, 10);
     } else if (date) {
-      let parsed = parseHumanDate(date);
+      let parsed = parseThrough(date);
+      if (!parsed) parsed = parseHumanDate(date);
       if (!parsed) {
-        const startPart = date.split(/\s*[-–—]\s*|\s+to\s+|\s+and\s+/i)[0]?.trim();
-        if (startPart && startPart !== date) parsed = parseHumanDate(startPart);
+        const parts = date.split(/\s*[-–—]\s*|\s+to\s+|\s+and\s+/i);
+        if (parts.length >= 2) {
+          const startD = parseHumanDate(parts[0].trim());
+          const endD = parseHumanDate(parts[parts.length - 1].trim());
+          if (startD && endD) parsed = `${startD} to ${endD}`;
+          else if (startD) parsed = startD;
+        }
       }
       date = parsed || null;
     }
@@ -352,18 +405,23 @@ async function scrapePlaybill() {
     const $ = cheerio.load(html);
     const items = [];
     const seen = new Set();
-    // Playbill uses direct links to /production/ pages
-    $('a[href*="/production/"]').each((_, el) => {
+    // Playbill production cards — look for data-date attributes (Unix timestamps)
+    $('[data-date], a[href*="/production/"]').each((_, el) => {
       const $el = $(el);
-      const title = $el.text().trim();
-      const link = $el.attr('href') || '';
+      const title = $el.text().trim() || $el.find('[class*="title"]').first().text().trim();
+      const link = $el.attr('href') || $el.find('a').first().attr('href') || '';
       const fullLink = link.startsWith('/') ? `https://playbill.com${link}` : link;
-      // Skip nav/footer links and dupes
+      // data-date is a Unix timestamp in seconds
+      const dataDate = $el.attr('data-date') || $el.closest('[data-date]').attr('data-date') || '';
+      let dateText = '';
+      if (dataDate && /^\d{9,11}$/.test(dataDate)) {
+        dateText = dataDate; // parseHumanDate now handles Unix timestamps
+      }
       if (title && title.length > 3 && title.length < 120
           && !seen.has(title.toLowerCase())
           && !/^(see all|view|more|production)/i.test(title)) {
         seen.add(title.toLowerCase());
-        items.push({ title, link: fullLink });
+        items.push({ title, link: fullLink, date: dateText });
       }
     });
     push(items, 'Broadway', 'Theater', 'https://playbill.com/productions');
@@ -383,13 +441,38 @@ async function scrapeEventbrite(browser) {
     await page.waitForTimeout(5000);
     const items = await page.evaluate(() => {
       const r = [];
+      const now = new Date();
+      const fmt = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      const DAYS = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+
       document.querySelectorAll('[class*="event-card"], [class*="search-event"], article, [data-testid*="event"]').forEach(el => {
         const t = el.querySelector('h2, h3, h4, [class*="title"]')?.textContent?.trim();
         const venue = el.querySelector('[class*="location"], [class*="venue"]')?.textContent?.trim();
         const link = el.querySelector('a')?.href;
-        const dateEl = el.querySelector('time[datetime], [class*="date"]');
-        const date = dateEl?.getAttribute('datetime') || dateEl?.textContent?.trim() || '';
-        if (t && t.length > 5 && t.length < 120) r.push({ title: t, venue, link, date });
+        const dateEl = el.querySelector('time[datetime], [class*="date"], p');
+        let dateRaw = dateEl?.getAttribute('datetime') || dateEl?.textContent?.trim() || '';
+
+        // Parse relative dates: "Today", "Tomorrow", "Friday", "Saturday • 10:00 PM"
+        let dateText = dateRaw;
+        const lower = dateRaw.toLowerCase().split('•')[0].trim();
+        if (lower === 'today') {
+          dateText = fmt(now);
+        } else if (lower === 'tomorrow') {
+          const tom = new Date(now); tom.setDate(tom.getDate() + 1);
+          dateText = fmt(tom);
+        } else {
+          // "Friday", "Saturday" etc — find next occurrence
+          const dayIdx = DAYS.indexOf(lower);
+          if (dayIdx >= 0) {
+            const today = now.getDay();
+            let diff = dayIdx - today;
+            if (diff <= 0) diff += 7;
+            const target = new Date(now); target.setDate(target.getDate() + diff);
+            dateText = fmt(target);
+          }
+        }
+
+        if (t && t.length > 5 && t.length < 120) r.push({ title: t, venue, link, date: dateText });
       });
       return r.slice(0, 25);
     });
@@ -417,7 +500,7 @@ async function runSource(name, fn, browserOrNull) {
   }
   const count = events.length - before;
   const elapsed = ((Date.now() - start) / 1000).toFixed(1);
-  const datesExtracted = events.slice(before).filter(e => e.date && /^\d{4}-\d{2}-\d{2}$/.test(e.date)).length;
+  const datesExtracted = events.slice(before).filter(e => e.date && (/^\d{4}-\d{2}-\d{2}$/.test(e.date) || /^\d{4}-\d{2}-\d{2} to \d{4}-\d{2}-\d{2}$/.test(e.date))).length;
   sourceLog.push({ name, count, datesExtracted, elapsed, error });
 }
 

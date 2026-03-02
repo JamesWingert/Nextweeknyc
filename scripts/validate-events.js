@@ -158,7 +158,6 @@ const SHORT_JUNK_PHRASES = [
   /^(why have i been blocked|what can i do to resolve)/i,
   /^(verification successful|waiting for)/i,
   /^(all exhibitions? are free)/i,
-  /through\s+(january|february|march|april|may|june|july|august|september|october|november|december)/i,
   /^(unfortunately.*outdated browser)/i,
   /^\d+\s*(year|month)s?$/i,
   /^<\s*\d/,  // "< 1 Year"
@@ -172,7 +171,6 @@ const SHORT_JUNK_PHRASES = [
   /^(class registration|lincoln center moments)\b/i,
   /^spring \d{4}[a-z]/i,  // "Spring 2026APr 21 - May 31"
   /ongoing$/i,  // "German Masterworks from the Neue GalerieOngoing"
-  /\b(oct|nov|dec|jan|feb|mar|apr|may|jun|jul|aug|sep)\s+\d+.*\d{4}$/i,  // dates at end like "Feb 12 — May 4, 2026"
   /^introduction by\b/i,  // "Introduction by Cinema Tehran founder..."
   /beginner.*trial lesson/i,
   /do not sell or share/i,
