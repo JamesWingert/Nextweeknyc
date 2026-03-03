@@ -152,7 +152,10 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [today] = useState(() => startOfDay(new Date()));
   const [currentMonth, setCurrentMonth] = useState(() => startOfMonth(new Date()));
-  const [selectedDay, setSelectedDay] = useState<string | null>(null);
+  const [selectedDay, setSelectedDay] = useState<string | null>(() => {
+    const t = startOfDay(new Date());
+    return `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
+  });
 
   useEffect(() => {
     Promise.all([
@@ -808,6 +811,68 @@ function getVenueColor(venue: string) {
   return VENUE_COLORS[venue.toLowerCase()] || DEFAULT_VENUE_COLOR;
 }
 
+const NOW_PLAYING_COLLAPSED = 8;
+
+function NowPlayingGrid({ films, vc }: { films: Event[]; vc: { accent: string; bg: string; text: string; border: string; dot: string } }) {
+  const [expanded, setExpanded] = useState(false);
+  const showToggle = films.length > NOW_PLAYING_COLLAPSED;
+  const visible = expanded ? films : films.slice(0, NOW_PLAYING_COLLAPSED);
+
+  return (
+    <div>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+        gap: '0.375rem',
+      }}>
+        {visible.map(film => (
+          <a
+            key={film.id}
+            href={film.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'block', textDecoration: 'none', color: '#1a1a2e',
+              padding: '0.375rem 0.625rem', borderRadius: '0.375rem',
+              background: '#fff', border: `1px solid ${vc.border}`,
+              borderLeft: `3px solid ${vc.accent}`,
+              transition: 'all 0.15s ease',
+              overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' as const,
+            }}
+            onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
+              e.currentTarget.style.borderColor = vc.accent;
+              e.currentTarget.style.transform = 'translateY(-1px)';
+              e.currentTarget.style.boxShadow = '0 2px 6px rgba(0,0,0,0.05)';
+            }}
+            onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
+              e.currentTarget.style.borderColor = vc.border;
+              e.currentTarget.style.borderLeftColor = vc.accent;
+              e.currentTarget.style.transform = 'none';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+            title={film.title}
+          >
+            <span style={{ fontWeight: 600, fontSize: '0.8125rem' }}>{film.title}</span>
+          </a>
+        ))}
+      </div>
+      {showToggle && (
+        <button
+          onClick={() => setExpanded(!expanded)}
+          style={{
+            display: 'block', margin: '0.5rem auto 0', padding: '0.25rem 0.75rem',
+            borderRadius: '999px', fontSize: '0.6875rem', fontWeight: 600,
+            border: `1px solid ${vc.border}`, background: '#fff', color: vc.accent,
+            cursor: 'pointer', transition: 'all 0.15s ease',
+          }}
+        >
+          {expanded ? '▲ Show less' : `▼ Show all ${films.length} films`}
+        </button>
+      )}
+    </div>
+  );
+}
+
 function ShowtimesView({ events, currentMonth, today }: { events: Event[]; currentMonth: Date; today: Date }) {
   const [selectedVenue, setSelectedVenue] = useState<string | null>(null);
 
@@ -998,43 +1063,7 @@ function ShowtimesView({ events, currentMonth, today }: { events: Event[]; curre
                 }}>
                   ▶ Now Playing · {nowPlaying.length} film{nowPlaying.length !== 1 ? 's' : ''}
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '0.375rem' }}>
-                  {nowPlaying.map(film => (
-                    <a
-                      key={film.id}
-                      href={film.sourceUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        display: 'flex', alignItems: 'baseline', gap: '0.5rem',
-                        textDecoration: 'none', color: '#1a1a2e',
-                        padding: '0.375rem 0.625rem', borderRadius: '0.375rem',
-                        background: '#fff', border: `1px solid ${vc.border}`,
-                        transition: 'all 0.15s ease',
-                      }}
-                      onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                        e.currentTarget.style.borderColor = vc.accent;
-                        e.currentTarget.style.transform = 'translateY(-1px)';
-                        e.currentTarget.style.boxShadow = '0 2px 6px rgba(0,0,0,0.05)';
-                      }}
-                      onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                        e.currentTarget.style.borderColor = vc.border;
-                        e.currentTarget.style.transform = 'none';
-                        e.currentTarget.style.boxShadow = 'none';
-                      }}
-                    >
-                      <span style={{ fontWeight: 600, fontSize: '0.8125rem' }}>{film.title}</span>
-                      {film.description && (
-                        <span style={{
-                          fontSize: '0.6875rem', color: '#8888a0', flex: 1, minWidth: 0,
-                          overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-                        }}>
-                          {film.description}
-                        </span>
-                      )}
-                    </a>
-                  ))}
-                </div>
+                <NowPlayingGrid films={nowPlaying} vc={vc} />
               </div>
             )}
 
