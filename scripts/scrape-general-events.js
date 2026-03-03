@@ -244,6 +244,20 @@ async function scrapeDoNYC() {
   const now = new Date();
   const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
+  // Map DoNYC CSS category classes to our categories
+  const DONYC_CAT_MAP = {
+    'music': 'Music/Performing Arts',
+    'comedy': 'Comedy',
+    'theatre-performing-arts': 'Theater',
+    'performing-arts': 'Music/Performing Arts',
+    'dj-parties': 'Music/Performing Arts',
+    'burlesque': 'Music/Performing Arts',
+    'karaoke': 'Music/Performing Arts',
+    'sports': 'Other',
+    'pop-up': 'Other',
+    'other-fun-deals': 'Other',
+  };
+
   for (let dayOffset = 0; dayOffset < 14; dayOffset++) {
     const d = new Date(startDate);
     d.setDate(startDate.getDate() + dayOffset);
@@ -254,7 +268,8 @@ async function scrapeDoNYC() {
     try {
       const { html } = await fetchHTML(url);
       const $ = cheerio.load(html);
-      const items = [];
+      // Group items by category
+      const byCategory = {};
       $('.ds-listing').each((_, el) => {
         const $el = $(el);
         const title = $el.find('h3, .ds-listing-event-title').first().text().trim();
@@ -262,44 +277,107 @@ async function scrapeDoNYC() {
         const link = $el.find('a').first().attr('href') || '';
         const fullLink = link.startsWith('/') ? `https://donyc.com${link}` : link;
         const time = $el.find('.ds-event-time').first().text().trim();
-        if (title && title.length > 3) items.push({ title, venue, link: fullLink, time, date: dateStr });
+        // Extract category from CSS class like "ds-event-category-music"
+        const classes = $el.attr('class') || '';
+        const catMatch = classes.match(/ds-event-category-([a-z-]+)/);
+        const catKey = catMatch ? catMatch[1] : '';
+        const category = DONYC_CAT_MAP[catKey] || 'Other';
+        if (title && title.length > 3) {
+          if (!byCategory[category]) byCategory[category] = [];
+          byCategory[category].push({ title, venue, link: fullLink, time, date: dateStr });
+        }
       });
-      push(items, 'doNYC', 'Other', url);
-      console.error(`doNYC ${dateStr}: ${items.length}`);
+      // Push each category group separately
+      let total = 0;
+      for (const [cat, items] of Object.entries(byCategory)) {
+        push(items, 'doNYC', cat, url);
+        total += items.length;
+      }
+      console.error(`doNYC ${dateStr}: ${total}`);
     } catch (e) { console.error(`doNYC ${dateStr} error:`, e.message); }
   }
 }
 
 async function scrapeTheSkint() {
   const year = new Date(WEEK.start).getFullYear();
-  // Homepage — daily picks (blog-post style, titles contain date info)
+
+  // Keyword-based category detection for The Skint events
+  // The Skint is plain-text blog style with no structured category data,
+  // so we infer category from title + description keywords.
+  const SKINT_CAT_RULES = [
+    { cat: 'Film', re: /\bfilm\b|cinema|screening|movie|documentary|short[s ]|fest.*film|film.*fest/i },
+    { cat: 'Comedy', re: /\bcomedy\b|comedian|stand-?up|improv|sketch|laugh|comic|funny|humor|roast/i },
+    { cat: 'Classical Music', re: /\bclassical\b|symphony|orchestra|chamber music|philharmonic|carnegie hall/i },
+    { cat: 'Opera', re: /\bopera\b|puccini|verdi|rossini|suor angelica|la traviata|tosca/i },
+    { cat: 'Ballet', re: /\bballet\b/i },
+    { cat: 'Dance', re: /\bdance\b|\bdancing\b/i },
+    { cat: 'Jazz', re: /\bjazz\b/i },
+    { cat: 'Theater', re: /\btheater\b|\btheatre\b|broadway|off-broadway|musical|play\b|playwright|drama|cabaret|shadowcast|one-act/i },
+    { cat: 'Art', re: /\bart\b|exhibition|gallery|museum|sculpture|painting|mural|retrospective|installation|curator/i },
+    { cat: 'Music/Performing Arts', re: /\bmusic\b|\bconcert\b|band\b|singer|songwriter|indie|rock\b|punk|hip-?hop|dj\b|karaoke|open mic|live.*music|music.*live/i },
+    { cat: 'Talk', re: /\breading\b|book launch|storytelling|lecture|author|discussion|panel|talk\b|speaker|literary|poetry|book.*event|reading series/i },
+    { cat: 'Food/Drink', re: /\bfood\b|restaurant|tasting|chili|pancake|brunch|dinner|cook|bake|beer|wine|cocktail|market.*food/i },
+    { cat: 'Shopping/Markets', re: /\bmarket\b|flea|bazaar|warehouse sale|pop-?up.*shop|craft.*fair|vintage|comics.*fest|zine/i },
+    { cat: 'Outdoor/Parks', re: /\boutdoor\b|park\b|garden|nature|walk|hike|bike|skating|ice rink|botanic/i },
+    { cat: 'Family', re: /\bkids\b|children|family|puppet/i },
+  ];
+
+  function categorizeSkintEvent(title, description) {
+    const text = ((title || '') + ' ' + (description || '')).toLowerCase();
+    for (const rule of SKINT_CAT_RULES) {
+      if (rule.re.test(text)) return rule.cat;
+    }
+    return 'Other';
+  }
+
+  // Homepage — daily picks (blog-post style)
   try {
     const { html } = await fetchHTML('https://theskint.com/');
     const $ = cheerio.load(html);
-    const items = [];
-    $('article, .post').each((_, el) => {
+    const byCategory = {};
+    // Each event is a <p> inside .entry-content with a <b> bold title
+    $('.entry-content p').each((_, el) => {
       const $el = $(el);
-      const title = $el.find('h2, h3, .entry-title').first().text().trim();
-      const link = $el.find('a').first().attr('href') || '';
-      if (title && title.length > 5 && title.length < 120) {
-        // Try to extract date from title: "FRI-MON, 2/27-3/2: SKINT WEEKEND"
-        let dateText = '';
-        const mmddMatch = title.match(/(\d{1,2})\/(\d{1,2})/);
-        if (mmddMatch) {
-          dateText = `${year}-${String(parseInt(mmddMatch[1],10)).padStart(2,'0')}-${String(parseInt(mmddMatch[2],10)).padStart(2,'0')}`;
-        }
-        items.push({ title, link, date: dateText });
+      const text = $el.text().trim();
+      const bold = $el.find('b').first().text().trim();
+      const link = $el.find('a').last().attr('href') || '';
+      // Skip day headers (just "tuesday", "wednesday", etc.), sponsored labels, short lines
+      if (!bold || bold.length < 4 || bold.length > 120) return;
+      if (/^(monday|tuesday|wednesday|thursday|friday|saturday|sunday|ongoing|sponsored|stay safe)$/i.test(bold)) return;
+      if (text.length < 15) return;
+
+      // Extract date from text prefix: "tues 7pm:", "thurs thru 3/15:", "sat 1pm:"
+      let dateText = '';
+      const mmddMatch = text.match(/(\d{1,2})\/(\d{1,2})/);
+      if (mmddMatch) {
+        dateText = `${year}-${String(parseInt(mmddMatch[1],10)).padStart(2,'0')}-${String(parseInt(mmddMatch[2],10)).padStart(2,'0')}`;
       }
+      // Check for date ranges: "thru 3/15" or "thru 4/18"
+      const thruMatch = text.match(/thru\s+(\d{1,2})\/(\d{1,2})/i);
+      if (thruMatch && mmddMatch) {
+        const endDate = `${year}-${String(parseInt(thruMatch[1],10)).padStart(2,'0')}-${String(parseInt(thruMatch[2],10)).padStart(2,'0')}`;
+        if (endDate !== dateText) {
+          dateText = `${dateText} to ${endDate}`;
+        }
+      }
+
+      const category = categorizeSkintEvent(bold, text);
+      if (!byCategory[category]) byCategory[category] = [];
+      byCategory[category].push({ title: bold, link, date: dateText, description: text.slice(0, 200) });
     });
-    push(items, 'The Skint', 'Other', 'https://theskint.com');
-    console.error(`The Skint (home): ${items.length}`);
+    let total = 0;
+    for (const [cat, items] of Object.entries(byCategory)) {
+      push(items, 'The Skint', cat, 'https://theskint.com');
+      total += items.length;
+    }
+    console.error(`The Skint (home): ${total} (${Object.keys(byCategory).join(', ')})`);
   } catch (e) { console.error('The Skint home error:', e.message); }
 
   // Ongoing events page — curated list of ongoing NYC events
   try {
     const { html } = await fetchHTML('https://theskint.com/ongoing-events/');
     const $ = cheerio.load(html);
-    const items = [];
+    const byCategory = {};
     const fmt = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
     const today = fmt(new Date());
     // Events are in paragraphs with bold titles and ► markers
@@ -308,21 +386,31 @@ async function scrapeTheSkint() {
       const text = $el.text().trim();
       const bold = $el.find('b, strong').first().text().trim();
       const link = $el.find('a').last().attr('href') || '';
-      if (bold && bold.length > 3 && bold.length < 100 && text.length > 10) {
-        // Extract "thru 3/8" or "thru 3/30" dates from text
-        let dateText = '';
-        const thruMatch = text.match(/thru\s+(\d{1,2})\/(\d{1,2})/i);
-        if (thruMatch) {
-          const endDate = `${year}-${String(parseInt(thruMatch[1],10)).padStart(2,'0')}-${String(parseInt(thruMatch[2],10)).padStart(2,'0')}`;
-          dateText = `${today} to ${endDate}`;
-        }
-        items.push({ title: bold, link, description: text.slice(0, 200), date: dateText });
+      if (!bold || bold.length < 4 || bold.length > 120) return;
+      if (/^(ongoing|sponsored|stay safe|ice skating|film fests)/i.test(bold)) return;
+      if (text.length < 15) return;
+
+      // Extract "thru 3/8" or "thru 3/30" dates from text
+      let dateText = '';
+      const thruMatch = text.match(/thru\s+(\d{1,2})\/(\d{1,2})/i);
+      if (thruMatch) {
+        const endDate = `${year}-${String(parseInt(thruMatch[1],10)).padStart(2,'0')}-${String(parseInt(thruMatch[2],10)).padStart(2,'0')}`;
+        dateText = `${today} to ${endDate}`;
       }
+
+      const category = categorizeSkintEvent(bold, text);
+      if (!byCategory[category]) byCategory[category] = [];
+      byCategory[category].push({ title: bold, link, description: text.slice(0, 200), date: dateText });
     });
-    push(items, 'The Skint', 'Other', 'https://theskint.com/ongoing-events/');
-    console.error(`The Skint (ongoing): ${items.length}`);
+    let total = 0;
+    for (const [cat, items] of Object.entries(byCategory)) {
+      push(items, 'The Skint', cat, 'https://theskint.com/ongoing-events/');
+      total += items.length;
+    }
+    console.error(`The Skint (ongoing): ${total} (${Object.keys(byCategory).join(', ')})`);
   } catch (e) { console.error('The Skint ongoing error:', e.message); }
 }
+
 
 // Time Out NY removed — their /things-to-do page is editorial content (listicles,
 // neighborhood guides, reviews), not structured events. Our other sources cover
