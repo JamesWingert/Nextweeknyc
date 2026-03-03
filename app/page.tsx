@@ -216,35 +216,37 @@ export default function Home() {
         </p>
       </header>
 
-      {/* Category filters + view toggle */}
+      {/* Category filters (hidden on Showtimes) + view toggle */}
       <div style={{ display: 'flex', flexWrap: 'wrap' as const, alignItems: 'center', justifyContent: 'space-between', gap: '1rem', marginBottom: '1.5rem' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem' }}>
-          {deduped.map(({ key, label, bg, text, dot }) => {
-            const matchingKeys = categoryConfig.filter(c => c.label === label).map(c => c.key);
-            const isActive = matchingKeys.some(k => selectedCategories.includes(k));
-            return (
-              <button
-                key={key}
-                onClick={() => {
-                  setSelectedCategories(prev => {
-                    if (isActive) return prev.filter(c => !matchingKeys.includes(c));
-                    return [...prev, ...matchingKeys.filter(k => !prev.includes(k))];
-                  });
-                }}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: '0.375rem',
-                  padding: '0.375rem 0.75rem', borderRadius: '999px', fontSize: '0.8125rem', fontWeight: 500,
-                  border: isActive ? `1.5px solid ${dot}` : '1.5px solid #e8e4de',
-                  background: isActive ? bg : '#fff', color: isActive ? text : '#8888a0',
-                  cursor: 'pointer', transition: 'all 0.15s ease',
-                }}
-              >
-                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: isActive ? dot : '#d1d1d1' }} />
-                {label}
-              </button>
-            );
-          })}
-        </div>
+        {viewMode !== 'showtimes' ? (
+          <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem' }}>
+            {deduped.map(({ key, label, bg, text, dot }) => {
+              const matchingKeys = categoryConfig.filter(c => c.label === label).map(c => c.key);
+              const isActive = matchingKeys.some(k => selectedCategories.includes(k));
+              return (
+                <button
+                  key={key}
+                  onClick={() => {
+                    setSelectedCategories(prev => {
+                      if (isActive) return prev.filter(c => !matchingKeys.includes(c));
+                      return [...prev, ...matchingKeys.filter(k => !prev.includes(k))];
+                    });
+                  }}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: '0.375rem',
+                    padding: '0.375rem 0.75rem', borderRadius: '999px', fontSize: '0.8125rem', fontWeight: 500,
+                    border: isActive ? `1.5px solid ${dot}` : '1.5px solid #e8e4de',
+                    background: isActive ? bg : '#fff', color: isActive ? text : '#8888a0',
+                    cursor: 'pointer', transition: 'all 0.15s ease',
+                  }}
+                >
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: isActive ? dot : '#d1d1d1' }} />
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        ) : <div />}
         <div style={{ display: 'flex', background: '#f0ece6', borderRadius: '0.5rem', padding: '3px' }}>
           {([
             { mode: 'calendar' as const, label: '📅 Calendar' },
@@ -733,18 +735,32 @@ function MonthCalendar({
 
 // --- Showtimes View ---
 
+const VENUE_COLORS: Record<string, { accent: string; bg: string; text: string; border: string; dot: string }> = {
+  'metrograph':          { accent: '#7c3aed', bg: '#f5f3ff', text: '#5b21b6', border: '#c4b5fd', dot: '#8b5cf6' },
+  'ifc center':          { accent: '#0891b2', bg: '#ecfeff', text: '#155e75', border: '#a5f3fc', dot: '#06b6d4' },
+  'film forum':          { accent: '#c2410c', bg: '#fff7ed', text: '#9a3412', border: '#fed7aa', dot: '#f97316' },
+  'angelika film center':{ accent: '#be185d', bg: '#fdf2f8', text: '#9d174d', border: '#fbcfe8', dot: '#ec4899' },
+};
+const DEFAULT_VENUE_COLOR = { accent: '#6b7280', bg: '#f9fafb', text: '#374151', border: '#d1d5db', dot: '#9ca3af' };
+
+function getVenueColor(venue: string) {
+  return VENUE_COLORS[venue.toLowerCase()] || DEFAULT_VENUE_COLOR;
+}
+
 function ShowtimesView({ events, currentMonth, today }: { events: Event[]; currentMonth: Date; today: Date }) {
   const [selectedVenue, setSelectedVenue] = useState<string | null>(null);
 
-  // Group by venue
   const venues = Array.from(new Set(events.map(e => e.venue))).sort();
-
-  // Get unique dates for the current month, sorted
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(currentMonth);
 
   const filteredByMonth = events.filter(e => {
     if (!e.date) return false;
+    if (isDateRange(e.date)) {
+      const range = parseDateRange(e.date);
+      if (!range) return false;
+      return range.end >= monthStart && range.start <= monthEnd;
+    }
     const d = toDate(e.date);
     return d >= monthStart && d <= monthEnd;
   });
@@ -755,66 +771,164 @@ function ShowtimesView({ events, currentMonth, today }: { events: Event[]; curre
     if (!e.date) continue;
     const v = e.venue;
     if (!grouped[v]) grouped[v] = {};
-    if (!grouped[v][e.date]) grouped[v][e.date] = [];
-    grouped[v][e.date].push(e);
+    // For range dates, use the start date as the grouping key
+    const dateKey = isDateRange(e.date) ? e.date.split(' to ')[0] : e.date;
+    if (!grouped[v][dateKey]) grouped[v][dateKey] = [];
+    grouped[v][dateKey].push(e);
   }
 
   const todayStr = toStr(today);
   const activeVenues = selectedVenue ? [selectedVenue] : venues;
 
+  // Collect "today" films across all active venues
+  const todayFilms = activeVenues.flatMap(v => (grouped[v]?.[todayStr] || []))
+    .sort((a, b) => a.venue.localeCompare(b.venue) || a.title.localeCompare(b.title));
+
   return (
     <div>
-      <div style={{ marginBottom: '1.25rem' }}>
-        <p style={{ fontSize: '0.875rem', color: '#8888a0', marginBottom: '0.75rem' }}>
-          {filteredByMonth.length} showtime{filteredByMonth.length !== 1 ? 's' : ''} across {venues.length} venue{venues.length !== 1 ? 's' : ''} in {format(currentMonth, 'MMMM')}
-        </p>
+      {/* Venue filter pills */}
+      <div style={{ marginBottom: '1.5rem' }}>
         <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' as const }}>
-          {venues.map(v => (
-            <button
-              key={v}
-              onClick={() => setSelectedVenue(selectedVenue === v ? null : v)}
-              style={{
-                padding: '0.375rem 0.75rem', borderRadius: '999px', fontSize: '0.8125rem', fontWeight: 500,
-                border: selectedVenue === v ? '1.5px solid #ef4444' : '1.5px solid #e8e4de',
-                background: selectedVenue === v ? '#fde8e8' : '#fff',
-                color: selectedVenue === v ? '#b91c1c' : '#8888a0',
-                cursor: 'pointer', transition: 'all 0.15s ease',
-              }}
-            >
-              🎬 {v} ({(grouped[v] ? Object.values(grouped[v]).reduce((n, arr) => n + arr.length, 0) : 0)})
-            </button>
-          ))}
+          {venues.map(v => {
+            const vc = getVenueColor(v);
+            const isActive = selectedVenue === v;
+            const count = grouped[v] ? Object.values(grouped[v]).reduce((n, arr) => n + arr.length, 0) : 0;
+            return (
+              <button
+                key={v}
+                onClick={() => setSelectedVenue(isActive ? null : v)}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: '0.375rem',
+                  padding: '0.4rem 0.875rem', borderRadius: '999px', fontSize: '0.8125rem', fontWeight: 500,
+                  border: `1.5px solid ${isActive ? vc.accent : '#e8e4de'}`,
+                  background: isActive ? vc.bg : '#fff',
+                  color: isActive ? vc.text : '#8888a0',
+                  cursor: 'pointer', transition: 'all 0.15s ease',
+                }}
+              >
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: isActive ? vc.dot : '#d1d1d1' }} />
+                {v}
+                <span style={{ fontSize: '0.75rem', opacity: 0.7 }}>({count})</span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
+      {/* Today's screenings highlight */}
+      {todayFilms.length > 0 && !selectedVenue && (
+        <div style={{
+          marginBottom: '2rem', padding: '1.25rem', borderRadius: '0.75rem',
+          background: 'linear-gradient(135deg, #fffbf5 0%, #fef3ec 100%)',
+          border: '1px solid #fde8d8',
+        }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem',
+          }}>
+            <span style={{
+              fontSize: '0.75rem', fontWeight: 700, color: '#e07a5f',
+              textTransform: 'uppercase', letterSpacing: '0.06em',
+            }}>
+              ● Playing Today
+            </span>
+            <span style={{ fontSize: '0.75rem', color: '#c4956e' }}>
+              {format(today, 'EEEE, MMMM d')}
+            </span>
+          </div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+            gap: '0.5rem',
+          }}>
+            {todayFilms.map(film => {
+              const vc = getVenueColor(film.venue);
+              return (
+                <a
+                  key={film.id}
+                  href={film.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'flex', flexDirection: 'column' as const,
+                    padding: '0.625rem 0.875rem',
+                    borderRadius: '0.5rem', fontSize: '0.8125rem',
+                    textDecoration: 'none', color: '#1a1a2e',
+                    background: '#fff', border: `1px solid ${vc.border}`,
+                    borderLeft: `3px solid ${vc.accent}`,
+                    transition: 'all 0.15s ease',
+                  }}
+                  onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                    e.currentTarget.style.background = vc.bg;
+                    e.currentTarget.style.transform = 'translateY(-1px)';
+                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+                  }}
+                  onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                    e.currentTarget.style.background = '#fff';
+                    e.currentTarget.style.transform = 'none';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                  title={film.title}
+                >
+                  <span style={{ fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {film.title}
+                  </span>
+                  <span style={{ fontSize: '0.6875rem', color: vc.text, marginTop: '0.25rem', fontWeight: 500 }}>
+                    {film.venue}
+                    {film.time && film.time !== 'TBA' && ` · ${film.time}`}
+                  </span>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Venue sections */}
       {activeVenues.map(venue => {
         const venueDates = grouped[venue];
         if (!venueDates) return null;
         const sortedDates = Object.keys(venueDates).sort();
+        const vc = getVenueColor(venue);
+        const venueTotal = Object.values(venueDates).reduce((n, arr) => n + arr.length, 0);
 
         return (
-          <div key={venue} style={{ marginBottom: '2rem' }}>
+          <div key={venue} style={{ marginBottom: '2.5rem' }}>
+            {/* Venue header */}
             <div style={{
-              display: 'flex', alignItems: 'center', gap: '0.5rem',
-              marginBottom: '1rem', paddingBottom: '0.625rem', borderBottom: '2px solid #fde8e8',
+              display: 'flex', alignItems: 'center', gap: '0.625rem',
+              marginBottom: '1.25rem', paddingBottom: '0.75rem',
+              borderBottom: `2px solid ${vc.border}`,
             }}>
-              <span style={{ fontSize: '1.125rem' }}>🎬</span>
-              <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#1a1a2e', margin: 0 }}>{venue}</h3>
+              <span style={{
+                width: '10px', height: '10px', borderRadius: '50%', background: vc.accent,
+              }} />
+              <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#1a1a2e', margin: 0 }}>
+                {venue}
+              </h3>
+              <span style={{ fontSize: '0.8125rem', color: '#8888a0', fontWeight: 400 }}>
+                {venueTotal} screening{venueTotal !== 1 ? 's' : ''}
+              </span>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '0.75rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '1rem' }}>
               {sortedDates.map(date => {
                 const films = venueDates[date];
                 const isPast = date < todayStr;
                 const isToday = date === todayStr;
 
                 return (
-                  <div key={date} style={{ opacity: isPast ? 0.5 : 1 }}>
+                  <div key={date} style={{ opacity: isPast ? 0.45 : 1 }}>
                     <div style={{
-                      fontSize: '0.75rem', fontWeight: 600, color: isToday ? '#e07a5f' : '#8888a0',
-                      textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.375rem',
+                      fontSize: '0.75rem', fontWeight: 600,
+                      color: isToday ? '#e07a5f' : '#8888a0',
+                      textTransform: 'uppercase', letterSpacing: '0.04em',
+                      marginBottom: '0.5rem',
+                      display: 'flex', alignItems: 'center', gap: '0.375rem',
                     }}>
-                      {isToday ? '● Today' : format(toDate(date), 'EEE, MMM d')}
+                      {isToday && <span style={{
+                        width: '6px', height: '6px', borderRadius: '50%', background: '#e07a5f',
+                      }} />}
+                      {isToday ? 'Today' : format(toDate(date), 'EEE, MMM d')}
                     </div>
                     <div style={{
                       display: 'grid',
@@ -831,24 +945,31 @@ function ShowtimesView({ events, currentMonth, today }: { events: Event[]; curre
                             display: 'block', padding: '0.5rem 0.75rem',
                             borderRadius: '0.5rem', fontSize: '0.8125rem',
                             textDecoration: 'none', color: '#1a1a2e',
-                            background: '#fff', border: '1px solid #f0ece6',
-                            borderLeft: '3px solid #ef4444',
+                            background: '#fff', border: `1px solid ${vc.border}`,
+                            borderLeft: `3px solid ${vc.accent}`,
                             transition: 'all 0.15s ease',
                             overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                           }}
                           onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                            e.currentTarget.style.borderColor = '#fde8e8';
-                            e.currentTarget.style.background = '#fef9f3';
+                            e.currentTarget.style.background = vc.bg;
+                            e.currentTarget.style.transform = 'translateY(-1px)';
+                            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
                           }}
                           onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                            e.currentTarget.style.borderColor = '#f0ece6';
                             e.currentTarget.style.background = '#fff';
+                            e.currentTarget.style.transform = 'none';
+                            e.currentTarget.style.boxShadow = 'none';
                           }}
                           title={film.title}
                         >
                           <span style={{ fontWeight: 600 }}>{film.title}</span>
                           {film.time && film.time !== 'TBA' && (
                             <span style={{ color: '#8888a0', marginLeft: '0.5rem', fontSize: '0.75rem' }}>{film.time}</span>
+                          )}
+                          {isDateRange(film.date || '') && (
+                            <span style={{ color: vc.text, marginLeft: '0.5rem', fontSize: '0.6875rem', fontWeight: 500 }}>
+                              {getDateLabel(film.date || '')}
+                            </span>
                           )}
                         </a>
                       ))}

@@ -541,55 +541,212 @@ async function scrapeBAM() {
 // ---------------------------------------------------------------------------
 
 async function scrapeMetrograph(browser) {
-  const page = await browser.newPage();
-  page.setDefaultTimeout(15000);
-  try {
-    await page.goto('https://metrograph.com/calendar/', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(4000);
-    const items = await page.evaluate(() => {
-      const r = [], seen = new Set();
-      const MONTHS = {jan:0,january:0,feb:1,february:1,mar:2,march:2,apr:3,april:3,may:4,jun:5,june:5,jul:6,july:6,aug:7,august:7,sep:8,sept:8,september:8,oct:9,october:9,nov:10,november:10,dec:11,december:11};
-      const year = new Date().getFullYear();
+  // Metrograph has two relevant pages:
+  //   /film/   — showtimes listing; each film has h3.movie_title and nearby
+  //              date_picker_holder / film_day_chooser with dates like "Mon Mar 2"
+  //   /events/ — special events (Q&As, introductions, live accompaniment)
+  //              with specific dates like "Friday March 6, 9:00pm"
 
-      // The selected day tab has the current date — "Today March 2" or "Tuesday March 3"
-      // Find the selected day-selector-day to get the date for all films shown
-      let currentDate = '';
-      const selectedDay = document.querySelector('.day-selector-day.selected, a.day-selector-day.selected');
-      if (selectedDay) {
-        const monthEl = selectedDay.textContent?.replace(/\s+/g, ' ')?.trim() || '';
-        // "TodayMarch2" or "TuesdayMarch3" — extract month + day
-        const dayMatch = monthEl.match(/(January|February|March|April|May|June|July|August|September|October|November|December)\s*(\d{1,2})/i);
-        if (dayMatch) {
-          const mon = MONTHS[dayMatch[1].toLowerCase()];
-          if (mon !== undefined) {
-            currentDate = `${year}-${String(mon+1).padStart(2,'0')}-${String(parseInt(dayMatch[2],10)).padStart(2,'0')}`;
+  const showtimeItems = [];
+  const eventItems = [];
+
+  // --- 1. Scrape /film/ for showtimes with per-film dates ---
+  const filmPage = await browser.newPage();
+  filmPage.setDefaultTimeout(15000);
+  try {
+    await filmPage.goto('https://metrograph.com/film/', { waitUntil: 'domcontentloaded' });
+    await filmPage.waitForTimeout(5000);
+
+    const films = await filmPage.evaluate(() => {
+      const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11,
+        january:0,february:1,march:2,april:3,june:5,july:6,august:7,september:8,october:9,november:10,december:11};
+      const year = new Date().getFullYear();
+      const results = [];
+
+      // Collect all h3.movie_title elements — each represents one film block
+      const movieBlocks = document.querySelectorAll('h3.movie_title');
+
+      movieBlocks.forEach((h3, idx) => {
+        const title = h3.textContent?.trim();
+        if (!title || title.length < 3 || title.length > 120) return;
+        if (/^(all films|now playing|coming soon|showtimes)/i.test(title)) return;
+
+        // Scope: collect DOM between this h3 and the NEXT h3.movie_title
+        // This avoids picking up dates from the global page header or other films
+        const nextH3 = movieBlocks[idx + 1] || null;
+        let scopeEl = h3.nextElementSibling;
+        const scopeText = [];
+        const scopeEls = [];
+        while (scopeEl && scopeEl !== nextH3) {
+          scopeEls.push(scopeEl);
+          scopeText.push(scopeEl.textContent || '');
+          scopeEl = scopeEl.nextElementSibling;
+        }
+        const blockText = scopeText.join(' ').replace(/\s+/g, ' ');
+
+        // Extract dates from film_day_chooser within this block
+        const dates = new Set();
+        for (const el of scopeEls) {
+          el.querySelectorAll?.('.film_day_chooser li, .film_day_chooser a').forEach(dp => {
+            const text = dp.textContent?.trim().replace(/\s+/g, ' ') || '';
+            const m = text.match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+(\d{1,2})/i);
+            if (m) {
+              const mon = MONTHS[m[1].toLowerCase()];
+              if (mon !== undefined) {
+                dates.add(`${year}-${String(mon+1).padStart(2,'0')}-${String(parseInt(m[2],10)).padStart(2,'0')}`);
+              }
+            }
+          });
+          // Also check if the element itself is a film_day_chooser
+          if (el.classList?.contains('film_day_chooser') || el.classList?.contains('date_picker_holder')) {
+            el.querySelectorAll('li, a').forEach(dp => {
+              const text = dp.textContent?.trim().replace(/\s+/g, ' ') || '';
+              const m = text.match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+(\d{1,2})/i);
+              if (m) {
+                const mon = MONTHS[m[1].toLowerCase()];
+                if (mon !== undefined) {
+                  dates.add(`${year}-${String(mon+1).padStart(2,'0')}-${String(parseInt(m[2],10)).padStart(2,'0')}`);
+                }
+              }
+            });
           }
         }
-      }
-      // Fallback: use today's date
-      if (!currentDate) {
-        const now = new Date();
-        currentDate = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
-      }
 
-      // Films are shown as links to /film/ pages
-      document.querySelectorAll('[class*="film"], [class*="screening"], a[href*="/film/"]').forEach(el => {
-        const titleEl = el.querySelector('h2, h3, h4, .title, [class*="title"]');
-        const t = titleEl?.textContent?.trim()
-          || (el.tagName === 'A' ? el.textContent?.trim() : '');
-        const link = el.closest('a')?.href || el.querySelector('a')?.href || '';
-        if (t && t.length > 3 && t.length < 100 && !seen.has(t.toLowerCase())
-            && !/^(calendar|schedule|today|this week|view calendar|sign in|showtimes)/i.test(t)) {
-          seen.add(t.toLowerCase());
-          r.push({ title: t, link, date: currentDate });
+        // Fallback: parse "Day Mon DD" patterns from the scoped block text only
+        if (dates.size === 0) {
+          const re = /(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\w*\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+(\d{1,2})/gi;
+          let match;
+          while ((match = re.exec(blockText)) !== null) {
+            const mon = MONTHS[match[1].toLowerCase()];
+            if (mon !== undefined) {
+              dates.add(`${year}-${String(mon+1).padStart(2,'0')}-${String(parseInt(match[2],10)).padStart(2,'0')}`);
+            }
+          }
+        }
+
+        // Find the film link
+        let link = '';
+        const prevA = h3.previousElementSibling;
+        if (prevA?.tagName === 'A' && prevA.href?.includes('/film/')) link = prevA.href;
+        if (!link) {
+          for (const el of scopeEls) {
+            const a = el.querySelector?.('a[href*="/film/"]');
+            if (a) { link = a.href; break; }
+          }
+        }
+        if (!link) {
+          const a = h3.closest('a') || h3.querySelector('a');
+          if (a) link = a.href;
+        }
+
+        // Convert dates to sorted array
+        const dateArr = Array.from(dates).sort();
+
+        if (dateArr.length > 5) {
+          // Too many individual dates — collapse into a range
+          results.push({ title, link, date: `${dateArr[0]} to ${dateArr[dateArr.length - 1]}` });
+        } else if (dateArr.length > 0) {
+          // Emit one entry per date
+          dateArr.forEach(d => results.push({ title, link, date: d }));
+        } else {
+          // No dates found — still include with today's date as fallback
+          const now = new Date();
+          const today = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+          results.push({ title, link, date: today });
         }
       });
-      return r.slice(0, 30);
+      return results;
     });
-    push(items, 'Metrograph', 'Film', 'https://metrograph.com/calendar/');
-    console.error(`Metrograph: ${items.length}`);
-  } catch (e) { console.error('Metrograph error:', e.message); }
-  finally { await page.close(); }
+
+    showtimeItems.push(...films);
+    console.error(`Metrograph /film/: ${films.length} showtime entries`);
+  } catch (e) { console.error('Metrograph /film/ error:', e.message); }
+  finally { await filmPage.close(); }
+
+  // --- 2. Scrape /events/ for special events (Q&As, introductions, etc.) ---
+  const eventsPage = await browser.newPage();
+  eventsPage.setDefaultTimeout(15000);
+  try {
+    await eventsPage.goto('https://metrograph.com/events/', { waitUntil: 'domcontentloaded' });
+    await eventsPage.waitForTimeout(5000);
+
+    const evts = await eventsPage.evaluate(() => {
+      const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11,
+        january:0,february:1,march:2,april:3,june:5,july:6,august:7,september:8,october:9,november:10,december:11};
+      const year = new Date().getFullYear();
+      const results = [];
+      const seen = new Set();
+
+      // Events page has h3/h4 titles with descriptions containing dates
+      // Each event appears duplicated — dedupe by title
+      document.querySelectorAll('h3, h4, [class*="title"]').forEach(el => {
+        const title = el.textContent?.trim();
+        if (!title || title.length < 4 || title.length > 150) return;
+        if (seen.has(title.toLowerCase())) return;
+        if (/^(events?|calendar|metrograph|sign in|all films)/i.test(title)) return;
+
+        seen.add(title.toLowerCase());
+
+        // Find the parent container for context
+        let container = el.parentElement;
+        for (let i = 0; i < 6 && container; i++) {
+          const text = container.textContent || '';
+          if (text.length > title.length + 20) break;
+          container = container.parentElement;
+        }
+
+        const fullText = container ? container.textContent?.replace(/\s+/g, ' ')?.trim() || '' : '';
+        const link = container?.querySelector('a[href*="/film/"]')?.href
+          || el.closest('a')?.href || '';
+
+        // Extract date: "Friday March 6, 9:00pm" or "Sunday, March 8th"
+        let dateStr = '';
+        const dateMatch = fullText.match(/(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2})(?:th|st|nd|rd)?/i);
+        if (dateMatch) {
+          const mon = MONTHS[dateMatch[1].toLowerCase()];
+          if (mon !== undefined) {
+            dateStr = `${year}-${String(mon+1).padStart(2,'0')}-${String(parseInt(dateMatch[2],10)).padStart(2,'0')}`;
+          }
+        }
+        // Fallback: "March 6th" without day-of-week
+        if (!dateStr) {
+          const m2 = fullText.match(/(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2})(?:th|st|nd|rd)?/i);
+          if (m2) {
+            const mon = MONTHS[m2[1].toLowerCase()];
+            if (mon !== undefined) {
+              dateStr = `${year}-${String(mon+1).padStart(2,'0')}-${String(parseInt(m2[2],10)).padStart(2,'0')}`;
+            }
+          }
+        }
+
+        // Extract time
+        const timeMatch = fullText.match(/(\d{1,2}:\d{2}\s*(?:am|pm))/i);
+        const time = timeMatch ? timeMatch[1] : '';
+
+        // Build description from Q&A / introduction context
+        let description = '';
+        const qaMatch = fullText.match(/(Q&A with[^.]+)/i);
+        if (qaMatch) description = qaMatch[1].trim();
+        const introMatch = fullText.match(/(Introduction by[^.]+)/i);
+        if (introMatch) description = (description ? description + '. ' : '') + introMatch[1].trim();
+        const liveMatch = fullText.match(/(Live [^.]+accompaniment[^.]*)/i);
+        if (liveMatch) description = (description ? description + '. ' : '') + liveMatch[1].trim();
+
+        results.push({ title, link, date: dateStr, time, description });
+      });
+      return results;
+    });
+
+    eventItems.push(...evts);
+    console.error(`Metrograph /events/: ${evts.length} events`);
+  } catch (e) { console.error('Metrograph /events/ error:', e.message); }
+  finally { await eventsPage.close(); }
+
+  // Showtimes go as Film category (will appear in Showtimes tab via isShowtime())
+  push(showtimeItems, 'Metrograph', 'Film', 'https://metrograph.com/film/');
+  // Events go as Music/Performing Arts so they appear on the calendar, not showtimes
+  push(eventItems, 'Metrograph', 'Music/Performing Arts', 'https://metrograph.com/events/');
+  console.error(`Metrograph total: ${showtimeItems.length} showtimes + ${eventItems.length} events`);
 }
 
 async function scrapeGuggenheim(browser) {
@@ -1057,31 +1214,66 @@ async function scrapeAngelika(browser) {
   const page = await browser.newPage();
   page.setDefaultTimeout(15000);
   try {
-    await page.goto('https://angelikafilmcenter.com/nyc', { waitUntil: 'networkidle' });
+    await page.goto('https://angelikafilmcenter.com/nyc/now-playing', { waitUntil: 'networkidle' });
     await page.waitForTimeout(4000);
-    const items = await page.evaluate(() => {
+
+    // Get all date tabs (e.g. "Today, 3/2", "Tomorrow, 3/3", "Wednesday 3/4")
+    const dateTabs = await page.evaluate(() => {
       const r = [];
-      document.querySelectorAll('div[class*="movie-details-section"]').forEach(el => {
-        const links = el.querySelectorAll('a');
-        let title = '', href = '';
-        links.forEach(a => {
-          if (a.href && a.href.includes('/movies/details/')) {
-            title = a.textContent.trim();
-            href = a.href;
-          }
-        });
-        if (title && title.length > 2 && title.length < 100) {
-          r.push({ title, link: href });
+      const seen = new Set();
+      document.querySelectorAll('.slick-slide span').forEach(el => {
+        const t = el.textContent.trim();
+        const m = t.match(/(\d{1,2})\/(\d{1,2})/);
+        if (m && !seen.has(t)) {
+          seen.add(t);
+          r.push({ text: t, month: parseInt(m[1], 10), day: parseInt(m[2], 10) });
         }
       });
       return r;
     });
-    // Angelika shows today's schedule — use today's date
-    const today = new Date();
-    const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
-    items.forEach(item => { item.date = todayStr; });
-    push(items, 'Angelika Film Center', 'Film', 'https://angelikafilmcenter.com/nyc');
-    console.error(`Angelika: ${items.length}`);
+
+    const year = new Date().getFullYear();
+    const allItems = [];
+
+    // Click each date tab and scrape movies
+    for (const tab of dateTabs) {
+      try {
+        // Click the tab by finding the span with matching text
+        await page.evaluate((tabText) => {
+          document.querySelectorAll('.slick-slide span').forEach(el => {
+            if (el.textContent.trim() === tabText) el.click();
+          });
+        }, tab.text);
+        await page.waitForTimeout(1500);
+
+        const dateStr = `${year}-${String(tab.month).padStart(2, '0')}-${String(tab.day).padStart(2, '0')}`;
+        const movies = await page.evaluate(() => {
+          const r = [];
+          document.querySelectorAll('div[class*="movie-details-section"]').forEach(el => {
+            const links = el.querySelectorAll('a');
+            let title = '', href = '';
+            links.forEach(a => {
+              if (a.href && a.href.includes('/movies/details/')) {
+                title = a.textContent.trim();
+                href = a.href;
+              }
+            });
+            if (title && title.length > 2 && title.length < 100) {
+              r.push({ title, link: href });
+            }
+          });
+          return r;
+        });
+
+        movies.forEach(m => { m.date = dateStr; });
+        allItems.push(...movies);
+      } catch (e) {
+        console.error(`  Angelika tab "${tab.text}" error:`, e.message);
+      }
+    }
+
+    push(allItems, 'Angelika Film Center', 'Film', 'https://angelikafilmcenter.com/nyc');
+    console.error(`Angelika: ${allItems.length} (${dateTabs.length} days)`);
   } catch (e) { console.error('Angelika error:', e.message); }
   finally { await page.close(); }
 }

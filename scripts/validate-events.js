@@ -278,27 +278,29 @@ function normalizeTitle(t) {
 }
 
 function dedupeEvents(events) {
-  const byTitle = new Map();
+  const byKey = new Map();
   for (const e of events) {
-    const key = normalizeTitle(e.title);
-    const existing = byTitle.get(key);
+    // Dedup by normalized title + date — same film on different days is NOT a dupe
+    const titleKey = normalizeTitle(e.title);
+    const key = `${titleKey}|${e.date || ''}`;
+    const existing = byKey.get(key);
     if (!existing) {
-      byTitle.set(key, e);
+      byKey.set(key, e);
     } else {
       // Prefer the one with a more specific venue (not the scraper source name)
       const genericVenues = new Set(['donyc', 'the skint', 'time out ny', 'secret nyc', 'brooklyn magazine', 'eventbrite', 'nyc parks', 'broadway']);
       const existingGeneric = genericVenues.has((existing.venue || '').toLowerCase());
       const newGeneric = genericVenues.has((e.venue || '').toLowerCase());
       if (existingGeneric && !newGeneric) {
-        byTitle.set(key, e);
+        byKey.set(key, e);
       }
       // Prefer the one with a date if the other doesn't have one
       if (!existing.date && e.date) {
-        byTitle.set(key, e);
+        byKey.set(key, e);
       }
     }
   }
-  return [...byTitle.values()];
+  return [...byKey.values()];
 }
 
 // ---------------------------------------------------------------------------

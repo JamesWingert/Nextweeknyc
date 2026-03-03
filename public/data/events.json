@@ -216,6 +216,33 @@
     "time": "6:30PM"
   },
   {
+    "id": "astor-place-theatre-burnout-paradise-25",
+    "title": "Burnout Paradise",
+    "venue": "Astor Place Theatre",
+    "date": "2026-03-03",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/18/burnout-paradise-tickets",
+    "time": "7:00PM"
+  },
+  {
+    "id": "bowery-palace-jesse-malin-s-silver-manhattan-26",
+    "title": "Jesse Malin's Silver Manhattan",
+    "venue": "Bowery Palace",
+    "date": "2026-03-03",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/19/jesse-malins-silver-manhattan-tickets",
+    "time": "8:00PM"
+  },
+  {
+    "id": "pregones-theater-march-is-music-2026-27",
+    "title": "March Is Music 2026",
+    "venue": "Pregones Theater",
+    "date": "2026-03-03",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/1/march-is-music-2026-tickets",
+    "time": "7:00AM"
+  },
+  {
     "id": "webster-hall-maggie-lindemann-ayleen-valentine-28",
     "title": "Maggie Lindemann, Ayleen Valentine",
     "venue": "Webster Hall",
@@ -241,6 +268,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/3/lexxe-valentina-lucia-sierra-lancaster-tickets",
     "time": "7:00PM"
+  },
+  {
+    "id": "the-shed-nothing-s-about-to-happen-to-me-mitski-31",
+    "title": "Nothing's About to Happen to Me Mitski",
+    "venue": "The Shed",
+    "date": "2026-03-03",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/3/mitski-tickets",
+    "time": "8:00PM"
   },
   {
     "id": "mercury-lounge-muo-duo-evan-isaac-segami-annabel-asher-32",
@@ -277,6 +313,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/3/jane-handcock-tickets-late-show",
     "time": "10:30PM"
+  },
+  {
+    "id": "irving-plaza-akira-yamaoka-with-special-guest-raj-ramayya-36",
+    "title": "Akira Yamaoka with Special Guest Raj Ramayya",
+    "venue": "Irving Plaza",
+    "date": "2026-03-03",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/3/akira-yamaoka-with-special-guest-raj-ramayya-tickets",
+    "time": "7:00PM"
   },
   {
     "id": "sid-gold-s-request-room-piano-karaoke-with-mark-benjamin-37",
@@ -322,6 +367,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/3/piano-panties-tickets",
     "time": "8:00PM"
+  },
+  {
+    "id": "madison-square-garden-madison-square-garden-tour-experience-43",
+    "title": "Madison Square Garden Tour Experience",
+    "venue": "Madison Square Garden",
+    "date": "2026-03-03",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/3/madison-square-garden-tour-experience-tickets",
+    "time": "7:00PM"
   },
   {
     "id": "madison-square-garden-st-john-s-red-storm-men-s-basketball-v-georgetown-44",
@@ -378,6 +432,24 @@
     "time": "7:00PM"
   },
   {
+    "id": "astor-place-theatre-burnout-paradise-50",
+    "title": "Burnout Paradise",
+    "venue": "Astor Place Theatre",
+    "date": "2026-03-04",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/18/burnout-paradise-tickets",
+    "time": "7:00PM"
+  },
+  {
+    "id": "bowery-palace-jesse-malin-s-silver-manhattan-51",
+    "title": "Jesse Malin's Silver Manhattan",
+    "venue": "Bowery Palace",
+    "date": "2026-03-04",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/19/jesse-malins-silver-manhattan-tickets",
+    "time": "8:00PM"
+  },
+  {
     "id": "cafe-wha-the-cafe-wha-house-band-52",
     "title": "The Cafe Wha? House Band",
     "venue": "Cafe Wha?",
@@ -385,6 +457,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/4/the-cafe-wha-house-band-tickets",
     "time": "9:00PM"
+  },
+  {
+    "id": "pregones-theater-march-is-music-2026-54",
+    "title": "March Is Music 2026",
+    "venue": "Pregones Theater",
+    "date": "2026-03-04",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/1/march-is-music-2026-tickets",
+    "time": "7:00AM"
   },
   {
     "id": "marquee-new-york-kazi-55",
@@ -430,6 +511,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/4/residual-groove-one-time-weekend-tickets",
     "time": "9:00PM"
+  },
+  {
+    "id": "the-shed-nothing-s-about-to-happen-to-me-mitski-60",
+    "title": "Nothing's About to Happen to Me Mitski",
+    "venue": "The Shed",
+    "date": "2026-03-04",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/4/mitski-tickets",
+    "time": "8:00PM"
   },
   {
     "id": "rough-trade-nyc-presented-by-rough-trade-nyc-restrung-book-talk-q-a-w-matt-f-61",
@@ -504,6 +594,15 @@
     "time": "7:00PM"
   },
   {
+    "id": "blue-note-jazz-club-jane-handcock-69",
+    "title": "Jane Handcock",
+    "venue": "Blue Note Jazz Club",
+    "date": "2026-03-04",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/4/jane-handcock-1772127292",
+    "time": "10:30PM"
+  },
+  {
     "id": "garcia-s-at-the-cap-mystic-dead-70",
     "title": "Mystic Dead",
     "venue": "Garcia's at The Cap",
@@ -540,12 +639,30 @@
     "time": "5:00PM"
   },
   {
+    "id": "astor-place-theatre-burnout-paradise-74",
+    "title": "Burnout Paradise",
+    "venue": "Astor Place Theatre",
+    "date": "2026-03-05",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/18/burnout-paradise-tickets",
+    "time": "7:00PM"
+  },
+  {
     "id": "beacon-theatre-love-rocks-nyc-billy-gibbons-elvis-costello-goo-goo-dolls-ho-75",
     "title": "Love Rocks NYC, Billy Gibbons, Elvis Costello, Goo Goo Dolls, Hozier, Jon Batiste, Linda Perry, Mary J. Blige, Nile Rodgers & CH",
     "venue": "Beacon Theatre",
     "date": "2026-03-05",
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/5/love-rocks-nyc-billy-gibbons-elvis-costello-goo-goo-dolls-hozier-jon-batiste-linda-perry-mary-j-blige-nile-rodgers-ch-tickets",
+    "time": "8:00PM"
+  },
+  {
+    "id": "bowery-palace-jesse-malin-s-silver-manhattan-76",
+    "title": "Jesse Malin's Silver Manhattan",
+    "venue": "Bowery Palace",
+    "date": "2026-03-05",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/19/jesse-malins-silver-manhattan-tickets",
     "time": "8:00PM"
   },
   {
@@ -576,6 +693,15 @@
     "time": "8:00PM"
   },
   {
+    "id": "cafe-wha-the-cafe-wha-house-band-80",
+    "title": "The Cafe Wha? House Band",
+    "venue": "Cafe Wha?",
+    "date": "2026-03-05",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/5/the-cafe-wha-house-band-tickets",
+    "time": "9:00PM"
+  },
+  {
     "id": "music-hall-of-williamsburg-landon-conrath-abby-holliday-82",
     "title": "Landon Conrath, Abby Holliday",
     "venue": "Music Hall of Williamsburg",
@@ -585,12 +711,30 @@
     "time": "7:00PM"
   },
   {
+    "id": "pregones-theater-march-is-music-2026-83",
+    "title": "March Is Music 2026",
+    "venue": "Pregones Theater",
+    "date": "2026-03-05",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/1/march-is-music-2026-tickets",
+    "time": "7:00AM"
+  },
+  {
     "id": "cafe-wha-pompeii-floyd-presents-wish-you-were-here-live-84",
     "title": "Pompeii Floyd Presents \"Wish You Were Here\" Live",
     "venue": "Cafe Wha?",
     "date": "2026-03-05",
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/5/wish-you-were-here-live-tickets",
+    "time": "7:00PM"
+  },
+  {
+    "id": "brooklyn-steel-amber-mark-sherwyn-rebel-rae-85",
+    "title": "Amber Mark, Sherwyn, Rebel Rae",
+    "venue": "Brooklyn Steel",
+    "date": "2026-03-05",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/5/amber-mark-sherwyn-tickets",
     "time": "7:00PM"
   },
   {
@@ -702,6 +846,15 @@
     "time": "7:00PM"
   },
   {
+    "id": "astor-place-theatre-burnout-paradise-99",
+    "title": "Burnout Paradise",
+    "venue": "Astor Place Theatre",
+    "date": "2026-03-06",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/18/burnout-paradise-tickets",
+    "time": "7:00PM"
+  },
+  {
     "id": "brooklyn-steel-an-evening-with-cat-power-20th-anniversary-performance-of-th-100",
     "title": "An Evening with Cat Power, 20th Anniversary performance of the album in its entirety",
     "venue": "Brooklyn Steel",
@@ -709,6 +862,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/6/cat-power-20th-anniversary-performance-of-the-album-in-its-entirety-tickets",
     "time": "7:00PM"
+  },
+  {
+    "id": "bowery-palace-jesse-malin-s-silver-manhattan-101",
+    "title": "Jesse Malin's Silver Manhattan",
+    "venue": "Bowery Palace",
+    "date": "2026-03-06",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/19/jesse-malins-silver-manhattan-tickets",
+    "time": "8:00PM"
   },
   {
     "id": "brooklyn-bowl-the-heavyweights-ft-cory-henry-eric-krasno-robert-sput-seari-102",
@@ -738,6 +900,15 @@
     "time": "7:00PM"
   },
   {
+    "id": "cafe-wha-the-cafe-wha-house-band-105",
+    "title": "The Cafe Wha? House Band",
+    "venue": "Cafe Wha?",
+    "date": "2026-03-06",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/6/the-cafe-wha-house-band-tickets",
+    "time": "9:00PM"
+  },
+  {
     "id": "le-poisson-rouge-boots-n-beats-country-boiler-room-107",
     "title": "Boots ‘N Beats Country Boiler Room",
     "venue": "Le Poisson Rouge",
@@ -745,6 +916,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/6/boots-n-beats-a-night-of-country-edm-tickets",
     "time": "11:30PM"
+  },
+  {
+    "id": "pregones-theater-march-is-music-2026-108",
+    "title": "March Is Music 2026",
+    "venue": "Pregones Theater",
+    "date": "2026-03-06",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/1/march-is-music-2026-tickets",
+    "time": "7:00AM"
   },
   {
     "id": "le-poisson-rouge-herbert-holler-s-annual-ladies-night-with-host-savior-elmund-109",
@@ -789,6 +969,15 @@
     "date": "2026-03-06",
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/6/rael-the-music-of-genesis-and-peter-gabriel-tickets",
+    "time": "8:00PM"
+  },
+  {
+    "id": "the-shed-nothing-s-about-to-happen-to-me-mitski-114",
+    "title": "Nothing's About to Happen to Me Mitski",
+    "venue": "The Shed",
+    "date": "2026-03-06",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/6/mitski-tickets",
     "time": "8:00PM"
   },
   {
@@ -837,6 +1026,15 @@
     "time": "7:00PM"
   },
   {
+    "id": "xanadu-presented-by-xanadu-elsewhere-presents-esprit-live-skate-120",
+    "title": "Presented by Xanadu & Elsewhere Presents ESPRIT 空想 (live) (skate)",
+    "venue": "Xanadu",
+    "date": "2026-03-06",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/6/esprit-live-skate-tickets",
+    "time": "10:00PM"
+  },
+  {
     "id": "public-records-aerae-elias-garcia-martyn-viiaan-kels-121",
     "title": "AERAE + Elias Garcia / Martyn + Viiaan / Kels",
     "venue": "Public Records",
@@ -855,6 +1053,15 @@
     "time": "8:00PM"
   },
   {
+    "id": "astor-place-theatre-burnout-paradise-123",
+    "title": "Burnout Paradise",
+    "venue": "Astor Place Theatre",
+    "date": "2026-03-07",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/18/burnout-paradise-tickets",
+    "time": "7:00PM"
+  },
+  {
     "id": "webster-hall-an-evening-with-cat-power-124",
     "title": "An Evening with Cat Power",
     "venue": "Webster Hall",
@@ -862,6 +1069,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/7/cat-power-tickets",
     "time": "6:30PM"
+  },
+  {
+    "id": "bowery-palace-jesse-malin-s-silver-manhattan-125",
+    "title": "Jesse Malin's Silver Manhattan",
+    "venue": "Bowery Palace",
+    "date": "2026-03-07",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/19/jesse-malins-silver-manhattan-tickets",
+    "time": "8:00PM"
   },
   {
     "id": "brooklyn-bowl-spafford-126",
@@ -909,6 +1125,15 @@
     "time": "8:00PM"
   },
   {
+    "id": "cafe-wha-the-cafe-wha-house-band-131",
+    "title": "The Cafe Wha? House Band",
+    "venue": "Cafe Wha?",
+    "date": "2026-03-07",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/7/the-cafe-wha-house-band-tickets",
+    "time": "9:00PM"
+  },
+  {
     "id": "elsewhere-what-so-not-133",
     "title": "What So Not",
     "venue": "Elsewhere",
@@ -916,6 +1141,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/7/what-so-not-tickets",
     "time": "7:00PM"
+  },
+  {
+    "id": "pregones-theater-march-is-music-2026-134",
+    "title": "March Is Music 2026",
+    "venue": "Pregones Theater",
+    "date": "2026-03-07",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/1/march-is-music-2026-tickets",
+    "time": "7:00AM"
   },
   {
     "id": "cafe-wha-a-birthday-tribute-to-townes-van-zandt-135",
@@ -981,6 +1215,15 @@
     "time": "11:00PM"
   },
   {
+    "id": "the-shed-nothing-s-about-to-happen-to-me-mitski-142",
+    "title": "Nothing's About to Happen to Me Mitski",
+    "venue": "The Shed",
+    "date": "2026-03-07",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/7/mitski-tickets",
+    "time": "8:00PM"
+  },
+  {
     "id": "elsewhere-flamingosis-nothing-nueue-bliss-station-143",
     "title": "Flamingosis, Nothing_Nueue, Bliss Station",
     "venue": "Elsewhere",
@@ -1008,6 +1251,24 @@
     "time": "10:00PM"
   },
   {
+    "id": "astor-place-theatre-burnout-paradise-147",
+    "title": "Burnout Paradise",
+    "venue": "Astor Place Theatre",
+    "date": "2026-03-08",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/18/burnout-paradise-tickets",
+    "time": "7:00PM"
+  },
+  {
+    "id": "bowery-palace-jesse-malin-s-silver-manhattan-148",
+    "title": "Jesse Malin's Silver Manhattan",
+    "venue": "Bowery Palace",
+    "date": "2026-03-08",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/19/jesse-malins-silver-manhattan-tickets",
+    "time": "8:00PM"
+  },
+  {
     "id": "groove-ladies-of-90s-soul-mary-j-blige-janet-jackson-toni-braxton-149",
     "title": "Ladies of 90s Soul: Mary J. Blige, Janet Jackson, & Toni Braxton",
     "venue": "Groove",
@@ -1017,6 +1278,15 @@
     "time": "7:00PM"
   },
   {
+    "id": "cafe-wha-the-cafe-wha-house-band-150",
+    "title": "The Cafe Wha? House Band",
+    "venue": "Cafe Wha?",
+    "date": "2026-03-08",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/8/the-cafe-wha-house-band-tickets",
+    "time": "9:00PM"
+  },
+  {
     "id": "brooklyn-bowl-the-rock-and-roll-playhouse-plays-music-of-bad-bunny-more-152",
     "title": "The Rock and Roll Playhouse Plays Music of Bad Bunny + More",
     "venue": "Brooklyn Bowl",
@@ -1024,6 +1294,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/8/the-rock-and-roll-playhouse-plays-music-of-bad-bunny-more-tickets",
     "time": "12:00PM"
+  },
+  {
+    "id": "pregones-theater-march-is-music-2026-153",
+    "title": "March Is Music 2026",
+    "venue": "Pregones Theater",
+    "date": "2026-03-08",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/1/march-is-music-2026-tickets",
+    "time": "7:00AM"
   },
   {
     "id": "elsewhere-coma-cinema-trace-mountains-honeygaze-154",
@@ -1062,6 +1341,24 @@
     "time": "6:00PM"
   },
   {
+    "id": "blue-note-jazz-club-kem-presents-alkemy-158",
+    "title": "KEM Presents Alkemy",
+    "venue": "Blue Note Jazz Club",
+    "date": "2026-03-08",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/8/alkemy-a-soulful-jazz-homage-to-al-jarreau-tickets",
+    "time": "10:30PM"
+  },
+  {
+    "id": "city-winery-lalah-hathaway-159",
+    "title": "Lalah Hathaway",
+    "venue": "City Winery",
+    "date": "2026-03-08",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/8/lalah-hathaway-tickets",
+    "time": "5:00PM"
+  },
+  {
     "id": "the-paramount-kenny-wayne-shepherd-162",
     "title": "Kenny Wayne Shepherd",
     "venue": "The Paramount",
@@ -1087,6 +1384,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/8/surfing-for-daisy-tickets",
     "time": "5:00PM"
+  },
+  {
+    "id": "xanadu-presented-by-xanadu-presents-skaterobics-all-experience-leve-165",
+    "title": "Presented by Xanadu Presents. Skaterobics - All Experience Levels Instructional Class",
+    "venue": "Xanadu",
+    "date": "2026-03-08",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/8/skaterobics-all-experience-levels-instructional-class-tickets",
+    "time": "6:00PM"
   },
   {
     "id": "xanadu-presented-by-xanadu-presents-sunday-skate-club-ft-shawn-dub--166",
@@ -1143,6 +1449,33 @@
     "time": "6:30PM"
   },
   {
+    "id": "astor-place-theatre-burnout-paradise-172",
+    "title": "Burnout Paradise",
+    "venue": "Astor Place Theatre",
+    "date": "2026-03-09",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/18/burnout-paradise-tickets",
+    "time": "7:00PM"
+  },
+  {
+    "id": "bowery-palace-jesse-malin-s-silver-manhattan-173",
+    "title": "Jesse Malin's Silver Manhattan",
+    "venue": "Bowery Palace",
+    "date": "2026-03-09",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/19/jesse-malins-silver-manhattan-tickets",
+    "time": "8:00PM"
+  },
+  {
+    "id": "pregones-theater-march-is-music-2026-174",
+    "title": "March Is Music 2026",
+    "venue": "Pregones Theater",
+    "date": "2026-03-09",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/1/march-is-music-2026-tickets",
+    "time": "7:00AM"
+  },
+  {
     "id": "le-poisson-rouge-gabi-hartmann-175",
     "title": "Gabi Hartmann",
     "venue": "Le Poisson Rouge",
@@ -1170,12 +1503,30 @@
     "time": "6:00PM"
   },
   {
+    "id": "the-shed-nothing-s-about-to-happen-to-me-mitski-178",
+    "title": "Nothing's About to Happen to Me Mitski",
+    "venue": "The Shed",
+    "date": "2026-03-09",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/9/mitski-tickets",
+    "time": "8:00PM"
+  },
+  {
     "id": "the-bell-house-the-moth-storyslam-179",
     "title": "The Moth Storyslam",
     "venue": "The Bell House",
     "date": "2026-03-09",
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/9/the-moth-storyslam-tickets",
+    "time": "8:00PM"
+  },
+  {
+    "id": "the-stand-the-legion-of-skanks-podcast-live-180",
+    "title": "The Legion Of Skanks Podcast Live",
+    "venue": "The Stand",
+    "date": "2026-03-09",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/9/the-legion-of-skanks-podcast-live-tickets",
     "time": "8:00PM"
   },
   {
@@ -1197,6 +1548,24 @@
     "time": "7:00PM"
   },
   {
+    "id": "union-pool-rev-vince-anderson-the-love-choir-183",
+    "title": "Rev. Vince Anderson & The Love Choir!",
+    "venue": "Union Pool",
+    "date": "2026-03-09",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/9/rev-vince-anderson-the-love-choir-tickets",
+    "time": "8:30PM"
+  },
+  {
+    "id": "city-winery-city-vineyard-sessions-are-back-184",
+    "title": "City Vineyard Sessions Are Back",
+    "venue": "City Winery",
+    "date": "2026-03-09",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/9/city-vineyard-sessions-are-back-tickets",
+    "time": "8:00PM"
+  },
+  {
     "id": "barclays-center-brooklyn-nets-vs-memphis-grizzlies-185",
     "title": "Brooklyn Nets vs. Memphis Grizzlies",
     "venue": "Barclays Center",
@@ -1204,6 +1573,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/9/brooklyn-nets-vs-memphis-grizzlies-tickets",
     "time": "7:30PM"
+  },
+  {
+    "id": "madison-square-garden-madison-square-garden-tour-experience-186",
+    "title": "Madison Square Garden Tour Experience",
+    "venue": "Madison Square Garden",
+    "date": "2026-03-09",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/9/madison-square-garden-tour-experience-tickets",
+    "time": "7:00PM"
   },
   {
     "id": "blue-note-jazz-club-dizzy-gillespie-all-stars-187",
@@ -1296,6 +1674,15 @@
     "time": "9:00PM"
   },
   {
+    "id": "astor-place-theatre-burnout-paradise-197",
+    "title": "Burnout Paradise",
+    "venue": "Astor Place Theatre",
+    "date": "2026-03-10",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/18/burnout-paradise-tickets",
+    "time": "7:00PM"
+  },
+  {
     "id": "good-judy-missed-connections-with-girls-198",
     "title": "missed connections with girls",
     "venue": "Good Judy",
@@ -1305,6 +1692,15 @@
     "time": "7:00PM"
   },
   {
+    "id": "bowery-palace-jesse-malin-s-silver-manhattan-199",
+    "title": "Jesse Malin's Silver Manhattan",
+    "venue": "Bowery Palace",
+    "date": "2026-03-10",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/19/jesse-malins-silver-manhattan-tickets",
+    "time": "8:00PM"
+  },
+  {
     "id": "blue-note-jazz-club-chris-dave-x-dj-jazzy-jeff-x-savion-glover-200",
     "title": "Chris Dave X Dj Jazzy Jeff X Savion Glover",
     "venue": "Blue Note Jazz Club",
@@ -1312,6 +1708,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/10/chris-dave-x-dj-jazzy-jeff-x-savion-glover-tickets",
     "time": "8:00PM"
+  },
+  {
+    "id": "pregones-theater-march-is-music-2026-201",
+    "title": "March Is Music 2026",
+    "venue": "Pregones Theater",
+    "date": "2026-03-10",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/1/march-is-music-2026-tickets",
+    "time": "7:00AM"
   },
   {
     "id": "le-poisson-rouge-josman-202",
@@ -1476,6 +1881,69 @@
     "time": "7:30PM"
   },
   {
+    "id": "madison-square-garden-madison-square-garden-tour-experience-221",
+    "title": "Madison Square Garden Tour Experience",
+    "venue": "Madison Square Garden",
+    "date": "2026-03-10",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/10/madison-square-garden-tour-experience-tickets",
+    "time": "7:00PM"
+  },
+  {
+    "id": "astor-place-theatre-burnout-paradise-222",
+    "title": "Burnout Paradise",
+    "venue": "Astor Place Theatre",
+    "date": "2026-03-11",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/18/burnout-paradise-tickets",
+    "time": "7:00PM"
+  },
+  {
+    "id": "bowery-palace-jesse-malin-s-silver-manhattan-223",
+    "title": "Jesse Malin's Silver Manhattan",
+    "venue": "Bowery Palace",
+    "date": "2026-03-11",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/19/jesse-malins-silver-manhattan-tickets",
+    "time": "8:00PM"
+  },
+  {
+    "id": "cafe-wha-the-cafe-wha-house-band-224",
+    "title": "The Cafe Wha? House Band",
+    "venue": "Cafe Wha?",
+    "date": "2026-03-11",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/11/the-cafe-wha-house-band-tickets",
+    "time": "9:00PM"
+  },
+  {
+    "id": "blue-note-jazz-club-chris-dave-x-dj-jazzy-jeff-x-savion-glover-226",
+    "title": "Chris Dave X Dj Jazzy Jeff X Savion Glover",
+    "venue": "Blue Note Jazz Club",
+    "date": "2026-03-11",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/11/chris-dave-x-dj-jazzy-jeff-x-savion-glover-tickets",
+    "time": "8:00PM"
+  },
+  {
+    "id": "pregones-theater-march-is-music-2026-227",
+    "title": "March Is Music 2026",
+    "venue": "Pregones Theater",
+    "date": "2026-03-11",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/1/march-is-music-2026-tickets",
+    "time": "7:00AM"
+  },
+  {
+    "id": "beacon-theatre-tedeschi-trucks-band-228",
+    "title": "Tedeschi Trucks Band",
+    "venue": "Beacon Theatre",
+    "date": "2026-03-11",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/11/tedeschi-trucks-band-tickets",
+    "time": "7:30PM"
+  },
+  {
     "id": "the-gramercy-theatre-orbit-culture-ov-sulfur-atlas-229",
     "title": "Orbit Culture, Ov Sulfur, Atlas",
     "venue": "The Gramercy Theatre",
@@ -1503,6 +1971,33 @@
     "time": "8:00PM"
   },
   {
+    "id": "mercury-lounge-chasing-abbey-232",
+    "title": "Chasing Abbey",
+    "venue": "Mercury Lounge",
+    "date": "2026-03-11",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/11/chasing-abbey-tickets",
+    "time": "6:00PM"
+  },
+  {
+    "id": "xanadu-presented-by-xanadu-presents-skaterobics-all-experience-leve-233",
+    "title": "Presented by Xanadu Presents. Skaterobics - All Experience Levels Instructional Class",
+    "venue": "Xanadu",
+    "date": "2026-03-11",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/11/skaterobics-all-experience-levels-instructional-class-tickets",
+    "time": "6:00PM"
+  },
+  {
+    "id": "brooklyn-paramount-rainbow-kitten-surprise-bones-north-american-tour-234",
+    "title": "Rainbow Kitten Surprise: bones North American Tour",
+    "venue": "Brooklyn Paramount",
+    "date": "2026-03-11",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/11/rainbow-kitten-surprise-bones-north-american-tour-tickets",
+    "time": "7:00PM"
+  },
+  {
     "id": "xanadu-presented-by-xanadu-presents-wednesdays-on-wheels-ft-dj-drea-235",
     "title": "Presented by Xanadu Presents. Wednesdays on Wheels ft. DJ Dream (skate)",
     "venue": "Xanadu",
@@ -1519,6 +2014,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/11/dream-ivory-tickets",
     "time": "7:00PM"
+  },
+  {
+    "id": "groove-groove-theory-the-marcellus-sessions-237",
+    "title": "Groove Theory “The Marcellus Sessions”",
+    "venue": "Groove",
+    "date": "2026-03-11",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/weeklies/2026/03/04",
+    "time": "6:00PM"
   },
   {
     "id": "tv-eye-sun-ra-arkestra-238",
@@ -1593,12 +2097,48 @@
     "time": "7:00PM"
   },
   {
+    "id": "astor-place-theatre-burnout-paradise-246",
+    "title": "Burnout Paradise",
+    "venue": "Astor Place Theatre",
+    "date": "2026-03-12",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/18/burnout-paradise-tickets",
+    "time": "7:00PM"
+  },
+  {
+    "id": "bowery-palace-jesse-malin-s-silver-manhattan-247",
+    "title": "Jesse Malin's Silver Manhattan",
+    "venue": "Bowery Palace",
+    "date": "2026-03-12",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/19/jesse-malins-silver-manhattan-tickets",
+    "time": "8:00PM"
+  },
+  {
     "id": "brooklyn-bowl-john-medeski-stanton-moore-nels-cline-skerik-248",
     "title": "John Medeski, Stanton Moore, Nels Cline & Skerik",
     "venue": "Brooklyn Bowl",
     "date": "2026-03-12",
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/12/john-medeski-stanton-moore-nels-cline-skerik-tickets",
+    "time": "8:00PM"
+  },
+  {
+    "id": "cafe-wha-the-cafe-wha-house-band-249",
+    "title": "The Cafe Wha? House Band",
+    "venue": "Cafe Wha?",
+    "date": "2026-03-12",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/12/the-cafe-wha-house-band-tickets",
+    "time": "9:00PM"
+  },
+  {
+    "id": "blue-note-jazz-club-chris-dave-x-dj-jazzy-jeff-x-savion-glover-251",
+    "title": "Chris Dave X Dj Jazzy Jeff X Savion Glover",
+    "venue": "Blue Note Jazz Club",
+    "date": "2026-03-12",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/12/chris-dave-x-dj-jazzy-jeff-x-savion-glover-tickets",
     "time": "8:00PM"
   },
   {
@@ -1609,6 +2149,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/12/dan-peggy-reeder-w-isaac-stalling-tickets",
     "time": "7:30PM"
+  },
+  {
+    "id": "pregones-theater-march-is-music-2026-253",
+    "title": "March Is Music 2026",
+    "venue": "Pregones Theater",
+    "date": "2026-03-12",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/1/march-is-music-2026-tickets",
+    "time": "7:00AM"
   },
   {
     "id": "baby-s-all-right-live-on-stage-jonathan-richman-featuring-tommy-larkins-on-254",
@@ -1737,6 +2286,15 @@
     "time": "5:00PM"
   },
   {
+    "id": "joe-s-pub-ethan-lipton-his-orchestra-268",
+    "title": "Ethan Lipton & His Orchestra",
+    "venue": "Joe's Pub",
+    "date": "2026-03-12",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/12/ethan-lipton-his-orchestra-tickets",
+    "time": "7:00PM"
+  },
+  {
     "id": "the-vogel-at-count-basie-center-for-the-arts-spyro-gyra-269",
     "title": "Spyro Gyra",
     "venue": "The Vogel at Count Basie Center for the Arts",
@@ -1755,12 +2313,30 @@
     "time": "7:00PM"
   },
   {
+    "id": "astor-place-theatre-burnout-paradise-271",
+    "title": "Burnout Paradise",
+    "venue": "Astor Place Theatre",
+    "date": "2026-03-13",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/18/burnout-paradise-tickets",
+    "time": "7:00PM"
+  },
+  {
     "id": "the-wellmont-theater-rainbow-kitten-surprise-common-people-272",
     "title": "Rainbow Kitten Surprise, Common People",
     "venue": "The Wellmont Theater",
     "date": "2026-03-13",
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/13/rainbow-kitten-surprise-common-people-tickets",
+    "time": "8:00PM"
+  },
+  {
+    "id": "bowery-palace-jesse-malin-s-silver-manhattan-273",
+    "title": "Jesse Malin's Silver Manhattan",
+    "venue": "Bowery Palace",
+    "date": "2026-03-13",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/19/jesse-malins-silver-manhattan-tickets",
     "time": "8:00PM"
   },
   {
@@ -1780,6 +2356,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/13/jams-a-late-90-s-2000-s-r-b-pop-and-hip-hop-party-tickets",
     "time": "11:00PM"
+  },
+  {
+    "id": "cafe-wha-the-cafe-wha-house-band-276",
+    "title": "The Cafe Wha? House Band",
+    "venue": "Cafe Wha?",
+    "date": "2026-03-13",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/13/the-cafe-wha-house-band-tickets",
+    "time": "9:00PM"
   },
   {
     "id": "the-gramercy-theatre-steve-earle-margaret-glaspy-278",
@@ -1809,6 +2394,15 @@
     "time": "8:00PM"
   },
   {
+    "id": "pregones-theater-march-is-music-2026-281",
+    "title": "March Is Music 2026",
+    "venue": "Pregones Theater",
+    "date": "2026-03-13",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/1/march-is-music-2026-tickets",
+    "time": "7:00AM"
+  },
+  {
     "id": "le-poisson-rouge-matinee-social-club-pursuit-of-happiness-282",
     "title": "Matinee Social Club: Pursuit of Happiness",
     "venue": "Le Poisson Rouge",
@@ -1836,6 +2430,24 @@
     "time": "9:00PM"
   },
   {
+    "id": "baby-s-all-right-live-on-stage-jonathan-richman-featuring-tommy-larkins-on-285",
+    "title": "LIVE! ON STAGE: JONATHAN RICHMAN featuring TOMMY LARKINS on",
+    "venue": "Baby's All Right",
+    "date": "2026-03-13",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/13/live-on-stage-jonathan-richman-featuring-tommy-larkins-on-tickets",
+    "time": "8:00PM"
+  },
+  {
+    "id": "the-capitol-theatre-unbroken-chain-a-celebration-of-the-life-and-music-of-phil-l-286",
+    "title": "Unbroken Chain: A Celebration of the Life and Music of Phil Lesh, To Benefit Sweet Relief",
+    "venue": "The Capitol Theatre",
+    "date": "2026-03-13",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/13/unbroken-chain-a-celebration-of-the-life-and-music-of-phil-lesh-to-benefit-sweet-relief-tickets",
+    "time": "6:30PM"
+  },
+  {
     "id": "rough-trade-nyc-presented-by-rough-trade-nyc-cut-worms-performance-signing-287",
     "title": "Presented by Rough Trade NYC. Cut Worms Performance + Signing",
     "venue": "Rough Trade NYC",
@@ -1843,6 +2455,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/13/cut-worms-performance-signing-tickets",
     "time": "6:00PM"
+  },
+  {
+    "id": "beacon-theatre-tedeschi-trucks-band-288",
+    "title": "Tedeschi Trucks Band",
+    "venue": "Beacon Theatre",
+    "date": "2026-03-13",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/13/tedeschi-trucks-band-tickets",
+    "time": "7:30PM"
   },
   {
     "id": "the-stephen-talkhouse-karaoke-w-jbm-289",
@@ -1881,6 +2502,15 @@
     "time": "7:00PM"
   },
   {
+    "id": "xanadu-presented-by-xanadu-presents-weekend-warm-up-skate-293",
+    "title": "Presented by Xanadu Presents. Weekend Warm-Up (skate)",
+    "venue": "Xanadu",
+    "date": "2026-03-13",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/13/weekend-warm-up-skate-tickets",
+    "time": "4:00PM"
+  },
+  {
     "id": "xanadu-presented-by-xanadu-presents-birthday-behavior-ft-dj-arson-s-294",
     "title": "Presented by Xanadu Presents. Birthday Behavior ft. DJ Arson (skate)",
     "venue": "Xanadu",
@@ -1897,6 +2527,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/13/hlwa-tickets",
     "time": "9:00PM"
+  },
+  {
+    "id": "astor-place-theatre-burnout-paradise-296",
+    "title": "Burnout Paradise",
+    "venue": "Astor Place Theatre",
+    "date": "2026-03-14",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/18/burnout-paradise-tickets",
+    "time": "7:00PM"
   },
   {
     "id": "brooklyn-steel-st-lucia-performing-two-sets-297",
@@ -1917,6 +2556,15 @@
     "time": "8:00PM"
   },
   {
+    "id": "bowery-palace-jesse-malin-s-silver-manhattan-299",
+    "title": "Jesse Malin's Silver Manhattan",
+    "venue": "Bowery Palace",
+    "date": "2026-03-14",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/19/jesse-malins-silver-manhattan-tickets",
+    "time": "8:00PM"
+  },
+  {
     "id": "terminal-5-artemas-henry-morris-ellah-boh-300",
     "title": "Artemas, Henry Morris, Ellah Boh",
     "venue": "Terminal 5",
@@ -1924,6 +2572,24 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/14/artemas-isabel-larosa-tickets",
     "time": "7:00PM"
+  },
+  {
+    "id": "cafe-wha-the-cafe-wha-house-band-301",
+    "title": "The Cafe Wha? House Band",
+    "venue": "Cafe Wha?",
+    "date": "2026-03-14",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/14/the-cafe-wha-house-band-tickets",
+    "time": "9:00PM"
+  },
+  {
+    "id": "pregones-theater-march-is-music-2026-303",
+    "title": "March Is Music 2026",
+    "venue": "Pregones Theater",
+    "date": "2026-03-14",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/1/march-is-music-2026-tickets",
+    "time": "7:00AM"
   },
   {
     "id": "cafe-wha-liv-greene-melanie-maclaren-304",
@@ -1980,6 +2646,24 @@
     "time": "7:00PM"
   },
   {
+    "id": "baby-s-all-right-live-on-stage-jonathan-richman-featuring-tommy-larkins-on-310",
+    "title": "LIVE! ON STAGE: JONATHAN RICHMAN featuring TOMMY LARKINS on",
+    "venue": "Baby's All Right",
+    "date": "2026-03-14",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/14/live-on-stage-jonathan-richman-featuring-tommy-larkins-on-tickets",
+    "time": "8:00PM"
+  },
+  {
+    "id": "the-capitol-theatre-unbroken-chain-a-celebration-of-the-life-and-music-of-phil-l-311",
+    "title": "Unbroken Chain: A Celebration of the Life and Music of Phil Lesh, To Benefit Sweet Relief",
+    "venue": "The Capitol Theatre",
+    "date": "2026-03-14",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/14/unbroken-chain-a-celebration-of-the-life-and-music-of-phil-lesh-to-benefit-sweet-relief-tickets",
+    "time": "6:30PM"
+  },
+  {
     "id": "mercury-lounge-kevin-devine-the-goddamn-band-are-kenny-o-brien-the-o-douls-312",
     "title": "Kevin Devine & The Goddamn Band are Kenny O'Brien & The O'Douls",
     "venue": "Mercury Lounge",
@@ -1987,6 +2671,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/14/the-red-party-the-bootblacks-the-discussion-live-tickets",
     "time": "6:00PM"
+  },
+  {
+    "id": "beacon-theatre-tedeschi-trucks-band-313",
+    "title": "Tedeschi Trucks Band",
+    "venue": "Beacon Theatre",
+    "date": "2026-03-14",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/14/tedeschi-trucks-band-tickets",
+    "time": "7:30PM"
   },
   {
     "id": "irving-plaza-the-summer-set-314",
@@ -2052,6 +2745,51 @@
     "time": "8:00PM"
   },
   {
+    "id": "astor-place-theatre-burnout-paradise-321",
+    "title": "Burnout Paradise",
+    "venue": "Astor Place Theatre",
+    "date": "2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/18/burnout-paradise-tickets",
+    "time": "7:00PM"
+  },
+  {
+    "id": "bowery-palace-jesse-malin-s-silver-manhattan-322",
+    "title": "Jesse Malin's Silver Manhattan",
+    "venue": "Bowery Palace",
+    "date": "2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/2/19/jesse-malins-silver-manhattan-tickets",
+    "time": "8:00PM"
+  },
+  {
+    "id": "cafe-wha-the-cafe-wha-house-band-323",
+    "title": "The Cafe Wha? House Band",
+    "venue": "Cafe Wha?",
+    "date": "2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/15/the-cafe-wha-house-band-tickets",
+    "time": "9:00PM"
+  },
+  {
+    "id": "pregones-theater-march-is-music-2026-325",
+    "title": "March Is Music 2026",
+    "venue": "Pregones Theater",
+    "date": "2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/1/march-is-music-2026-tickets",
+    "time": "7:00AM"
+  },
+  {
+    "id": "baby-s-all-right-live-on-stage-jonathan-richman-featuring-tommy-larkins-on-326",
+    "title": "LIVE! ON STAGE: JONATHAN RICHMAN featuring TOMMY LARKINS on",
+    "venue": "Baby's All Right",
+    "date": "2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/15/live-on-stage-jonathan-richman-featuring-tommy-larkins-on-tickets",
+    "time": "8:00PM"
+  },
+  {
     "id": "brooklyn-bowl-rock-roll-playhouse-presents-dj-raphi-2026-usa-hype-tour-327",
     "title": "Rock & Roll Playhouse Presents DJ Raphi, 2026 USA HYPE TOUR",
     "venue": "Brooklyn Bowl",
@@ -2070,6 +2808,15 @@
     "time": "1:00PM"
   },
   {
+    "id": "the-capitol-theatre-unbroken-chain-a-celebration-of-the-life-and-music-of-phil-l-329",
+    "title": "Unbroken Chain: A Celebration of the Life and Music of Phil Lesh, To Benefit Sweet Relief",
+    "venue": "The Capitol Theatre",
+    "date": "2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/15/unbroken-chain-a-celebration-of-the-life-and-music-of-phil-lesh-to-benefit-sweet-relief-tickets",
+    "time": "5:30PM"
+  },
+  {
     "id": "cafe-wha-professor-louie-the-crowmatix-presents-professor-louie-the-c-330",
     "title": "Professor Louie & The Crowmatix Presents Professor Louie & The Crowmatix Presents \"The Music of The Band\"",
     "venue": "Cafe Wha?",
@@ -2077,6 +2824,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/15/professor-louie-the-crowmatix-presents-the-music-of-the-band-tickets",
     "time": "6:00PM"
+  },
+  {
+    "id": "beacon-theatre-john-oliver-seth-meyers-331",
+    "title": "John Oliver, Seth Meyers",
+    "venue": "Beacon Theatre",
+    "date": "2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/15/john-oliver-seth-meyers-tickets",
+    "time": "7:30PM"
   },
   {
     "id": "mercury-lounge-gavin-marengi-w-the-national-reserve-rozlyn-332",
@@ -2106,6 +2862,24 @@
     "time": "7:00PM"
   },
   {
+    "id": "xanadu-presented-by-xanadu-roller-arts-sunday-afterglow-skate-335",
+    "title": "Presented by Xanadu Roller Arts. Sunday Afterglow (skate)",
+    "venue": "Xanadu",
+    "date": "2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/15/sunday-afterglow-skate-tickets",
+    "time": "12:00PM"
+  },
+  {
+    "id": "xanadu-presented-by-xanadu-presents-skaterobics-all-experience-leve-336",
+    "title": "Presented by Xanadu Presents. Skaterobics - All Experience Levels Instructional Class",
+    "venue": "Xanadu",
+    "date": "2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/15/skaterobics-all-experience-levels-instructional-class-tickets",
+    "time": "6:00PM"
+  },
+  {
     "id": "xanadu-presented-by-xanadu-presents-sunday-skate-club-miss-alicia-d-337",
     "title": "Presented by Xanadu Presents. Sunday Skate Club - Miss Alicia + DJ Houseplants (skate)",
     "venue": "Xanadu",
@@ -2122,6 +2896,15 @@
     "category": "Other",
     "sourceUrl": "https://donyc.com/events/2026/3/15/atomic-habitz-chris-dave-x-marcus-king-x-cleo-pookie-sample-x-dj-ginyard-tickets",
     "time": "8:00PM"
+  },
+  {
+    "id": "blue-note-jazz-club-wbgo-presents-brunch-the-world-famous-harlem-gospel-choir-339",
+    "title": "WBGO Presents Brunch The World Famous Harlem Gospel Choir",
+    "venue": "Blue Note Jazz Club",
+    "date": "2026-03-15",
+    "category": "Other",
+    "sourceUrl": "https://donyc.com/events/2026/3/15/the-world-famous-harlem-gospel-choir-tickets",
+    "time": "1:30PM"
   },
   {
     "id": "union-pool-presented-by-union-pool-some-velvet-sidewalk-antietam-the-sc-340",
@@ -3021,6 +3804,14 @@
     "sourceUrl": "https://events.newyorkfamily.com/event/purim-discovery-room/"
   },
   {
+    "id": "brooklyn-paper-audatours-brooklyn-audio-tour-from-cannons-to-craft-brews-462",
+    "title": "AudaTours Brooklyn Audio Tour: From Cannons to Craft Brews",
+    "venue": "Brooklyn Paper",
+    "date": "2026-03-04",
+    "category": "Other",
+    "sourceUrl": "https://events.brooklynpaper.com/event/audatours-brooklyn-audio-tour-from-cannons-to-craft-brews/"
+  },
+  {
     "id": "brooklyn-paper-empire-skate-of-mind-463",
     "title": "Empire Skate of Mind",
     "venue": "Brooklyn Paper",
@@ -3043,6 +3834,22 @@
     "date": "2026-03-04",
     "category": "Other",
     "sourceUrl": "https://events.brooklynpaper.com/event/bluegrass-wednesdays-at-mathilde/"
+  },
+  {
+    "id": "brooklyn-paper-audatours-brooklyn-audio-tour-from-cannons-to-craft-brews-466",
+    "title": "AudaTours Brooklyn Audio Tour: From Cannons to Craft Brews",
+    "venue": "Brooklyn Paper",
+    "date": "2026-03-05",
+    "category": "Other",
+    "sourceUrl": "https://events.brooklynpaper.com/event/audatours-brooklyn-audio-tour-from-cannons-to-craft-brews/"
+  },
+  {
+    "id": "brooklyn-paper-empire-skate-of-mind-467",
+    "title": "Empire Skate of Mind",
+    "venue": "Brooklyn Paper",
+    "date": "2026-03-05",
+    "category": "Other",
+    "sourceUrl": "https://events.newyorkfamily.com/event/empire-skate-of-mind-grand-opening/"
   },
   {
     "id": "brooklyn-paper-lavender-blues-remixes-a-family-hip-hop-concert-468",
@@ -3085,6 +3892,22 @@
     "sourceUrl": "https://events.gaycitynews.com/event/superstar-open-set/"
   },
   {
+    "id": "brooklyn-paper-audatours-brooklyn-audio-tour-from-cannons-to-craft-brews-473",
+    "title": "AudaTours Brooklyn Audio Tour: From Cannons to Craft Brews",
+    "venue": "Brooklyn Paper",
+    "date": "2026-03-06",
+    "category": "Other",
+    "sourceUrl": "https://events.brooklynpaper.com/event/audatours-brooklyn-audio-tour-from-cannons-to-craft-brews/"
+  },
+  {
+    "id": "brooklyn-paper-empire-skate-of-mind-474",
+    "title": "Empire Skate of Mind",
+    "venue": "Brooklyn Paper",
+    "date": "2026-03-06",
+    "category": "Other",
+    "sourceUrl": "https://events.newyorkfamily.com/event/empire-skate-of-mind-grand-opening/"
+  },
+  {
     "id": "brooklyn-paper-zoomies-a-comedy-show-in-a-cat-cafe-475",
     "title": "Zoomies! A Comedy Show in a Cat Cafe",
     "venue": "Brooklyn Paper",
@@ -3125,6 +3948,14 @@
     "sourceUrl": "https://events.brooklynpaper.com/event/walk-talk-about-lifes-big-questions/"
   },
   {
+    "id": "brooklyn-paper-empire-skate-of-mind-480",
+    "title": "Empire Skate of Mind",
+    "venue": "Brooklyn Paper",
+    "date": "2026-03-07",
+    "category": "Other",
+    "sourceUrl": "https://events.newyorkfamily.com/event/empire-skate-of-mind-grand-opening/"
+  },
+  {
     "id": "brooklyn-paper-suzi-shelton-benjamin-s-album-release-party-for-families-481",
     "title": "Suzi Shelton & Benjamin’s Album Release Party for Families",
     "venue": "Brooklyn Paper",
@@ -3139,6 +3970,14 @@
     "date": "2026-03-07",
     "category": "Other",
     "sourceUrl": "https://events.newyorkfamily.com/event/made-bush-terminal-lunar-new-year-celebration/"
+  },
+  {
+    "id": "brooklyn-paper-audatours-brooklyn-audio-tour-from-cannons-to-craft-brews-483",
+    "title": "AudaTours Brooklyn Audio Tour: From Cannons to Craft Brews",
+    "venue": "Brooklyn Paper",
+    "date": "2026-03-07",
+    "category": "Other",
+    "sourceUrl": "https://events.brooklynpaper.com/event/audatours-brooklyn-audio-tour-from-cannons-to-craft-brews/"
   },
   {
     "id": "brooklyn-paper-aladdin-the-wonderful-lamp-484",
@@ -3397,12 +4236,36 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/interval-walking-sessions"
   },
   {
+    "id": "at-arsenal-in-central-park-manhattan-arsenal-gallery-celebrating-40-years-of-ebony-519",
+    "title": "Arsenal Gallery: Celebrating 40 Years of Ebony",
+    "venue": "at Arsenal (in Central Park), Manhattan",
+    "date": "2026-03-04",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/arsenal-gallery-celebrating-40-years-of-ebony"
+  },
+  {
     "id": "at-102nd-street-field-house-in-riverside-park-manhattan-riverside-field-house-spring-yoga-520",
     "title": "Riverside Field House: Spring Yoga",
     "venue": "at 102nd Street Field House (in Riverside Park), Manhattan",
     "date": "2026-03-04",
     "category": "Outdoor/Parks",
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/riverside-field-house-fall-yoga"
+  },
+  {
+    "id": "at-visitor-center-satterlee-street-and-hylan-boulevard-in-co-exhibition-think-global-act-local-521",
+    "title": "Exhibition: Think Global. Act Local.",
+    "venue": "at Visitor Center - Satterlee Street and Hylan Boulevard (in Conference House Park), Staten Island",
+    "date": "2026-03-04",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/exhibition-think-global-act-local"
+  },
+  {
+    "id": "at-conference-house-museum-in-conference-house-park-staten-i-volunteering-at-conference-house-park-the-blue-wave-522",
+    "title": "Volunteering at Conference House Park - The Blue Wave",
+    "venue": "at Conference House Museum (in Conference House Park), Staten Island",
+    "date": "2026-03-04",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/volunteering-at-conference-house-park-the-blue-wave"
   },
   {
     "id": "at-seth-low-playground-in-seth-low-playground-bealin-square--it-s-my-park-at-seth-low-playground-bealin-square-523",
@@ -3413,12 +4276,76 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/its-my-park-at-seth-low-playground-bealin-square"
   },
   {
+    "id": "at-sunnyside-community-services-queens-senior-cardio-sculpt-524",
+    "title": "Senior Cardio Sculpt",
+    "venue": "at Sunnyside Community Services, Queens",
+    "date": "2026-03-04",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/senior-cardio-sculpt"
+  },
+  {
+    "id": "at-pure-life-movement-studio-dance-fitness-525",
+    "title": "Dance Fitness",
+    "venue": "at Pure Life Movement Studio",
+    "date": "2026-03-04",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/dance-fitness"
+  },
+  {
+    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-outdoor-museum-exhibit-alice-s-terracotta-garden-526",
+    "title": "Ongoing Outdoor Museum Exhibit: Alice's Terracotta Garden",
+    "venue": "at H.H. Biddle House (in Conference House Park), Staten Island",
+    "date": "2026-03-04",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/ongoing-outdoor-museum-exhibit-alices-terracotta-garden"
+  },
+  {
     "id": "at-multi-use-room-full-in-a-r-r-o-w-field-house-queens-little-sprouts-jump-and-play-527",
     "title": "Little Sprouts: Jump and Play",
     "venue": "at Multi-Use Room - Full (in A.R.R.O.W. Field House), Queens",
     "date": "2026-03-04",
     "category": "Outdoor/Parks",
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/little-sprouts-jump-and-play"
+  },
+  {
+    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-artist-sculptor-donna-napoli-steele-o-528",
+    "title": "Ongoing Museum Exhibit: Artist & Sculptor Donna Napoli-Steele: Out of the Box Biodiversity",
+    "venue": "at H.H. Biddle House (in Conference House Park), Staten Island",
+    "date": "2026-03-04",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/ongoing-museum-exhibit-artist-sculptor-donna-napolisteele-out-of-the-box-biodiversity"
+  },
+  {
+    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-clay-sculptor-darren-thomas-corona-529",
+    "title": "Ongoing Museum Exhibit: Clay Sculptor Darren Thomas Corona",
+    "venue": "at H.H. Biddle House (in Conference House Park), Staten Island",
+    "date": "2026-03-04",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/ongoing-museum-exhibit-clay-sculptor-darren-thomas-corona"
+  },
+  {
+    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-new-york-s-brick-terra-cotta-industri-530",
+    "title": "Ongoing Museum Exhibit: New York's Brick & Terra Cotta Industries",
+    "venue": "at H.H. Biddle House (in Conference House Park), Staten Island",
+    "date": "2026-03-04",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/ongoing-museum-exhibit-new-yorks-brick-terra-cotta-industries"
+  },
+  {
+    "id": "at-rutan-becket-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-out-of-the-box-biodiversity-student-a-531",
+    "title": "Ongoing Museum Exhibit: Out of the Box Biodiversity: Student Art",
+    "venue": "at Rutan-Becket House (in Conference House Park), Staten Island",
+    "date": "2026-03-04",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/ongoing-museum-exhibit-out-of-the-box-biodiversity-student-art"
+  },
+  {
+    "id": "at-rutan-becket-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-still-waters-reflections-of-a-maritim-532",
+    "title": "Ongoing Museum Exhibit: Still Waters: Reflections of a Maritime Community",
+    "venue": "at Rutan-Becket House (in Conference House Park), Staten Island",
+    "date": "2026-03-04",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/ongoing-museum-exhibit-still-waters-reflections-of-a-maritime-community"
   },
   {
     "id": "broadway-hadestown-534",

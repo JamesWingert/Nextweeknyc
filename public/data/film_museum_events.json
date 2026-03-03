@@ -136,6 +136,14 @@
     "sourceUrl": "https://www.ifccenter.com/films/train-dreams/"
   },
   {
+    "id": "ifc-center-sirat-open-captioning-27",
+    "title": "Sirat (Open Captioning)",
+    "venue": "IFC Center",
+    "date": "2026-03-08",
+    "category": "Film",
+    "sourceUrl": "https://www.ifccenter.com/films/sirat-open-captioning/"
+  },
+  {
     "id": "ifc-center-an-american-werewolf-in-london-28",
     "title": "An American Werewolf in London",
     "venue": "IFC Center",
@@ -174,6 +182,14 @@
     "date": "2026-03-08",
     "category": "Film",
     "sourceUrl": "https://www.ifccenter.com/films/the-piano-teacher/"
+  },
+  {
+    "id": "ifc-center-pompei-below-the-clouds-open-captioning-33",
+    "title": "Pompei: Below the Clouds (Open Captioning)",
+    "venue": "IFC Center",
+    "date": "2026-03-08",
+    "category": "Film",
+    "sourceUrl": "https://www.ifccenter.com/films/pompei-below-the-clouds-open-captioning/"
   },
   {
     "id": "ifc-center-space-cowboy-35",
@@ -350,6 +366,14 @@
     "date": "2026-03-05",
     "category": "Film",
     "sourceUrl": "https://filmforum.org/film/mouse-hunt-ffjr-2026"
+  },
+  {
+    "id": "film-forum-satyajit-ray-s-days-and-nights-in-the-forest-67",
+    "title": "Satyajit Ray’s DAYS AND NIGHTS IN THE FOREST",
+    "venue": "Film Forum",
+    "date": "2026-02-27 to 2026-03-12",
+    "category": "Film",
+    "sourceUrl": "https://filmforum.org/film/days-and-nights-in-the-forest"
   },
   {
     "id": "film-forum-ida-lupino-s-the-bigamist-68",
@@ -904,12 +928,12 @@
     "sourceUrl": "https://www.bam.org/hamlet"
   },
   {
-    "id": "angelika-film-center-pillion-206",
-    "title": "PILLION",
-    "venue": "Angelika Film Center",
-    "date": "2026-03-02",
-    "category": "Film",
-    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/pillion"
+    "id": "bam-pillion-139",
+    "title": "Pillion",
+    "venue": "BAM",
+    "date": "",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.bam.org/film/2026/pillion"
   },
   {
     "id": "bam-the-secret-agent-140",
@@ -1192,10 +1216,18 @@
     "sourceUrl": "https://www.bam.org/member-first-fridays"
   },
   {
-    "id": "metrograph-somersault-176",
+    "id": "metrograph-somersault-175",
     "title": "Somersault",
     "venue": "Metrograph",
     "date": "2026-03-02",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004698"
+  },
+  {
+    "id": "metrograph-somersault-176",
+    "title": "Somersault",
+    "venue": "Metrograph",
+    "date": "2026-03-03",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004698"
   },
@@ -1211,7 +1243,7 @@
     "id": "metrograph-el-sur-178",
     "title": "El Sur",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-03",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004686"
   },
@@ -1219,212 +1251,1276 @@
     "id": "metrograph-the-wind-will-carry-us-179",
     "title": "The Wind Will Carry Us",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-03",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004695"
   },
   {
-    "id": "metrograph-the-silence-180",
+    "id": "metrograph-the-wind-will-carry-us-180",
+    "title": "The Wind Will Carry Us",
+    "venue": "Metrograph",
+    "date": "2026-03-10",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004695"
+  },
+  {
+    "id": "metrograph-the-silence-181",
     "title": "The Silence",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-03",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999003929"
   },
   {
-    "id": "metrograph-the-earrings-of-madame-de-181",
+    "id": "metrograph-the-earrings-of-madame-de-182",
     "title": "The Earrings of Madame de...",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-03",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001228"
   },
   {
-    "id": "metrograph-cure-182",
+    "id": "metrograph-cure-183",
     "title": "Cure",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-03",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999003864"
   },
   {
-    "id": "metrograph-re-wind-183",
+    "id": "metrograph-re-wind-184",
     "title": "Re-Wind",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-03",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004699"
   },
   {
-    "id": "metrograph-the-lovers-on-the-bridge-184",
+    "id": "metrograph-the-lovers-on-the-bridge-185",
     "title": "The Lovers on the Bridge",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-04",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001693"
   },
   {
-    "id": "metrograph-the-reckless-moment-185",
+    "id": "metrograph-the-reckless-moment-186",
     "title": "The Reckless Moment",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-04",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001229"
   },
   {
-    "id": "metrograph-harmonica-186",
+    "id": "metrograph-harmonica-187",
     "title": "Harmonica",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-04",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004674"
   },
   {
-    "id": "metrograph-lola-mont-s-187",
+    "id": "metrograph-lola-mont-s-188",
     "title": "Lola Montès",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-04",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000107"
   },
   {
-    "id": "metrograph-the-search-188",
+    "id": "metrograph-the-search-189",
     "title": "The Search",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-04",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004682"
   },
   {
-    "id": "metrograph-klute-189",
+    "id": "metrograph-klute-190",
     "title": "Klute",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-04",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000329"
   },
   {
-    "id": "metrograph-can-she-bake-a-cherry-pie-190",
+    "id": "metrograph-klute-191",
+    "title": "Klute",
+    "venue": "Metrograph",
+    "date": "2026-03-09",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000329"
+  },
+  {
+    "id": "metrograph-can-she-bake-a-cherry-pie-192",
     "title": "Can She Bake a Cherry Pie?",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-04",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004697"
   },
   {
-    "id": "metrograph-in-the-mood-for-love-191",
+    "id": "metrograph-in-the-mood-for-love-193",
     "title": "In the Mood for Love",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-05",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000517"
   },
   {
-    "id": "metrograph-the-runner-192",
+    "id": "metrograph-in-the-mood-for-love-194",
+    "title": "In the Mood for Love",
+    "venue": "Metrograph",
+    "date": "2026-03-08",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000517"
+  },
+  {
+    "id": "metrograph-in-the-mood-for-love-195",
+    "title": "In the Mood for Love",
+    "venue": "Metrograph",
+    "date": "2026-03-10",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000517"
+  },
+  {
+    "id": "metrograph-in-the-mood-for-love-196",
+    "title": "In the Mood for Love",
+    "venue": "Metrograph",
+    "date": "2026-03-12",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000517"
+  },
+  {
+    "id": "metrograph-the-runner-197",
     "title": "The Runner",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-05",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004694"
   },
   {
-    "id": "metrograph-inside-the-yellow-cocoon-shell-193",
+    "id": "metrograph-inside-the-yellow-cocoon-shell-198",
     "title": "Inside the Yellow Cocoon Shell",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-05",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999003605"
   },
   {
-    "id": "metrograph-perfect-blue-194",
+    "id": "metrograph-inside-the-yellow-cocoon-shell-199",
+    "title": "Inside the Yellow Cocoon Shell",
+    "venue": "Metrograph",
+    "date": "2026-03-07",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999003605"
+  },
+  {
+    "id": "metrograph-perfect-blue-200",
     "title": "Perfect Blue",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-05",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001649"
   },
   {
-    "id": "metrograph-a-new-love-in-tokyo-195",
+    "id": "metrograph-a-new-love-in-tokyo-201",
     "title": "A New Love in Tokyo",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-05",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004654"
   },
   {
-    "id": "metrograph-sunset-boulevard-196",
+    "id": "metrograph-sunset-boulevard-202",
     "title": "Sunset Boulevard",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-06",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001579"
   },
   {
-    "id": "metrograph-diary-of-a-country-priest-197",
+    "id": "metrograph-sunset-boulevard-203",
+    "title": "Sunset Boulevard",
+    "venue": "Metrograph",
+    "date": "2026-03-08",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001579"
+  },
+  {
+    "id": "metrograph-sunset-boulevard-204",
+    "title": "Sunset Boulevard",
+    "venue": "Metrograph",
+    "date": "2026-03-13",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001579"
+  },
+  {
+    "id": "metrograph-diary-of-a-country-priest-205",
     "title": "Diary of a Country Priest",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-06",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000872"
   },
   {
-    "id": "metrograph-stalker-198",
+    "id": "metrograph-diary-of-a-country-priest-206",
+    "title": "Diary of a Country Priest",
+    "venue": "Metrograph",
+    "date": "2026-03-07",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000872"
+  },
+  {
+    "id": "metrograph-diary-of-a-country-priest-207",
+    "title": "Diary of a Country Priest",
+    "venue": "Metrograph",
+    "date": "2026-03-09",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000872"
+  },
+  {
+    "id": "metrograph-stalker-208",
     "title": "Stalker",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-06",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001012"
   },
   {
-    "id": "metrograph-the-unbearable-lightness-of-being-199",
+    "id": "metrograph-stalker-209",
+    "title": "Stalker",
+    "venue": "Metrograph",
+    "date": "2026-03-07",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001012"
+  },
+  {
+    "id": "metrograph-stalker-210",
+    "title": "Stalker",
+    "venue": "Metrograph",
+    "date": "2026-03-10",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001012"
+  },
+  {
+    "id": "metrograph-stalker-211",
+    "title": "Stalker",
+    "venue": "Metrograph",
+    "date": "2026-03-14",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001012"
+  },
+  {
+    "id": "metrograph-stalker-212",
+    "title": "Stalker",
+    "venue": "Metrograph",
+    "date": "2026-03-21",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001012"
+  },
+  {
+    "id": "metrograph-the-unbearable-lightness-of-being-213",
     "title": "The Unbearable Lightness of Being",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-06",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004497"
   },
   {
-    "id": "metrograph-demonlover-200",
+    "id": "metrograph-the-unbearable-lightness-of-being-214",
+    "title": "The Unbearable Lightness of Being",
+    "venue": "Metrograph",
+    "date": "2026-03-08",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004497"
+  },
+  {
+    "id": "metrograph-demonlover-215",
     "title": "Demonlover",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-06",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000709"
   },
   {
-    "id": "metrograph-sukiyaki-western-django-201",
+    "id": "metrograph-demonlover-216",
+    "title": "Demonlover",
+    "venue": "Metrograph",
+    "date": "2026-03-10",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000709"
+  },
+  {
+    "id": "metrograph-sukiyaki-western-django-217",
     "title": "Sukiyaki Western Django",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-06",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004712"
   },
   {
-    "id": "metrograph-the-taking-of-power-by-louis-xiv-202",
+    "id": "metrograph-sukiyaki-western-django-218",
+    "title": "Sukiyaki Western Django",
+    "venue": "Metrograph",
+    "date": "2026-03-07",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004712"
+  },
+  {
+    "id": "metrograph-sukiyaki-western-django-219",
+    "title": "Sukiyaki Western Django",
+    "venue": "Metrograph",
+    "date": "2026-03-10",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004712"
+  },
+  {
+    "id": "metrograph-sukiyaki-western-django-220",
+    "title": "Sukiyaki Western Django",
+    "venue": "Metrograph",
+    "date": "2026-03-14",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004712"
+  },
+  {
+    "id": "metrograph-the-taking-of-power-by-louis-xiv-221",
     "title": "The Taking of Power by Louis XIV",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-06",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004713"
   },
   {
-    "id": "metrograph-rendez-vous-203",
+    "id": "metrograph-the-taking-of-power-by-louis-xiv-222",
+    "title": "The Taking of Power by Louis XIV",
+    "venue": "Metrograph",
+    "date": "2026-03-12",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004713"
+  },
+  {
+    "id": "metrograph-rendez-vous-223",
     "title": "Rendez-vous",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-06",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004714"
   },
   {
-    "id": "metrograph-cowboy-bebop-the-movie-204",
+    "id": "metrograph-rendez-vous-224",
+    "title": "Rendez-vous",
+    "venue": "Metrograph",
+    "date": "2026-03-08",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004714"
+  },
+  {
+    "id": "metrograph-cowboy-bebop-the-movie-225",
     "title": "Cowboy Bebop: The Movie",
     "venue": "Metrograph",
-    "date": "2026-03-02",
+    "date": "2026-03-06",
     "category": "Film",
     "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000723"
   },
   {
-    "id": "angelika-film-center-dreams-205",
+    "id": "metrograph-cowboy-bebop-the-movie-226",
+    "title": "Cowboy Bebop: The Movie",
+    "venue": "Metrograph",
+    "date": "2026-03-07",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000723"
+  },
+  {
+    "id": "metrograph-cowboy-bebop-the-movie-227",
+    "title": "Cowboy Bebop: The Movie",
+    "venue": "Metrograph",
+    "date": "2026-03-11",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000723"
+  },
+  {
+    "id": "metrograph-cowboy-bebop-the-movie-228",
+    "title": "Cowboy Bebop: The Movie",
+    "venue": "Metrograph",
+    "date": "2026-03-13",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000723"
+  },
+  {
+    "id": "metrograph-mauvais-sang-229",
+    "title": "Mauvais Sang",
+    "venue": "Metrograph",
+    "date": "2026-03-06",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001771"
+  },
+  {
+    "id": "metrograph-mauvais-sang-230",
+    "title": "Mauvais Sang",
+    "venue": "Metrograph",
+    "date": "2026-03-08",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001771"
+  },
+  {
+    "id": "metrograph-mauvais-sang-231",
+    "title": "Mauvais Sang",
+    "venue": "Metrograph",
+    "date": "2026-03-14",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001771"
+  },
+  {
+    "id": "metrograph-the-english-patient-232",
+    "title": "The English Patient",
+    "venue": "Metrograph",
+    "date": "2026-03-07",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004715"
+  },
+  {
+    "id": "metrograph-the-milky-way-233",
+    "title": "The Milky Way",
+    "venue": "Metrograph",
+    "date": "2026-03-07",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000778"
+  },
+  {
+    "id": "metrograph-the-milky-way-234",
+    "title": "The Milky Way",
+    "venue": "Metrograph",
+    "date": "2026-03-08",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000778"
+  },
+  {
+    "id": "metrograph-certified-copy-235",
+    "title": "Certified Copy",
+    "venue": "Metrograph",
+    "date": "2026-03-07",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999003797"
+  },
+  {
+    "id": "metrograph-weekend-236",
+    "title": "Weekend",
+    "venue": "Metrograph",
+    "date": "2026-03-07",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001800"
+  },
+  {
+    "id": "metrograph-weekend-237",
+    "title": "Weekend",
+    "venue": "Metrograph",
+    "date": "2026-03-11",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001800"
+  },
+  {
+    "id": "metrograph-once-upon-a-time-in-hollywood-238",
+    "title": "Once Upon a Time in Hollywood",
+    "venue": "Metrograph",
+    "date": "2026-03-07",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004716"
+  },
+  {
+    "id": "metrograph-once-upon-a-time-in-hollywood-239",
+    "title": "Once Upon a Time in Hollywood",
+    "venue": "Metrograph",
+    "date": "2026-03-15",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004716"
+  },
+  {
+    "id": "metrograph-nostalghia-240",
+    "title": "Nostalghia",
+    "venue": "Metrograph",
+    "date": "2026-03-08",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004203"
+  },
+  {
+    "id": "metrograph-nostalghia-241",
+    "title": "Nostalghia",
+    "venue": "Metrograph",
+    "date": "2026-03-11",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004203"
+  },
+  {
+    "id": "metrograph-i-want-to-talk-about-duras-242",
+    "title": "I Want to Talk About Duras",
+    "venue": "Metrograph",
+    "date": "2026-03-08",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004717"
+  },
+  {
+    "id": "metrograph-public-housing-243",
+    "title": "Public Housing",
+    "venue": "Metrograph",
+    "date": "2026-03-08",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004718"
+  },
+  {
+    "id": "metrograph-the-competition-244",
+    "title": "The Competition",
+    "venue": "Metrograph",
+    "date": "2026-03-08",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001829"
+  },
+  {
+    "id": "metrograph-paris-texas-245",
+    "title": "Paris, Texas",
+    "venue": "Metrograph",
+    "date": "2026-03-09",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000581"
+  },
+  {
+    "id": "metrograph-by-the-time-it-gets-dark-246",
+    "title": "By The Time It Gets Dark",
+    "venue": "Metrograph",
+    "date": "2026-03-09",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999002975"
+  },
+  {
+    "id": "metrograph-the-holy-girl-247",
+    "title": "The Holy Girl",
+    "venue": "Metrograph",
+    "date": "2026-03-09",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004705"
+  },
+  {
+    "id": "metrograph-irma-vep-248",
+    "title": "Irma Vep",
+    "venue": "Metrograph",
+    "date": "2026-03-09",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000516"
+  },
+  {
+    "id": "metrograph-distant-249",
+    "title": "Distant",
+    "venue": "Metrograph",
+    "date": "2026-03-10",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004696"
+  },
+  {
+    "id": "metrograph-memoria-250",
+    "title": "Memoria",
+    "venue": "Metrograph",
+    "date": "2026-03-11",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999003117"
+  },
+  {
+    "id": "metrograph-a-real-young-girl-251",
+    "title": "A Real Young Girl",
+    "venue": "Metrograph",
+    "date": "2026-03-11",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004706"
+  },
+  {
+    "id": "metrograph-cach-252",
+    "title": "Caché",
+    "venue": "Metrograph",
+    "date": "2026-03-11",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999003131"
+  },
+  {
+    "id": "metrograph-la-ronde-253",
+    "title": "La ronde",
+    "venue": "Metrograph",
+    "date": "2026-03-12",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004700"
+  },
+  {
+    "id": "metrograph-mala-noche-254",
+    "title": "Mala Noche",
+    "venue": "Metrograph",
+    "date": "2026-03-12",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999002813"
+  },
+  {
+    "id": "metrograph-the-heroic-trio-255",
+    "title": "The Heroic Trio",
+    "venue": "Metrograph",
+    "date": "2026-03-12",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000514"
+  },
+  {
+    "id": "metrograph-angel-s-egg-256",
+    "title": "Angel's Egg",
+    "venue": "Metrograph",
+    "date": "2026-03-12",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004558"
+  },
+  {
+    "id": "metrograph-ed-wood-257",
+    "title": "Ed Wood",
+    "venue": "Metrograph",
+    "date": "2026-03-13",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999003417"
+  },
+  {
+    "id": "metrograph-ed-wood-258",
+    "title": "Ed Wood",
+    "venue": "Metrograph",
+    "date": "2026-03-15",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999003417"
+  },
+  {
+    "id": "metrograph-queen-of-katwe-259",
+    "title": "Queen of Katwe",
+    "venue": "Metrograph",
+    "date": "2026-03-13",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004719"
+  },
+  {
+    "id": "metrograph-queen-of-katwe-260",
+    "title": "Queen of Katwe",
+    "venue": "Metrograph",
+    "date": "2026-03-15",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004719"
+  },
+  {
+    "id": "metrograph-code-unknown-261",
+    "title": "Code Unknown",
+    "venue": "Metrograph",
+    "date": "2026-03-13",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999002367"
+  },
+  {
+    "id": "metrograph-code-unknown-262",
+    "title": "Code Unknown",
+    "venue": "Metrograph",
+    "date": "2026-03-20",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999002367"
+  },
+  {
+    "id": "metrograph-the-girl-with-the-hatbox-263",
+    "title": "The Girl With the Hatbox",
+    "venue": "Metrograph",
+    "date": "2026-03-13",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004720"
+  },
+  {
+    "id": "metrograph-camille-claudel-1915-264",
+    "title": "Camille Claudel 1915",
+    "venue": "Metrograph",
+    "date": "2026-03-13",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004726"
+  },
+  {
+    "id": "metrograph-camille-claudel-1915-265",
+    "title": "Camille Claudel 1915",
+    "venue": "Metrograph",
+    "date": "2026-03-14",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004726"
+  },
+  {
+    "id": "metrograph-in-a-lonely-place-266",
+    "title": "In a Lonely Place",
+    "venue": "Metrograph",
+    "date": "2026-03-13",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001065"
+  },
+  {
+    "id": "metrograph-in-a-lonely-place-267",
+    "title": "In a Lonely Place",
+    "venue": "Metrograph",
+    "date": "2026-03-14",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001065"
+  },
+  {
+    "id": "metrograph-the-house-on-trubnaya-268",
+    "title": "The House on Trubnaya",
+    "venue": "Metrograph",
+    "date": "2026-03-13",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004721"
+  },
+  {
+    "id": "metrograph-battle-royale-269",
+    "title": "Battle Royale",
+    "venue": "Metrograph",
+    "date": "2026-03-13",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001953"
+  },
+  {
+    "id": "metrograph-battle-royale-270",
+    "title": "Battle Royale",
+    "venue": "Metrograph",
+    "date": "2026-03-20",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001953"
+  },
+  {
+    "id": "metrograph-battle-royale-271",
+    "title": "Battle Royale",
+    "venue": "Metrograph",
+    "date": "2026-03-27",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001953"
+  },
+  {
+    "id": "metrograph-miss-mend-272",
+    "title": "Miss Mend",
+    "venue": "Metrograph",
+    "date": "2026-03-14",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004722"
+  },
+  {
+    "id": "metrograph-kill-bill-vol-1-273",
+    "title": "Kill Bill: Vol. 1",
+    "venue": "Metrograph",
+    "date": "2026-03-14",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004723"
+  },
+  {
+    "id": "metrograph-kill-bill-vol-1-274",
+    "title": "Kill Bill: Vol. 1",
+    "venue": "Metrograph",
+    "date": "2026-03-20",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004723"
+  },
+  {
+    "id": "metrograph-kill-bill-vol-2-275",
+    "title": "Kill Bill: Vol. 2",
+    "venue": "Metrograph",
+    "date": "2026-03-14",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004724"
+  },
+  {
+    "id": "metrograph-the-bad-and-the-beautiful-276",
+    "title": "The Bad and the Beautiful",
+    "venue": "Metrograph",
+    "date": "2026-03-14",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004725"
+  },
+  {
+    "id": "metrograph-the-bad-and-the-beautiful-277",
+    "title": "The Bad and the Beautiful",
+    "venue": "Metrograph",
+    "date": "2026-03-15",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004725"
+  },
+  {
+    "id": "metrograph-ghost-dog-the-way-of-the-samurai-278",
+    "title": "Ghost Dog: The Way of the Samurai",
+    "venue": "Metrograph",
+    "date": "2026-03-14",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001440"
+  },
+  {
+    "id": "metrograph-ghost-dog-the-way-of-the-samurai-279",
+    "title": "Ghost Dog: The Way of the Samurai",
+    "venue": "Metrograph",
+    "date": "2026-03-22",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001440"
+  },
+  {
+    "id": "metrograph-four-adventures-of-reinette-and-mirabelle-280",
+    "title": "Four Adventures of Reinette and Mirabelle",
+    "venue": "Metrograph",
+    "date": "2026-03-20",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000659"
+  },
+  {
+    "id": "metrograph-kiss-me-deadly-281",
+    "title": "Kiss Me Deadly",
+    "venue": "Metrograph",
+    "date": "2026-03-20",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000432"
+  },
+  {
+    "id": "metrograph-kiss-me-deadly-282",
+    "title": "Kiss Me Deadly",
+    "venue": "Metrograph",
+    "date": "2026-03-22",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000432"
+  },
+  {
+    "id": "metrograph-the-most-terrible-time-in-my-life-283",
+    "title": "The Most Terrible Time in My Life",
+    "venue": "Metrograph",
+    "date": "2026-03-20",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004728"
+  },
+  {
+    "id": "metrograph-the-most-terrible-time-in-my-life-284",
+    "title": "The Most Terrible Time in My Life",
+    "venue": "Metrograph",
+    "date": "2026-03-21",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004728"
+  },
+  {
+    "id": "metrograph-the-most-terrible-time-in-my-life-285",
+    "title": "The Most Terrible Time in My Life",
+    "venue": "Metrograph",
+    "date": "2026-03-22",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004728"
+  },
+  {
+    "id": "metrograph-the-most-terrible-time-in-my-life-286",
+    "title": "The Most Terrible Time in My Life",
+    "venue": "Metrograph",
+    "date": "2026-03-29",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004728"
+  },
+  {
+    "id": "metrograph-the-stairway-to-a-distant-past-287",
+    "title": "The Stairway to a Distant Past",
+    "venue": "Metrograph",
+    "date": "2026-03-20",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004729"
+  },
+  {
+    "id": "metrograph-the-stairway-to-a-distant-past-288",
+    "title": "The Stairway to a Distant Past",
+    "venue": "Metrograph",
+    "date": "2026-03-21",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004729"
+  },
+  {
+    "id": "metrograph-the-stairway-to-a-distant-past-289",
+    "title": "The Stairway to a Distant Past",
+    "venue": "Metrograph",
+    "date": "2026-03-29",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004729"
+  },
+  {
+    "id": "metrograph-high-life-290",
+    "title": "High Life",
+    "venue": "Metrograph",
+    "date": "2026-03-20",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999002108"
+  },
+  {
+    "id": "metrograph-high-life-291",
+    "title": "High Life",
+    "venue": "Metrograph",
+    "date": "2026-03-22",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999002108"
+  },
+  {
+    "id": "metrograph-inherent-vice-292",
+    "title": "Inherent Vice",
+    "venue": "Metrograph",
+    "date": "2026-03-20",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001238"
+  },
+  {
+    "id": "metrograph-inherent-vice-293",
+    "title": "Inherent Vice",
+    "venue": "Metrograph",
+    "date": "2026-03-27",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001238"
+  },
+  {
+    "id": "metrograph-maps-to-the-stars-294",
+    "title": "Maps to the Stars",
+    "venue": "Metrograph",
+    "date": "2026-03-20",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999002655"
+  },
+  {
+    "id": "metrograph-maps-to-the-stars-295",
+    "title": "Maps to the Stars",
+    "venue": "Metrograph",
+    "date": "2026-03-22",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999002655"
+  },
+  {
+    "id": "metrograph-murray-center-class-of-25-award-winning-shorts-296",
+    "title": "Murray Center Class of '25: Award-winning Shorts",
+    "venue": "Metrograph",
+    "date": "2026-03-21",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004731"
+  },
+  {
+    "id": "metrograph-pinocchio-297",
+    "title": "Pinocchio",
+    "venue": "Metrograph",
+    "date": "2026-03-21",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004730"
+  },
+  {
+    "id": "metrograph-pinocchio-298",
+    "title": "Pinocchio",
+    "venue": "Metrograph",
+    "date": "2026-03-28",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004730"
+  },
+  {
+    "id": "metrograph-future-of-documentary-secret-screening-panel-299",
+    "title": "Future of Documentary: Secret Screening & Panel",
+    "venue": "Metrograph",
+    "date": "2026-03-21",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004732"
+  },
+  {
+    "id": "metrograph-the-player-300",
+    "title": "The Player",
+    "venue": "Metrograph",
+    "date": "2026-03-21",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999003399"
+  },
+  {
+    "id": "metrograph-the-player-301",
+    "title": "The Player",
+    "venue": "Metrograph",
+    "date": "2026-03-29",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999003399"
+  },
+  {
+    "id": "metrograph-maidan-302",
+    "title": "Maidan",
+    "venue": "Metrograph",
+    "date": "2026-03-21",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999002533"
+  },
+  {
+    "id": "metrograph-maidan-303",
+    "title": "Maidan",
+    "venue": "Metrograph",
+    "date": "2026-03-27",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999002533"
+  },
+  {
+    "id": "metrograph-outskirts-304",
+    "title": "Outskirts",
+    "venue": "Metrograph",
+    "date": "2026-03-21",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004733"
+  },
+  {
+    "id": "metrograph-outskirts-305",
+    "title": "Outskirts",
+    "venue": "Metrograph",
+    "date": "2026-03-28",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004733"
+  },
+  {
+    "id": "metrograph-the-trap-306",
+    "title": "The Trap",
+    "venue": "Metrograph",
+    "date": "2026-03-21",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004734"
+  },
+  {
+    "id": "metrograph-the-trap-307",
+    "title": "The Trap",
+    "venue": "Metrograph",
+    "date": "2026-03-29",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004734"
+  },
+  {
+    "id": "metrograph-by-the-bluest-of-seas-308",
+    "title": "By the Bluest of Seas",
+    "venue": "Metrograph",
+    "date": "2026-03-21",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004735"
+  },
+  {
+    "id": "metrograph-inland-empire-309",
+    "title": "Inland Empire",
+    "venue": "Metrograph",
+    "date": "2026-03-21",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004189"
+  },
+  {
+    "id": "metrograph-inland-empire-310",
+    "title": "Inland Empire",
+    "venue": "Metrograph",
+    "date": "2026-03-22",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004189"
+  },
+  {
+    "id": "metrograph-the-invasion-preceded-by-paleontology-lesson-311",
+    "title": "The Invasion preceded by Paleontology Lesson",
+    "venue": "Metrograph",
+    "date": "2026-03-22",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004736"
+  },
+  {
+    "id": "metrograph-let-the-sunshine-in-312",
+    "title": "Let the Sunshine In",
+    "venue": "Metrograph",
+    "date": "2026-03-22",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999003597"
+  },
+  {
+    "id": "metrograph-goodbye-dragon-inn-313",
+    "title": "Goodbye, Dragon Inn",
+    "venue": "Metrograph",
+    "date": "2026-03-27",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000006"
+  },
+  {
+    "id": "metrograph-dead-man-314",
+    "title": "Dead Man",
+    "venue": "Metrograph",
+    "date": "2026-03-27",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000299"
+  },
+  {
+    "id": "metrograph-dead-man-315",
+    "title": "Dead Man",
+    "venue": "Metrograph",
+    "date": "2026-03-28",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000299"
+  },
+  {
+    "id": "metrograph-the-seventh-seal-316",
+    "title": "The Seventh Seal",
+    "venue": "Metrograph",
+    "date": "2026-03-27",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999001970"
+  },
+  {
+    "id": "metrograph-red-sorghum-317",
+    "title": "Red Sorghum",
+    "venue": "Metrograph",
+    "date": "2026-03-27",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004739"
+  },
+  {
+    "id": "metrograph-clouds-of-sils-maria-318",
+    "title": "Clouds of Sils Maria",
+    "venue": "Metrograph",
+    "date": "2026-03-27",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999002785"
+  },
+  {
+    "id": "metrograph-clouds-of-sils-maria-319",
+    "title": "Clouds of Sils Maria",
+    "venue": "Metrograph",
+    "date": "2026-03-28",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999002785"
+  },
+  {
+    "id": "metrograph-allegro-non-troppo-320",
+    "title": "Allegro Non Troppo",
+    "venue": "Metrograph",
+    "date": "2026-03-27",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004740"
+  },
+  {
+    "id": "metrograph-allegro-non-troppo-321",
+    "title": "Allegro Non Troppo",
+    "venue": "Metrograph",
+    "date": "2026-03-28",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004740"
+  },
+  {
+    "id": "metrograph-allegro-non-troppo-322",
+    "title": "Allegro Non Troppo",
+    "venue": "Metrograph",
+    "date": "2026-03-29",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004740"
+  },
+  {
+    "id": "metrograph-zodiac-323",
+    "title": "Zodiac",
+    "venue": "Metrograph",
+    "date": "2026-03-27",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004741"
+  },
+  {
+    "id": "metrograph-downtown-81-324",
+    "title": "Downtown 81",
+    "venue": "Metrograph",
+    "date": "2026-03-28",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999002127"
+  },
+  {
+    "id": "metrograph-raise-the-red-lantern-325",
+    "title": "Raise the Red Lantern",
+    "venue": "Metrograph",
+    "date": "2026-03-28",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004742"
+  },
+  {
+    "id": "metrograph-the-old-jockey-326",
+    "title": "The Old Jockey",
+    "venue": "Metrograph",
+    "date": "2026-03-28",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004743"
+  },
+  {
+    "id": "metrograph-the-story-of-qiu-ju-327",
+    "title": "The Story of Qiu Ju",
+    "venue": "Metrograph",
+    "date": "2026-03-28",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004744"
+  },
+  {
+    "id": "metrograph-ace-presents-cool-hand-luke-328",
+    "title": "ACE Presents Cool Hand Luke",
+    "venue": "Metrograph",
+    "date": "2026-03-28",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004745"
+  },
+  {
+    "id": "metrograph-made-in-hong-kong-329",
+    "title": "Made in Hong Kong",
+    "venue": "Metrograph",
+    "date": "2026-03-28",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999002313"
+  },
+  {
+    "id": "metrograph-point-blank-330",
+    "title": "Point Blank",
+    "venue": "Metrograph",
+    "date": "2026-03-28",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000587"
+  },
+  {
+    "id": "metrograph-point-blank-331",
+    "title": "Point Blank",
+    "venue": "Metrograph",
+    "date": "2026-03-29",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999000587"
+  },
+  {
+    "id": "metrograph-fantasia-332",
+    "title": "Fantasia",
+    "venue": "Metrograph",
+    "date": "2026-03-29",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004578"
+  },
+  {
+    "id": "metrograph-secret-agent-333",
+    "title": "Secret Agent",
+    "venue": "Metrograph",
+    "date": "2026-03-29",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004746"
+  },
+  {
+    "id": "metrograph-once-upon-a-night-preceded-by-a-priceless-head-334",
+    "title": "Once Upon a Night preceded by A Priceless Head",
+    "venue": "Metrograph",
+    "date": "2026-03-29",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004747"
+  },
+  {
+    "id": "metrograph-the-darjeeling-limited-335",
+    "title": "The Darjeeling Limited",
+    "venue": "Metrograph",
+    "date": "2026-03-29",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004748"
+  },
+  {
+    "id": "metrograph-ju-dou-336",
+    "title": "Ju Dou",
+    "venue": "Metrograph",
+    "date": "2026-03-29",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004738"
+  },
+  {
+    "id": "metrograph-no-other-choice-337",
+    "title": "No Other Choice",
+    "venue": "Metrograph",
+    "date": "2026-03-29",
+    "category": "Film",
+    "sourceUrl": "https://metrograph.com/film/?vista_film_id=9999004749"
+  },
+  {
+    "id": "angelika-film-center-dreams-355",
     "title": "DREAMS",
     "venue": "Angelika Film Center",
     "date": "2026-03-02",
@@ -1432,7 +2528,15 @@
     "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/dreams"
   },
   {
-    "id": "angelika-film-center-midwinter-break-207",
+    "id": "angelika-film-center-pillion-356",
+    "title": "PILLION",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-02",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/pillion"
+  },
+  {
+    "id": "angelika-film-center-midwinter-break-357",
     "title": "MIDWINTER BREAK",
     "venue": "Angelika Film Center",
     "date": "2026-03-02",
@@ -1440,7 +2544,7 @@
     "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/midwinter-break"
   },
   {
-    "id": "angelika-film-center-the-moment-208",
+    "id": "angelika-film-center-the-moment-358",
     "title": "THE MOMENT",
     "venue": "Angelika Film Center",
     "date": "2026-03-02",
@@ -1448,7 +2552,7 @@
     "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/the-moment"
   },
   {
-    "id": "angelika-film-center-my-father-s-shadow-209",
+    "id": "angelika-film-center-my-father-s-shadow-359",
     "title": "MY FATHER'S SHADOW",
     "venue": "Angelika Film Center",
     "date": "2026-03-02",
@@ -1456,7 +2560,7 @@
     "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/my-fathers-shadow"
   },
   {
-    "id": "angelika-film-center-charliebird-210",
+    "id": "angelika-film-center-charliebird-360",
     "title": "CHARLIEBIRD",
     "venue": "Angelika Film Center",
     "date": "2026-03-02",
@@ -1464,7 +2568,623 @@
     "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/charliebird"
   },
   {
-    "id": "the-frick-collection-gainsborough-the-fashion-of-portraiture-211",
+    "id": "angelika-film-center-dreams-361",
+    "title": "DREAMS",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-03",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/dreams"
+  },
+  {
+    "id": "angelika-film-center-my-father-s-shadow-362",
+    "title": "MY FATHER'S SHADOW",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-03",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/my-fathers-shadow"
+  },
+  {
+    "id": "angelika-film-center-charliebird-363",
+    "title": "CHARLIEBIRD",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-03",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/charliebird"
+  },
+  {
+    "id": "angelika-film-center-pillion-364",
+    "title": "PILLION",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-03",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/pillion"
+  },
+  {
+    "id": "angelika-film-center-in-the-mood-for-love-25th-anniversary-a-rarely-seen-short-fi-365",
+    "title": "IN THE MOOD FOR LOVE (25TH ANNIVERSARY) + A RARELY SEEN SHORT FILM",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-03",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/in-the-mood-for-love-25th-anniversary--a-rarely-seen-short-film"
+  },
+  {
+    "id": "angelika-film-center-midwinter-break-366",
+    "title": "MIDWINTER BREAK",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-03",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/midwinter-break"
+  },
+  {
+    "id": "angelika-film-center-kokuho-367",
+    "title": "KOKUHO",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-03",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/kokuho"
+  },
+  {
+    "id": "angelika-film-center-the-moment-368",
+    "title": "THE MOMENT",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-03",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/the-moment"
+  },
+  {
+    "id": "angelika-film-center-dreams-369",
+    "title": "DREAMS",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-04",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/dreams"
+  },
+  {
+    "id": "angelika-film-center-my-father-s-shadow-370",
+    "title": "MY FATHER'S SHADOW",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-04",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/my-fathers-shadow"
+  },
+  {
+    "id": "angelika-film-center-charliebird-371",
+    "title": "CHARLIEBIRD",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-04",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/charliebird"
+  },
+  {
+    "id": "angelika-film-center-pillion-372",
+    "title": "PILLION",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-04",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/pillion"
+  },
+  {
+    "id": "angelika-film-center-in-the-mood-for-love-25th-anniversary-a-rarely-seen-short-fi-373",
+    "title": "IN THE MOOD FOR LOVE (25TH ANNIVERSARY) + A RARELY SEEN SHORT FILM",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-04",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/in-the-mood-for-love-25th-anniversary--a-rarely-seen-short-film"
+  },
+  {
+    "id": "angelika-film-center-kokuho-374",
+    "title": "KOKUHO",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-04",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/kokuho"
+  },
+  {
+    "id": "angelika-film-center-midwinter-break-375",
+    "title": "MIDWINTER BREAK",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-04",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/midwinter-break"
+  },
+  {
+    "id": "angelika-film-center-the-moment-376",
+    "title": "THE MOMENT",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-04",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/the-moment"
+  },
+  {
+    "id": "angelika-film-center-dreams-377",
+    "title": "DREAMS",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-05",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/dreams"
+  },
+  {
+    "id": "angelika-film-center-my-father-s-shadow-378",
+    "title": "MY FATHER'S SHADOW",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-05",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/my-fathers-shadow"
+  },
+  {
+    "id": "angelika-film-center-charliebird-379",
+    "title": "CHARLIEBIRD",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-05",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/charliebird"
+  },
+  {
+    "id": "angelika-film-center-pillion-380",
+    "title": "PILLION",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-05",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/pillion"
+  },
+  {
+    "id": "angelika-film-center-in-the-mood-for-love-25th-anniversary-a-rarely-seen-short-fi-381",
+    "title": "IN THE MOOD FOR LOVE (25TH ANNIVERSARY) + A RARELY SEEN SHORT FILM",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-05",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/in-the-mood-for-love-25th-anniversary--a-rarely-seen-short-film"
+  },
+  {
+    "id": "angelika-film-center-midwinter-break-382",
+    "title": "MIDWINTER BREAK",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-05",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/midwinter-break"
+  },
+  {
+    "id": "angelika-film-center-kokuho-383",
+    "title": "KOKUHO",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-05",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/kokuho"
+  },
+  {
+    "id": "angelika-film-center-the-moment-384",
+    "title": "THE MOMENT",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-05",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/the-moment"
+  },
+  {
+    "id": "angelika-film-center-peaky-blinders-the-immortal-man-385",
+    "title": "PEAKY BLINDERS: THE IMMORTAL MAN",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-06",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/peaky-blinders-the-immortal-man"
+  },
+  {
+    "id": "angelika-film-center-dreams-386",
+    "title": "DREAMS",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-06",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/dreams"
+  },
+  {
+    "id": "angelika-film-center-pillion-387",
+    "title": "PILLION",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-06",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/pillion"
+  },
+  {
+    "id": "angelika-film-center-my-father-s-shadow-388",
+    "title": "MY FATHER'S SHADOW",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-06",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/my-fathers-shadow"
+  },
+  {
+    "id": "angelika-film-center-the-napa-boys-389",
+    "title": "THE NAPA BOYS",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-06",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/the-napa-boys"
+  },
+  {
+    "id": "angelika-film-center-in-the-mood-for-love-25th-anniversary-a-rarely-seen-short-fi-390",
+    "title": "IN THE MOOD FOR LOVE (25TH ANNIVERSARY) + A RARELY SEEN SHORT FILM",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-06",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/in-the-mood-for-love-25th-anniversary--a-rarely-seen-short-film"
+  },
+  {
+    "id": "angelika-film-center-peaky-blinders-the-immortal-man-391",
+    "title": "PEAKY BLINDERS: THE IMMORTAL MAN",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-07",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/peaky-blinders-the-immortal-man"
+  },
+  {
+    "id": "angelika-film-center-dreams-392",
+    "title": "DREAMS",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-07",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/dreams"
+  },
+  {
+    "id": "angelika-film-center-pillion-393",
+    "title": "PILLION",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-07",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/pillion"
+  },
+  {
+    "id": "angelika-film-center-my-father-s-shadow-394",
+    "title": "MY FATHER'S SHADOW",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-07",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/my-fathers-shadow"
+  },
+  {
+    "id": "angelika-film-center-the-napa-boys-395",
+    "title": "THE NAPA BOYS",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-07",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/the-napa-boys"
+  },
+  {
+    "id": "angelika-film-center-in-the-mood-for-love-25th-anniversary-a-rarely-seen-short-fi-396",
+    "title": "IN THE MOOD FOR LOVE (25TH ANNIVERSARY) + A RARELY SEEN SHORT FILM",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-07",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/in-the-mood-for-love-25th-anniversary--a-rarely-seen-short-film"
+  },
+  {
+    "id": "angelika-film-center-peaky-blinders-the-immortal-man-397",
+    "title": "PEAKY BLINDERS: THE IMMORTAL MAN",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-08",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/peaky-blinders-the-immortal-man"
+  },
+  {
+    "id": "angelika-film-center-dreams-398",
+    "title": "DREAMS",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-08",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/dreams"
+  },
+  {
+    "id": "angelika-film-center-pillion-399",
+    "title": "PILLION",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-08",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/pillion"
+  },
+  {
+    "id": "angelika-film-center-my-father-s-shadow-400",
+    "title": "MY FATHER'S SHADOW",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-08",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/my-fathers-shadow"
+  },
+  {
+    "id": "angelika-film-center-the-napa-boys-401",
+    "title": "THE NAPA BOYS",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-08",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/the-napa-boys"
+  },
+  {
+    "id": "angelika-film-center-in-the-mood-for-love-25th-anniversary-a-rarely-seen-short-fi-402",
+    "title": "IN THE MOOD FOR LOVE (25TH ANNIVERSARY) + A RARELY SEEN SHORT FILM",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-08",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/in-the-mood-for-love-25th-anniversary--a-rarely-seen-short-film"
+  },
+  {
+    "id": "angelika-film-center-peaky-blinders-the-immortal-man-403",
+    "title": "PEAKY BLINDERS: THE IMMORTAL MAN",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-09",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/peaky-blinders-the-immortal-man"
+  },
+  {
+    "id": "angelika-film-center-dreams-404",
+    "title": "DREAMS",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-09",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/dreams"
+  },
+  {
+    "id": "angelika-film-center-pillion-405",
+    "title": "PILLION",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-09",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/pillion"
+  },
+  {
+    "id": "angelika-film-center-my-father-s-shadow-406",
+    "title": "MY FATHER'S SHADOW",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-09",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/my-fathers-shadow"
+  },
+  {
+    "id": "angelika-film-center-the-napa-boys-407",
+    "title": "THE NAPA BOYS",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-09",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/the-napa-boys"
+  },
+  {
+    "id": "angelika-film-center-in-the-mood-for-love-25th-anniversary-a-rarely-seen-short-fi-408",
+    "title": "IN THE MOOD FOR LOVE (25TH ANNIVERSARY) + A RARELY SEEN SHORT FILM",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-09",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/in-the-mood-for-love-25th-anniversary--a-rarely-seen-short-film"
+  },
+  {
+    "id": "angelika-film-center-peaky-blinders-the-immortal-man-409",
+    "title": "PEAKY BLINDERS: THE IMMORTAL MAN",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-10",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/peaky-blinders-the-immortal-man"
+  },
+  {
+    "id": "angelika-film-center-dreams-410",
+    "title": "DREAMS",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-10",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/dreams"
+  },
+  {
+    "id": "angelika-film-center-pillion-411",
+    "title": "PILLION",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-10",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/pillion"
+  },
+  {
+    "id": "angelika-film-center-the-napa-boys-412",
+    "title": "THE NAPA BOYS",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-10",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/the-napa-boys"
+  },
+  {
+    "id": "angelika-film-center-in-the-mood-for-love-25th-anniversary-a-rarely-seen-short-fi-413",
+    "title": "IN THE MOOD FOR LOVE (25TH ANNIVERSARY) + A RARELY SEEN SHORT FILM",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-10",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/in-the-mood-for-love-25th-anniversary--a-rarely-seen-short-film"
+  },
+  {
+    "id": "angelika-film-center-my-father-s-shadow-414",
+    "title": "MY FATHER'S SHADOW",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-10",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/my-fathers-shadow"
+  },
+  {
+    "id": "angelika-film-center-peaky-blinders-the-immortal-man-415",
+    "title": "PEAKY BLINDERS: THE IMMORTAL MAN",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-11",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/peaky-blinders-the-immortal-man"
+  },
+  {
+    "id": "angelika-film-center-dreams-416",
+    "title": "DREAMS",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-11",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/dreams"
+  },
+  {
+    "id": "angelika-film-center-pillion-417",
+    "title": "PILLION",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-11",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/pillion"
+  },
+  {
+    "id": "angelika-film-center-my-father-s-shadow-418",
+    "title": "MY FATHER'S SHADOW",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-11",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/my-fathers-shadow"
+  },
+  {
+    "id": "angelika-film-center-the-napa-boys-419",
+    "title": "THE NAPA BOYS",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-11",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/the-napa-boys"
+  },
+  {
+    "id": "angelika-film-center-in-the-mood-for-love-25th-anniversary-a-rarely-seen-short-fi-420",
+    "title": "IN THE MOOD FOR LOVE (25TH ANNIVERSARY) + A RARELY SEEN SHORT FILM",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-11",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/in-the-mood-for-love-25th-anniversary--a-rarely-seen-short-film"
+  },
+  {
+    "id": "angelika-film-center-peaky-blinders-the-immortal-man-421",
+    "title": "PEAKY BLINDERS: THE IMMORTAL MAN",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-12",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/peaky-blinders-the-immortal-man"
+  },
+  {
+    "id": "angelika-film-center-dreams-422",
+    "title": "DREAMS",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-12",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/dreams"
+  },
+  {
+    "id": "angelika-film-center-pillion-423",
+    "title": "PILLION",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-12",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/pillion"
+  },
+  {
+    "id": "angelika-film-center-my-father-s-shadow-424",
+    "title": "MY FATHER'S SHADOW",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-12",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/my-fathers-shadow"
+  },
+  {
+    "id": "angelika-film-center-the-napa-boys-425",
+    "title": "THE NAPA BOYS",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-12",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/the-napa-boys"
+  },
+  {
+    "id": "angelika-film-center-in-the-mood-for-love-25th-anniversary-a-rarely-seen-short-fi-426",
+    "title": "IN THE MOOD FOR LOVE (25TH ANNIVERSARY) + A RARELY SEEN SHORT FILM",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-12",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/in-the-mood-for-love-25th-anniversary--a-rarely-seen-short-film"
+  },
+  {
+    "id": "angelika-film-center-the-revolution-will-not-be-televised-in-35mm-427",
+    "title": "THE REVOLUTION WILL NOT BE TELEVISED in 35MM",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-13",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/the-revolution-will-not-be-televised-in-35mm"
+  },
+  {
+    "id": "angelika-film-center-the-revolution-will-not-be-televised-in-35mm-428",
+    "title": "THE REVOLUTION WILL NOT BE TELEVISED in 35MM",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-14",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/the-revolution-will-not-be-televised-in-35mm"
+  },
+  {
+    "id": "angelika-film-center-the-revolution-will-not-be-televised-in-35mm-429",
+    "title": "THE REVOLUTION WILL NOT BE TELEVISED in 35MM",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-15",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/the-revolution-will-not-be-televised-in-35mm"
+  },
+  {
+    "id": "angelika-film-center-the-revolution-will-not-be-televised-in-35mm-430",
+    "title": "THE REVOLUTION WILL NOT BE TELEVISED in 35MM",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-16",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/the-revolution-will-not-be-televised-in-35mm"
+  },
+  {
+    "id": "angelika-film-center-the-revolution-will-not-be-televised-in-35mm-431",
+    "title": "THE REVOLUTION WILL NOT BE TELEVISED in 35MM",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-17",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/the-revolution-will-not-be-televised-in-35mm"
+  },
+  {
+    "id": "angelika-film-center-palestine-36-432",
+    "title": "PALESTINE '36",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-17",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/palestine-36"
+  },
+  {
+    "id": "angelika-film-center-the-revolution-will-not-be-televised-in-35mm-433",
+    "title": "THE REVOLUTION WILL NOT BE TELEVISED in 35MM",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-18",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/the-revolution-will-not-be-televised-in-35mm"
+  },
+  {
+    "id": "angelika-film-center-palestine-36-434",
+    "title": "PALESTINE '36",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-18",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/palestine-36"
+  },
+  {
+    "id": "angelika-film-center-the-revolution-will-not-be-televised-in-35mm-435",
+    "title": "THE REVOLUTION WILL NOT BE TELEVISED in 35MM",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-19",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/the-revolution-will-not-be-televised-in-35mm"
+  },
+  {
+    "id": "angelika-film-center-palestine-36-436",
+    "title": "PALESTINE '36",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-19",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/palestine-36"
+  },
+  {
+    "id": "angelika-film-center-palestine-36-437",
+    "title": "PALESTINE '36",
+    "venue": "Angelika Film Center",
+    "date": "2026-03-20",
+    "category": "Film",
+    "sourceUrl": "https://angelikafilmcenter.com/nyc/movies/details/palestine-36"
+  },
+  {
+    "id": "the-frick-collection-gainsborough-the-fashion-of-portraiture-438",
     "title": "Gainsborough: The Fashion of Portraiture",
     "venue": "The Frick Collection",
     "date": "",
@@ -1472,7 +3192,7 @@
     "sourceUrl": "https://www.frick.org/exhibitions/gainsborough"
   },
   {
-    "id": "the-frick-collection-turner-s-modern-and-ancient-ports-passages-through-time-212",
+    "id": "the-frick-collection-turner-s-modern-and-ancient-ports-passages-through-time-439",
     "title": "Turner’s Modern and Ancient Ports: Passages through Time",
     "venue": "The Frick Collection",
     "date": "",
@@ -1480,7 +3200,7 @@
     "sourceUrl": "https://www.frick.org/exhibitions/turner"
   },
   {
-    "id": "the-frick-collection-moroni-the-riches-of-renaissance-portraiture-213",
+    "id": "the-frick-collection-moroni-the-riches-of-renaissance-portraiture-440",
     "title": "Moroni: The Riches of Renaissance Portraiture",
     "venue": "The Frick Collection",
     "date": "",
@@ -1488,7 +3208,7 @@
     "sourceUrl": "https://www.frick.org/exhibitions/moroni"
   },
   {
-    "id": "guggenheim-gabriele-m-nter-214",
+    "id": "guggenheim-gabriele-m-nter-441",
     "title": "Gabriele Münter",
     "venue": "Guggenheim",
     "date": "",
@@ -1496,7 +3216,7 @@
     "sourceUrl": "https://www.guggenheim.org/exhibition/gabriele-munter"
   },
   {
-    "id": "guggenheim-robert-rauschenberg-215",
+    "id": "guggenheim-robert-rauschenberg-442",
     "title": "Robert Rauschenberg",
     "venue": "Guggenheim",
     "date": "",
@@ -1504,7 +3224,7 @@
     "sourceUrl": "https://www.guggenheim.org/exhibition/collection-in-focus-robert-rauschenberg-life-cant-be-stopped"
   },
   {
-    "id": "guggenheim-collection-216",
+    "id": "guggenheim-collection-443",
     "title": "collection",
     "venue": "Guggenheim",
     "date": "",
@@ -1512,7 +3232,7 @@
     "sourceUrl": "https://www.guggenheim.org/exhibition/collection-in-focus-modern-european-currents"
   },
   {
-    "id": "guggenheim-carol-bove-217",
+    "id": "guggenheim-carol-bove-444",
     "title": "Carol Bove",
     "venue": "Guggenheim",
     "date": "",
@@ -1520,7 +3240,7 @@
     "sourceUrl": "https://www.guggenheim.org/exhibition/carol-bove"
   },
   {
-    "id": "guggenheim-gabriele-m-nter-contours-of-a-world-218",
+    "id": "guggenheim-gabriele-m-nter-contours-of-a-world-445",
     "title": "Gabriele Münter: Contours of a World",
     "venue": "Guggenheim",
     "date": "2026-03-02 to 2026-04-26",
@@ -1528,7 +3248,7 @@
     "sourceUrl": "https://www.guggenheim.org/exhibition/gabriele-munter"
   },
   {
-    "id": "guggenheim-collection-in-focus-robert-rauschenberg-life-can-t-be-stoppe-219",
+    "id": "guggenheim-collection-in-focus-robert-rauschenberg-life-can-t-be-stoppe-446",
     "title": "Collection in Focus | Robert Rauschenberg: Life Can’t Be Stopped",
     "venue": "Guggenheim",
     "date": "2026-03-02 to 2026-05-03",
@@ -1536,7 +3256,7 @@
     "sourceUrl": "https://www.guggenheim.org/exhibition/collection-in-focus-robert-rauschenberg-life-cant-be-stopped"
   },
   {
-    "id": "guggenheim-collection-in-focus-modern-european-currents-220",
+    "id": "guggenheim-collection-in-focus-modern-european-currents-447",
     "title": "Collection in Focus | Modern European Currents",
     "venue": "Guggenheim",
     "date": "2026-03-02 to 2027-01-10",
@@ -1544,7 +3264,7 @@
     "sourceUrl": "https://www.guggenheim.org/exhibition/collection-in-focus-modern-european-currents"
   },
   {
-    "id": "guggenheim-a-year-with-children-2026-221",
+    "id": "guggenheim-a-year-with-children-2026-448",
     "title": "A Year with Children 2026",
     "venue": "Guggenheim",
     "date": "",
@@ -1552,7 +3272,7 @@
     "sourceUrl": "https://www.guggenheim.org/exhibition/a-year-with-children-2026"
   },
   {
-    "id": "guggenheim-guggenheim-pop-222",
+    "id": "guggenheim-guggenheim-pop-449",
     "title": "Guggenheim Pop",
     "venue": "Guggenheim",
     "date": "",
@@ -1560,7 +3280,7 @@
     "sourceUrl": "https://www.guggenheim.org/exhibition/guggenheim-pop"
   },
   {
-    "id": "guggenheim-collection-in-focus-zidane-a-21st-century-portrait-223",
+    "id": "guggenheim-collection-in-focus-zidane-a-21st-century-portrait-450",
     "title": "Collection in Focus | Zidane, a 21st century portrait",
     "venue": "Guggenheim",
     "date": "",
@@ -1568,7 +3288,7 @@
     "sourceUrl": "https://www.guggenheim.org/exhibition/collection-in-focus-zidane-a-21st-century-portrait"
   },
   {
-    "id": "guggenheim-taryn-simon-224",
+    "id": "guggenheim-taryn-simon-451",
     "title": "Taryn Simon",
     "venue": "Guggenheim",
     "date": "",
@@ -1576,7 +3296,7 @@
     "sourceUrl": "https://www.guggenheim.org/exhibition/taryn-simon"
   },
   {
-    "id": "guggenheim-thannhauser-collection-225",
+    "id": "guggenheim-thannhauser-collection-452",
     "title": "Thannhauser Collection",
     "venue": "Guggenheim",
     "date": "",
@@ -1584,7 +3304,7 @@
     "sourceUrl": "https://www.guggenheim.org/exhibition/thannhauser-collection"
   },
   {
-    "id": "guggenheim-rashid-johnson-a-poem-for-deep-thinkers-226",
+    "id": "guggenheim-rashid-johnson-a-poem-for-deep-thinkers-453",
     "title": "Rashid Johnson: A Poem for Deep Thinkers",
     "venue": "Guggenheim",
     "date": "",
@@ -1592,7 +3312,7 @@
     "sourceUrl": "https://www.guggenheim.org/exhibition/rashid-johnson-a-poem-for-deep-thinkers"
   },
   {
-    "id": "guggenheim-collection-in-focus-beatriz-milhazes-rigor-and-beauty-227",
+    "id": "guggenheim-collection-in-focus-beatriz-milhazes-rigor-and-beauty-454",
     "title": "Collection in Focus | Beatriz Milhazes: Rigor and Beauty",
     "venue": "Guggenheim",
     "date": "",
@@ -1600,7 +3320,7 @@
     "sourceUrl": "https://www.guggenheim.org/exhibition/beatriz-milhazes"
   },
   {
-    "id": "guggenheim-collection-in-focus-the-reach-of-faith-ringgold-228",
+    "id": "guggenheim-collection-in-focus-the-reach-of-faith-ringgold-455",
     "title": "Collection in Focus | The Reach of Faith Ringgold",
     "venue": "Guggenheim",
     "date": "",
@@ -1608,7 +3328,7 @@
     "sourceUrl": "https://www.guggenheim.org/exhibition/faith-ringgold"
   },
   {
-    "id": "new-museum-new-humans-memories-of-the-futureopening-229",
+    "id": "new-museum-new-humans-memories-of-the-futureopening-456",
     "title": "New Humans: Memories of the FutureOpening",
     "venue": "New Museum",
     "date": "",
@@ -1616,7 +3336,7 @@
     "sourceUrl": "https://www.newmuseum.org/exhibition/new-humans-memories-of-the-future/"
   },
   {
-    "id": "new-museum-plaza-sarah-lucas-venus-victoria-230",
+    "id": "new-museum-plaza-sarah-lucas-venus-victoria-457",
     "title": "Plaza: Sarah Lucas—VENUS VICTORIA",
     "venue": "New Museum",
     "date": "",
@@ -1624,7 +3344,7 @@
     "sourceUrl": "https://www.newmuseum.org/exhibition/plaza-sarah-lucas-venus-victoria/"
   },
   {
-    "id": "new-museum-facade-tschabalala-self-art-lovers-231",
+    "id": "new-museum-facade-tschabalala-self-art-lovers-458",
     "title": "Facade: Tschabalala Self—Art Lovers",
     "venue": "New Museum",
     "date": "",
@@ -1632,7 +3352,7 @@
     "sourceUrl": "https://www.newmuseum.org/exhibition/facade-tschabalala-self-art-lovers/"
   },
   {
-    "id": "new-museum-atrium-stair-kl-ra-hosnedlov-232",
+    "id": "new-museum-atrium-stair-kl-ra-hosnedlov-459",
     "title": "Atrium Stair: Klára Hosnedlová",
     "venue": "New Museum",
     "date": "2026-03-21",
@@ -1640,7 +3360,7 @@
     "sourceUrl": "https://www.newmuseum.org/exhibition/atrium-stair-klara-hosnedlova/"
   },
   {
-    "id": "new-museum-offsite-new-museum-and-the-deste-foundation-at-the-benaki-mu-233",
+    "id": "new-museum-offsite-new-museum-and-the-deste-foundation-at-the-benaki-mu-460",
     "title": "Offsite: New Museum and the DESTE Foundation at the Benaki Museum in AthensJune 11–",
     "venue": "New Museum",
     "date": "",
@@ -1648,7 +3368,7 @@
     "sourceUrl": "https://www.newmuseum.org/exhibition/in-a-bright-green-field/"
   },
   {
-    "id": "new-museum-window-installation-silence-death-234",
+    "id": "new-museum-window-installation-silence-death-461",
     "title": "Window Installation: SILENCE=DEATH",
     "venue": "New Museum",
     "date": "2024-11-28 to 2025-02-02",
@@ -1656,7 +3376,7 @@
     "sourceUrl": "https://www.newmuseum.org/exhibition/silence-equals-death/"
   },
   {
-    "id": "new-museum-screens-series-seba-calfuqueojanuary-9-235",
+    "id": "new-museum-screens-series-seba-calfuqueojanuary-9-462",
     "title": "Screens Series: Seba CalfuqueoJanuary 9–",
     "venue": "New Museum",
     "date": "",
@@ -1664,7 +3384,7 @@
     "sourceUrl": "https://www.newmuseum.org/exhibition/screens-series-seba-calfuqueo/"
   },
   {
-    "id": "new-museum-first-look-mezzanine-236",
+    "id": "new-museum-first-look-mezzanine-463",
     "title": "First Look: Mezzanine",
     "venue": "New Museum",
     "date": "",
@@ -1672,7 +3392,7 @@
     "sourceUrl": "https://www.newmuseum.org/exhibition/first-look-mezzanine/"
   },
   {
-    "id": "new-museum-first-look-the-longest-whistlegraph-ever-so-far-237",
+    "id": "new-museum-first-look-the-longest-whistlegraph-ever-so-far-464",
     "title": "First Look: The Longest Whistlegraph Ever (so far)",
     "venue": "New Museum",
     "date": "",
@@ -1680,7 +3400,7 @@
     "sourceUrl": "https://www.newmuseum.org/exhibition/first-look-the-longest-whistlegraph-ever-so-far/"
   },
   {
-    "id": "new-museum-first-look-black-artist-burnout-238",
+    "id": "new-museum-first-look-black-artist-burnout-465",
     "title": "First Look: Black Artist Burnout",
     "venue": "New Museum",
     "date": "",
@@ -1688,7 +3408,7 @@
     "sourceUrl": "https://www.newmuseum.org/exhibition/first-look-black-artist-burnout/"
   },
   {
-    "id": "japan-society-annual-dinner-239",
+    "id": "japan-society-annual-dinner-466",
     "title": "Annual Dinner",
     "venue": "Japan Society",
     "date": "",
@@ -1696,7 +3416,7 @@
     "sourceUrl": "https://japansociety.org/events/japan-society-2026-annual-dinner/"
   },
   {
-    "id": "japan-society-alliance-at-a-crossroads-america-s-transformation-and-japan--241",
+    "id": "japan-society-alliance-at-a-crossroads-america-s-transformation-and-japan--468",
     "title": "Alliance at a Crossroads: America’s Transformation and Japan’s Strategy",
     "venue": "Japan Society",
     "date": "2026-03-04",
@@ -1704,7 +3424,7 @@
     "sourceUrl": "https://japansociety.org/events/alliance-at-a-crossroads-americas-transformation-and-japans-strategy/"
   },
   {
-    "id": "japan-society-book-talk-and-signing-at-the-limits-of-the-gaze-242",
+    "id": "japan-society-book-talk-and-signing-at-the-limits-of-the-gaze-469",
     "title": "Book Talk and Signing: At the Limits of the Gaze",
     "venue": "Japan Society",
     "date": "2026-03-05",
@@ -1712,7 +3432,7 @@
     "sourceUrl": "https://japansociety.org/events/book-talk-and-signing-at-the-limits-of-the-gaze/"
   },
   {
-    "id": "japan-society-the-ozu-diaries-243",
+    "id": "japan-society-the-ozu-diaries-470",
     "title": "The Ozu Diaries",
     "venue": "Japan Society",
     "date": "2026-03-06",
@@ -1720,7 +3440,7 @@
     "sourceUrl": "https://japansociety.org/events/ozu-diaries/"
   },
   {
-    "id": "japan-society-intermediate-advanced-english-trial-lesson-244",
+    "id": "japan-society-intermediate-advanced-english-trial-lesson-471",
     "title": "中上級向け 英会話体験講座 Intermediate/Advanced English Trial Lesson",
     "venue": "Japan Society",
     "date": "2026-03-06",
@@ -1728,7 +3448,7 @@
     "sourceUrl": "https://japansociety.org/events/english-trial-lesson-march6/"
   },
   {
-    "id": "japan-society-late-autumn-245",
+    "id": "japan-society-late-autumn-472",
     "title": "Late Autumn",
     "venue": "Japan Society",
     "date": "2026-03-06",
@@ -1736,7 +3456,7 @@
     "sourceUrl": "https://japansociety.org/events/late-autumn-2/"
   },
   {
-    "id": "japan-society-the-power-of-relationships-in-career-advancement-246",
+    "id": "japan-society-the-power-of-relationships-in-career-advancement-473",
     "title": "The Power of Relationships in Career Advancement",
     "venue": "Japan Society",
     "date": "2026-03-09",
@@ -1744,7 +3464,7 @@
     "sourceUrl": "https://japansociety.org/events/the-power-of-relationships-in-career-advancement-build-and-leverage-your-network-to-maximize-your-growth-opportunities/"
   },
   {
-    "id": "japan-society-the-theater-of-the-matters-the-island-of-loves-247",
+    "id": "japan-society-the-theater-of-the-matters-the-island-of-loves-474",
     "title": "The Theater of the Matters: The Island of Loves",
     "venue": "Japan Society",
     "date": "2026-03-13",
@@ -1752,7 +3472,7 @@
     "sourceUrl": "https://japansociety.org/events/the-theater-of-the-matters-the-island-of-loves/"
   },
   {
-    "id": "japan-society-kanpai-nights-world-baseball-classic-watch-party-248",
+    "id": "japan-society-kanpai-nights-world-baseball-classic-watch-party-475",
     "title": "Kanpai Nights: World Baseball Classic Watch Party",
     "venue": "Japan Society",
     "date": "2026-03-17",
@@ -1760,7 +3480,7 @@
     "sourceUrl": "https://japansociety.org/events/kanpai-nights-world-baseball-classic-watch-party/"
   },
   {
-    "id": "japan-society-opening-reception-kawai-kanjir-house-to-house-249",
+    "id": "japan-society-opening-reception-kawai-kanjir-house-to-house-476",
     "title": "Opening Reception | Kawai Kanjirō: House to House",
     "venue": "Japan Society",
     "date": "2026-03-18",
@@ -1768,7 +3488,7 @@
     "sourceUrl": "https://japansociety.org/events/opening-reception-kawai-kanjiro-house-to-house/"
   },
   {
-    "id": "japan-society-kawai-kanjir-s-way-of-tea-250",
+    "id": "japan-society-kawai-kanjir-s-way-of-tea-477",
     "title": "Kawai Kanjirō’s Way of Tea",
     "venue": "Japan Society",
     "date": "2026-03-19",
@@ -1776,7 +3496,7 @@
     "sourceUrl": "https://japansociety.org/events/kawai-kanjiros-way-of-tea/"
   },
   {
-    "id": "japan-society-book-talk-and-signing-spent-bullets-with-author-terao-tetsuy-251",
+    "id": "japan-society-book-talk-and-signing-spent-bullets-with-author-terao-tetsuy-478",
     "title": "Book Talk and Signing: Spent Bullets with Author Terao Tetsuya",
     "venue": "Japan Society",
     "date": "2026-03-19",
@@ -1784,7 +3504,7 @@
     "sourceUrl": "https://japansociety.org/events/book-talk-and-signing-spent-bullets-with-author-terao-tetsuya/"
   },
   {
-    "id": "japan-society-christie-s-asian-art-week-a-guided-tour-252",
+    "id": "japan-society-christie-s-asian-art-week-a-guided-tour-479",
     "title": "Christie's Asian Art Week: A Guided Tour",
     "venue": "Japan Society",
     "date": "2026-03-21",
@@ -1792,7 +3512,7 @@
     "sourceUrl": "https://japansociety.org/events/christies-asian-art-week-a-guided-tour/"
   },
   {
-    "id": "japan-society-jasa-annual-lecture-2026-253",
+    "id": "japan-society-jasa-annual-lecture-2026-480",
     "title": "JASA Annual Lecture 2026",
     "venue": "Japan Society",
     "date": "2026-03-22",
@@ -1800,7 +3520,7 @@
     "sourceUrl": "https://japansociety.org/events/jasa-annual-lecture-2026/"
   },
   {
-    "id": "new-york-philharmonic-mirga-gra-inyt-tyla-emanuel-ax-254",
+    "id": "new-york-philharmonic-mirga-gra-inyt-tyla-emanuel-ax-481",
     "title": "Mirga Gražinytė-Tyla & Emanuel Ax",
     "venue": "New York Philharmonic",
     "date": "2026-03-03",
@@ -1808,7 +3528,7 @@
     "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/mirga-grazinyte-tyla-and-emanuel-ax/"
   },
   {
-    "id": "new-york-philharmonic-gra-inyt-tyla-conducts-elgar-schumann-255",
+    "id": "new-york-philharmonic-gra-inyt-tyla-conducts-elgar-schumann-482",
     "title": "Gražinytė-Tyla Conducts Elgar & Schumann",
     "venue": "New York Philharmonic",
     "date": "2026-03-05",
@@ -1816,7 +3536,23 @@
     "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/grazinyte-tyla-conducts-elgar-and-schumann/"
   },
   {
-    "id": "new-york-philharmonic-donor-rehearsal-dudamel-conducts-eroica-the-people-united-258",
+    "id": "new-york-philharmonic-gra-inyt-tyla-conducts-elgar-schumann-483",
+    "title": "Gražinytė-Tyla Conducts Elgar & Schumann",
+    "venue": "New York Philharmonic",
+    "date": "2026-03-06",
+    "category": "Classical Music",
+    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/grazinyte-tyla-conducts-elgar-and-schumann/"
+  },
+  {
+    "id": "new-york-philharmonic-gra-inyt-tyla-conducts-elgar-schumann-484",
+    "title": "Gražinytė-Tyla Conducts Elgar & Schumann",
+    "venue": "New York Philharmonic",
+    "date": "2026-03-07",
+    "category": "Classical Music",
+    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/grazinyte-tyla-conducts-elgar-and-schumann/"
+  },
+  {
+    "id": "new-york-philharmonic-donor-rehearsal-dudamel-conducts-eroica-the-people-united-485",
     "title": "Donor Rehearsal: Dudamel Conducts Eroica & The People United…",
     "venue": "New York Philharmonic",
     "date": "2026-03-12",
@@ -1824,7 +3560,7 @@
     "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/donor-rehearsal-march-12/"
   },
   {
-    "id": "new-york-philharmonic-dudamel-conducts-eroica-the-people-united-259",
+    "id": "new-york-philharmonic-dudamel-conducts-eroica-the-people-united-486",
     "title": "Dudamel Conducts Eroica & The People United…",
     "venue": "New York Philharmonic",
     "date": "2026-03-12",
@@ -1832,7 +3568,31 @@
     "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/dudamel-conducts-eroica-and-the-people-united/"
   },
   {
-    "id": "new-york-philharmonic-dudamel-david-lang-s-the-wealth-of-nations-263",
+    "id": "new-york-philharmonic-dudamel-conducts-eroica-the-people-united-487",
+    "title": "Dudamel Conducts Eroica & The People United…",
+    "venue": "New York Philharmonic",
+    "date": "2026-03-13",
+    "category": "Classical Music",
+    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/dudamel-conducts-eroica-and-the-people-united/"
+  },
+  {
+    "id": "new-york-philharmonic-dudamel-conducts-eroica-the-people-united-488",
+    "title": "Dudamel Conducts Eroica & The People United…",
+    "venue": "New York Philharmonic",
+    "date": "2026-03-14",
+    "category": "Classical Music",
+    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/dudamel-conducts-eroica-and-the-people-united/"
+  },
+  {
+    "id": "new-york-philharmonic-dudamel-conducts-eroica-the-people-united-489",
+    "title": "Dudamel Conducts Eroica & The People United…",
+    "venue": "New York Philharmonic",
+    "date": "2026-03-17",
+    "category": "Classical Music",
+    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/dudamel-conducts-eroica-and-the-people-united/"
+  },
+  {
+    "id": "new-york-philharmonic-dudamel-david-lang-s-the-wealth-of-nations-490",
     "title": "Dudamel & David Lang’s the wealth of nations",
     "venue": "New York Philharmonic",
     "date": "2026-03-19",
@@ -1840,7 +3600,31 @@
     "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/dudamel-and-david-langs-the-wealth-of-nations/"
   },
   {
-    "id": "new-york-philharmonic-enigma-variations-bruch-s-violin-concerto-267",
+    "id": "new-york-philharmonic-dudamel-david-lang-s-the-wealth-of-nations-491",
+    "title": "Dudamel & David Lang’s the wealth of nations",
+    "venue": "New York Philharmonic",
+    "date": "2026-03-20",
+    "category": "Classical Music",
+    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/dudamel-and-david-langs-the-wealth-of-nations/"
+  },
+  {
+    "id": "new-york-philharmonic-dudamel-david-lang-s-the-wealth-of-nations-492",
+    "title": "Dudamel & David Lang’s the wealth of nations",
+    "venue": "New York Philharmonic",
+    "date": "2026-03-21",
+    "category": "Classical Music",
+    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/dudamel-and-david-langs-the-wealth-of-nations/"
+  },
+  {
+    "id": "new-york-philharmonic-dudamel-david-lang-s-the-wealth-of-nations-493",
+    "title": "Dudamel & David Lang’s the wealth of nations",
+    "venue": "New York Philharmonic",
+    "date": "2026-03-22",
+    "category": "Classical Music",
+    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/dudamel-and-david-langs-the-wealth-of-nations/"
+  },
+  {
+    "id": "new-york-philharmonic-enigma-variations-bruch-s-violin-concerto-494",
     "title": "Enigma Variations & Bruch’s Violin Concerto",
     "venue": "New York Philharmonic",
     "date": "2026-03-27",
@@ -1848,7 +3632,7 @@
     "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/enigma-variations-and-bruchs-violin-concerto/"
   },
   {
-    "id": "new-york-philharmonic-philharmonic-families-winds-268",
+    "id": "new-york-philharmonic-philharmonic-families-winds-495",
     "title": "Philharmonic Families: Winds",
     "venue": "New York Philharmonic",
     "date": "2026-03-28",
@@ -1856,7 +3640,23 @@
     "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/vypc-mar/"
   },
   {
-    "id": "new-york-philharmonic-golda-schultz-sings-barber-stravinsky-272",
+    "id": "new-york-philharmonic-enigma-variations-bruch-s-violin-concerto-497",
+    "title": "Enigma Variations & Bruch’s Violin Concerto",
+    "venue": "New York Philharmonic",
+    "date": "2026-03-28",
+    "category": "Classical Music",
+    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/enigma-variations-and-bruchs-violin-concerto/"
+  },
+  {
+    "id": "new-york-philharmonic-enigma-variations-bruch-s-violin-concerto-498",
+    "title": "Enigma Variations & Bruch’s Violin Concerto",
+    "venue": "New York Philharmonic",
+    "date": "2026-03-29",
+    "category": "Classical Music",
+    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/enigma-variations-and-bruchs-violin-concerto/"
+  },
+  {
+    "id": "new-york-philharmonic-golda-schultz-sings-barber-stravinsky-499",
     "title": "Golda Schultz Sings Barber & Stravinsky",
     "venue": "New York Philharmonic",
     "date": "2026-04-08",
@@ -1864,7 +3664,23 @@
     "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/golda-schultz-sings-barber-and-stravinsky/"
   },
   {
-    "id": "new-york-philharmonic-ny-phil-ensembles-at-merkin-hall-275",
+    "id": "new-york-philharmonic-golda-schultz-sings-barber-stravinsky-500",
+    "title": "Golda Schultz Sings Barber & Stravinsky",
+    "venue": "New York Philharmonic",
+    "date": "2026-04-09",
+    "category": "Classical Music",
+    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/golda-schultz-sings-barber-and-stravinsky/"
+  },
+  {
+    "id": "new-york-philharmonic-golda-schultz-sings-barber-stravinsky-501",
+    "title": "Golda Schultz Sings Barber & Stravinsky",
+    "venue": "New York Philharmonic",
+    "date": "2026-04-10",
+    "category": "Classical Music",
+    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/golda-schultz-sings-barber-and-stravinsky/"
+  },
+  {
+    "id": "new-york-philharmonic-ny-phil-ensembles-at-merkin-hall-502",
     "title": "NY Phil Ensembles at Merkin Hall",
     "venue": "New York Philharmonic",
     "date": "2026-04-12",
@@ -1872,7 +3688,7 @@
     "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/merkin-apr/"
   },
   {
-    "id": "new-york-philharmonic-donor-rehearsal-dvo-k-s-seventh-sibelius-s-violin-concerto-276",
+    "id": "new-york-philharmonic-donor-rehearsal-dvo-k-s-seventh-sibelius-s-violin-concerto-503",
     "title": "Donor Rehearsal: Dvořák’s Seventh & Sibelius’s Violin Concerto",
     "venue": "New York Philharmonic",
     "date": "2026-04-15",
@@ -1880,7 +3696,7 @@
     "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/donor-rehearsal-april-15/"
   },
   {
-    "id": "new-york-philharmonic-dvo-k-s-seventh-sibelius-s-violin-concerto-277",
+    "id": "new-york-philharmonic-dvo-k-s-seventh-sibelius-s-violin-concerto-504",
     "title": "Dvořák’s Seventh & Sibelius’s Violin Concerto",
     "venue": "New York Philharmonic",
     "date": "2026-04-15",
@@ -1888,7 +3704,15 @@
     "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/dvoraks-seventh-and-sibeliuss-violin-concerto/"
   },
   {
-    "id": "new-york-philharmonic-young-people-s-concert-shall-we-dance-279",
+    "id": "new-york-philharmonic-dvo-k-s-seventh-sibelius-s-violin-concerto-505",
+    "title": "Dvořák’s Seventh & Sibelius’s Violin Concerto",
+    "venue": "New York Philharmonic",
+    "date": "2026-04-16",
+    "category": "Classical Music",
+    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/dvoraks-seventh-and-sibeliuss-violin-concerto/"
+  },
+  {
+    "id": "new-york-philharmonic-young-people-s-concert-shall-we-dance-506",
     "title": "Young People’s Concert: Shall We Dance?",
     "venue": "New York Philharmonic",
     "date": "2026-04-18",
@@ -1896,7 +3720,15 @@
     "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/ypc-apr/"
   },
   {
-    "id": "new-york-philharmonic-la-voix-humaine-with-barbara-hannigan-281",
+    "id": "new-york-philharmonic-dvo-k-s-seventh-sibelius-s-violin-concerto-507",
+    "title": "Dvořák’s Seventh & Sibelius’s Violin Concerto",
+    "venue": "New York Philharmonic",
+    "date": "2026-04-18",
+    "category": "Classical Music",
+    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/dvoraks-seventh-and-sibeliuss-violin-concerto/"
+  },
+  {
+    "id": "new-york-philharmonic-la-voix-humaine-with-barbara-hannigan-508",
     "title": "La Voix humaine with Barbara Hannigan",
     "venue": "New York Philharmonic",
     "date": "2026-04-23",
@@ -1904,7 +3736,23 @@
     "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/la-voix-humaine-with-barbara-hannigan/"
   },
   {
-    "id": "carnegie-hall-guided-tours-284",
+    "id": "new-york-philharmonic-la-voix-humaine-with-barbara-hannigan-509",
+    "title": "La Voix humaine with Barbara Hannigan",
+    "venue": "New York Philharmonic",
+    "date": "2026-04-24",
+    "category": "Classical Music",
+    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/la-voix-humaine-with-barbara-hannigan/"
+  },
+  {
+    "id": "new-york-philharmonic-la-voix-humaine-with-barbara-hannigan-510",
+    "title": "La Voix humaine with Barbara Hannigan",
+    "venue": "New York Philharmonic",
+    "date": "2026-04-25",
+    "category": "Classical Music",
+    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/la-voix-humaine-with-barbara-hannigan/"
+  },
+  {
+    "id": "carnegie-hall-guided-tours-511",
     "title": "Guided Tours",
     "venue": "Carnegie Hall",
     "date": "",
@@ -1912,7 +3760,7 @@
     "sourceUrl": "https://www.carnegiehall.org/Visit/Tour/Tours"
   },
   {
-    "id": "carnegie-hall-gianfranco-pappalardo-and-giulio-potenza-piano-four-hands-285",
+    "id": "carnegie-hall-gianfranco-pappalardo-and-giulio-potenza-piano-four-hands-512",
     "title": "Gianfranco Pappalardo and Giulio Potenza, Piano Four Hands",
     "venue": "Carnegie Hall",
     "date": "",
@@ -1920,7 +3768,7 @@
     "sourceUrl": "https://www.carnegiehall.org/calendar/2026/03/03/gianfranco-pappalardo-and-giulio-potenza-piano-four-hands-0700pm"
   },
   {
-    "id": "carnegie-hall-tibet-house-us-39th-annual-benefit-concert-philip-glass-and--286",
+    "id": "carnegie-hall-tibet-house-us-39th-annual-benefit-concert-philip-glass-and--513",
     "title": "Tibet House US 39th Annual Benefit Concert: Philip Glass and Friends",
     "venue": "Carnegie Hall",
     "date": "",
@@ -1928,7 +3776,7 @@
     "sourceUrl": "https://www.carnegiehall.org/calendar/2026/03/03/tibet-house-us-39th-annual-benefit-concert-philip-glass-and-friends-0730pm"
   },
   {
-    "id": "carnegie-hall-united-in-sound-america-at-250-287",
+    "id": "carnegie-hall-united-in-sound-america-at-250-514",
     "title": "United in Sound: America at 250",
     "venue": "Carnegie Hall",
     "date": "",
@@ -1936,7 +3784,7 @@
     "sourceUrl": "https://www.carnegiehall.org/Events/Highlights/Festivals-and-Artistic-Focuses/United-in-Sound-America-at-250"
   },
   {
-    "id": "carnegie-hall-making-history-making-change-dr-krystal-klingenberg-288",
+    "id": "carnegie-hall-making-history-making-change-dr-krystal-klingenberg-515",
     "title": "Making History, Making Change: Dr. Krystal Klingenberg",
     "venue": "Carnegie Hall",
     "date": "",
@@ -1944,7 +3792,7 @@
     "sourceUrl": "https://www.carnegiehall.org/calendar/2026/03/04/making-history-making-change-dr-krystal-klingenberg-0600pm"
   },
   {
-    "id": "carnegie-hall-american-musical-modernism-revolution-in-sound-289",
+    "id": "carnegie-hall-american-musical-modernism-revolution-in-sound-516",
     "title": "American Musical Modernism: Revolution in Sound",
     "venue": "Carnegie Hall",
     "date": "",
@@ -1952,7 +3800,7 @@
     "sourceUrl": "https://www.carnegiehall.org/calendar/2026/03/04/american-musical-modernism-revolution-in-sound-0630pm"
   },
   {
-    "id": "carnegie-hall-brooklyn-community-song-circle-290",
+    "id": "carnegie-hall-brooklyn-community-song-circle-517",
     "title": "Brooklyn Community Song Circle",
     "venue": "Carnegie Hall",
     "date": "",
@@ -1960,7 +3808,7 @@
     "sourceUrl": "https://www.carnegiehall.org/calendar/2026/03/04/brooklyn-community-song-circle-0700pm"
   },
   {
-    "id": "carnegie-hall-tak-cs-quartet-291",
+    "id": "carnegie-hall-tak-cs-quartet-518",
     "title": "Takács Quartet",
     "venue": "Carnegie Hall",
     "date": "",
@@ -1968,7 +3816,7 @@
     "sourceUrl": "https://www.carnegiehall.org/calendar/2026/03/04/takacs-quartet-0730pm"
   },
   {
-    "id": "carnegie-hall-mao-fujita-piano-292",
+    "id": "carnegie-hall-mao-fujita-piano-519",
     "title": "Mao Fujita, Piano",
     "venue": "Carnegie Hall",
     "date": "",
@@ -1976,7 +3824,7 @@
     "sourceUrl": "https://www.carnegiehall.org/calendar/2026/03/04/mao-fujita-piano-0800pm"
   },
   {
-    "id": "carnegie-hall-festival-chamber-music-293",
+    "id": "carnegie-hall-festival-chamber-music-520",
     "title": "Festival Chamber Music",
     "venue": "Carnegie Hall",
     "date": "",
@@ -1984,7 +3832,7 @@
     "sourceUrl": "https://www.carnegiehall.org/calendar/2026/03/04/festival-chamber-music-0800pm"
   },
   {
-    "id": "carnegie-hall-guseva-s-music-school-recital-294",
+    "id": "carnegie-hall-guseva-s-music-school-recital-521",
     "title": "Guseva's Music School Recital",
     "venue": "Carnegie Hall",
     "date": "",
@@ -1992,7 +3840,7 @@
     "sourceUrl": "https://www.carnegiehall.org/calendar/2026/03/05/gusevas-music-school-recital-0700pm"
   },
   {
-    "id": "carnegie-hall-academy-of-st-martin-in-the-fields-295",
+    "id": "carnegie-hall-academy-of-st-martin-in-the-fields-522",
     "title": "Academy of St Martin in the Fields",
     "venue": "Carnegie Hall",
     "date": "",
@@ -2000,7 +3848,7 @@
     "sourceUrl": "https://www.carnegiehall.org/calendar/2026/03/05/academy-of-st-martin-in-the-fields-0800pm"
   },
   {
-    "id": "metropolitan-opera-les-troyens-carthage-les-troyens-part-ii-artist-s-choice-296",
+    "id": "metropolitan-opera-les-troyens-carthage-les-troyens-part-ii-artist-s-choice-523",
     "title": "Les Troyens à Carthage (Les Troyens Part II) - Artist's Choice",
     "venue": "Metropolitan Opera",
     "date": "2026-03-07",
@@ -2008,7 +3856,15 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-6-more-performances-298",
+    "id": "metropolitan-opera-tristan-und-isolde-524",
+    "title": "Tristan und Isolde",
+    "venue": "Metropolitan Opera",
+    "date": "2026-03-09",
+    "category": "Opera",
+    "sourceUrl": "https://www.metopera.org/calendar/"
+  },
+  {
+    "id": "metropolitan-opera-6-more-performances-525",
     "title": "6 MORE PERFORMANCES",
     "venue": "Metropolitan Opera",
     "date": "2026-03-09",
@@ -2016,7 +3872,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-tristan-und-isolde-siriusxm-live-broadcast-299",
+    "id": "metropolitan-opera-tristan-und-isolde-siriusxm-live-broadcast-526",
     "title": "Tristan und Isolde: SiriusXM Live Broadcast",
     "venue": "Metropolitan Opera",
     "date": "2026-03-09",
@@ -2024,7 +3880,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-tuesday-talk-madama-butterfly-300",
+    "id": "metropolitan-opera-tuesday-talk-madama-butterfly-527",
     "title": "Tuesday Talk: Madama Butterfly",
     "venue": "Metropolitan Opera",
     "date": "2026-03-10",
@@ -2032,7 +3888,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-madama-butterfly-301",
+    "id": "metropolitan-opera-madama-butterfly-528",
     "title": "Madama Butterfly",
     "venue": "Metropolitan Opera",
     "date": "2026-03-10",
@@ -2040,7 +3896,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-9-more-performances-302",
+    "id": "metropolitan-opera-9-more-performances-529",
     "title": "9 MORE PERFORMANCES",
     "venue": "Metropolitan Opera",
     "date": "2026-03-10",
@@ -2048,7 +3904,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-8-more-performances-303",
+    "id": "metropolitan-opera-8-more-performances-530",
     "title": "8 MORE PERFORMANCES",
     "venue": "Metropolitan Opera",
     "date": "2026-03-11",
@@ -2056,7 +3912,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-5-more-performances-304",
+    "id": "metropolitan-opera-5-more-performances-531",
     "title": "5 MORE PERFORMANCES",
     "venue": "Metropolitan Opera",
     "date": "2026-03-13",
@@ -2064,7 +3920,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-7-more-performances-305",
+    "id": "metropolitan-opera-7-more-performances-532",
     "title": "7 MORE PERFORMANCES",
     "venue": "Metropolitan Opera",
     "date": "2026-03-14",
@@ -2072,7 +3928,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-4-more-performances-306",
+    "id": "metropolitan-opera-4-more-performances-533",
     "title": "4 MORE PERFORMANCES",
     "venue": "Metropolitan Opera",
     "date": "2026-03-17",
@@ -2080,7 +3936,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-la-traviata-307",
+    "id": "metropolitan-opera-la-traviata-534",
     "title": "La Traviata",
     "venue": "Metropolitan Opera",
     "date": "2026-03-20",
@@ -2088,7 +3944,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-20-more-performances-308",
+    "id": "metropolitan-opera-20-more-performances-535",
     "title": "20 MORE PERFORMANCES",
     "venue": "Metropolitan Opera",
     "date": "2026-03-20",
@@ -2096,7 +3952,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-3-more-performances-309",
+    "id": "metropolitan-opera-3-more-performances-536",
     "title": "3 MORE PERFORMANCES",
     "venue": "Metropolitan Opera",
     "date": "2026-03-21",
@@ -2104,7 +3960,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-laffont-grand-finals-concert-310",
+    "id": "metropolitan-opera-laffont-grand-finals-concert-537",
     "title": "Laffont Grand Finals Concert",
     "venue": "Metropolitan Opera",
     "date": "2026-03-22",
@@ -2112,7 +3968,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-laffont-grand-finals-concert-siriusxm-live-broadcast-311",
+    "id": "metropolitan-opera-laffont-grand-finals-concert-siriusxm-live-broadcast-538",
     "title": "Laffont Grand Finals Concert: SiriusXM Live Broadcast",
     "venue": "Metropolitan Opera",
     "date": "2026-03-22",
@@ -2120,7 +3976,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-2-more-performances-312",
+    "id": "metropolitan-opera-2-more-performances-539",
     "title": "2 MORE PERFORMANCES",
     "venue": "Metropolitan Opera",
     "date": "2026-03-23",
@@ -2128,7 +3984,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-19-more-performances-313",
+    "id": "metropolitan-opera-19-more-performances-540",
     "title": "19 MORE PERFORMANCES",
     "venue": "Metropolitan Opera",
     "date": "2026-03-24",
@@ -2136,7 +3992,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-1-more-performances-314",
+    "id": "metropolitan-opera-1-more-performances-541",
     "title": "1 MORE PERFORMANCES",
     "venue": "Metropolitan Opera",
     "date": "2026-03-27",
@@ -2144,7 +4000,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-18-more-performances-315",
+    "id": "metropolitan-opera-18-more-performances-542",
     "title": "18 MORE PERFORMANCES",
     "venue": "Metropolitan Opera",
     "date": "2026-03-28",
@@ -2152,7 +4008,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-lamb-of-god-316",
+    "id": "metropolitan-opera-lamb-of-god-543",
     "title": "Lamb of God",
     "venue": "Metropolitan Opera",
     "date": "2026-03-30",
@@ -2160,7 +4016,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "metropolitan-opera-17-more-performances-317",
+    "id": "metropolitan-opera-17-more-performances-544",
     "title": "17 MORE PERFORMANCES",
     "venue": "Metropolitan Opera",
     "date": "2026-03-31",
@@ -2168,7 +4024,7 @@
     "sourceUrl": "https://www.metopera.org/calendar/"
   },
   {
-    "id": "new-york-city-ballet-all-balanchine-iii-318",
+    "id": "new-york-city-ballet-all-balanchine-iii-545",
     "title": "All Balanchine III",
     "venue": "New York City Ballet",
     "date": "2026-04-21",
@@ -2176,7 +4032,7 @@
     "sourceUrl": "https://www.nycballet.com/season-and-tickets/"
   },
   {
-    "id": "new-york-city-ballet-innovators-icons-319",
+    "id": "new-york-city-ballet-innovators-icons-546",
     "title": "Innovators & Icons",
     "venue": "New York City Ballet",
     "date": "2026-04-22",
@@ -2184,7 +4040,7 @@
     "sourceUrl": "https://www.nycballet.com/season-and-tickets/"
   },
   {
-    "id": "new-york-city-ballet-eclectic-nycb-ii-320",
+    "id": "new-york-city-ballet-eclectic-nycb-ii-547",
     "title": "Eclectic NYCB II",
     "venue": "New York City Ballet",
     "date": "2026-04-29",
@@ -2192,7 +4048,7 @@
     "sourceUrl": "https://www.nycballet.com/season-and-tickets/"
   },
   {
-    "id": "new-york-city-ballet-contemporary-choreography-iii-321",
+    "id": "new-york-city-ballet-contemporary-choreography-iii-548",
     "title": "Contemporary Choreography III",
     "venue": "New York City Ballet",
     "date": "2026-05-01",
@@ -2200,7 +4056,7 @@
     "sourceUrl": "https://www.nycballet.com/season-and-tickets/"
   },
   {
-    "id": "new-york-city-ballet-eclectic-nycb-iii-322",
+    "id": "new-york-city-ballet-eclectic-nycb-iii-549",
     "title": "Eclectic NYCB III",
     "venue": "New York City Ballet",
     "date": "2026-05-09",
@@ -2208,7 +4064,7 @@
     "sourceUrl": "https://www.nycballet.com/season-and-tickets/"
   },
   {
-    "id": "new-york-city-ballet-all-bach-323",
+    "id": "new-york-city-ballet-all-bach-550",
     "title": "All Bach",
     "venue": "New York City Ballet",
     "date": "2026-05-13",
@@ -2216,7 +4072,7 @@
     "sourceUrl": "https://www.nycballet.com/season-and-tickets/"
   },
   {
-    "id": "new-york-city-ballet-copp-lia-325",
+    "id": "new-york-city-ballet-copp-lia-552",
     "title": "COPPÉLIA",
     "venue": "New York City Ballet",
     "date": "2026-05-22",
@@ -2224,7 +4080,7 @@
     "sourceUrl": "https://www.nycballet.com/season-and-tickets/"
   },
   {
-    "id": "the-joyce-theater-no-soulier-326",
+    "id": "the-joyce-theater-no-soulier-553",
     "title": "Noé Soulier",
     "venue": "The Joyce Theater",
     "date": "2026-03-04",
@@ -2232,7 +4088,7 @@
     "sourceUrl": "https://www.joyce.org/performances/noe-soulier-ywql"
   },
   {
-    "id": "the-joyce-theater-compagnie-herv-koubi-327",
+    "id": "the-joyce-theater-compagnie-herv-koubi-554",
     "title": "Compagnie Hervé KOUBI",
     "venue": "The Joyce Theater",
     "date": "2026-03-10",
@@ -2240,7 +4096,7 @@
     "sourceUrl": "https://www.joyce.org/performances/compagnie-herve-koubi-7h98"
   },
   {
-    "id": "the-joyce-theater-ailey-ii-328",
+    "id": "the-joyce-theater-ailey-ii-555",
     "title": "Ailey II",
     "venue": "The Joyce Theater",
     "date": "2026-03-17",
@@ -2248,7 +4104,7 @@
     "sourceUrl": "https://www.joyce.org/performances/ailey-ii-576n"
   },
   {
-    "id": "the-joyce-theater-hubbard-street-dance-chicago-329",
+    "id": "the-joyce-theater-hubbard-street-dance-chicago-556",
     "title": "Hubbard Street Dance Chicago",
     "venue": "The Joyce Theater",
     "date": "2026-03-24",
@@ -2256,7 +4112,7 @@
     "sourceUrl": "https://www.joyce.org/performances/hubbard-street-dance-chicago-xqz6"
   },
   {
-    "id": "the-joyce-theater-gibney-company-330",
+    "id": "the-joyce-theater-gibney-company-557",
     "title": "Gibney Company",
     "venue": "The Joyce Theater",
     "date": "2026-04-07",
@@ -2264,7 +4120,7 @@
     "sourceUrl": "https://www.joyce.org/performances/gibney-company-n8df"
   },
   {
-    "id": "the-joyce-theater-johnny-loves-johann-331",
+    "id": "the-joyce-theater-johnny-loves-johann-558",
     "title": "Johnny Loves Johann",
     "venue": "The Joyce Theater",
     "date": "2026-04-14",
@@ -2272,7 +4128,7 @@
     "sourceUrl": "https://www.joyce.org/performances/johnny-loves-johann-s4q2"
   },
   {
-    "id": "the-joyce-theater-flamenco-vivo-carlota-santana-332",
+    "id": "the-joyce-theater-flamenco-vivo-carlota-santana-559",
     "title": "Flamenco Vivo Carlota Santana",
     "venue": "The Joyce Theater",
     "date": "2026-04-21",
@@ -2280,7 +4136,7 @@
     "sourceUrl": "https://www.joyce.org/performances/flamenco-vivo-carlota-santana-fs5q"
   },
   {
-    "id": "the-joyce-theater-parsons-dance-333",
+    "id": "the-joyce-theater-parsons-dance-560",
     "title": "Parsons Dance",
     "venue": "The Joyce Theater",
     "date": "2026-04-29",
@@ -2288,55 +4144,63 @@
     "sourceUrl": "https://www.joyce.org/performances/parsons-dance-zxz4"
   },
   {
-    "id": "lincoln-center-march-03-at-7-30-pm-334",
-    "title": "March 03 at 7:30 pm",
+    "id": "lincoln-center-mirga-gra-inyt-tyla-emanuel-ax-561",
+    "title": "Mirga Gražinytė-Tyla & Emanuel Ax",
     "venue": "Lincoln Center",
-    "date": "2026-03-03",
+    "date": "",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/mirga-grazinyte-tyla-and-emanuel-ax/"
   },
   {
-    "id": "lincoln-center-march-04-at-6-30-pm-336",
+    "id": "lincoln-center-march-03-at-7-30-pm-562",
+    "title": "March 03 at 7:30 pm",
+    "venue": "Lincoln Center",
+    "date": "2026-03-03",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.lincolncenter.org/calendar"
+  },
+  {
+    "id": "lincoln-center-the-violin-today-563",
+    "title": "The Violin Today",
+    "venue": "Lincoln Center",
+    "date": "",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.chambermusicsociety.org/our-concerts/at-lincoln-center/lectures/the-violin-today-2/"
+  },
+  {
+    "id": "lincoln-center-march-04-at-6-30-pm-564",
     "title": "March 04 at 6:30 pm",
     "venue": "Lincoln Center",
     "date": "2026-03-04",
     "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.chambermusicsociety.org/our-concerts/at-lincoln-center/lectures/the-violin-today-2/"
+    "sourceUrl": "https://www.lincolncenter.org/calendar"
   },
   {
-    "id": "lincoln-center-the-violin-today-337",
-    "title": "The Violin Today",
-    "venue": "Lincoln Center",
-    "date": "2026-03-04",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.chambermusicsociety.org/our-concerts/at-lincoln-center/lectures/the-violin-today-2/"
-  },
-  {
-    "id": "lincoln-center-march-05-at-1-00-pm-338",
+    "id": "lincoln-center-march-05-at-1-00-pm-566",
     "title": "March 05 at 1:00 pm",
     "venue": "Lincoln Center",
     "date": "2026-03-05",
     "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.lincolncenter.org/series/accessibility-at-lincoln-center/juilliard-gluck-community-fellows-duet-of-air-262"
+    "sourceUrl": "https://www.lincolncenter.org/calendar"
   },
   {
-    "id": "lincoln-center-march-06-at-7-00-pm-340",
+    "id": "lincoln-center-houdini-speaks-to-the-living-567",
+    "title": "Houdini Speaks to the Living",
+    "venue": "Lincoln Center",
+    "date": "",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.nypl.org/events/programs/2026/03/06/houdini-speaks-living"
+  },
+  {
+    "id": "lincoln-center-march-06-at-7-00-pm-568",
     "title": "March 06 at 7:00 pm",
     "venue": "Lincoln Center",
     "date": "2026-03-06",
     "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.nypl.org/events/programs/2026/03/06/houdini-speaks-living"
+    "sourceUrl": "https://www.lincolncenter.org/calendar"
   },
   {
-    "id": "lincoln-center-houdini-speaks-to-the-living-341",
-    "title": "Houdini Speaks to the Living",
-    "venue": "Lincoln Center",
-    "date": "2026-03-06",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.nypl.org/events/programs/2026/03/06/houdini-speaks-living"
-  },
-  {
-    "id": "92ny-stardust-from-tin-pan-alley-to-broadway-342",
+    "id": "92ny-stardust-from-tin-pan-alley-to-broadway-569",
     "title": "Stardust: From Tin Pan Alley to Broadway",
     "venue": "92NY",
     "date": "",
@@ -2344,7 +4208,7 @@
     "sourceUrl": "https://www.92ny.org/event/stardust-from-tin-pan-alley-to-broadway"
   },
   {
-    "id": "92ny-crime-on-prime-an-evening-with-the-casts-of-cross-and-scarpe-343",
+    "id": "92ny-crime-on-prime-an-evening-with-the-casts-of-cross-and-scarpe-570",
     "title": "Crime on Prime: An Evening with the Casts of Cross and Scarpetta",
     "venue": "92NY",
     "date": "",
@@ -2352,7 +4216,7 @@
     "sourceUrl": "https://www.92ny.org/event/crime-on-prime"
   },
   {
-    "id": "92ny-35th-annual-faculty-exhibition-opening-reception-344",
+    "id": "92ny-35th-annual-faculty-exhibition-opening-reception-571",
     "title": "35th Annual Faculty Exhibition Opening Reception",
     "venue": "92NY",
     "date": "",
@@ -2360,7 +4224,7 @@
     "sourceUrl": "https://www.92ny.org/event/35th-annual-faculty-exhibition-opening-reception"
   },
   {
-    "id": "92ny-uptown-rhythm-dance-festival-345",
+    "id": "92ny-uptown-rhythm-dance-festival-572",
     "title": "Uptown Rhythm Dance Festival",
     "venue": "92NY",
     "date": "",
@@ -2368,7 +4232,7 @@
     "sourceUrl": "https://www.92ny.org/event/uptown-rhythm-dance-festival"
   },
   {
-    "id": "92ny-92ny-s-goodbye-to-starz-s-outlander-346",
+    "id": "92ny-92ny-s-goodbye-to-starz-s-outlander-573",
     "title": "92NY’s Goodbye to Starz’s Outlander",
     "venue": "92NY",
     "date": "",
@@ -2376,7 +4240,7 @@
     "sourceUrl": "https://www.92ny.org/event/92ny-s-goodbye-to-starz-s-outlander"
   },
   {
-    "id": "92ny-richard-holmes-young-tennyson-and-the-boundless-deep-347",
+    "id": "92ny-richard-holmes-young-tennyson-and-the-boundless-deep-574",
     "title": "Richard Holmes: Young Tennyson and The Boundless Deep",
     "venue": "92NY",
     "date": "",
@@ -2384,7 +4248,7 @@
     "sourceUrl": "https://www.92ny.org/event/richard-holmes"
   },
   {
-    "id": "92ny-taylor-tomlinson-in-conversation-with-alex-morris-screening--348",
+    "id": "92ny-taylor-tomlinson-in-conversation-with-alex-morris-screening--575",
     "title": "Taylor Tomlinson in Conversation with Alex Morris: Screening of Netflix’s Prodigal Daughter",
     "venue": "92NY",
     "date": "",
