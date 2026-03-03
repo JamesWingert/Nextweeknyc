@@ -1246,7 +1246,10 @@ async function scrapeLincolnCenter(browser) {
         const dateEl = el.querySelector('[class*="date"]');
         const rawDate = dateEl?.textContent?.trim().replace(/\s+/g, ' ') || '';
         if (t && t.length > 3 && t.length < 120 && !seen.has(t.toLowerCase())
-            && !/^(upcoming|calendar)/i.test(t)) {
+            && !/^(upcoming|calendar)/i.test(t)
+            && !/^(january|february|march|april|may|june|july|august|september|october|november|december)\s+\d/i.test(t)
+            && !/^(monday|tuesday|wednesday|thursday|friday|saturday|sunday)/i.test(t)
+            && !/^\d{1,2}:\d{2}/i.test(t)) {
           seen.add(t.toLowerCase());
           r.push({ title: t, link, date: rawDate });
         }

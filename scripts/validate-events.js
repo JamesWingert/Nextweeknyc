@@ -85,11 +85,13 @@ const JUNK_PATTERNS = [
   /^(advertisement|sponsored|ad)$/i,
   /\(SPONSORED\)/i,
 
-  // Pure dates or times
+  // Pure dates or times (including "Month DD at HH:MM" format)
   /^\d{1,2}[\/\-]\d{1,2}([\/\-]\d{2,4})?$/,
   /^\d{1,2}:\d{2}\s*(am|pm)?$/i,
   /^\d{4}-\d{2}-\d{2}$/,
   /^until\s/i,
+  /^(january|february|march|april|may|june|july|august|september|october|november|december)\s+\d{1,2}\s+(at|@)\s+\d{1,2}[:.]\d{2}/i,
+  /^(monday|tuesday|wednesday|thursday|friday|saturday|sunday),?\s+(january|february|march|april|may|june|july|august|september|october|november|december)\s+\d/i,
 
   // Spam / ads / online courses / MLM / non-events
   /\bPMP\b.*application/i,
