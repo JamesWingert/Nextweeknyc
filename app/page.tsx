@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Event, Category, EventsData } from '@/lib/types';
 import type { RawEvent } from '@/lib/types';
-import { format, isBefore, startOfDay, addDays } from 'date-fns';
+import { format, isBefore, startOfDay, addDays, startOfMonth, endOfMonth, getDay, addMonths, subMonths, isSameMonth, isWithinInterval } from 'date-fns';
 
 // --- Date helpers ---
 
@@ -37,13 +37,43 @@ function getDateLabel(date: string): string {
 }
 
 function isEventFuture(eventDate: string | null, today: Date): boolean {
-  if (!eventDate) return true; // null-date events are always shown (ongoing/TBD)
+  if (!eventDate) return true;
   if (isDateRange(eventDate)) {
     const range = parseDateRange(eventDate);
     if (!range) return false;
     return !isBefore(range.end, today);
   }
   return !isBefore(toDate(eventDate), today);
+}
+
+/** Check if an event falls on a specific day (single-date or within range) */
+function eventOnDay(event: Event, dayStr: string): boolean {
+  if (!event.date) return false;
+  if (isDateRange(event.date)) {
+    const range = parseDateRange(event.date);
+    if (!range) return false;
+    const day = toDate(dayStr);
+    return isWithinInterval(day, { start: range.start, end: range.end });
+  }
+  return event.date === dayStr;
+}
+
+// --- Showtime detection ---
+
+const SHOWTIME_VENUES = new Set([
+  'ifc center', 'metrograph', 'film forum', 'angelika film center',
+]);
+
+const SPECIAL_EVENT_KEYWORDS = /\b(q\s*&?\s*a|panel|introduction by|intro by|premiere|opening night|special screening|live (score|music|accompaniment)|marathon|festival|retrospective|in person|discussion|conversation|filmmaker|director|cast)\b/i;
+
+/** Returns true if this Film event is a regular showtime (not a special event) */
+function isShowtime(event: Event): boolean {
+  if (event.category !== 'Film') return false;
+  if (!SHOWTIME_VENUES.has(event.venue.toLowerCase())) return false;
+  // Check title and description for special event keywords
+  const text = `${event.title} ${event.description || ''}`;
+  if (SPECIAL_EVENT_KEYWORDS.test(text)) return false;
+  return true;
 }
 
 // --- Category config ---
@@ -69,51 +99,22 @@ const categoryConfig: { key: Category; label: string; bg: string; text: string; 
   { key: 'Other', label: 'Other', bg: '#f3f4f6', text: '#4b5563', dot: '#9ca3af' },
 ];
 
-/** Map messy scraped category names → canonical Category keys */
 const categoryAliases: Record<string, Category> = {
-  'art': 'Art',
-  'arts': 'Art',
-  'museums/art': 'Art',
-  'museum exhibition': 'Art',
-  'museum': 'Art',
-  'exhibition': 'Art',
-  'gallery': 'Art',
-  'classical': 'Classical Music',
-  'classical music': 'Classical Music',
-  'orchestra': 'Classical Music',
-  'symphony': 'Classical Music',
-  'chamber music': 'Classical Music',
-  'ballet': 'Ballet',
-  'opera': 'Opera',
-  'dance': 'Dance',
-  'comedy': 'Comedy',
-  'standup': 'Comedy',
-  'stand-up': 'Comedy',
-  'improv': 'Comedy',
-  'jazz': 'Jazz',
-  'theater': 'Theater',
-  'theatre': 'Theater',
-  'musical': 'Theater',
-  'broadway': 'Theater',
-  'off-broadway': 'Theater',
-  'music': 'Music/Performing Arts',
-  'concert': 'Music/Performing Arts',
-  'concerts': 'Music/Performing Arts',
-  'live music': 'Music/Performing Arts',
+  'art': 'Art', 'arts': 'Art', 'museums/art': 'Art', 'museum exhibition': 'Art',
+  'museum': 'Art', 'exhibition': 'Art', 'gallery': 'Art',
+  'classical': 'Classical Music', 'classical music': 'Classical Music',
+  'orchestra': 'Classical Music', 'symphony': 'Classical Music', 'chamber music': 'Classical Music',
+  'ballet': 'Ballet', 'opera': 'Opera', 'dance': 'Dance',
+  'comedy': 'Comedy', 'standup': 'Comedy', 'stand-up': 'Comedy', 'improv': 'Comedy',
+  'jazz': 'Jazz', 'theater': 'Theater', 'theatre': 'Theater',
+  'musical': 'Theater', 'broadway': 'Theater', 'off-broadway': 'Theater',
+  'music': 'Music/Performing Arts', 'concert': 'Music/Performing Arts',
+  'concerts': 'Music/Performing Arts', 'live music': 'Music/Performing Arts',
   'performing arts': 'Music/Performing Arts',
-  'outdoor': 'Outdoor/Parks',
-  'parks': 'Outdoor/Parks',
-  'fitness': 'Outdoor/Parks',
-  'workshop': 'Talk',
-  'lecture': 'Talk',
-  'reading': 'Talk',
-  'storytelling': 'Talk',
-  'general': 'Other',
-  'attraction': 'Other',
-  'circus': 'Other',
-  'sports': 'Other',
-  'party': 'Other',
-  'gallery experience': 'Art',
+  'outdoor': 'Outdoor/Parks', 'parks': 'Outdoor/Parks', 'fitness': 'Outdoor/Parks',
+  'workshop': 'Talk', 'lecture': 'Talk', 'reading': 'Talk', 'storytelling': 'Talk',
+  'general': 'Other', 'attraction': 'Other', 'circus': 'Other',
+  'sports': 'Other', 'party': 'Other', 'gallery experience': 'Art',
 };
 
 function getCategoryStyle(category: Category) {
@@ -132,28 +133,21 @@ function normalizeCategory(raw: string): Category {
 export default function Home() {
   const [eventsData, setEventsData] = useState<EventsData>({ weekOf: '', events: [] });
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
-  const [viewMode, setViewMode] = useState<'category' | 'calendar'>('category');
+  const [viewMode, setViewMode] = useState<'calendar' | 'category' | 'showtimes'>('calendar');
   const [loading, setLoading] = useState(true);
   const [today] = useState(() => startOfDay(new Date()));
+  const [currentMonth, setCurrentMonth] = useState(() => startOfMonth(new Date()));
+  const [selectedDay, setSelectedDay] = useState<string | null>(null);
 
   useEffect(() => {
     Promise.all([
       fetch('/data/events.json').then(r => r.json()).catch(() => []),
       fetch('/data/film_museum_events.json').then(r => r.json()).catch(() => [])
     ]).then(([raw1, raw2]) => {
-      // Support both formats: raw array or { weekOf, events }
       const arr1: RawEvent[] = Array.isArray(raw1) ? raw1 : (raw1.events || []);
       const arr2: RawEvent[] = Array.isArray(raw2) ? raw2 : (raw2.events || []);
       const allRaw = [...arr1, ...arr2];
 
-      // With monthly data, weekOf = current week's Monday (always based on today)
-      const now = new Date();
-      const dow = now.getDay();
-      const diffToMon = dow === 0 ? -6 : 1 - dow;
-      const mon = new Date(now.getFullYear(), now.getMonth(), now.getDate() + diffToMon);
-      const weekOf = toStr(mon);
-
-      // Dedupe by title+venue+date
       const seen = new Set<string>();
       const unique = allRaw.filter(e => {
         const title = e.title || e.name || '';
@@ -164,7 +158,6 @@ export default function Home() {
         return true;
       });
 
-      // Map raw → Event (handle field name variants from different scrapers)
       const processed: Event[] = unique
         .map((e, i) => ({
           id: e.id || `evt-${i}`,
@@ -179,7 +172,7 @@ export default function Home() {
         }))
         .filter(e => isEventFuture(e.date, today));
 
-      setEventsData({ weekOf, events: processed });
+      setEventsData({ weekOf: toStr(today), events: processed });
       setLoading(false);
     }).catch(() => setLoading(false));
   }, [today]);
@@ -194,6 +187,10 @@ export default function Home() {
     ? eventsData.events.filter(e => selectedCategories.includes(e.category))
     : eventsData.events;
 
+  // Split showtimes from calendar events
+  const showtimeEvents = filteredEvents.filter(isShowtime);
+  const calendarEvents = filteredEvents.filter(e => !isShowtime(e));
+
   if (loading) {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#faf7f2', color: '#4a4a68' }}>
@@ -202,29 +199,24 @@ export default function Home() {
     );
   }
 
-  const weekStart = toDate(eventsData.weekOf || toStr(new Date()));
-  const weekLabel = eventsData.weekOf
-    ? format(weekStart, 'MMM d') + ' – ' + format(addDays(weekStart, 6), 'MMM d, yyyy')
-    : '';
-
   return (
     <main style={{ minHeight: '100vh', padding: '2rem 1.5rem', maxWidth: '72rem', margin: '0 auto' }}>
       <header style={{ marginBottom: '2rem' }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.75rem', flexWrap: 'wrap' as const }}>
           <h1 style={{ fontSize: '2rem', fontWeight: 700, letterSpacing: '-0.02em', color: '#1a1a2e' }}>
-            Next Week NYC
+            NYC Events
           </h1>
-          {weekLabel && (
-            <span style={{ fontSize: '0.875rem', fontWeight: 500, color: '#e07a5f', background: '#fde8e8', padding: '0.25rem 0.75rem', borderRadius: '999px' }}>
-              {weekLabel}
-            </span>
-          )}
+          <span style={{ fontSize: '0.875rem', fontWeight: 500, color: '#e07a5f', background: '#fde8e8', padding: '0.25rem 0.75rem', borderRadius: '999px' }}>
+            {format(currentMonth, 'MMMM yyyy')}
+          </span>
         </div>
         <p style={{ color: '#8888a0', fontSize: '0.875rem', marginTop: '0.5rem' }}>
-          {filteredEvents.length} upcoming event{filteredEvents.length !== 1 ? 's' : ''}
+          {calendarEvents.length} event{calendarEvents.length !== 1 ? 's' : ''}
+          {showtimeEvents.length > 0 && ` · ${showtimeEvents.length} showtime${showtimeEvents.length !== 1 ? 's' : ''}`}
         </p>
       </header>
 
+      {/* Category filters + view toggle */}
       <div style={{ display: 'flex', flexWrap: 'wrap' as const, alignItems: 'center', justifyContent: 'space-between', gap: '1rem', marginBottom: '1.5rem' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem' }}>
           {deduped.map(({ key, label, bg, text, dot }) => {
@@ -254,7 +246,11 @@ export default function Home() {
           })}
         </div>
         <div style={{ display: 'flex', background: '#f0ece6', borderRadius: '0.5rem', padding: '3px' }}>
-          {(['category', 'calendar'] as const).map(mode => (
+          {([
+            { mode: 'calendar' as const, label: '📅 Calendar' },
+            { mode: 'showtimes' as const, label: '🎬 Showtimes' },
+            { mode: 'category' as const, label: '📂 Category' },
+          ]).map(({ mode, label }) => (
             <button
               key={mode}
               onClick={() => setViewMode(mode)}
@@ -267,16 +263,25 @@ export default function Home() {
                 transition: 'all 0.15s ease',
               }}
             >
-              {mode === 'category' ? '📂 Category' : '📅 Calendar'}
+              {label}
             </button>
           ))}
         </div>
       </div>
 
       {viewMode === 'category' ? (
-        <EventList events={filteredEvents} />
+        <EventList events={calendarEvents} />
+      ) : viewMode === 'showtimes' ? (
+        <ShowtimesView events={showtimeEvents} currentMonth={currentMonth} today={today} />
       ) : (
-        <CalendarView events={filteredEvents} weekOf={eventsData.weekOf} />
+        <MonthCalendar
+          events={calendarEvents}
+          currentMonth={currentMonth}
+          onMonthChange={setCurrentMonth}
+          selectedDay={selectedDay}
+          onSelectDay={setSelectedDay}
+          today={today}
+        />
       )}
     </main>
   );
@@ -490,86 +495,361 @@ function EventList({ events }: { events: Event[] }) {
   );
 }
 
-// --- Calendar View ---
+// --- Monthly Calendar View ---
 
-function CalendarView({ events, weekOf }: { events: Event[]; weekOf: string }) {
-  const [showAllWeek, setShowAllWeek] = useState(true);
-  // Use the weekOf from data, fallback to current week's Monday
-  const weekStart = weekOf ? toDate(weekOf) : (() => {
-    const now = new Date();
-    const dow = now.getDay();
-    const diffToMon = dow === 0 ? -6 : 1 - dow;
-    const mon = new Date(now);
-    mon.setDate(now.getDate() + diffToMon);
-    return mon;
-  })();
-  const days = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
-  const todayStr = toStr(new Date());
+function MonthCalendar({
+  events, currentMonth, onMonthChange, selectedDay, onSelectDay, today,
+}: {
+  events: Event[];
+  currentMonth: Date;
+  onMonthChange: (d: Date) => void;
+  selectedDay: string | null;
+  onSelectDay: (d: string | null) => void;
+  today: Date;
+}) {
+  const todayStr = toStr(today);
+  const monthStart = startOfMonth(currentMonth);
+  const monthEnd = endOfMonth(currentMonth);
 
-  const multiDayEvents = events.filter(e => e.date && isDateRange(e.date));
-  const singleDayEvents = events.filter(e => e.date && !isDateRange(e.date));
+  // Build calendar grid: pad start to Sunday, pad end to Saturday
+  const startDow = getDay(monthStart); // 0=Sun
+  const calendarStart = addDays(monthStart, -startDow);
+  const endDow = getDay(monthEnd);
+  const calendarEnd = addDays(monthEnd, 6 - endDow);
 
-  const multiByCategory = multiDayEvents.reduce((acc, e) => {
-    if (!acc[e.category]) acc[e.category] = [];
-    acc[e.category].push(e);
-    return acc;
-  }, {} as Record<string, Event[]>);
+  const calendarDays: Date[] = [];
+  let cursor = calendarStart;
+  while (cursor <= calendarEnd) {
+    calendarDays.push(cursor);
+    cursor = addDays(cursor, 1);
+  }
+
+  // Pre-compute event counts per day for the visible calendar
+  const eventCountMap = useMemo(() => {
+    const map: Record<string, number> = {};
+    const catDotMap: Record<string, Set<string>> = {};
+    for (const day of calendarDays) {
+      const ds = toStr(day);
+      let count = 0;
+      const cats = new Set<string>();
+      for (const ev of events) {
+        if (eventOnDay(ev, ds)) {
+          count++;
+          cats.add(ev.category);
+        }
+      }
+      map[ds] = count;
+      catDotMap[ds] = cats;
+    }
+    return { counts: map, cats: catDotMap };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [events, toStr(monthStart)]);
+
+  // Events for the selected day
+  const selectedDayEvents = selectedDay
+    ? events.filter(ev => eventOnDay(ev, selectedDay)).sort((a, b) => {
+        const catOrder = categoryConfig.findIndex(c => c.key === a.category) - categoryConfig.findIndex(c => c.key === b.category);
+        if (catOrder !== 0) return catOrder;
+        return a.title.localeCompare(b.title);
+      })
+    : [];
+
+  const DOW_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   return (
     <div>
-      {multiDayEvents.length > 0 && (
-        <div style={{
-          marginBottom: '1rem', background: '#fff', borderRadius: '0.75rem',
-          border: '1px solid #e0e7ff', overflow: 'hidden',
-        }}>
-          <button
-            onClick={() => setShowAllWeek(prev => !prev)}
-            style={{
-              width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-              padding: '0.75rem 1rem', background: '#eef2ff', border: 'none',
-              cursor: 'pointer', fontSize: '0.875rem', fontWeight: 600, color: '#3730a3',
-            }}
-          >
-            <span>🗓 Playing all week ({multiDayEvents.length})</span>
-            <span style={{ fontSize: '0.75rem', color: '#6366f1' }}>
-              {showAllWeek ? '▲ Hide' : '▼ Show'}
-            </span>
-          </button>
-          {showAllWeek && (
-            <div style={{ padding: '0.75rem 1rem', display: 'flex', flexDirection: 'column' as const, gap: '0.5rem' }}>
-              {Object.entries(multiByCategory).map(([cat, catEvents]) => {
-                const catStyle = getCategoryStyle(cat as Category);
+      {/* Month navigation */}
+      <div style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        marginBottom: '1rem', padding: '0.5rem 0',
+      }}>
+        <button
+          onClick={() => { onMonthChange(subMonths(currentMonth, 1)); onSelectDay(null); }}
+          style={{
+            background: '#fff', border: '1px solid #e8e4de', borderRadius: '0.5rem',
+            padding: '0.5rem 1rem', cursor: 'pointer', fontSize: '0.875rem',
+            color: '#4a4a68', fontWeight: 500, transition: 'all 0.15s ease',
+          }}
+          onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => { e.currentTarget.style.background = '#f5f2ed'; }}
+          onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => { e.currentTarget.style.background = '#fff'; }}
+        >
+          ← {format(subMonths(currentMonth, 1), 'MMM')}
+        </button>
+        <h2 style={{ fontSize: '1.375rem', fontWeight: 700, color: '#1a1a2e', margin: 0 }}>
+          {format(currentMonth, 'MMMM yyyy')}
+        </h2>
+        <button
+          onClick={() => { onMonthChange(addMonths(currentMonth, 1)); onSelectDay(null); }}
+          style={{
+            background: '#fff', border: '1px solid #e8e4de', borderRadius: '0.5rem',
+            padding: '0.5rem 1rem', cursor: 'pointer', fontSize: '0.875rem',
+            color: '#4a4a68', fontWeight: 500, transition: 'all 0.15s ease',
+          }}
+          onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => { e.currentTarget.style.background = '#f5f2ed'; }}
+          onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => { e.currentTarget.style.background = '#fff'; }}
+        >
+          {format(addMonths(currentMonth, 1), 'MMM')} →
+        </button>
+      </div>
+
+      {/* Day-of-week headers */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '1px', marginBottom: '1px' }}>
+        {DOW_LABELS.map(d => (
+          <div key={d} style={{
+            textAlign: 'center', padding: '0.5rem', fontSize: '0.75rem',
+            fontWeight: 600, color: '#8888a0', textTransform: 'uppercase',
+            letterSpacing: '0.05em', background: '#f5f2ed', borderRadius: d === 'Sun' ? '0.5rem 0 0 0' : d === 'Sat' ? '0 0.5rem 0 0' : '0',
+          }}>
+            {d}
+          </div>
+        ))}
+      </div>
+
+      {/* Calendar grid */}
+      <div style={{
+        display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '1px',
+        background: '#e8e4de', borderRadius: '0 0 0.75rem 0.75rem', overflow: 'hidden',
+      }}>
+        {calendarDays.map(day => {
+          const ds = toStr(day);
+          const inMonth = isSameMonth(day, currentMonth);
+          const isToday = ds === todayStr;
+          const isSelected = ds === selectedDay;
+          const count = eventCountMap.counts[ds] || 0;
+          const dayCats = eventCountMap.cats[ds] || new Set();
+          const isPast = isBefore(day, today);
+
+          // Get up to 4 category dots
+          const dotColors: string[] = [];
+          Array.from(dayCats).forEach(cat => {
+            const s = getCategoryStyle(cat as Category);
+            if (dotColors.length < 4) dotColors.push(s.dot);
+          });
+
+          return (
+            <button
+              key={ds}
+              onClick={() => count > 0 ? onSelectDay(isSelected ? null : ds) : undefined}
+              style={{
+                background: isSelected ? '#fef9f3' : isToday ? '#fffbf5' : inMonth ? '#fff' : '#faf7f2',
+                border: 'none',
+                borderBottom: isSelected ? '3px solid #e07a5f' : '3px solid transparent',
+                padding: '0.5rem 0.375rem',
+                minHeight: '80px',
+                cursor: count > 0 ? 'pointer' : 'default',
+                opacity: inMonth ? 1 : 0.4,
+                transition: 'all 0.1s ease',
+                display: 'flex', flexDirection: 'column' as const, alignItems: 'center',
+                gap: '0.25rem',
+              }}
+            >
+              <span style={{
+                fontSize: '0.9375rem', fontWeight: isToday ? 700 : 500,
+                color: isToday ? '#fff' : isPast && inMonth ? '#b0aec0' : inMonth ? '#1a1a2e' : '#c4c0b8',
+                background: isToday ? '#e07a5f' : 'transparent',
+                width: '28px', height: '28px', borderRadius: '50%',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                lineHeight: 1,
+              }}>
+                {format(day, 'd')}
+              </span>
+
+              {count > 0 && (
+                <span style={{
+                  fontSize: '0.6875rem', fontWeight: 600,
+                  color: isSelected ? '#e07a5f' : '#4a4a68',
+                  lineHeight: 1,
+                }}>
+                  {count}
+                </span>
+              )}
+
+              {dotColors.length > 0 && (
+                <div style={{ display: 'flex', gap: '3px', flexWrap: 'wrap' as const, justifyContent: 'center' }}>
+                  {dotColors.map((color, i) => (
+                    <span key={i} style={{
+                      width: '5px', height: '5px', borderRadius: '50%', background: color,
+                    }} />
+                  ))}
+                </div>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Selected day detail panel */}
+      {selectedDay && (
+        <div style={{ marginTop: '1.5rem' }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            marginBottom: '1rem', paddingBottom: '0.75rem', borderBottom: '2px solid #f0ece6',
+          }}>
+            <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#1a1a2e', margin: 0 }}>
+              {format(toDate(selectedDay), 'EEEE, MMMM d')}
+            </h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <span style={{ fontSize: '0.8125rem', color: '#8888a0' }}>
+                {selectedDayEvents.length} event{selectedDayEvents.length !== 1 ? 's' : ''}
+              </span>
+              <button
+                onClick={() => onSelectDay(null)}
+                style={{
+                  background: '#f0ece6', border: 'none', borderRadius: '0.375rem',
+                  padding: '0.25rem 0.625rem', cursor: 'pointer', fontSize: '0.75rem',
+                  color: '#8888a0', fontWeight: 500,
+                }}
+              >
+                ✕ Close
+              </button>
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '0.5rem' }}>
+            {selectedDayEvents.map(event => (
+              <EventCard key={event.id} event={event} showDate={isDateRange(event.date || '')} />
+            ))}
+            {selectedDayEvents.length === 0 && (
+              <p style={{ textAlign: 'center', color: '#8888a0', padding: '2rem 0' }}>
+                No events on this day.
+              </p>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Ongoing / no-date events */}
+      <OngoingEvents events={events} />
+
+      <style>{`
+        @media (max-width: 640px) {
+          div[style*="grid-template-columns: repeat(7"] {
+            font-size: 0.8125rem;
+          }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+// --- Showtimes View ---
+
+function ShowtimesView({ events, currentMonth, today }: { events: Event[]; currentMonth: Date; today: Date }) {
+  const [selectedVenue, setSelectedVenue] = useState<string | null>(null);
+
+  // Group by venue
+  const venues = Array.from(new Set(events.map(e => e.venue))).sort();
+
+  // Get unique dates for the current month, sorted
+  const monthStart = startOfMonth(currentMonth);
+  const monthEnd = endOfMonth(currentMonth);
+
+  const filteredByMonth = events.filter(e => {
+    if (!e.date) return false;
+    const d = toDate(e.date);
+    return d >= monthStart && d <= monthEnd;
+  });
+
+  // Group: venue → date → films
+  const grouped: Record<string, Record<string, Event[]>> = {};
+  for (const e of filteredByMonth) {
+    if (!e.date) continue;
+    const v = e.venue;
+    if (!grouped[v]) grouped[v] = {};
+    if (!grouped[v][e.date]) grouped[v][e.date] = [];
+    grouped[v][e.date].push(e);
+  }
+
+  const todayStr = toStr(today);
+  const activeVenues = selectedVenue ? [selectedVenue] : venues;
+
+  return (
+    <div>
+      <div style={{ marginBottom: '1.25rem' }}>
+        <p style={{ fontSize: '0.875rem', color: '#8888a0', marginBottom: '0.75rem' }}>
+          {filteredByMonth.length} showtime{filteredByMonth.length !== 1 ? 's' : ''} across {venues.length} venue{venues.length !== 1 ? 's' : ''} in {format(currentMonth, 'MMMM')}
+        </p>
+        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' as const }}>
+          {venues.map(v => (
+            <button
+              key={v}
+              onClick={() => setSelectedVenue(selectedVenue === v ? null : v)}
+              style={{
+                padding: '0.375rem 0.75rem', borderRadius: '999px', fontSize: '0.8125rem', fontWeight: 500,
+                border: selectedVenue === v ? '1.5px solid #ef4444' : '1.5px solid #e8e4de',
+                background: selectedVenue === v ? '#fde8e8' : '#fff',
+                color: selectedVenue === v ? '#b91c1c' : '#8888a0',
+                cursor: 'pointer', transition: 'all 0.15s ease',
+              }}
+            >
+              🎬 {v} ({(grouped[v] ? Object.values(grouped[v]).reduce((n, arr) => n + arr.length, 0) : 0)})
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {activeVenues.map(venue => {
+        const venueDates = grouped[venue];
+        if (!venueDates) return null;
+        const sortedDates = Object.keys(venueDates).sort();
+
+        return (
+          <div key={venue} style={{ marginBottom: '2rem' }}>
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: '0.5rem',
+              marginBottom: '1rem', paddingBottom: '0.625rem', borderBottom: '2px solid #fde8e8',
+            }}>
+              <span style={{ fontSize: '1.125rem' }}>🎬</span>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#1a1a2e', margin: 0 }}>{venue}</h3>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '0.75rem' }}>
+              {sortedDates.map(date => {
+                const films = venueDates[date];
+                const isPast = date < todayStr;
+                const isToday = date === todayStr;
+
                 return (
-                  <div key={cat}>
+                  <div key={date} style={{ opacity: isPast ? 0.5 : 1 }}>
                     <div style={{
-                      fontSize: '0.6875rem', fontWeight: 700, color: catStyle.text,
+                      fontSize: '0.75rem', fontWeight: 600, color: isToday ? '#e07a5f' : '#8888a0',
                       textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.375rem',
-                      display: 'flex', alignItems: 'center', gap: '0.25rem',
                     }}>
-                      <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: catStyle.dot }} />
-                      {catStyle.label}
+                      {isToday ? '● Today' : format(toDate(date), 'EEE, MMM d')}
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '0.375rem' }}>
-                      {catEvents.map(event => (
+                    <div style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+                      gap: '0.375rem',
+                    }}>
+                      {films.map(film => (
                         <a
-                          key={event.id}
-                          href={event.sourceUrl}
+                          key={film.id}
+                          href={film.sourceUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           style={{
-                            display: 'block', padding: '0.375rem 0.625rem',
-                            borderRadius: '0.375rem', fontSize: '0.75rem',
+                            display: 'block', padding: '0.5rem 0.75rem',
+                            borderRadius: '0.5rem', fontSize: '0.8125rem',
                             textDecoration: 'none', color: '#1a1a2e',
-                            background: catStyle.bg, borderLeft: `3px solid ${catStyle.dot}`,
-                            transition: 'opacity 0.15s ease',
+                            background: '#fff', border: '1px solid #f0ece6',
+                            borderLeft: '3px solid #ef4444',
+                            transition: 'all 0.15s ease',
                             overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                           }}
-                          onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => { e.currentTarget.style.opacity = '0.75'; }}
-                          onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => { e.currentTarget.style.opacity = '1'; }}
-                          title={`${event.title} — ${event.venue}`}
+                          onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                            e.currentTarget.style.borderColor = '#fde8e8';
+                            e.currentTarget.style.background = '#fef9f3';
+                          }}
+                          onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                            e.currentTarget.style.borderColor = '#f0ece6';
+                            e.currentTarget.style.background = '#fff';
+                          }}
+                          title={film.title}
                         >
-                          <span style={{ fontWeight: 600 }}>{event.title}</span>
-                          <span style={{ color: '#8888a0', marginLeft: '0.375rem', fontSize: '0.6875rem' }}>{event.venue}</span>
+                          <span style={{ fontWeight: 600 }}>{film.title}</span>
+                          {film.time && film.time !== 'TBA' && (
+                            <span style={{ color: '#8888a0', marginLeft: '0.5rem', fontSize: '0.75rem' }}>{film.time}</span>
+                          )}
                         </a>
                       ))}
                     </div>
@@ -577,94 +857,52 @@ function CalendarView({ events, weekOf }: { events: Event[]; weekOf: string }) {
                 );
               })}
             </div>
-          )}
+          </div>
+        );
+      })}
+
+      {filteredByMonth.length === 0 && (
+        <p style={{ textAlign: 'center', color: '#8888a0', padding: '3rem 0', fontSize: '1rem' }}>
+          No showtimes found for {format(currentMonth, 'MMMM yyyy')}.
+        </p>
+      )}
+    </div>
+  );
+}
+
+// --- Ongoing / No-date events section ---
+
+function OngoingEvents({ events }: { events: Event[] }) {
+  const [showOngoing, setShowOngoing] = useState(false);
+  const noDate = events.filter(e => !e.date);
+
+  if (noDate.length === 0) return null;
+
+  return (
+    <div style={{
+      marginTop: '1.5rem', background: '#fff', borderRadius: '0.75rem',
+      border: '1px solid #e8e4de', overflow: 'hidden',
+    }}>
+      <button
+        onClick={() => setShowOngoing(prev => !prev)}
+        style={{
+          width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          padding: '0.75rem 1rem', background: '#f5f2ed', border: 'none',
+          cursor: 'pointer', fontSize: '0.875rem', fontWeight: 600, color: '#4a4a68',
+        }}
+      >
+        <span>📌 Ongoing / Date TBD ({noDate.length})</span>
+        <span style={{ fontSize: '0.75rem', color: '#8888a0' }}>
+          {showOngoing ? '▲ Hide' : '▼ Show'}
+        </span>
+      </button>
+      {showOngoing && (
+        <div style={{ padding: '0.75rem 1rem', display: 'flex', flexDirection: 'column' as const, gap: '0.5rem' }}>
+          {noDate.map(event => (
+            <EventCard key={event.id} event={event} />
+          ))}
         </div>
       )}
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '0.5rem' }}>
-        {days.map(day => {
-          const dayStr = toStr(day);
-          const dayEvents = singleDayEvents.filter(e => e.date === dayStr);
-          const isToday = dayStr === todayStr;
-          const byCategory = dayEvents.reduce((acc, e) => {
-            if (!acc[e.category]) acc[e.category] = [];
-            acc[e.category].push(e);
-            return acc;
-          }, {} as Record<string, Event[]>);
-
-          return (
-            <div
-              key={dayStr}
-              style={{
-                minHeight: '200px', background: isToday ? '#fef9f3' : '#fff',
-                borderRadius: '0.75rem', padding: '0.75rem',
-                border: isToday ? '2px solid #e07a5f' : '1px solid #e8e4de',
-              }}
-            >
-              <div style={{ textAlign: 'center' as const, marginBottom: '0.625rem', paddingBottom: '0.5rem', borderBottom: '1px solid #f0ece6' }}>
-                <div style={{ fontSize: '0.6875rem', fontWeight: 600, color: '#8888a0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  {format(day, 'EEE')}
-                </div>
-                <div style={{ fontSize: '1.5rem', fontWeight: 700, color: isToday ? '#e07a5f' : '#1a1a2e', lineHeight: 1.2 }}>
-                  {format(day, 'd')}
-                </div>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '0.375rem' }}>
-                {Object.entries(byCategory).map(([cat, catEvents]) => {
-                  const catStyle = getCategoryStyle(cat as Category);
-                  return (
-                    <div key={cat}>
-                      {catEvents.map(event => (
-                        <a
-                          key={event.id}
-                          href={event.sourceUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{
-                            display: 'block', padding: '0.375rem 0.5rem',
-                            borderRadius: '0.375rem', fontSize: '0.6875rem',
-                            textDecoration: 'none', color: 'inherit',
-                            background: catStyle.bg, borderLeft: `3px solid ${catStyle.dot}`,
-                            marginBottom: '0.25rem', transition: 'opacity 0.15s ease',
-                          }}
-                          onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => { e.currentTarget.style.opacity = '0.8'; }}
-                          onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => { e.currentTarget.style.opacity = '1'; }}
-                        >
-                          <div style={{ fontWeight: 600, color: '#1a1a2e', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                            {event.title}
-                          </div>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: '0.125rem' }}>
-                            <span style={{ fontSize: '0.5625rem', fontWeight: 700, color: catStyle.text, textTransform: 'uppercase', letterSpacing: '0.03em' }}>
-                              {catStyle.label}
-                            </span>
-                            {event.time && event.time !== 'TBA' && (
-                              <>
-                                <span style={{ color: '#d1d1d1' }}>·</span>
-                                <span style={{ color: '#8888a0' }}>{event.time}</span>
-                              </>
-                            )}
-                          </div>
-                        </a>
-                      ))}
-                    </div>
-                  );
-                })}
-                {dayEvents.length === 0 && (
-                  <p style={{ fontSize: '0.75rem', color: '#c4c0b8', textAlign: 'center', margin: '1rem 0' }}>No events</p>
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          div[style*="grid-template-columns: repeat(7"] {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }

@@ -2,8 +2,9 @@
 /**
  * Scrape NYC Film, Arts, Classical, Opera, Ballet & Museum Events
  *
- * Sources (24):
- *   FILM:       Metrograph [JS], Film Forum, IFC Center
+ * Sources (26):
+ *   FILM:       Metrograph [JS], Film Forum, IFC Center, Angelika [JS],
+ *               Film at Lincoln Center [JS, Cloudflare — may fail]
  *   MUSEUMS:    The Met, Whitney, Guggenheim [JS], New Museum [JS],
  *               Neue Galerie, Frick (exhibitions), Queens Museum [dropped-403]
  *   CULTURAL:   BAM, Asia Society [dropped-cloudflare], Japan Society [JS],
@@ -250,39 +251,50 @@ function push(items, venue, category, fallbackUrl) {
 // ---------------------------------------------------------------------------
 
 async function scrapeFilmForum(browser) {
-  const page = await browser.newPage();
-  page.setDefaultTimeout(15000);
+  // Scrape both now_playing (with date ranges) and coming_soon pages via cheerio
+  // The homepage lacks dates; the now_playing page has "Friday, Feb 27 – Thursday, March 12" etc.
   try {
-    await page.goto('https://filmforum.org/', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(4000);
-    const items = await page.evaluate(() => {
-      const r = [], seen = new Set();
-      // Grab all unique film links on the homepage
-      document.querySelectorAll('a[href*="/film/"]').forEach(el => {
-        const t = el.textContent?.trim();
-        if (t && t.length > 3 && t.length < 120 && !seen.has(t.toLowerCase())
-            && !/^(watch trailer|see all|more|film forum)/i.test(t)) {
-          seen.add(t.toLowerCase());
-          // Look for date context near the link
-          const container = el.closest('article, [class*="card"], li, div, section, [class*="film"]');
-          const containerText = container?.textContent?.replace(/\s+/g, ' ')?.trim() || '';
-          let dateText = '';
-          // "March 5 - March 12" or "March 5" or "through March 12"
-          const throughMatch = containerText.match(/(through\s+[A-Za-z]+(?:\s+\d{1,2})?(?:\s*,?\s*\d{4})?)/i);
-          if (throughMatch) dateText = throughMatch[1];
-          if (!dateText) {
-            const dateMatch = containerText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}(?:\s*[-–—]\s*(?:(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+)?\d{1,2})?(?:\s*,?\s*\d{4})?)/i);
-            if (dateMatch) dateText = dateMatch[1];
-          }
-          r.push({ title: t, link: el.href || '', date: dateText });
+    const items = [];
+    const seen = new Set();
+
+    // Helper to extract films from a Film Forum page
+    async function scrapePage(url) {
+      const { html } = await fetchHTML(url);
+      const $ = cheerio.load(html);
+      $('a[href*="/film/"]').each((_, el) => {
+        const t = $(el).text().trim();
+        if (!t || t.length < 4 || t.length > 120 || seen.has(t.toLowerCase())) return;
+        if (/^(watch trailer|see all|more|film forum|showtimes|buy tickets)/i.test(t)) return;
+        seen.add(t.toLowerCase());
+        const href = $(el).attr('href') || '';
+        const fullLink = href.startsWith('http') ? href : `https://filmforum.org${href}`;
+
+        // Walk up to find date context in parent containers
+        let dateText = '';
+        let container = $(el).parent();
+        for (let i = 0; i < 8 && container.length; i++) {
+          const text = container.text().replace(/\s+/g, ' ').trim();
+          // "Friday, February 27 – Thursday, March 12" or "MUST END THURSDAY, MARCH 5"
+          const rangeMatch = text.match(/((?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\w*,?\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+\d{1,2}\s*[–—-]\s*(?:(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\w*,?\s+)?(?:(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+)?\d{1,2})/i);
+          if (rangeMatch) { dateText = rangeMatch[1]; break; }
+          // "MUST END THURSDAY, MARCH 5"
+          const endMatch = text.match(/must end\s+\w+,?\s+((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+\d{1,2})/i);
+          if (endMatch) { dateText = endMatch[1]; break; }
+          // Single date: "Opens March 6" or "March 15"
+          const singleMatch = text.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+\d{1,2}(?:\s*,?\s*\d{4})?)/i);
+          if (singleMatch) { dateText = singleMatch[1]; break; }
+          container = container.parent();
         }
+        items.push({ title: t, link: fullLink, date: dateText });
       });
-      return r.slice(0, 25);
-    });
+    }
+
+    await scrapePage('https://filmforum.org/now_playing');
+    await scrapePage('https://filmforum.org/coming_soon');
+
     push(items, 'Film Forum', 'Film', 'https://filmforum.org');
     console.error(`Film Forum: ${items.length}`);
   } catch (e) { console.error('Film Forum error:', e.message); }
-  finally { await page.close(); }
 }
 
 async function scrapeIFC() {
@@ -629,15 +641,23 @@ async function scrapeNewMuseum(browser) {
     await page.waitForTimeout(5000);
     const items = await page.evaluate(() => {
       const r = [], seen = new Set();
+      // Helper: strip date suffixes that get concatenated into titles
+      function cleanTitle(raw) {
+        return raw
+          .replace(/(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s*\d{4}\s*[–—-]\s*(Ongoing|January|February|March|April|May|June|July|August|September|October|November|December).*$/i, '')
+          .replace(/(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s*\d{4}.*$/i, '')
+          .replace(/\s+/g, ' ').trim();
+      }
       // Try exhibition links first
       document.querySelectorAll('a[href*="/exhibition"]').forEach(el => {
-        const t = el.textContent?.trim();
-        if (t && t.length > 5 && t.length < 120 && !seen.has(t.toLowerCase())
+        const raw = el.textContent?.trim() || '';
+        const t = cleanTitle(raw);
+        if (t && t.length > 5 && t.length < 200 && !seen.has(t.toLowerCase())
             && !/^(exhibitions?|view|see all)/i.test(t)) {
           seen.add(t.toLowerCase());
-          // Look for date in parent container
+          // Extract date from the raw text or parent container
           const card = el.closest('article, [class*="card"], li, div, section');
-          const cardText = card?.textContent?.replace(/\s+/g, ' ')?.trim() || '';
+          const cardText = card?.textContent?.replace(/\s+/g, ' ')?.trim() || raw;
           let dateText = '';
           const throughMatch = cardText.match(/(through\s+[A-Za-z]+(?:\s+\d{1,2})?(?:\s*,?\s*\d{4})?)/i);
           if (throughMatch) dateText = throughMatch[1];
@@ -645,15 +665,21 @@ async function scrapeNewMuseum(browser) {
             const rangeMatch = cardText.match(/([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})\s*[–—-]\s*([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})/);
             if (rangeMatch) dateText = `${rangeMatch[1]} – ${rangeMatch[2]}`;
           }
+          if (!dateText) {
+            // "March 21, 2026–Ongoing" → use start date as range start
+            const ongoingMatch = cardText.match(/([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})\s*[–—-]\s*Ongoing/i);
+            if (ongoingMatch) dateText = ongoingMatch[1];
+          }
           r.push({ title: t, link: el.href, date: dateText });
         }
       });
       // Fallback: h2/h3 headings
       if (r.length === 0) {
         document.querySelectorAll('h2, h3').forEach(el => {
-          const t = el.textContent?.trim();
+          const raw = el.textContent?.trim() || '';
+          const t = cleanTitle(raw);
           const link = el.closest('a')?.href || el.querySelector('a')?.href || '';
-          if (t && t.length > 5 && t.length < 120 && !seen.has(t.toLowerCase())
+          if (t && t.length > 5 && t.length < 200 && !seen.has(t.toLowerCase())
               && !/^(exhibitions?|current|upcoming|past)/i.test(t)) {
             seen.add(t.toLowerCase());
             const card = el.closest('article, [class*="card"], li, div, section');
@@ -1017,10 +1043,77 @@ async function scrape92NY(browser) {
 
 const sourceLog = [];
 const JS_SOURCES = new Set([
-  'Film Forum', 'Metrograph', 'The Frick', 'Guggenheim', 'New Museum', 'Japan Society',
+  'Metrograph', 'The Frick', 'Guggenheim', 'New Museum', 'Japan Society',
   'NY Philharmonic', 'Carnegie Hall', 'Met Opera', 'NYCB',
+  'Joyce Theater', 'Lincoln Center', 'Moving Image', '92NY',
+  'Angelika', 'Film at Lincoln Center',
   'Joyce Theater', 'Lincoln Center', 'Moving Image', '92NY'
 ]);
+
+async function scrapeAngelika(browser) {
+  const page = await browser.newPage();
+  page.setDefaultTimeout(15000);
+  try {
+    await page.goto('https://angelikafilmcenter.com/nyc', { waitUntil: 'networkidle' });
+    await page.waitForTimeout(4000);
+    const items = await page.evaluate(() => {
+      const r = [];
+      document.querySelectorAll('div[class*="movie-details-section"]').forEach(el => {
+        const links = el.querySelectorAll('a');
+        let title = '', href = '';
+        links.forEach(a => {
+          if (a.href && a.href.includes('/movies/details/')) {
+            title = a.textContent.trim();
+            href = a.href;
+          }
+        });
+        if (title && title.length > 2 && title.length < 100) {
+          r.push({ title, link: href });
+        }
+      });
+      return r;
+    });
+    // Angelika shows today's schedule — use today's date
+    const today = new Date();
+    const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+    items.forEach(item => { item.date = todayStr; });
+    push(items, 'Angelika Film Center', 'Film', 'https://angelikafilmcenter.com/nyc');
+    console.error(`Angelika: ${items.length}`);
+  } catch (e) { console.error('Angelika error:', e.message); }
+  finally { await page.close(); }
+}
+
+async function scrapeFilmLinc(browser) {
+  // Film at Lincoln Center — behind Cloudflare, try anyway
+  const page = await browser.newPage();
+  page.setDefaultTimeout(20000);
+  try {
+    await page.goto('https://www.filmlinc.org/now-playing/', { waitUntil: 'networkidle' });
+    await page.waitForTimeout(6000);
+    const bodyText = await page.evaluate(() => document.body.textContent.replace(/\s+/g, ' ').trim().slice(0, 200));
+    if (/security verification|enable javascript|just a moment/i.test(bodyText)) {
+      console.error('Film at Lincoln Center: blocked by Cloudflare');
+      return;
+    }
+    const items = await page.evaluate(() => {
+      const r = [], seen = new Set();
+      document.querySelectorAll('a[href*="/film"]').forEach(el => {
+        const t = el.textContent.trim();
+        if (t && t.length > 3 && t.length < 120 && !seen.has(t.toLowerCase())) {
+          seen.add(t.toLowerCase());
+          const container = el.closest('article, div, li, [class*="card"]');
+          const ctx = container ? container.textContent.replace(/\s+/g, ' ').trim() : '';
+          const dateMatch = ctx.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+\d{1,2}(?:\s*[-–—]\s*(?:(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+)?\d{1,2})?)/i);
+          r.push({ title: t, link: el.href, date: dateMatch ? dateMatch[1] : '' });
+        }
+      });
+      return r.slice(0, 30);
+    });
+    push(items, 'Film at Lincoln Center', 'Film', 'https://www.filmlinc.org');
+    console.error(`Film at Lincoln Center: ${items.length}`);
+  } catch (e) { console.error('Film at Lincoln Center error:', e.message); }
+  finally { await page.close(); }
+}
 
 async function runSource(name, fn, browserOrNull) {
   const before = events.length;
@@ -1068,6 +1161,7 @@ function printReport() {
   console.error('  MoMA — Cloudflare (try /calendar/exhibitions)');
   console.error('  Asia Society — Cloudflare');
   console.error('  Queens Museum — 403 Forbidden');
+  console.error('  Film at Lincoln Center — Cloudflare (attempted, may fail)');
   console.error('='.repeat(70) + '\n');
 }
 
@@ -1078,6 +1172,7 @@ function printReport() {
 (async () => {
   // Cheerio sources (fast, no browser needed)
   await runSource('IFC Center', scrapeIFC);
+  await runSource('Film Forum', scrapeFilmForum);
   await runSource('The Met', scrapeTheMet);
   await runSource('Whitney', scrapeWhitney);
   await runSource('Neue Galerie', scrapeNeueGalerie);
@@ -1089,8 +1184,9 @@ function printReport() {
     const { chromium } = require('playwright');
     browser = await chromium.launch({ headless: true });
 
-    await runSource('Film Forum', scrapeFilmForum, browser);
     await runSource('Metrograph', scrapeMetrograph, browser);
+    await runSource('Angelika', scrapeAngelika, browser);
+    await runSource('Film at Lincoln Center', scrapeFilmLinc, browser);
     await runSource('The Frick', scrapeFrick, browser);
     await runSource('Guggenheim', scrapeGuggenheim, browser);
     await runSource('New Museum', scrapeNewMuseum, browser);

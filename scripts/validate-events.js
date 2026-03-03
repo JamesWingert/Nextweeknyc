@@ -42,10 +42,10 @@ function slugify(str) {
 // ---------------------------------------------------------------------------
 
 const JUNK_PATTERNS = [
-  // Navigation / calendar chrome
-  /^(january|february|march|april|may|june|july|august|september|october|november|december)/i,
+  // Navigation / calendar chrome — only bare month names or "Month YYYY" (not event titles starting with month)
+  /^(january|february|march|april|may|june|july|august|september|october|november|december)\s*(\d{4})?$/i,
   /january.*february|february.*march|march.*april/i,
-  /^(sun|mon|tue|wed|thu|fri|sat)\b/i,
+  /^(sun|mon|tue|wed|thu|fri|sat)(day)?,?\s+\d/i,
   /^(previous|next)\s+(month|week|page)/i,
   /^(load more|show more|see all|view all|view more)/i,
   /^(upcoming events?|events?|agenda|calendar|schedule)$/i,
@@ -104,6 +104,9 @@ const JUNK_PATTERNS = [
   /\bcrystals,?\s*gemstone/i,
   /\bwellness!+$/i,
   /\bPWL ReWind\b/i,
+
+  // Numbered list items from Eventbrite category headers
+  /^\d+\.\s+(january|february|march|april|may|june|july|august|september|october|november|december|brooklyn|queens|manhattan|job fairs?|valentines?)/i,
 ];
 
 // Clickbait / listicle / article headline patterns (not actual events)
@@ -170,30 +173,31 @@ const SHORT_JUNK_PHRASES = [
   /^(limited-time discounted admission)$/i,
   /^(class registration|lincoln center moments)\b/i,
   /^spring \d{4}[a-z]/i,  // "Spring 2026APr 21 - May 31"
-  /ongoing$/i,  // "German Masterworks from the Neue GalerieOngoing"
+  /^ongoing$/i,  // Only bare "Ongoing" text, not titles containing it
   /^introduction by\b/i,  // "Introduction by Cinema Tehran founder..."
   /beginner.*trial lesson/i,
   /do not sell or share/i,
   /manage consent/i,
+
+  // Scraper artifacts from film sites
+  /^(all films|film details|tickets and more info|now playing|short programs? now playing)$/i,
+  /^live-action,?\s+animated/i,
+  /^(buy|get) tickets?\b/i,
+  /^opens?\s+(fri|mon|tue|wed|thu|sat|sun)\w*\s/i,  // "Opens Fri Mar 6"
+  /\blast \d+ days?\b/i,  // "Ghost Elephants Last 4 Days"
+  /\b(open captioning)\s*$/i,  // Duplicate "(Open Captioning)" variants — keep the base title
+  /^(view showtimes?|see showtimes?|all showtimes?|full schedule)$/i,
+  /^(now showing|currently showing|on screen)$/i,
 ];
 
 function isJunkTitle(title) {
   if (!title) return true;
   const t = title.trim();
-  if (t.length < 5 || t.length > 120) return true;
+  if (t.length < 4 || t.length > 200) return true;
 
-  // Single word or very short — almost never a real event title
-  if (t.split(/\s+/).length <= 1 && t.length < 15) {
-    if (SINGLE_WORD_JUNK.has(t.toLowerCase())) return true;
-  }
-
-  // Two words or fewer and under 20 chars — check against single word junk
+  // Single word junk — only reject if the ENTIRE title is a single junk word
   const words = t.split(/\s+/);
-  if (words.length <= 2 && t.length < 20) {
-    for (const w of words) {
-      if (SINGLE_WORD_JUNK.has(w.toLowerCase())) return true;
-    }
-  }
+  if (words.length === 1 && SINGLE_WORD_JUNK.has(t.toLowerCase())) return true;
 
   // Mostly non-alphabetic (less than 40% letters)
   const letters = (t.match(/[a-zA-Z]/g) || []).length;
@@ -265,10 +269,18 @@ function validateEvent(raw, index) {
 // Deduplication — by normalized title, keep the entry with the best venue
 // ---------------------------------------------------------------------------
 
+function normalizeTitle(t) {
+  return t.toLowerCase()
+    .replace(/\s*\(open captioning\)\s*/i, '')
+    .replace(/\s*last \d+ days?\s*/i, '')
+    .replace(/\s*opens?\s+(fri|mon|tue|wed|thu|sat|sun)\w*\s+.*/i, '')
+    .trim();
+}
+
 function dedupeEvents(events) {
   const byTitle = new Map();
   for (const e of events) {
-    const key = e.title.toLowerCase().trim();
+    const key = normalizeTitle(e.title);
     const existing = byTitle.get(key);
     if (!existing) {
       byTitle.set(key, e);
@@ -280,7 +292,10 @@ function dedupeEvents(events) {
       if (existingGeneric && !newGeneric) {
         byTitle.set(key, e);
       }
-      // Otherwise keep existing (first seen with real venue)
+      // Prefer the one with a date if the other doesn't have one
+      if (!existing.date && e.date) {
+        byTitle.set(key, e);
+      }
     }
   }
   return [...byTitle.values()];
