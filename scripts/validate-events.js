@@ -98,6 +98,7 @@ const JUNK_PATTERNS = [
   /\bfree mp3\b/i,
   /\bLLC\b/i,
   /\bmerch(andise)?\s*submission/i,
+  /\bMORE PERFORMANCES?\b/i,
   /\bgroup travel advisor/i,
   /\bholistic healing\b/i,
   /\bgemstone jewelry\b/i,

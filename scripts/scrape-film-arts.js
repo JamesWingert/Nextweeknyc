@@ -1025,13 +1025,28 @@ async function scrapeMetOpera(browser) {
       }
     });
     await page.waitForTimeout(5000);
+
     const items = await page.evaluate(() => {
       const r = [], seen = new Set();
       const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
       const year = new Date().getFullYear();
+
+      // Try to extract structured data from links first
+      const eventLinks = document.querySelectorAll('a[href*="/season/"]');
+      let currentDate = '';
+
+      // Walk through the body text for date context, but grab links for URLs
+      const linkMap = new Map();
+      eventLinks.forEach(a => {
+        const title = a.textContent?.trim();
+        const href = a.href || '';
+        if (title && title.length > 3 && href.includes('/season/')) {
+          linkMap.set(title.toLowerCase(), href);
+        }
+      });
+
       const body = document.body.innerText;
       const lines = body.split('\n').map(l => l.trim()).filter(l => l.length > 0);
-      let currentDate = '';
       for (const line of lines) {
         // Date header: "SAT, MAR 7" or "MON, MAR 9"
         const dm = line.match(/^(?:MON|TUE|WED|THU|FRI|SAT|SUN),?\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\s+(\d{1,2})$/i);
@@ -1045,7 +1060,8 @@ async function scrapeMetOpera(browser) {
         if (!currentDate) continue;
         if (line.length < 4 || line.length > 150) continue;
         // Skip known non-title lines
-        if (/^(ON STAGE|ON RADIO|IN CINEMAS|BACKSTAGE|ALL EVENTS|ONSTAGE|Page|Date|Previous|Next|Enter|Filter|Subscribe|Buy|View|Calendar|FIND STATION|MORE PERFORMANCE|LAST PERFORMANCE|TO |SuMoTu|PrevNext)/i.test(line)) continue;
+        if (/^(ON STAGE|ON RADIO|IN CINEMAS|BACKSTAGE|ALL EVENTS|ONSTAGE|Page|Date|Previous|Next|Enter|Filter|Subscribe|Buy|View|Calendar|FIND STATION|LAST PERFORMANCE|TO |SuMoTu|PrevNext)/i.test(line)) continue;
+        if (/\bMORE PERFORMANCES?\b/i.test(line)) continue;
         if (/^\d{1,2}:\d{2}\s*(AM|PM)$/i.test(line)) continue;
         // Skip ALL CAPS lines (composer names like "RICHARD WAGNER", "GIACOMO PUCCINI")
         if (/^[A-Z\s.,'()-]+$/.test(line) && line.length < 50) continue;
@@ -1057,12 +1073,14 @@ async function scrapeMetOpera(browser) {
         const key = line.toLowerCase();
         if (!seen.has(key)) {
           seen.add(key);
-          r.push({ title: line, date: currentDate, link: 'https://www.metopera.org/calendar/' });
+          // Try to find a matching season link
+          const link = linkMap.get(key) || '';
+          r.push({ title: line, date: currentDate, link: link || 'https://www.metopera.org/season/2025-26-season/' });
         }
       }
       return r.slice(0, 25);
     });
-    push(items, 'Metropolitan Opera', 'Opera', 'https://www.metopera.org/calendar/');
+    push(items, 'Metropolitan Opera', 'Opera', 'https://www.metopera.org/season/2025-26-season/');
     console.error(`Met Opera: ${items.length}`);
   } catch (e) { console.error('Met Opera error:', e.message); }
   finally { await page.close(); }

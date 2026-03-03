@@ -738,7 +738,7 @@ function MonthCalendar({
 const VENUE_COLORS: Record<string, { accent: string; bg: string; text: string; border: string; dot: string }> = {
   'metrograph':          { accent: '#7c3aed', bg: '#f5f3ff', text: '#5b21b6', border: '#c4b5fd', dot: '#8b5cf6' },
   'ifc center':          { accent: '#0891b2', bg: '#ecfeff', text: '#155e75', border: '#a5f3fc', dot: '#06b6d4' },
-  'film forum':          { accent: '#c2410c', bg: '#fff7ed', text: '#9a3412', border: '#fed7aa', dot: '#f97316' },
+  'film forum':          { accent: '#0d9488', bg: '#f0fdfa', text: '#115e59', border: '#99f6e4', dot: '#14b8a6' },
   'angelika film center':{ accent: '#be185d', bg: '#fdf2f8', text: '#9d174d', border: '#fbcfe8', dot: '#ec4899' },
 };
 const DEFAULT_VENUE_COLOR = { accent: '#6b7280', bg: '#f9fafb', text: '#374151', border: '#d1d5db', dot: '#9ca3af' };
@@ -891,6 +891,21 @@ function ShowtimesView({ events, currentMonth, today }: { events: Event[]; curre
         const vc = getVenueColor(venue);
         const venueTotal = Object.values(venueDates).reduce((n, arr) => n + arr.length, 0);
 
+        // "Now Playing" — unique films currently in this venue's lineup
+        // A film is "now playing" if it has any screening today or in the future
+        const nowPlayingMap = new Map<string, Event>();
+        for (const evts of Object.values(venueDates)) {
+          for (const ev of evts) {
+            const key = ev.title.toLowerCase().trim().replace(/[\u2018\u2019\u201C\u201D]/g, "'");
+            if (nowPlayingMap.has(key)) continue;
+            // Include if the film has any non-past date
+            if (ev.date && isEventFuture(ev.date, today)) {
+              nowPlayingMap.set(key, ev);
+            }
+          }
+        }
+        const nowPlaying = Array.from(nowPlayingMap.values()).sort((a, b) => a.title.localeCompare(b.title));
+
         return (
           <div key={venue} style={{ marginBottom: '2.5rem' }}>
             {/* Venue header */}
@@ -909,6 +924,58 @@ function ShowtimesView({ events, currentMonth, today }: { events: Event[]; curre
                 {venueTotal} screening{venueTotal !== 1 ? 's' : ''}
               </span>
             </div>
+
+            {/* Now Playing */}
+            {nowPlaying.length > 0 && (
+              <div style={{
+                marginBottom: '1.25rem', padding: '1rem', borderRadius: '0.625rem',
+                background: vc.bg, border: `1px solid ${vc.border}`,
+              }}>
+                <div style={{
+                  fontSize: '0.6875rem', fontWeight: 700, color: vc.accent,
+                  textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.625rem',
+                }}>
+                  ▶ Now Playing · {nowPlaying.length} film{nowPlaying.length !== 1 ? 's' : ''}
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '0.375rem' }}>
+                  {nowPlaying.map(film => (
+                    <a
+                      key={film.id}
+                      href={film.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: 'flex', alignItems: 'baseline', gap: '0.5rem',
+                        textDecoration: 'none', color: '#1a1a2e',
+                        padding: '0.375rem 0.625rem', borderRadius: '0.375rem',
+                        background: '#fff', border: `1px solid ${vc.border}`,
+                        transition: 'all 0.15s ease',
+                      }}
+                      onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                        e.currentTarget.style.borderColor = vc.accent;
+                        e.currentTarget.style.transform = 'translateY(-1px)';
+                        e.currentTarget.style.boxShadow = '0 2px 6px rgba(0,0,0,0.05)';
+                      }}
+                      onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                        e.currentTarget.style.borderColor = vc.border;
+                        e.currentTarget.style.transform = 'none';
+                        e.currentTarget.style.boxShadow = 'none';
+                      }}
+                    >
+                      <span style={{ fontWeight: 600, fontSize: '0.8125rem' }}>{film.title}</span>
+                      {film.description && (
+                        <span style={{
+                          fontSize: '0.6875rem', color: '#8888a0', flex: 1, minWidth: 0,
+                          overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                        }}>
+                          {film.description}
+                        </span>
+                      )}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '1rem' }}>
               {sortedDates.map(date => {
