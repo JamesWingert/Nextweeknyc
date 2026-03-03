@@ -478,7 +478,7 @@ export default function Home() {
       </header>
 
       {/* Borough filter — sits between tabs and category pills, visible on all tabs */}
-      <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem', marginBottom: '0.75rem', alignItems: 'center' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem', marginBottom: '1rem', alignItems: 'center' }}>
         {boroughConfig.map(({ key, label, emoji }) => {
           const isActive = selectedBoroughs.includes(key);
           return (
@@ -507,7 +507,7 @@ export default function Home() {
 
       {/* Category filters (hidden on Showtimes / On View) */}
       {viewMode !== 'showtimes' && viewMode !== 'onview' && (
-        <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem', marginBottom: '1.5rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem', marginBottom: '1.5rem', paddingTop: '0.75rem', borderTop: '1px solid var(--border-light)' }}>
           {deduped.map(({ key, label, bg, text, dot }) => {
             const matchingKeys = categoryConfig.filter(c => c.label === label).map(c => c.key);
             const isActive = matchingKeys.some(k => selectedCategories.includes(k));
