@@ -390,6 +390,12 @@ async function scrapeTheSkint() {
       if (/^our roundup/i.test(bold)) return;
       // Real Skint events always have a >> link; paragraphs without links are ad body text
       if (!link) return;
+      // Skip news article links — we only want event/venue/ticket URLs
+      try {
+        const host = new URL(link).hostname.replace(/^www\./, '');
+        const NEWS_DOMAINS = /^(abc7|nbc|cbs|fox|cnn|nytimes|nypost|gothamist|amny|pix11|ny1|dailynews|washingtonpost|bbc|reuters|apnews|usatoday|newsday)\b/i;
+        if (NEWS_DOMAINS.test(host)) return;
+      } catch (_) {}
 
       let dateText = '';
       const mmddMatch = text.match(/(\d{1,2})\/(\d{1,2})/);
@@ -435,6 +441,14 @@ async function scrapeTheSkint() {
       if (text.length < 15) return;
       if (isSkintJunk(bold)) return;
       if (/^our roundup/i.test(bold)) return;
+      // Skip news article links
+      if (link) {
+        try {
+          const host = new URL(link).hostname.replace(/^www\./, '');
+          const NEWS_DOMAINS = /^(abc7|nbc|cbs|fox|cnn|nytimes|nypost|gothamist|amny|pix11|ny1|dailynews|washingtonpost|bbc|reuters|apnews|usatoday|newsday)\b/i;
+          if (NEWS_DOMAINS.test(host)) return;
+        } catch (_) {}
+      }
       let dateText = '';
       const thruMatch = text.match(/thru\s+(\d{1,2})\/(\d{1,2})/i);
       if (thruMatch) {
@@ -569,68 +583,133 @@ async function scrapePlaybill() {
 // ---------------------------------------------------------------------------
 
 async function scrapeEventbrite(browser) {
-  const page = await browser.newPage();
-  page.setDefaultTimeout(20000);
-  try {
-    await page.goto('https://www.eventbrite.com/d/ny--new-york/events--this-week/', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(6000);
-    const items = await page.evaluate(() => {
-      const r = [], seen = new Set();
-      const now = new Date();
-      const fmt = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-      const DAYS = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+  // Eventbrite search pages: each event is a container div with class containing
+  // "map_experiment_event_card". Inside: .event-card-link <a> for URL, <h3> for title,
+  // <p> tags for metadata like "Friday • 10:00 PM", "Brooklyn · Elsewhere", "From $29.41"
+  const PAGES = [
+    'https://www.eventbrite.com/d/ny--new-york/events--this-week/',
+    'https://www.eventbrite.com/d/ny--new-york/events--next-week/',
+    'https://www.eventbrite.com/d/ny--new-york/arts--events--this-week/',
+    'https://www.eventbrite.com/d/ny--new-york/music--events--this-week/',
+    'https://www.eventbrite.com/d/ny--new-york/food-and-drink--events--this-week/',
+    'https://www.eventbrite.com/d/ny--new-york/arts--events--next-week/',
+    'https://www.eventbrite.com/d/ny--new-york/music--events--next-week/',
+  ];
 
-      document.querySelectorAll('[class*="event-card"], [class*="search-event"], article, [data-testid*="event"]').forEach(el => {
-        const t = el.querySelector('h2, h3, h4, [class*="title"]')?.textContent?.trim();
-        if (!t || t.length < 5 || t.length > 120) return;
-        const key = t.toLowerCase();
-        if (seen.has(key)) return;
-        seen.add(key);
+  const allItems = [];
+  const seenTitles = new Set();
 
-        const venue = el.querySelector('[class*="location"], [class*="venue"]')?.textContent?.trim();
-        const link = el.querySelector('a')?.href;
+  for (const url of PAGES) {
+    const page = await browser.newPage();
+    page.setDefaultTimeout(20000);
+    try {
+      await page.goto(url, { waitUntil: 'domcontentloaded' });
+      await page.waitForTimeout(5000);
 
-        // Date is in a <p> tag like "Friday • 10:00 PM" or "Saturday • 9:00 PM"
-        // Scan all p tags in the card for day-of-week patterns
-        let dateText = '';
-        el.querySelectorAll('p').forEach(p => {
-          if (dateText) return;
-          const pText = p.textContent?.trim() || '';
-          // "Friday • 10:00 PM" or "Tomorrow • 7:00 PM" or "Today • 9:00 AM"
-          const parts = pText.split('\u2022'); // bullet •
-          if (parts.length < 2) return;
-          const dayPart = parts[0].trim().toLowerCase();
-          if (dayPart === 'today') {
-            dateText = fmt(now);
-          } else if (dayPart === 'tomorrow') {
-            const tom = new Date(now); tom.setDate(tom.getDate() + 1);
-            dateText = fmt(tom);
-          } else {
-            const dayIdx = DAYS.indexOf(dayPart);
-            if (dayIdx >= 0) {
-              const today = now.getDay();
-              let diff = dayIdx - today;
-              if (diff <= 0) diff += 7;
-              const target = new Date(now); target.setDate(target.getDate() + diff);
-              dateText = fmt(target);
+      // Scroll aggressively to load more cards
+      for (let i = 0; i < 8; i++) {
+        await page.evaluate(() => window.scrollBy(0, 1500));
+        await page.waitForTimeout(1500);
+      }
+
+      const items = await page.evaluate(() => {
+        const r = [];
+        const now = new Date();
+        const fmt = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+        const DAYS = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+        const MONTHS = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+
+        // Use the parent card container — the <p> tags with date/venue/price
+        // are siblings of .event-card-link, not children of it
+        const containers = document.querySelectorAll('[class*="map_experiment_event_card"]');
+        const seen = new Set();
+
+        containers.forEach(container => {
+          const link = container.querySelector('a.event-card-link');
+          if (!link) return;
+          const href = link.href;
+          if (seen.has(href)) return;
+          seen.add(href);
+
+          const h3 = container.querySelector('h3');
+          if (!h3) return;
+          const title = h3.textContent?.trim();
+          if (!title || title.length < 5 || title.length > 150) return;
+
+          const ps = Array.from(container.querySelectorAll('p')).map(p => p.textContent?.trim() || '');
+
+          let dateText = '', timeText = '', venue = '', price = '';
+
+          for (const pText of ps) {
+            // Date/time: "Friday • 10:00 PM" or "Sat, Mar 14 • 11:00 PM" or "Today • 9:00 AM"
+            if (pText.includes('\u2022') && !dateText) {
+              const parts = pText.split('\u2022');
+              const dayPart = parts[0].trim();
+              const timePart = (parts[1] || '').trim();
+              if (timePart) timeText = timePart;
+
+              const dayLower = dayPart.toLowerCase();
+              if (dayLower === 'today') {
+                dateText = fmt(now);
+              } else if (dayLower === 'tomorrow') {
+                const tom = new Date(now); tom.setDate(tom.getDate() + 1);
+                dateText = fmt(tom);
+              } else {
+                // Try "Sat, Mar 14" or "Tue, Mar 10" format
+                const fullMatch = dayPart.match(/(\w{3}),?\s+(\w{3})\s+(\d{1,2})/);
+                if (fullMatch) {
+                  const monthIdx = MONTHS.indexOf(fullMatch[2].toLowerCase().slice(0, 3));
+                  if (monthIdx >= 0) {
+                    const day = parseInt(fullMatch[3], 10);
+                    const year = now.getFullYear();
+                    dateText = `${year}-${String(monthIdx + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                  }
+                } else {
+                  // Day-of-week only: "Friday", "Saturday"
+                  const dayIdx = DAYS.indexOf(dayLower);
+                  if (dayIdx >= 0) {
+                    const today = now.getDay();
+                    let diff = dayIdx - today;
+                    if (diff <= 0) diff += 7;
+                    const target = new Date(now); target.setDate(target.getDate() + diff);
+                    dateText = fmt(target);
+                  }
+                }
+              }
+            }
+            // Venue: "Brooklyn · MAMATACO" or "New York · Pioneer Works"
+            if (pText.includes('\u00B7') && !venue) {
+              const vParts = pText.split('\u00B7');
+              venue = (vParts[1] || '').trim();
+              if (!venue) venue = pText;
+            }
+            // Price: "From $0.00" or "$29.41"
+            if (/^\$|^From \$/i.test(pText) && !price) {
+              price = pText;
             }
           }
+
+          r.push({ title, link: href, date: dateText, time: timeText, venue, price });
         });
-
-        // Also try time[datetime] as fallback
-        if (!dateText) {
-          const timeEl = el.querySelector('time[datetime]');
-          if (timeEl) dateText = timeEl.getAttribute('datetime') || '';
-        }
-
-        r.push({ title: t, venue, link, date: dateText });
+        return r;
       });
-      return r.slice(0, 25);
-    });
-    push(items, 'Eventbrite', 'Other', 'https://www.eventbrite.com');
-    console.error(`Eventbrite: ${items.length}`);
-  } catch (e) { console.error('Eventbrite error:', e.message); }
-  finally { await page.close(); }
+
+      for (const item of items) {
+        const key = item.title.toLowerCase().trim();
+        if (seenTitles.has(key)) continue;
+        seenTitles.add(key);
+        allItems.push(item);
+      }
+      console.error(`Eventbrite (${url.split('/').slice(-2, -1)[0]}): ${items.length} cards`);
+    } catch (e) {
+      console.error(`Eventbrite error (${url}): ${e.message}`);
+    } finally {
+      await page.close();
+    }
+  }
+
+  push(allItems, 'Eventbrite', 'Other', 'https://www.eventbrite.com');
+  console.error(`Eventbrite total: ${allItems.length} unique events`);
 }
 
 // ---------------------------------------------------------------------------

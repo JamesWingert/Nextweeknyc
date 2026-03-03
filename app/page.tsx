@@ -499,10 +499,10 @@ export default function Home() {
             </button>
           );
         })}
-        {/* Inline clear all — only visible when filters are active */}
-        {(searchQuery || selectedCategories.length > 0 || selectedBoroughs.length > 0) && (
+        {/* Inline clear — only when boroughs are selected */}
+        {selectedBoroughs.length > 0 && (
           <button
-            onClick={() => { setSearchQuery(''); setSelectedCategories([]); setSelectedBoroughs([]); }}
+            onClick={() => setSelectedBoroughs([])}
             style={{
               padding: '0.3rem 0.625rem', borderRadius: '999px', fontSize: '0.7rem', fontWeight: 600,
               border: '1.5px solid var(--border)', background: 'var(--bg-card)',
@@ -516,7 +516,7 @@ export default function Home() {
 
       {/* Category filters (hidden on Showtimes / On View) */}
       {viewMode !== 'showtimes' && viewMode !== 'onview' && (
-        <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem', marginBottom: '1.5rem', paddingTop: '0.75rem', borderTop: '1px solid var(--border-light)' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem', marginBottom: '1.5rem', paddingTop: '0.75rem', borderTop: '1px solid var(--border-light)', alignItems: 'center' }}>
           {deduped.map(({ key, label, bg, text, dot }) => {
             const matchingKeys = categoryConfig.filter(c => c.label === label).map(c => c.key);
             const isActive = matchingKeys.some(k => selectedCategories.includes(k));
@@ -542,6 +542,19 @@ export default function Home() {
               </button>
             );
           })}
+          {/* Inline clear — only when categories are selected */}
+          {selectedCategories.length > 0 && (
+            <button
+              onClick={() => setSelectedCategories([])}
+              style={{
+                padding: '0.3rem 0.625rem', borderRadius: '999px', fontSize: '0.7rem', fontWeight: 600,
+                border: '1.5px solid var(--border)', background: 'var(--bg-card)',
+                color: 'var(--text-muted)', cursor: 'pointer', marginLeft: '0.25rem',
+              }}
+            >
+              ✕ Clear
+            </button>
+          )}
         </div>
       )}
 
