@@ -123,6 +123,10 @@ body {
   .desktop-tabs {
     display: none !important;
   }
+  /* Push scroll-to-top above bottom nav */
+  .scroll-to-top {
+    bottom: 5.5rem !important;
+  }
 }
 
 @media (min-width: 641px) {
