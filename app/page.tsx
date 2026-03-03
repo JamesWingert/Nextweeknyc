@@ -304,7 +304,48 @@ export default function Home() {
           today={today}
         />
       )}
+      <ScrollToTop />
     </main>
+  );
+}
+
+// --- Scroll to top button ---
+
+function ScrollToTop() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 400);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <button
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      aria-label="Scroll to top"
+      style={{
+        position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 50,
+        width: '44px', height: '44px', borderRadius: '50%',
+        background: '#1a1a2e', color: '#fff', border: 'none',
+        cursor: 'pointer', fontSize: '1.25rem', lineHeight: 1,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        boxShadow: '0 2px 12px rgba(0,0,0,0.15)',
+        transition: 'all 0.2s ease',
+      }}
+      onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
+        e.currentTarget.style.background = '#e07a5f';
+        e.currentTarget.style.transform = 'translateY(-2px)';
+      }}
+      onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
+        e.currentTarget.style.background = '#1a1a2e';
+        e.currentTarget.style.transform = 'none';
+      }}
+    >
+      ↑
+    </button>
   );
 }
 
