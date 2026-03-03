@@ -100,6 +100,8 @@ const JUNK_PATTERNS = [
   /\bmerch(andise)?\s*submission/i,
   /\bMORE PERFORMANCES?\b/i,
   /\bSiriusXM\b/i,
+  /\bstation[- ]?finder\b/i,
+  /\bSaturday Matinee Broadcast/i,
   /\bgroup travel advisor/i,
   /\bholistic healing\b/i,
   /\bgemstone jewelry\b/i,
@@ -256,6 +258,8 @@ function validateEvent(raw, index) {
   // Reject events from dropped/non-venue sources
   const JUNK_VENUES = ['time out ny', 'time out'];
   if (JUNK_VENUES.includes(venue.toLowerCase())) errors.push(`[${index}] junk venue: "${venue}"`);
+  // Reject Met Opera radio broadcast links (station-finder page, not actual performances)
+  if (/station-finder|\/radio\//i.test(sourceUrl)) errors.push(`[${index}] radio broadcast link: "${sourceUrl.slice(0, 80)}"`);
   // Allow events with null/empty dates — they won't show on specific calendar days
   // but are still valid (e.g. ongoing exhibitions, events with unparseable dates)
   if (date && !isValidDate(date)) errors.push(`[${index}] invalid date format: "${date}"`);

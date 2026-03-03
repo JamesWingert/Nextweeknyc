@@ -1119,6 +1119,7 @@ async function scrapeMetOpera(browser) {
 
       const body = document.body.innerText;
       const lines = body.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+      let inRadioSection = false;
       for (const line of lines) {
         // Date header: "SAT, MAR 7" or "MON, MAR 9"
         const dm = line.match(/^(?:MON|TUE|WED|THU|FRI|SAT|SUN),?\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\s+(\d{1,2})$/i);
@@ -1127,8 +1128,13 @@ async function scrapeMetOpera(browser) {
           if (mon !== undefined) {
             currentDate = `${year}-${String(mon+1).padStart(2,'0')}-${String(parseInt(dm[2],10)).padStart(2,'0')}`;
           }
+          inRadioSection = false;
           continue;
         }
+        // Track section headers — skip radio broadcasts
+        if (/^ON RADIO$/i.test(line)) { inRadioSection = true; continue; }
+        if (/^(ON STAGE|IN CINEMAS|BACKSTAGE|ONSTAGE)$/i.test(line)) { inRadioSection = false; continue; }
+        if (inRadioSection) continue;
         if (!currentDate) continue;
         if (line.length < 4 || line.length > 150) continue;
         // Skip known non-title lines
@@ -1157,7 +1163,8 @@ async function scrapeMetOpera(browser) {
           r.push({ title: line, date: currentDate, link: link || 'https://www.metopera.org/season/2025-26-season/' });
         }
       }
-      return r.slice(0, 25);
+      // Filter out any radio broadcast links that slipped through
+      return r.filter(e => !/station-finder|\/radio\//i.test(e.link)).slice(0, 25);
     });
     push(items, 'Metropolitan Opera', 'Opera', 'https://www.metopera.org/season/2025-26-season/');
     console.error(`Met Opera: ${items.length}`);
