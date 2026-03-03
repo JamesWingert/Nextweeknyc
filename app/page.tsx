@@ -222,21 +222,26 @@ export default function Home() {
     <main style={{ minHeight: '100vh', padding: '2rem 1.5rem', maxWidth: '72rem', margin: '0 auto' }}>
       <header style={{ marginBottom: '2rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' as const }}>
-          <h1 style={{ fontSize: '2.25rem', fontWeight: 300, letterSpacing: '-0.03em', color: '#1a1a2e', margin: 0, lineHeight: 1.1 }}>
-            <span style={{ fontWeight: 300, color: '#8888a0' }}>next week</span>
+          <h1 style={{ fontSize: '2.5rem', fontWeight: 300, letterSpacing: '-0.03em', color: '#1a1a2e', margin: 0, lineHeight: 1.1 }}>
+            <span style={{ fontWeight: 400, color: '#4a4a68' }}>next week</span>
             {' '}
-            <span style={{ fontWeight: 700, color: '#e07a5f', letterSpacing: '-0.02em' }}>NYC</span>
+            <span style={{
+              fontWeight: 800, letterSpacing: '-0.01em',
+              background: 'linear-gradient(135deg, #e07a5f, #d4543a)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}>NYC</span>
           </h1>
           <span style={{
-            fontSize: '0.75rem', fontWeight: 600, color: '#e07a5f',
+            fontSize: '0.7rem', fontWeight: 700, color: '#e07a5f',
             background: 'linear-gradient(135deg, #fde8e8, #fef3c7)',
             padding: '0.3rem 0.875rem', borderRadius: '999px',
-            letterSpacing: '0.03em', textTransform: 'uppercase',
+            letterSpacing: '0.06em', textTransform: 'uppercase',
           }}>
             {format(currentMonth, 'MMMM yyyy')}
           </span>
         </div>
-        <p style={{ color: '#b0a090', fontSize: '0.8125rem', marginTop: '0.375rem', fontStyle: 'italic', letterSpacing: '0.01em' }}>
+        <p style={{ color: '#a09585', fontSize: '0.8125rem', marginTop: '0.375rem', fontStyle: 'italic', letterSpacing: '0.01em' }}>
           film, art, music, theater & more — curated for the city
         </p>
         <p style={{ color: '#8888a0', fontSize: '0.8125rem', marginTop: '0.375rem' }}>
