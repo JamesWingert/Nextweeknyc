@@ -501,58 +501,130 @@ async function scrapeFrick() {
   } catch (e) { console.error('The Frick error:', e.message); }
 }
 
-async function scrapeBAM() {
+async function scrapeBAM(browser) {
+  const page = await browser.newPage();
+  page.setDefaultTimeout(30000);
   try {
-    const { html } = await fetchHTML('https://www.bam.org');
-    const $ = cheerio.load(html);
-    const items = [];
-    // BAM uses blocks with class patterns like bam-block-2x4, bam-block-2x2, etc.
-    // Each block has a title (h2/h3) and a date element with class containing "date"
-    // Strategy: find all date-containing elements, then find the nearest title
-    $('[class*="date"]').each((_, el) => {
-      const $el = $(el);
-      const dateText = $el.text().trim();
-      if (!dateText || dateText.length > 60 || /^(date|filter)/i.test(dateText)) return;
-      // Skip hover duplicates and mobile duplicates
-      const cls = $el.attr('class') || '';
-      if (cls.includes('hover') || cls.includes('mobile')) return;
-      // Walk up to find the containing block
-      const block = $el.closest('[class*="bam-block"], [class*="module"], article, [class*="event"], a[href]');
-      if (!block.length) return;
-      const title = block.find('h2, h3, h4, [class*="title"]').first().text().trim();
-      const link = block.closest('a').attr('href') || block.find('a').first().attr('href') || '';
-      const fullLink = link.startsWith('/') ? `https://www.bam.org${link}` : link;
-      if (title && title.length > 3 && title.length < 120) {
-        items.push({ title, link: fullLink, date: dateText });
-      }
-    });
-    // Fallback: also grab eventInfo blocks
-    if (items.length < 5) {
-      $('.eventInfo, [class*="eventInfo"]').each((_, el) => {
-        const $el = $(el);
-        const container = $el.closest('a, article, [class*="card"], li, div').first();
-        const title = container.find('h2, h3, h4, [class*="title"]').first().text().trim()
-          || $el.find('h2, h3, h4').first().text().trim();
-        const link = container.closest('a').attr('href') || container.find('a').first().attr('href') || '';
-        const fullLink = link.startsWith('/') ? `https://www.bam.org${link}` : link;
-        // Extract date from the parent text
-        const parentText = container.text().replace(/\s+/g, ' ').trim();
-        let dateText = '';
-        // "Thu, Mar 12, 2026" or "Feb 27—Mar 3, 2026" or "Apr 19—May 17, 2026"
-        const dateMatch = parentText.match(/((?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\w*,?\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\s+\d{1,2}(?:\s*,?\s*\d{4})?)/i);
-        if (dateMatch) dateText = dateMatch[1];
-        if (!dateText) {
-          const rangeMatch = parentText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\s+\d{1,2})\s*[\u2014\u2013-]\s*((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\s+\d{1,2}(?:\s*,?\s*\d{4})?)/i);
-          if (rangeMatch) dateText = `${rangeMatch[1]}\u2014${rangeMatch[2]}`;
+    await page.goto('https://www.bam.org', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(8000);
+    // Scroll to load lazy content
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.waitForTimeout(3000);
+
+    const items = await page.evaluate(() => {
+      const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,sept:8,oct:9,nov:10,dec:11};
+      const year = new Date().getFullYear();
+
+      function parseDate(s) {
+        if (!s) return '';
+        // "Now Playing" / "ONGOING" / "Opens Mar 20"
+        if (/now playing|ongoing/i.test(s)) return '';
+        const opens = s.match(/opens\s+((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\w*\s+\d{1,2})/i);
+        if (opens) s = opens[1];
+        // Range with days: "Mar 4—Mar 5, 2026" or "Apr 19—May 17, 2026"
+        const rangeM = s.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\w*)\s+(\d{1,2})\s*[\u2014\u2013-]\s*((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
+        if (rangeM) {
+          const y = parseInt(rangeM[5] || year, 10);
+          const m1 = MONTHS[rangeM[1].slice(0,3).toLowerCase()];
+          const m2 = MONTHS[rangeM[3].slice(0,3).toLowerCase()];
+          if (m1 !== undefined && m2 !== undefined) {
+            const y2 = m2 < m1 ? y + 1 : y;
+            return `${y}-${String(m1+1).padStart(2,'0')}-${String(parseInt(rangeM[2],10)).padStart(2,'0')} to ${y2}-${String(m2+1).padStart(2,'0')}-${String(parseInt(rangeM[4],10)).padStart(2,'0')}`;
+          }
         }
-        if (title && title.length > 3 && title.length < 120) items.push({ title, link: fullLink, date: dateText });
-      });
+        // Month-only range: "Oct 2025—Apr 2026" or "Jan—Jun 2026"
+        const monthRange = s.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\w*)(?:\s+(\d{4}))?\s*[\u2014\u2013-]\s*((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\w*)(?:\s+(\d{4}))?/i);
+        if (monthRange) {
+          const m1 = MONTHS[monthRange[1].slice(0,3).toLowerCase()];
+          const m2 = MONTHS[monthRange[3].slice(0,3).toLowerCase()];
+          if (m1 !== undefined && m2 !== undefined) {
+            const y1 = parseInt(monthRange[2] || monthRange[4] || year, 10);
+            const y2 = parseInt(monthRange[4] || monthRange[2] || year, 10);
+            // Last day of end month
+            const lastDay = new Date(y2, m2 + 1, 0).getDate();
+            return `${y1}-${String(m1+1).padStart(2,'0')}-01 to ${y2}-${String(m2+1).padStart(2,'0')}-${String(lastDay).padStart(2,'0')}`;
+          }
+        }
+        // Single: "Thu, Mar 12, 2026" or "Wed, Mar 18, 2026" or "Mar 25, 2026"
+        const singleM = s.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
+        if (singleM) {
+          const y = parseInt(singleM[3] || year, 10);
+          const m = MONTHS[singleM[1].slice(0,3).toLowerCase()];
+          if (m !== undefined) return `${y}-${String(m+1).padStart(2,'0')}-${String(parseInt(singleM[2],10)).padStart(2,'0')}`;
+        }
+        return '';
+      }
+
+      // BAM category label -> our category
+      const CAT_MAP = {
+        'film': 'Film', 'film series': 'Film',
+        'music': 'Music/Performing Arts', 'community | music': 'Music/Performing Arts',
+        'theater': 'Theater', 'theater | music': 'Theater',
+        'dance': 'Dance',
+        'talks': 'Talk',
+        'opera': 'Opera', 'live broadcast | opera | film': 'Opera',
+        'poetry': 'Music/Performing Arts', 'music | poetry': 'Music/Performing Arts',
+        'kids': 'Family', 'kids | community': 'Family', 'kids | theater | music': 'Family',
+        'visual art': 'Art', 'visual art | performance art': 'Art',
+        'performance art': 'Music/Performing Arts',
+        'galas & events': 'Other', 'community': 'Other',
+      };
+
+      const lines = document.body.innerText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+      const results = [];
+      const seen = new Set();
+
+      // Walk through lines looking for category labels followed by event data
+      for (let i = 0; i < lines.length; i++) {
+        const catKey = lines[i].toLowerCase();
+        const cat = CAT_MAP[catKey];
+        if (!cat) continue;
+
+        // Next line should be the title
+        const title = lines[i + 1] || '';
+        if (!title || title.length < 3 || title.length > 150) continue;
+        // Skip navigation/chrome/labels
+        if (/^(MORE|BUY TICKETS|RSVP|REGISTER|Previous|Next|Goto|Click|NEW RELEASE|NEW PRODUCTION|REVIVAL|MET PREMIERE|NEXT WAVE|BAM FREE MUSIC)/i.test(title)) continue;
+        // Skip if title is itself a category label, compound label, or CAT_MAP key
+        if (/^(Film|Music|Theater|Dance|Talks|Opera|Poetry|Kids|Visual Art|Performance Art|Galas|Community|Calendar|Featured)(\s*[|&].*)?$/i.test(title)) continue;
+        // Skip site chrome / nav items
+        if (/^(Visit|PROGRAMS|Programs|Senior Cinema|Community Programs|Community Resources|Support BAM|Fisher Takeovers|DanceAfrica and the BAM)$/i.test(title)) continue;
+        if (/^(MON|TUE|WED|THU|FRI|SAT|SUN)$/i.test(title)) continue;
+        if (/^AGES\s+\d/i.test(title)) continue;
+
+        // Line after title should be date or "Now Playing"
+        const dateLine = lines[i + 2] || '';
+
+        // Dedup by title (case-insensitive)
+        const key = title.toLowerCase().replace(/[\u201c\u201d\u2018\u2019"']/g, '');
+        if (seen.has(key)) continue;
+        seen.add(key);
+
+        const date = parseDate(dateLine);
+        results.push({ title, date, category: cat });
+      }
+      return results;
+    });
+
+    // Filter out junk: prints, galas, merch, leaked section labels, site chrome
+    const JUNK = /\b(limited edition|print series|print$|gala|ball$|member first|behavioral strategies)\b/i;
+    const LABEL_JUNK = /^(KIDS|VISUAL ART|MUSIC|PERFORMANCE ART|COMMUNITY|GALAS|SUPPORT BAM|Share the Brooklyn|Visit|PROGRAMS|Senior Cinema|Community Programs|Community Resources|Fisher Takeovers|DanceAfrica and the BAM)(\s*[|&].*)?$/i;
+    const filtered = items.filter(i => !JUNK.test(i.title) && !LABEL_JUNK.test(i.title));
+
+    // Group by category and push each group
+    const groups = {};
+    for (const item of filtered) {
+      if (!groups[item.category]) groups[item.category] = [];
+      groups[item.category].push(item);
     }
-    const seen = new Set();
-    const deduped = items.filter(i => { const k = i.title.toLowerCase(); if (seen.has(k)) return false; seen.add(k); return true; });
-    push(deduped, 'BAM', 'Music/Performing Arts', 'https://www.bam.org');
-    console.error(`BAM: ${deduped.length}`);
+    for (const [cat, catItems] of Object.entries(groups)) {
+      push(catItems, 'BAM', cat, 'https://www.bam.org');
+    }
+    const total = filtered.length;
+    const filmCount = (groups['Film'] || []).length;
+    console.error(`BAM: ${total} total (${filmCount} film, ${total - filmCount} other)`);
   } catch (e) { console.error('BAM error:', e.message); }
+  finally { await page.close(); }
 }
 
 // ---------------------------------------------------------------------------
@@ -1414,7 +1486,6 @@ function printReport() {
   await runSource('The Met', scrapeTheMet);
   await runSource('Whitney', scrapeWhitney);
   await runSource('Neue Galerie', scrapeNeueGalerie);
-  await runSource('BAM', scrapeBAM);
   await runSource('The Frick', scrapeFrick);
 
   // Playwright sources
@@ -1424,6 +1495,7 @@ function printReport() {
     browser = await chromium.launch({ headless: true });
 
     await runSource('Metrograph', scrapeMetrograph, browser);
+    await runSource('BAM', scrapeBAM, browser);
     await runSource('Angelika', scrapeAngelika, browser);
     await runSource('Film at Lincoln Center', scrapeFilmLinc, browser);
     await runSource('Guggenheim', scrapeGuggenheim, browser);

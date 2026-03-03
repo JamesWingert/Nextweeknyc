@@ -61,7 +61,7 @@ function eventOnDay(event: Event, dayStr: string): boolean {
 // --- Showtime detection ---
 
 const SHOWTIME_VENUES = new Set([
-  'ifc center', 'metrograph', 'film forum', 'angelika film center',
+  'ifc center', 'metrograph', 'film forum', 'angelika film center', 'bam',
 ]);
 
 const SPECIAL_EVENT_KEYWORDS = /\b(q\s*&?\s*a|panel|introduction by|intro by|premiere|opening night|special screening|live (score|music|accompaniment)|marathon|festival|retrospective|in person|discussion|conversation|filmmaker|director|cast)\b/i;
@@ -800,6 +800,7 @@ const VENUE_COLORS: Record<string, { accent: string; bg: string; text: string; b
   'ifc center':          { accent: '#0891b2', bg: '#ecfeff', text: '#155e75', border: '#a5f3fc', dot: '#06b6d4' },
   'film forum':          { accent: '#0d9488', bg: '#f0fdfa', text: '#115e59', border: '#99f6e4', dot: '#14b8a6' },
   'angelika film center':{ accent: '#be185d', bg: '#fdf2f8', text: '#9d174d', border: '#fbcfe8', dot: '#ec4899' },
+  'bam':                 { accent: '#9d174d', bg: '#fdf2f8', text: '#be185d', border: '#fbcfe8', dot: '#ec4899' },
 };
 const DEFAULT_VENUE_COLOR = { accent: '#6b7280', bg: '#f9fafb', text: '#374151', border: '#d1d5db', dot: '#9ca3af' };
 
