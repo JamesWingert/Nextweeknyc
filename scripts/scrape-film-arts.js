@@ -1262,234 +1262,361 @@ async function scrapeLincolnCenter(browser) {
   finally { await page.close(); }
 }
 
-async function scrapeMovingImage(browser) {
-  // Museum of the Moving Image — Playwright scraper using /events/month/ calendar
-  // Behind Cloudflare, needs browser. Uses The Events Calendar (Tribe) plugin.
-  const page = await browser.newPage();
-  page.setDefaultTimeout(20000);
-  try {
-    await page.goto('https://movingimage.org/events/month/', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(6000);
-    const items = await page.evaluate(() => {
-      const r = [], seen = new Set();
-      const year = new Date().getFullYear();
-      const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
-
-      // Each day cell has event entries with titles, links, dates, descriptions
-      document.querySelectorAll('article, [class*="calendar-event"], [class*="tribe-events"]').forEach(el => {
-        const titleEl = el.querySelector('h3, h4, [class*="event-title"]');
-        const t = titleEl?.textContent?.trim();
-        if (!t || t.length < 3 || t.length > 150) return;
-        const key = t.toLowerCase();
-        if (seen.has(key)) return;
-        seen.add(key);
-
-        const link = el.querySelector('a')?.href || '';
-
-        // Date from datetime attribute
-        const dateAttr = el.querySelector('[datetime]')?.getAttribute('datetime') || '';
-        let date = '';
-        if (/^\d{4}-\d{2}-\d{2}/.test(dateAttr)) {
-          date = dateAttr.slice(0, 10);
-        }
-
-        // Check for date range text like "Sep 26, 2025 - Mar 22, 2026"
-        const rangeText = el.querySelector('[class*="date"]')?.textContent?.trim() || '';
-        const rm = rangeText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:,?\s+(\d{4}))?\s*[-–—]\s*((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:,?\s+(\d{4}))?/i);
-        if (rm) {
-          const sm = MONTHS[rm[1].slice(0,3).toLowerCase()];
-          const sd = parseInt(rm[2], 10);
-          const sy = rm[3] ? parseInt(rm[3], 10) : year;
-          const em = MONTHS[rm[4].slice(0,3).toLowerCase()];
-          const ed = parseInt(rm[5], 10);
-          const ey = rm[6] ? parseInt(rm[6], 10) : year;
-          if (sm !== undefined && em !== undefined) {
-            const fmt = (y,m,d) => `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-            date = `${fmt(sy,sm,sd)} to ${fmt(ey,em,ed)}`;
-          }
-        }
-
-        // Time
-        const timeMatch = rangeText.match(/(\d{1,2}:\d{2}\s*(?:am|pm))/i);
-        const time = timeMatch ? timeMatch[1] : '';
-
-        // Description
-        const desc = (el.querySelector('p')?.textContent?.trim() || '').slice(0, 200);
-
-        // Skip permanent installations with very old dates
-        if (/^\d{4}/.test(date) && parseInt(date.slice(0,4), 10) < 2025) return;
-
-        // Infer category from CSS classes, URL path, and title keywords
-        // MoMI has: Screenings (Film), Exhibitions (Art), Events (talks/performances)
-        const classes = (el.className || '') + ' ' + (el.closest('[class]')?.className || '');
-        const allText = (classes + ' ' + link + ' ' + t).toLowerCase();
-        let category = '';
-        if (/screening|\/film\/|\/screening/.test(allText)) {
-          category = 'Film';
-        } else if (/exhibition|\/exhibition|gallery|on view|permanent/.test(allText)) {
-          category = 'Art';
-        } else if (/talk|lecture|panel|discussion|conversation|workshop|class\b/.test(allText)) {
-          category = 'Talk';
-        } else if (/music|concert|performance|live\b/.test(allText)) {
-          category = 'Music/Performing Arts';
-        }
-
-        r.push({ title: t, link, date, time, description: desc, category });
-      });
-      return r.slice(0, 30);
-    });
-    // Default to 'Art' for items where category couldn't be inferred
-    push(items, 'Museum of the Moving Image', 'Art', 'https://movingimage.org/events/');
-    console.error(`Moving Image: ${items.length}`);
-  } catch (e) { console.error('Moving Image error:', e.message); }
-  finally { await page.close(); }
-}
-
-async function scrape92NY(browser) {
-  // 92NY — Playwright scraper with pagination support
-  // Site uses Incapsula protection, needs browser. Events paginated via ?page=N
-  const page = await browser.newPage();
-  page.setDefaultTimeout(20000);
+async function scrapeMovingImage(stealthBrowser) {
+  // Museum of the Moving Image — needs stealth (headed) browser for Cloudflare
+  // Uses Tribe Events Calendar month view at /events/month/
+  // Scrapes current month + next month for full coverage
   const allItems = [];
-  const MAX_PAGES = 5;
+  const seen = new Set();
 
-  try {
-    for (let pg = 1; pg <= MAX_PAGES; pg++) {
-      const url = pg === 1
-        ? 'https://www.92ny.org/whats-on/events'
-        : `https://www.92ny.org/whats-on/events?page=${pg}`;
+  for (let m = 0; m < 2; m++) {
+    const page = await stealthBrowser.newPage();
+    page.setDefaultTimeout(30000);
+    try {
+      // Build URL for current month + offset
+      const now = new Date();
+      const targetDate = new Date(now.getFullYear(), now.getMonth() + m, 1);
+      const ym = `${targetDate.getFullYear()}-${String(targetDate.getMonth()+1).padStart(2,'0')}`;
+      const url = `https://movingimage.org/events/month/${ym}/`;
+      console.error(`Moving Image: fetching ${url}`);
 
       await page.goto(url, { waitUntil: 'domcontentloaded' });
-      await page.waitForTimeout(5000);
+      await page.waitForTimeout(8000);
 
-      // Scroll multiple times to trigger lazy loading
-      for (let i = 0; i < 5; i++) {
-        await page.evaluate(() => window.scrollBy(0, 800));
-        await page.waitForTimeout(800);
-      }
+      const items = await page.evaluate((seenKeys) => {
+        const r = [];
+        const seenSet = new Set(seenKeys);
 
-      const items = await page.evaluate((pageNum) => {
-        const r = [], seen = new Set();
-        const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
-        const year = new Date().getFullYear();
-
-        // 92NY uses event cards with links to /event/ paths
-        // Try multiple selectors for robustness
-        const cards = document.querySelectorAll(
-          'a[href*="/event/"], ' +
-          '[class*="event-card"], ' +
-          '[class*="EventCard"], ' +
-          'article'
+        // Tribe Events month calendar: each day cell contains multiday event bars
+        // and single-day event entries. The key selectors:
+        // - .tribe-events-calendar-month__multiday-event (spanning events)
+        // - .tribe-events-calendar-month__calendar-event (single day)
+        // - Also try generic article tags
+        const eventEls = document.querySelectorAll(
+          '.tribe-events-calendar-month__multiday-event, ' +
+          '.tribe-events-calendar-month__calendar-event, ' +
+          'article.tribe-events-calendar-month__calendar-event, ' +
+          '[data-event-id]'
         );
 
-        cards.forEach(el => {
-          // Get the link element
-          const linkEl = el.tagName === 'A' ? el : el.querySelector('a[href*="/event/"]');
+        eventEls.forEach(el => {
+          const linkEl = el.querySelector('a[href*="/event/"]') || el.closest('a[href*="/event/"]');
           if (!linkEl) return;
           const link = linkEl.href || '';
-          if (!link.includes('/event/')) return;
 
-          // Find the card container (go up to find the full card)
-          const card = linkEl.closest('article, [class*="card"], [class*="Card"], li') || linkEl.parentElement?.parentElement || linkEl;
-          const cardText = card?.textContent?.replace(/\s+/g, ' ')?.trim() || '';
-
-          // Title: prefer heading elements, fall back to link text
-          const titleEl = card?.querySelector('h2, h3, h4, [class*="title"], [class*="Title"]');
-          let t = titleEl?.textContent?.trim() || linkEl.textContent?.trim() || '';
+          // Title from the link text or aria-label
+          let t = linkEl.getAttribute('aria-label') || linkEl.textContent?.trim() || '';
           t = t.replace(/\s+/g, ' ').trim();
-
-          if (!t || t.length < 5 || t.length > 200) return;
-          // Skip navigation/UI text
-          if (/^(members|in person|virtual|save|buy|register|learn more|view|see all|load more)/i.test(t)) return;
+          if (!t || t.length < 3 || t.length > 200) return;
 
           const key = t.toLowerCase();
+          if (seenSet.has(key)) return;
+          seenSet.add(key);
+
+          // Date: find the parent day cell's data-day or datetime
+          let date = '';
+          const dayCell = el.closest('[data-day]') || el.closest('td[class*="day"]');
+          if (dayCell) {
+            const dayAttr = dayCell.getAttribute('data-day') || '';
+            if (/^\d{4}-\d{2}-\d{2}$/.test(dayAttr)) date = dayAttr;
+          }
+          // Fallback: datetime attribute on time element
+          if (!date) {
+            const timeEl = el.querySelector('time[datetime], [datetime]');
+            if (timeEl) {
+              const dt = timeEl.getAttribute('datetime') || '';
+              if (/^\d{4}-\d{2}-\d{2}/.test(dt)) date = dt.slice(0, 10);
+            }
+          }
+
+          // Category from CSS classes
+          const classes = (el.className || '').toLowerCase();
+          const allText = (classes + ' ' + link + ' ' + t).toLowerCase();
+          let category = '';
+          if (/cat_screening|screening|\/film\/|\/screening/.test(allText)) category = 'Film';
+          else if (/cat_exhibition|exhibition|gallery|on.view/.test(allText)) category = 'Art';
+          else if (/cat_education|talk|lecture|panel|workshop|class\b/.test(allText)) category = 'Talk';
+          else if (/music|concert|performance|live\b/.test(allText)) category = 'Music/Performing Arts';
+
+          r.push({ title: t, link, date, category });
+        });
+
+        // Also try the list/grid fallback if month calendar didn't yield results
+        if (r.length === 0) {
+          document.querySelectorAll('article, .type-tribe_events, [class*="tribe-events"] a[href*="/event/"]').forEach(el => {
+            const linkEl = el.tagName === 'A' ? el : el.querySelector('a[href*="/event/"]');
+            if (!linkEl) return;
+            const link = linkEl.href || '';
+            const titleEl = el.querySelector('h3, h4, h2, [class*="title"]');
+            let t = titleEl?.textContent?.trim() || linkEl.textContent?.trim() || '';
+            t = t.replace(/\s+/g, ' ').trim();
+            if (!t || t.length < 3 || t.length > 200) return;
+            const key = t.toLowerCase();
+            if (seenSet.has(key)) return;
+            seenSet.add(key);
+            r.push({ title: t, link, date: '', category: '' });
+          });
+        }
+
+        return { items: r, keys: Array.from(seenSet) };
+      }, Array.from(seen));
+
+      items.items.forEach(i => { seen.add(i.title.toLowerCase()); allItems.push(i); });
+      items.keys.forEach(k => seen.add(k));
+      console.error(`Moving Image month ${ym}: ${items.items.length} events`);
+    } catch (e) { console.error(`Moving Image month ${m} error:`, e.message); }
+    finally { await page.close(); }
+  }
+
+  // Filter out old permanent installations
+  const filtered = allItems.filter(i => {
+    if (i.date && /^\d{4}/.test(i.date) && parseInt(i.date.slice(0,4), 10) < 2025) return false;
+    return true;
+  });
+
+  push(filtered, 'Museum of the Moving Image', 'Art', 'https://movingimage.org/events/');
+  console.error(`Moving Image total: ${filtered.length}`);
+}
+
+async function scrape92NY(stealthBrowser) {
+  // 92NY — behind Incapsula bot protection
+  // Strategy: first load triggers captcha/challenge which sets cookies.
+  // After a brief wait, REFRESH the page — second load gets through.
+  // Also intercept XHR/fetch responses to capture any calendar API data.
+  const page = await stealthBrowser.newPage();
+  page.setDefaultTimeout(45000);
+
+  try {
+    // Collect API response data (92NY uses Algolia or similar for calendar)
+    const apiEvents = [];
+    page.on('response', async (response) => {
+      try {
+        const url = response.url();
+        const isApi = url.includes('algolia') || url.includes('/api/') ||
+                      (url.includes('search') && response.headers()['content-type']?.includes('json'));
+        if (!isApi) return;
+        const body = await response.json().catch(() => null);
+        if (!body) return;
+        // Algolia returns { results: [{ hits: [...] }] }
+        const hits = body?.results?.[0]?.hits || body?.hits || (Array.isArray(body) ? body : []);
+        hits.forEach(hit => {
+          if (hit.title || hit.name || hit.eventTitle) {
+            apiEvents.push(hit);
+          }
+        });
+      } catch (_) { /* ignore parse errors */ }
+    });
+
+    // Step 1: First load — triggers Incapsula captcha/challenge, sets cookies
+    console.error('92NY: first load (captcha challenge)...');
+    await page.goto('https://www.92ny.org/whats-on/calendar', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(8000);
+
+    // Step 2: Refresh — cookies are now set, should get real page
+    console.error('92NY: refreshing after captcha...');
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(10000);
+
+    const pageTitle = await page.title();
+    console.error(`92NY page title after refresh: "${pageTitle}"`);
+
+    // Check if still blocked
+    const blocked = await page.evaluate(() => {
+      const html = document.documentElement.innerHTML.toLowerCase();
+      return html.includes('incapsula') && html.includes('iframe') && document.body.children.length <= 2;
+    });
+
+    if (blocked) {
+      // Try one more time — sometimes needs a third attempt
+      console.error('92NY: still blocked, trying one more refresh...');
+      await page.waitForTimeout(5000);
+      await page.reload({ waitUntil: 'domcontentloaded' });
+      await page.waitForTimeout(10000);
+      const stillBlocked = await page.evaluate(() => {
+        const html = document.documentElement.innerHTML.toLowerCase();
+        return html.includes('incapsula') && html.includes('iframe') && document.body.children.length <= 2;
+      });
+      if (stillBlocked) {
+        console.error('92NY: blocked by Incapsula after 3 attempts. Skipping.');
+        return;
+      }
+    }
+
+    // Step 3: We're through — scroll to trigger lazy loading
+    for (let i = 0; i < 8; i++) {
+      await page.evaluate(() => window.scrollBy(0, 600));
+      await page.waitForTimeout(800);
+    }
+    // Extra wait for API calls to complete
+    await page.waitForTimeout(3000);
+
+    // Step 4: Check if we got API data (best case — structured JSON)
+    if (apiEvents.length > 0) {
+      console.error(`92NY: captured ${apiEvents.length} events from API responses`);
+      const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+      const year = new Date().getFullYear();
+      const items = [];
+      const seen = new Set();
+      for (const hit of apiEvents) {
+        const t = (hit.title || hit.name || hit.eventTitle || '').trim();
+        if (!t || t.length < 5) continue;
+        const key = t.toLowerCase();
+        if (seen.has(key)) continue;
+        seen.add(key);
+
+        // Date from various API field names
+        let date = '';
+        const rawDate = hit.date || hit.startDate || hit.start_date || hit.eventDate || hit.dateStart || '';
+        if (/^\d{4}-\d{2}-\d{2}/.test(rawDate)) date = rawDate.slice(0, 10);
+        else if (typeof rawDate === 'number') {
+          const d = new Date(rawDate * 1000);
+          if (!isNaN(d.getTime())) date = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+        }
+
+        const link = hit.url || hit.link || hit.permalink || (hit.slug ? `https://www.92ny.org/event/${hit.slug}` : '');
+        const catText = (hit.category || hit.eventCategory || hit.type || '').toLowerCase();
+        const allText = (t + ' ' + catText).toLowerCase();
+        let category = '';
+        if (/\bfilm\b|cinema|screening/.test(allText)) category = 'Film';
+        else if (/\bcomedy\b|comedian|stand-?up/.test(allText)) category = 'Comedy';
+        else if (/\bclassical\b|symphony|orchestra|chamber/.test(allText)) category = 'Classical Music';
+        else if (/\bjazz\b/.test(allText)) category = 'Jazz';
+        else if (/\bopera\b/.test(allText)) category = 'Opera';
+        else if (/\bdance\b|\bballet\b/.test(allText)) category = 'Dance';
+        else if (/\btheater\b|\btheatre\b|musical\b/.test(allText)) category = 'Theater';
+        else if (/\breading\b|\bauthor\b|\blecture\b|\btalk\b|\bpanel\b|\bbook\b|\bpoetry\b/.test(allText)) category = 'Talk';
+        else if (/concert|music|perform/.test(allText)) category = 'Music/Performing Arts';
+
+        items.push({ title: t, link, date, category });
+      }
+      push(items, '92NY', 'Music/Performing Arts', 'https://www.92ny.org/whats-on/calendar');
+      console.error(`92NY total (from API): ${items.length}`);
+      return;
+    }
+
+    // Step 5: Scrape DOM — 92NY calendar uses a grid with specific CSS classes:
+    //   div.calendar__grid-item.has-event (day cell)
+    //     div.calendar__grid-event (one per event)
+    //       div.calendar__item-time → "7:30 PM"
+    //       div.calendar__grid-event-title → category like "Talks" or "Concerts"
+    //       div.calendar__grid-event-name → actual event title
+    //       div.calendar__grid-event-ticket-info → contains a[href*="/event/"] "More Info"
+    console.error('92NY: scraping calendar DOM...');
+    const items = await page.evaluate(() => {
+      const r = [], seen = new Set();
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = now.getMonth(); // 0-indexed
+
+      // Each day cell has class like "calendar__grid-item has-event 2 2 current-month"
+      // The numbers in the class represent grid position; the day number is in a child element
+      const dayCells = document.querySelectorAll('.calendar__grid-item.has-event');
+
+      dayCells.forEach(dayCell => {
+        // Extract day number from the cell
+        const dayNumEl = dayCell.querySelector('.calendar__grid-item-day, [class*="item-day"]');
+        let dayNum = 0;
+        if (dayNumEl) {
+          dayNum = parseInt(dayNumEl.textContent?.trim(), 10) || 0;
+        }
+        // Fallback: parse from class names (they contain numbers)
+        if (!dayNum) {
+          const cls = dayCell.className || '';
+          const nums = cls.match(/\b(\d{1,2})\b/g);
+          if (nums && nums.length > 0) dayNum = parseInt(nums[0], 10);
+        }
+
+        // Check if this is current-month or next-month
+        const isCurrentMonth = dayCell.classList.contains('current-month');
+        const isNextMonth = dayCell.classList.contains('next-month');
+        let eventMonth = month;
+        let eventYear = year;
+        if (isNextMonth) {
+          eventMonth = month + 1;
+          if (eventMonth > 11) { eventMonth = 0; eventYear++; }
+        }
+
+        // Build date string
+        let date = '';
+        if (dayNum > 0) {
+          date = `${eventYear}-${String(eventMonth+1).padStart(2,'0')}-${String(dayNum).padStart(2,'0')}`;
+        }
+
+        // Each event in this day cell
+        const events = dayCell.querySelectorAll('.calendar__grid-event');
+        events.forEach(evt => {
+          // Time
+          const timeEl = evt.querySelector('.calendar__item-time');
+          const time = timeEl?.textContent?.trim() || '';
+
+          // Category from the title div (e.g. "Talks", "Concerts", "Dance")
+          const catEl = evt.querySelector('.calendar__grid-event-title');
+          const catText = catEl?.textContent?.trim() || '';
+
+          // Event title — it's the text between category and ticket info
+          // Could be in a .calendar__grid-event-name or just text nodes
+          const nameEl = evt.querySelector('.calendar__grid-event-name');
+          let title = '';
+          if (nameEl) {
+            title = nameEl.textContent?.trim() || '';
+          }
+          // Fallback: extract from full event text minus known parts
+          if (!title) {
+            const fullText = evt.textContent?.replace(/\s+/g, ' ')?.trim() || '';
+            // Remove time, category, and ticket info text
+            title = fullText
+              .replace(time, '')
+              .replace(catText, '')
+              .replace(/More Info/gi, '')
+              .replace(/Buy\s+(In-Person\s+)?Tickets?/gi, '')
+              .replace(/Buy\s+Streaming\s+Access/gi, '')
+              .replace(/Free\s+(In-Person\s+)?Tickets?/gi, '')
+              .replace(/\s+/g, ' ')
+              .trim();
+          }
+
+          if (!title || title.length < 3 || title.length > 200) return;
+
+          // Get the link
+          const linkEl = evt.querySelector('a[href*="/event/"]');
+          const link = linkEl?.href || '';
+
+          const key = title.toLowerCase();
           if (seen.has(key)) return;
           seen.add(key);
 
-          // Date extraction — look for multiple patterns
-          let date = '';
-
-          // Try datetime attributes first
-          const timeEl = card?.querySelector('time[datetime]');
-          if (timeEl) {
-            const dt = timeEl.getAttribute('datetime') || '';
-            if (/^\d{4}-\d{2}-\d{2}/.test(dt)) date = dt.slice(0, 10);
-          }
-
-          // Try date range: "Mar 5 – Apr 12, 2026" or "March 5 - March 12"
-          if (!date) {
-            const rangeMatch = cardText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?\s*[-–—]\s*((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
-            if (rangeMatch) {
-              const sm = MONTHS[rangeMatch[1].slice(0,3).toLowerCase()];
-              const sd = parseInt(rangeMatch[2], 10);
-              const sy = rangeMatch[3] ? parseInt(rangeMatch[3], 10) : year;
-              const em = MONTHS[rangeMatch[4].slice(0,3).toLowerCase()];
-              const ed = parseInt(rangeMatch[5], 10);
-              const ey = rangeMatch[6] ? parseInt(rangeMatch[6], 10) : year;
-              if (sm !== undefined && em !== undefined) {
-                const fmt = (y,m,d) => `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-                date = `${fmt(sy,sm,sd)} to ${fmt(ey,em,ed)}`;
-              }
-            }
-          }
-
-          // Try single date: "Mar 5, 2026" or "March 5"
-          if (!date) {
-            const singleMatch = cardText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
-            if (singleMatch) {
-              const mon = MONTHS[singleMatch[1].slice(0,3).toLowerCase()];
-              if (mon !== undefined) {
-                const day = parseInt(singleMatch[2], 10);
-                const y = singleMatch[3] ? parseInt(singleMatch[3], 10) : year;
-                date = `${y}-${String(mon+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
-              }
-            }
-          }
-
-          // Time extraction
-          const timeMatch = cardText.match(/(\d{1,2}:\d{2}\s*(?:am|pm|AM|PM))/);
-          const time = timeMatch ? timeMatch[1] : '';
-
-          // Category inference from card text, URL, and any category labels
-          const catEl = card?.querySelector('[class*="category"], [class*="Category"], [class*="tag"], [class*="Tag"]');
-          const catText = (catEl?.textContent?.trim() || '').toLowerCase();
-          const allText = (cardText + ' ' + catText + ' ' + link).toLowerCase();
-
+          // Map 92NY categories to ours
+          const catLower = catText.toLowerCase();
           let category = '';
-          if (/\bfilm\b|cinema|screening|movie/.test(allText)) category = 'Film';
-          else if (/\bcomedy\b|comedian|stand-?up|improv/.test(allText)) category = 'Comedy';
-          else if (/\bclassical\b|symphony|orchestra|chamber/.test(allText)) category = 'Classical Music';
-          else if (/\bjazz\b/.test(allText)) category = 'Jazz';
-          else if (/\bopera\b/.test(allText)) category = 'Opera';
-          else if (/\bballet\b|\bdance\b/.test(allText)) category = 'Dance';
-          else if (/\btheater\b|\btheatre\b|broadway|musical\b/.test(allText)) category = 'Theater';
-          else if (/\breading\b|\bauthor\b|\blecture\b|\btalk\b|\bpanel\b|\bdiscussion\b|\bbook\b|\bpoetry\b|\bliterary\b/.test(allText)) category = 'Talk';
-          else if (/\bconcert\b|\bmusic\b|\bperform/.test(allText)) category = 'Music/Performing Arts';
-          else if (/\bexhibition\b|\bgallery\b|\bart\b/.test(allText)) category = 'Art';
-          else if (/\bfamily\b|\bkids\b|\bchildren\b/.test(allText)) category = 'Family';
+          if (/concert|music/i.test(catLower)) category = 'Music/Performing Arts';
+          else if (/classical/i.test(catLower)) category = 'Classical Music';
+          else if (/jazz/i.test(catLower)) category = 'Jazz';
+          else if (/dance|ballet/i.test(catLower)) category = 'Dance';
+          else if (/talk|lecture|literary|reading/i.test(catLower)) category = 'Talk';
+          else if (/film|cinema|screening/i.test(catLower)) category = 'Film';
+          else if (/comedy|comedian/i.test(catLower)) category = 'Comedy';
+          else if (/theater|theatre|musical theater/i.test(catLower)) category = 'Theater';
+          else if (/opera/i.test(catLower)) category = 'Opera';
+          else if (/family|kids/i.test(catLower)) category = 'Family';
+          else if (/special event/i.test(catLower)) category = 'Music/Performing Arts';
 
-          r.push({ title: t, link, date, time, category });
+          r.push({ title, link, date, time, category });
         });
+      });
+      return r;
+    });
 
-        return r;
-      }, pg);
-
-      if (items.length === 0) break; // No more events on this page
-      allItems.push(...items);
-      console.error(`92NY page ${pg}: ${items.length} items`);
-    }
-
-    // Dedupe across pages
+    // Dedupe
     const seen = new Set();
-    const unique = allItems.filter(item => {
+    const unique = items.filter(item => {
       const key = item.title.toLowerCase();
       if (seen.has(key)) return false;
       seen.add(key);
       return true;
     });
 
-    push(unique, '92NY', 'Music/Performing Arts', 'https://www.92ny.org/whats-on/events');
-    console.error(`92NY total: ${unique.length}`);
+    push(unique, '92NY', 'Music/Performing Arts', 'https://www.92ny.org/whats-on/calendar');
+    console.error(`92NY total (from DOM): ${unique.length}`);
   } catch (e) { console.error('92NY error:', e.message); }
   finally { await page.close(); }
 }
@@ -1743,8 +1870,9 @@ function printReport() {
   await runSource('Neue Galerie', scrapeNeueGalerie);
   await runSource('The Frick', scrapeFrick);
 
-  // Playwright sources
+  // Playwright sources (headless)
   let browser = null;
+  let stealthBrowser = null;
   try {
     const { chromium } = require('playwright');
     browser = await chromium.launch({ headless: true });
@@ -1762,13 +1890,38 @@ function printReport() {
     await runSource('NYCB', scrapeNYCB, browser);
     await runSource('Joyce Theater', scrapeJoyce, browser);
     await runSource('Lincoln Center', scrapeLincolnCenter, browser);
-    await runSource('Moving Image', scrapeMovingImage, browser);
-    await runSource('92NY', scrape92NY, browser);
     await runSource('ABT', scrapeABT, browser);
+
+    // Stealth browser for Cloudflare/Incapsula-protected sources
+    // Uses headed mode with anti-detection flags
+    console.error('\nLaunching stealth browser for protected sources...');
+    stealthBrowser = await chromium.launch({
+      headless: false,
+      args: [
+        '--disable-blink-features=AutomationControlled',
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--window-size=1280,800',
+      ],
+    });
+    const stealthContext = await stealthBrowser.newContext({
+      userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+      viewport: { width: 1280, height: 800 },
+      javaScriptEnabled: true,
+    });
+    // Remove webdriver flag
+    await stealthContext.addInitScript(() => {
+      Object.defineProperty(navigator, 'webdriver', { get: () => false });
+    });
+
+    await runSource('Moving Image', scrapeMovingImage, stealthContext);
+    await runSource('92NY', scrape92NY, stealthContext);
   } catch (e) {
     console.error('Playwright unavailable, skipping JS sources:', e.message);
   } finally {
     if (browser) await browser.close();
+    if (stealthBrowser) await stealthBrowser.close();
   }
 
   printReport();

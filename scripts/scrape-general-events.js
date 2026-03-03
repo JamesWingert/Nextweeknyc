@@ -732,61 +732,71 @@ async function scrapeStrand(browser) {
 // PLAYWRIGHT SOURCE — It's In Queens
 // ---------------------------------------------------------------------------
 
-async function scrapeItsInQueens(browser) {
-  // itsinqueens.com — fully JS-rendered, needs Playwright
-  // Uses The Events Calendar (Tribe) plugin with list view
-  const page = await browser.newPage();
-  page.setDefaultTimeout(20000);
+async function scrapeItsInQueens(stealthContext) {
+  // itsinqueens.com switched to Timely calendar embed
+  // Navigate directly to the Timely posterboard URL and scrape event cards
+  const page = await stealthContext.newPage();
+  page.setDefaultTimeout(30000);
   try {
-    await page.goto('https://itsinqueens.com/explore/events/', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(8000);
+    console.error('Its In Queens: loading Timely posterboard...');
+    await page.goto('https://events.timely.fun/jxrw1att/posterboard', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(10000);
+
+    // Scroll to load more events
+    for (let i = 0; i < 6; i++) {
+      await page.evaluate(() => window.scrollBy(0, 800));
+      await page.waitForTimeout(1000);
+    }
 
     const items = await page.evaluate(() => {
       const r = [], seen = new Set();
       const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
       const year = new Date().getFullYear();
 
-      // Try multiple selector strategies for Tribe Events Calendar
-      const eventEls = document.querySelectorAll(
-        '.tribe-events-calendar-list__event, ' +
-        '.tribe-common-g-row, ' +
-        'article[class*="tribe"], ' +
-        '.type-tribe_events, ' +
-        '[class*="tribe-events"] article'
+      // Timely posterboard uses event cards/tiles
+      // Try multiple selector strategies for the Timely widget
+      const cards = document.querySelectorAll(
+        '[class*="timely-event"], [class*="event-card"], [class*="posterboard-event"], ' +
+        'a[href*="/event/"], a[href*="/e/"], ' +
+        '[class*="card"], article, ' +
+        '.timely-posterboard-event, .timely-card'
       );
 
-      eventEls.forEach(el => {
+      cards.forEach(el => {
+        // Find the link
+        const linkEl = el.tagName === 'A' ? el : el.querySelector('a');
+        const link = linkEl?.href || '';
+
         // Title
-        const titleEl = el.querySelector(
-          '.tribe-events-calendar-list__event-title a, ' +
-          'h3 a, h2 a, ' +
-          '[class*="event-title"] a, ' +
-          'a[class*="event-url"]'
-        );
-        const t = titleEl?.textContent?.trim();
+        const titleEl = el.querySelector('h2, h3, h4, [class*="title"], [class*="Title"], [class*="name"]');
+        let t = titleEl?.textContent?.trim() || el.querySelector('a')?.textContent?.trim() || '';
+        t = t.replace(/\s+/g, ' ').trim();
         if (!t || t.length < 3 || t.length > 200) return;
+
         const key = t.toLowerCase();
         if (seen.has(key)) return;
         seen.add(key);
 
-        const link = titleEl?.href || el.querySelector('a')?.href || '';
-
-        // Date from datetime attribute
-        const dtEl = el.querySelector('time[datetime], [datetime]');
+        // Date extraction
         let date = '';
-        if (dtEl) {
-          const dt = dtEl.getAttribute('datetime') || '';
+        // Try datetime attributes
+        const timeEl = el.querySelector('time[datetime], [datetime]');
+        if (timeEl) {
+          const dt = timeEl.getAttribute('datetime') || '';
           if (/^\d{4}-\d{2}-\d{2}/.test(dt)) date = dt.slice(0, 10);
         }
 
-        // Fallback: parse visible date text like "March 5, 2026"
+        // Try data attributes
         if (!date) {
-          const dateEl = el.querySelector(
-            '.tribe-events-calendar-list__event-datetime, ' +
-            '[class*="event-date"], ' +
-            '.tribe-event-schedule-details'
-          );
+          const dataDate = el.getAttribute('data-date') || el.getAttribute('data-start-date') || '';
+          if (/^\d{4}-\d{2}-\d{2}/.test(dataDate)) date = dataDate.slice(0, 10);
+        }
+
+        // Parse visible date text
+        if (!date) {
+          const dateEl = el.querySelector('[class*="date"], [class*="Date"], [class*="time"], [class*="Time"]');
           const dateText = dateEl?.textContent?.trim() || '';
+          // "Mar 5, 2026" or "March 5"
           const dm = dateText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
           if (dm) {
             const mon = MONTHS[dm[1].slice(0,3).toLowerCase()];
@@ -796,42 +806,43 @@ async function scrapeItsInQueens(browser) {
               date = `${y}-${String(mon+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
             }
           }
-
-          // Check for date range "March 5 - March 12, 2026"
-          const rm = dateText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:,?\s+(\d{4}))?\s*[-–—]\s*((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:,?\s+(\d{4}))?/i);
-          if (rm) {
-            const sm = MONTHS[rm[1].slice(0,3).toLowerCase()];
-            const sd = parseInt(rm[2], 10);
-            const sy = rm[3] ? parseInt(rm[3], 10) : year;
-            const em = MONTHS[rm[4].slice(0,3).toLowerCase()];
-            const ed = parseInt(rm[5], 10);
-            const ey = rm[6] ? parseInt(rm[6], 10) : year;
-            if (sm !== undefined && em !== undefined) {
-              const fmt = (y,m,d) => `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-              date = `${fmt(sy,sm,sd)} to ${fmt(ey,em,ed)}`;
-            }
-          }
         }
 
-        // Venue from event details
-        const venueEl = el.querySelector(
-          '.tribe-events-calendar-list__event-venue, ' +
-          '[class*="venue"], ' +
-          '.tribe-venue'
-        );
+        // Venue
+        const venueEl = el.querySelector('[class*="venue"], [class*="Venue"], [class*="location"], [class*="Location"]');
         const venue = venueEl?.textContent?.trim() || '';
 
-        // Description snippet
-        const descEl = el.querySelector(
-          '.tribe-events-calendar-list__event-description p, ' +
-          '[class*="description"] p, ' +
-          'p'
-        );
+        // Description
+        const descEl = el.querySelector('[class*="description"], [class*="Description"], [class*="excerpt"], p');
         const description = (descEl?.textContent?.trim() || '').slice(0, 200);
 
-        r.push({ title: t, link, date, venue, description });
+        // Full link — Timely links may be relative
+        let fullLink = link;
+        if (link && !link.startsWith('http')) {
+          fullLink = 'https://events.timely.fun' + (link.startsWith('/') ? '' : '/') + link;
+        }
+
+        r.push({ title: t, link: fullLink || '', date, venue, description });
       });
-      return r.slice(0, 40);
+
+      // If card selectors didn't work, try a broader approach
+      if (r.length === 0) {
+        // Look for any clickable elements with event-like content
+        document.querySelectorAll('a[href]').forEach(a => {
+          const href = a.href || '';
+          if (!href.includes('/e/') && !href.includes('/event/')) return;
+          const t = a.textContent?.replace(/\s+/g, ' ')?.trim() || '';
+          if (!t || t.length < 5 || t.length > 200) return;
+          const key = t.toLowerCase();
+          if (seen.has(key)) return;
+          seen.add(key);
+          let fullLink = href;
+          if (!href.startsWith('http')) fullLink = 'https://events.timely.fun' + (href.startsWith('/') ? '' : '/') + href;
+          r.push({ title: t, link: fullLink, date: '', venue: '', description: '' });
+        });
+      }
+
+      return r.slice(0, 50);
     });
 
     push(items, 'Its In Queens', 'Other', 'https://itsinqueens.com/explore/events/');
@@ -884,16 +895,40 @@ function printReport() {
 
   // Playwright sources (only Eventbrite truly needs JS)
   let browser = null;
+  let stealthBrowser = null;
   try {
     const { chromium } = require('playwright');
     browser = await chromium.launch({ headless: true });
     await runSource('Eventbrite', scrapeEventbrite, browser);
     await runSource('Strand Bookstore', scrapeStrand, browser);
-    await runSource('Its In Queens', scrapeItsInQueens, browser);
+
+    // Stealth browser for protected sources (Timely iframe needs headed mode)
+    console.error('\nLaunching stealth browser for protected sources...');
+    stealthBrowser = await chromium.launch({
+      headless: false,
+      args: [
+        '--disable-blink-features=AutomationControlled',
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--window-size=1280,800',
+      ],
+    });
+    const stealthContext = await stealthBrowser.newContext({
+      userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+      viewport: { width: 1280, height: 800 },
+      javaScriptEnabled: true,
+    });
+    await stealthContext.addInitScript(() => {
+      Object.defineProperty(navigator, 'webdriver', { get: () => false });
+    });
+
+    await runSource('Its In Queens', scrapeItsInQueens, stealthContext);
   } catch (e) {
     console.error('Playwright unavailable, skipping JS sources:', e.message);
   } finally {
     if (browser) await browser.close();
+    if (stealthBrowser) await stealthBrowser.close();
   }
 
   printReport();
