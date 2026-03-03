@@ -8,7 +8,7 @@
  *   MUSEUMS:    The Met, Whitney, Guggenheim [JS], New Museum [JS],
  *               Neue Galerie, Frick (exhibitions), Queens Museum [dropped-403]
  *   CULTURAL:   BAM, Asia Society [dropped-cloudflare], Japan Society [JS],
- *               Brooklyn Museum [dropped-vercel], Moving Image [dropped-cloudflare]
+ *               Brooklyn Museum [dropped-vercel], Moving Image (month calendar)
  *   CLASSICAL:  NY Philharmonic [JS], Carnegie Hall [JS]
  *   OPERA:      Met Opera (calendar) [JS]
  *   BALLET:     NYC Ballet [JS]
@@ -238,7 +238,7 @@ function push(items, venue, category, fallbackUrl) {
       title: (item.title || '').trim(),
       venue: item.venue || venue,
       date,
-      category,
+      category: item.category || category,
       url: item.link || item.url || fallbackUrl,
       ...(item.time ? { time: item.time } : {}),
       ...(item.description ? { description: item.description } : {}),
@@ -1263,62 +1263,233 @@ async function scrapeLincolnCenter(browser) {
 }
 
 async function scrapeMovingImage(browser) {
+  // Museum of the Moving Image — Playwright scraper using /events/month/ calendar
+  // Behind Cloudflare, needs browser. Uses The Events Calendar (Tribe) plugin.
   const page = await browser.newPage();
-  page.setDefaultTimeout(15000);
+  page.setDefaultTimeout(20000);
   try {
-    await page.goto('https://movingimage.org/whats-on/events/', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(4000);
+    await page.goto('https://movingimage.org/events/month/', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(6000);
     const items = await page.evaluate(() => {
       const r = [], seen = new Set();
-      document.querySelectorAll('a[href*="/event/"], a[href*="/events/"], article, [class*="event"]').forEach(el => {
-        const titleEl = el.querySelector('h2, h3, h4, [class*="title"]') || (el.tagName === 'A' ? el : null);
+      const year = new Date().getFullYear();
+      const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+
+      // Each day cell has event entries with titles, links, dates, descriptions
+      document.querySelectorAll('article, [class*="calendar-event"], [class*="tribe-events"]').forEach(el => {
+        const titleEl = el.querySelector('h3, h4, [class*="event-title"]');
         const t = titleEl?.textContent?.trim();
-        const link = el.closest('a')?.href || el.querySelector('a')?.href || '';
-        const dateEl = el.querySelector('time, [class*="date"]');
-        const rawDate = dateEl?.getAttribute('datetime') || dateEl?.textContent?.trim() || '';
-        if (t && t.length > 5 && t.length < 120 && !seen.has(t.toLowerCase())
-            && !/^(events?|calendar|what.s on|filter)/i.test(t)) {
-          seen.add(t.toLowerCase());
-          r.push({ title: t, link, date: rawDate });
+        if (!t || t.length < 3 || t.length > 150) return;
+        const key = t.toLowerCase();
+        if (seen.has(key)) return;
+        seen.add(key);
+
+        const link = el.querySelector('a')?.href || '';
+
+        // Date from datetime attribute
+        const dateAttr = el.querySelector('[datetime]')?.getAttribute('datetime') || '';
+        let date = '';
+        if (/^\d{4}-\d{2}-\d{2}/.test(dateAttr)) {
+          date = dateAttr.slice(0, 10);
         }
+
+        // Check for date range text like "Sep 26, 2025 - Mar 22, 2026"
+        const rangeText = el.querySelector('[class*="date"]')?.textContent?.trim() || '';
+        const rm = rangeText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:,?\s+(\d{4}))?\s*[-–—]\s*((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:,?\s+(\d{4}))?/i);
+        if (rm) {
+          const sm = MONTHS[rm[1].slice(0,3).toLowerCase()];
+          const sd = parseInt(rm[2], 10);
+          const sy = rm[3] ? parseInt(rm[3], 10) : year;
+          const em = MONTHS[rm[4].slice(0,3).toLowerCase()];
+          const ed = parseInt(rm[5], 10);
+          const ey = rm[6] ? parseInt(rm[6], 10) : year;
+          if (sm !== undefined && em !== undefined) {
+            const fmt = (y,m,d) => `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+            date = `${fmt(sy,sm,sd)} to ${fmt(ey,em,ed)}`;
+          }
+        }
+
+        // Time
+        const timeMatch = rangeText.match(/(\d{1,2}:\d{2}\s*(?:am|pm))/i);
+        const time = timeMatch ? timeMatch[1] : '';
+
+        // Description
+        const desc = (el.querySelector('p')?.textContent?.trim() || '').slice(0, 200);
+
+        // Skip permanent installations with very old dates
+        if (/^\d{4}/.test(date) && parseInt(date.slice(0,4), 10) < 2025) return;
+
+        // Infer category from CSS classes, URL path, and title keywords
+        // MoMI has: Screenings (Film), Exhibitions (Art), Events (talks/performances)
+        const classes = (el.className || '') + ' ' + (el.closest('[class]')?.className || '');
+        const allText = (classes + ' ' + link + ' ' + t).toLowerCase();
+        let category = '';
+        if (/screening|\/film\/|\/screening/.test(allText)) {
+          category = 'Film';
+        } else if (/exhibition|\/exhibition|gallery|on view|permanent/.test(allText)) {
+          category = 'Art';
+        } else if (/talk|lecture|panel|discussion|conversation|workshop|class\b/.test(allText)) {
+          category = 'Talk';
+        } else if (/music|concert|performance|live\b/.test(allText)) {
+          category = 'Music/Performing Arts';
+        }
+
+        r.push({ title: t, link, date, time, description: desc, category });
       });
-      return r.slice(0, 20);
+      return r.slice(0, 30);
     });
-    push(items, 'Museum of the Moving Image', 'Film', 'https://movingimage.org/whats-on/events/');
+    // Default to 'Art' for items where category couldn't be inferred
+    push(items, 'Museum of the Moving Image', 'Art', 'https://movingimage.org/events/');
     console.error(`Moving Image: ${items.length}`);
   } catch (e) { console.error('Moving Image error:', e.message); }
   finally { await page.close(); }
 }
 
 async function scrape92NY(browser) {
+  // 92NY — Playwright scraper with pagination support
+  // Site uses Incapsula protection, needs browser. Events paginated via ?page=N
   const page = await browser.newPage();
   page.setDefaultTimeout(20000);
+  const allItems = [];
+  const MAX_PAGES = 5;
+
   try {
-    await page.goto('https://www.92ny.org/whats-on/events', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(6000);
-    // Scroll to trigger lazy loading
-    await page.evaluate(() => window.scrollBy(0, 2000));
-    await page.waitForTimeout(3000);
-    const items = await page.evaluate(() => {
-      const r = [], seen = new Set();
-      document.querySelectorAll('a[href*="/event/"]').forEach(a => {
-        const t = a.textContent?.trim();
-        if (t && t.length > 5 && t.length < 150 && !seen.has(t.toLowerCase())
-            && !/^(members|in person|virtual|save)/i.test(t)) {
-          seen.add(t.toLowerCase());
-          // Look for date in parent card
-          const card = a.closest('article, [class*="card"], li, div, section');
+    for (let pg = 1; pg <= MAX_PAGES; pg++) {
+      const url = pg === 1
+        ? 'https://www.92ny.org/whats-on/events'
+        : `https://www.92ny.org/whats-on/events?page=${pg}`;
+
+      await page.goto(url, { waitUntil: 'domcontentloaded' });
+      await page.waitForTimeout(5000);
+
+      // Scroll multiple times to trigger lazy loading
+      for (let i = 0; i < 5; i++) {
+        await page.evaluate(() => window.scrollBy(0, 800));
+        await page.waitForTimeout(800);
+      }
+
+      const items = await page.evaluate((pageNum) => {
+        const r = [], seen = new Set();
+        const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+        const year = new Date().getFullYear();
+
+        // 92NY uses event cards with links to /event/ paths
+        // Try multiple selectors for robustness
+        const cards = document.querySelectorAll(
+          'a[href*="/event/"], ' +
+          '[class*="event-card"], ' +
+          '[class*="EventCard"], ' +
+          'article'
+        );
+
+        cards.forEach(el => {
+          // Get the link element
+          const linkEl = el.tagName === 'A' ? el : el.querySelector('a[href*="/event/"]');
+          if (!linkEl) return;
+          const link = linkEl.href || '';
+          if (!link.includes('/event/')) return;
+
+          // Find the card container (go up to find the full card)
+          const card = linkEl.closest('article, [class*="card"], [class*="Card"], li') || linkEl.parentElement?.parentElement || linkEl;
           const cardText = card?.textContent?.replace(/\s+/g, ' ')?.trim() || '';
-          let dateText = '';
-          const dateMatch = cardText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}(?:\s*,?\s*\d{4})?)/i);
-          if (dateMatch) dateText = dateMatch[1];
-          r.push({ title: t, link: a.href, date: dateText });
-        }
-      });
-      return r.slice(0, 20);
+
+          // Title: prefer heading elements, fall back to link text
+          const titleEl = card?.querySelector('h2, h3, h4, [class*="title"], [class*="Title"]');
+          let t = titleEl?.textContent?.trim() || linkEl.textContent?.trim() || '';
+          t = t.replace(/\s+/g, ' ').trim();
+
+          if (!t || t.length < 5 || t.length > 200) return;
+          // Skip navigation/UI text
+          if (/^(members|in person|virtual|save|buy|register|learn more|view|see all|load more)/i.test(t)) return;
+
+          const key = t.toLowerCase();
+          if (seen.has(key)) return;
+          seen.add(key);
+
+          // Date extraction — look for multiple patterns
+          let date = '';
+
+          // Try datetime attributes first
+          const timeEl = card?.querySelector('time[datetime]');
+          if (timeEl) {
+            const dt = timeEl.getAttribute('datetime') || '';
+            if (/^\d{4}-\d{2}-\d{2}/.test(dt)) date = dt.slice(0, 10);
+          }
+
+          // Try date range: "Mar 5 – Apr 12, 2026" or "March 5 - March 12"
+          if (!date) {
+            const rangeMatch = cardText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?\s*[-–—]\s*((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
+            if (rangeMatch) {
+              const sm = MONTHS[rangeMatch[1].slice(0,3).toLowerCase()];
+              const sd = parseInt(rangeMatch[2], 10);
+              const sy = rangeMatch[3] ? parseInt(rangeMatch[3], 10) : year;
+              const em = MONTHS[rangeMatch[4].slice(0,3).toLowerCase()];
+              const ed = parseInt(rangeMatch[5], 10);
+              const ey = rangeMatch[6] ? parseInt(rangeMatch[6], 10) : year;
+              if (sm !== undefined && em !== undefined) {
+                const fmt = (y,m,d) => `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+                date = `${fmt(sy,sm,sd)} to ${fmt(ey,em,ed)}`;
+              }
+            }
+          }
+
+          // Try single date: "Mar 5, 2026" or "March 5"
+          if (!date) {
+            const singleMatch = cardText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
+            if (singleMatch) {
+              const mon = MONTHS[singleMatch[1].slice(0,3).toLowerCase()];
+              if (mon !== undefined) {
+                const day = parseInt(singleMatch[2], 10);
+                const y = singleMatch[3] ? parseInt(singleMatch[3], 10) : year;
+                date = `${y}-${String(mon+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+              }
+            }
+          }
+
+          // Time extraction
+          const timeMatch = cardText.match(/(\d{1,2}:\d{2}\s*(?:am|pm|AM|PM))/);
+          const time = timeMatch ? timeMatch[1] : '';
+
+          // Category inference from card text, URL, and any category labels
+          const catEl = card?.querySelector('[class*="category"], [class*="Category"], [class*="tag"], [class*="Tag"]');
+          const catText = (catEl?.textContent?.trim() || '').toLowerCase();
+          const allText = (cardText + ' ' + catText + ' ' + link).toLowerCase();
+
+          let category = '';
+          if (/\bfilm\b|cinema|screening|movie/.test(allText)) category = 'Film';
+          else if (/\bcomedy\b|comedian|stand-?up|improv/.test(allText)) category = 'Comedy';
+          else if (/\bclassical\b|symphony|orchestra|chamber/.test(allText)) category = 'Classical Music';
+          else if (/\bjazz\b/.test(allText)) category = 'Jazz';
+          else if (/\bopera\b/.test(allText)) category = 'Opera';
+          else if (/\bballet\b|\bdance\b/.test(allText)) category = 'Dance';
+          else if (/\btheater\b|\btheatre\b|broadway|musical\b/.test(allText)) category = 'Theater';
+          else if (/\breading\b|\bauthor\b|\blecture\b|\btalk\b|\bpanel\b|\bdiscussion\b|\bbook\b|\bpoetry\b|\bliterary\b/.test(allText)) category = 'Talk';
+          else if (/\bconcert\b|\bmusic\b|\bperform/.test(allText)) category = 'Music/Performing Arts';
+          else if (/\bexhibition\b|\bgallery\b|\bart\b/.test(allText)) category = 'Art';
+          else if (/\bfamily\b|\bkids\b|\bchildren\b/.test(allText)) category = 'Family';
+
+          r.push({ title: t, link, date, time, category });
+        });
+
+        return r;
+      }, pg);
+
+      if (items.length === 0) break; // No more events on this page
+      allItems.push(...items);
+      console.error(`92NY page ${pg}: ${items.length} items`);
+    }
+
+    // Dedupe across pages
+    const seen = new Set();
+    const unique = allItems.filter(item => {
+      const key = item.title.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
     });
-    push(items, '92NY', 'Music/Performing Arts', 'https://www.92ny.org/whats-on/events');
-    console.error(`92NY: ${items.length}`);
+
+    push(unique, '92NY', 'Music/Performing Arts', 'https://www.92ny.org/whats-on/events');
+    console.error(`92NY total: ${unique.length}`);
   } catch (e) { console.error('92NY error:', e.message); }
   finally { await page.close(); }
 }

@@ -46,6 +46,41 @@ const RANGE = `${WEEK.start} to ${WEEK.end}`;
 console.error(`Date range: ${RANGE}`);
 
 // ---------------------------------------------------------------------------
+// Keyword-based category inference (shared across all scrapers)
+// ---------------------------------------------------------------------------
+
+const KEYWORD_CAT_RULES = [
+  { cat: 'Opera', re: /\bopera\b|puccini|verdi|rossini|suor angelica|la traviata|tosca|rigoletto|carmen\b/i },
+  { cat: 'Ballet', re: /\bballet\b/i },
+  { cat: 'Film', re: /\bfilm\b|cinema|screening|movie|documentary|short films?\b|double.?feature/i },
+  { cat: 'Comedy', re: /\bcomedy\b|comedian|stand-?up|improv\b|sketch comedy|laugh|standup|funny|humor|roast\b|cat cafe/i },
+  { cat: 'Classical Music', re: /\bclassical\b|symphony|orchestra|chamber music|philharmonic/i },
+  { cat: 'Jazz', re: /\bjazz\b/i },
+  { cat: 'Dance', re: /\bdance show\b|\bdance party\b|\bdance performance|\bdance class/i },
+  { cat: 'Theater', re: /\btheater\b|\btheatre\b|broadway|off-broadway|musical\b|playwright|cabaret|shadowcast|one-act|dramaturg/i },
+  { cat: 'Art', re: /\bexhibition\b|\bgallery\b|\bmuseum\b|sculpture|painting|mural|retrospective|installation\b|curator|photograph/i },
+  { cat: 'Music/Performing Arts', re: /\bmusic\b|\bconcert\b|\bband\b|singer|songwriter|indie music|rock\b|punk|hip-?hop|\bdj\b|karaoke|open mic|live.*music|music.*live|k-?pop|club night/i },
+  { cat: 'Talk', re: /\breading series\b|book launch|storytelling|lecture|author\b|discussion|panel\b|\btalk\b|speaker|literary|poetry|reading\b/i },
+  { cat: 'Food/Drink', re: /\bfood\b|restaurant week|tasting|chili|pancake|brunch|dinner\b|cook-?off|beer fest|wine\b|cocktail/i },
+  { cat: 'Shopping/Markets', re: /\bmarket\b|flea\b|bazaar|warehouse sale|craft.*fair|vintage.*sale|zine\b|comics.*fest/i },
+  { cat: 'Outdoor/Parks', re: /\bgarden\b|nature walk|botanic|ice.?skat/i },
+  { cat: 'Family', re: /\bkids\b|children|family\b|puppet/i },
+];
+
+/** Infer category from title (and optionally description) using keyword rules */
+function inferCategory(title, description) {
+  const titleLower = (title || '').toLowerCase();
+  for (const rule of KEYWORD_CAT_RULES) {
+    if (rule.re.test(titleLower)) return rule.cat;
+  }
+  const descLower = (description || '').toLowerCase();
+  for (const rule of KEYWORD_CAT_RULES) {
+    if (rule.re.test(descLower)) return rule.cat;
+  }
+  return 'Other';
+}
+
+// ---------------------------------------------------------------------------
 // HTTP fetch helper (Node 18 compatible — no global fetch)
 // ---------------------------------------------------------------------------
 
@@ -223,11 +258,17 @@ function push(items, venue, category, fallbackUrl) {
       }
       date = parsed || null;
     }
+    // Use item-level category if provided, otherwise use source default,
+    // and if that's 'Other', try keyword inference from title/description
+    let finalCategory = item.category || category;
+    if (finalCategory === 'Other') {
+      finalCategory = inferCategory(item.title, item.description);
+    }
     events.push({
       title: (item.title || '').trim(),
       venue: item.venue || venue,
       date,
-      category,
+      category: finalCategory,
       url: item.link || item.url || fallbackUrl,
       ...(item.time ? { time: item.time } : {}),
       ...(item.description ? { description: item.description } : {}),
@@ -302,41 +343,15 @@ async function scrapeTheSkint() {
   const year = new Date(WEEK.start).getFullYear();
 
   // Keyword-based category detection for The Skint events.
+  // Uses the shared inferCategory() function defined at the top of this file.
   // The Skint is plain-text blog style with no structured category data,
   // so we infer category from title + description keywords.
-  // Rules are ordered by specificity — more specific genres first.
-  const SKINT_CAT_RULES = [
-    { cat: 'Opera', re: /\bopera\b|puccini|verdi|rossini|suor angelica|la traviata|tosca|rigoletto|carmen\b/i },
-    { cat: 'Ballet', re: /\bballet\b/i },
-    { cat: 'Film', re: /\bfilm\b|cinema|screening|movie|documentary|short[s ]|double.?feature/i },
-    { cat: 'Comedy', re: /\bcomedy\b|comedian|stand-?up|improv\b|sketch comedy|laugh|standup|funny|humor|roast\b/i },
-    { cat: 'Classical Music', re: /\bclassical\b|symphony|orchestra|chamber music|philharmonic/i },
-    { cat: 'Jazz', re: /\bjazz\b/i },
-    { cat: 'Dance', re: /\bdance show\b|\bdance party\b|\bdance performance/i },
-    { cat: 'Theater', re: /\btheater\b|\btheatre\b|broadway|off-broadway|musical\b|playwright|cabaret|shadowcast|one-act|dramaturg/i },
-    { cat: 'Art', re: /\bexhibition\b|\bgallery\b|\bmuseum\b|sculpture|painting|mural|retrospective|installation\b|curator|photograph/i },
-    { cat: 'Music/Performing Arts', re: /\bmusic\b|\bconcert\b|\bband\b|singer|songwriter|indie music|rock\b|punk|hip-?hop|\bdj\b|karaoke|open mic|live.*music|music.*live/i },
-    { cat: 'Talk', re: /\breading series\b|book launch|storytelling|lecture|author\b|discussion|panel\b|\btalk\b|speaker|literary|poetry|reading\b/i },
-    { cat: 'Food/Drink', re: /\bfood\b|restaurant week|tasting|chili|pancake|brunch|dinner\b|cook-?off|beer fest|wine\b|cocktail/i },
-    { cat: 'Shopping/Markets', re: /\bmarket\b|flea\b|bazaar|warehouse sale|craft.*fair|vintage.*sale|zine\b|comics.*fest/i },
-    { cat: 'Outdoor/Parks', re: /\bgarden\b|nature walk|botanic|ice.?skat/i },
-    { cat: 'Family', re: /\bkids\b|children|family\b|puppet/i },
-  ];
 
   // Junk filter for sponsored content fragments and non-event text
   const SKINT_JUNK_RE = /^(use code|use the individual|get tickets|fees apply|more info|promo code|CLB\d|MCP\w|book tickets)/i;
 
   function categorizeSkintEvent(title, description) {
-    // Categorize primarily from title, fall back to description
-    const titleLower = (title || '').toLowerCase();
-    for (const rule of SKINT_CAT_RULES) {
-      if (rule.re.test(titleLower)) return rule.cat;
-    }
-    const descLower = (description || '').toLowerCase();
-    for (const rule of SKINT_CAT_RULES) {
-      if (rule.re.test(descLower)) return rule.cat;
-    }
-    return 'Other';
+    return inferCategory(title, description);
   }
 
   function isSkintJunk(title) {
@@ -713,6 +728,118 @@ async function scrapeStrand(browser) {
   finally { await page.close(); }
 }
 
+// ---------------------------------------------------------------------------
+// PLAYWRIGHT SOURCE — It's In Queens
+// ---------------------------------------------------------------------------
+
+async function scrapeItsInQueens(browser) {
+  // itsinqueens.com — fully JS-rendered, needs Playwright
+  // Uses The Events Calendar (Tribe) plugin with list view
+  const page = await browser.newPage();
+  page.setDefaultTimeout(20000);
+  try {
+    await page.goto('https://itsinqueens.com/explore/events/', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(8000);
+
+    const items = await page.evaluate(() => {
+      const r = [], seen = new Set();
+      const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+      const year = new Date().getFullYear();
+
+      // Try multiple selector strategies for Tribe Events Calendar
+      const eventEls = document.querySelectorAll(
+        '.tribe-events-calendar-list__event, ' +
+        '.tribe-common-g-row, ' +
+        'article[class*="tribe"], ' +
+        '.type-tribe_events, ' +
+        '[class*="tribe-events"] article'
+      );
+
+      eventEls.forEach(el => {
+        // Title
+        const titleEl = el.querySelector(
+          '.tribe-events-calendar-list__event-title a, ' +
+          'h3 a, h2 a, ' +
+          '[class*="event-title"] a, ' +
+          'a[class*="event-url"]'
+        );
+        const t = titleEl?.textContent?.trim();
+        if (!t || t.length < 3 || t.length > 200) return;
+        const key = t.toLowerCase();
+        if (seen.has(key)) return;
+        seen.add(key);
+
+        const link = titleEl?.href || el.querySelector('a')?.href || '';
+
+        // Date from datetime attribute
+        const dtEl = el.querySelector('time[datetime], [datetime]');
+        let date = '';
+        if (dtEl) {
+          const dt = dtEl.getAttribute('datetime') || '';
+          if (/^\d{4}-\d{2}-\d{2}/.test(dt)) date = dt.slice(0, 10);
+        }
+
+        // Fallback: parse visible date text like "March 5, 2026"
+        if (!date) {
+          const dateEl = el.querySelector(
+            '.tribe-events-calendar-list__event-datetime, ' +
+            '[class*="event-date"], ' +
+            '.tribe-event-schedule-details'
+          );
+          const dateText = dateEl?.textContent?.trim() || '';
+          const dm = dateText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
+          if (dm) {
+            const mon = MONTHS[dm[1].slice(0,3).toLowerCase()];
+            if (mon !== undefined) {
+              const day = parseInt(dm[2], 10);
+              const y = dm[3] ? parseInt(dm[3], 10) : year;
+              date = `${y}-${String(mon+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+            }
+          }
+
+          // Check for date range "March 5 - March 12, 2026"
+          const rm = dateText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:,?\s+(\d{4}))?\s*[-–—]\s*((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:,?\s+(\d{4}))?/i);
+          if (rm) {
+            const sm = MONTHS[rm[1].slice(0,3).toLowerCase()];
+            const sd = parseInt(rm[2], 10);
+            const sy = rm[3] ? parseInt(rm[3], 10) : year;
+            const em = MONTHS[rm[4].slice(0,3).toLowerCase()];
+            const ed = parseInt(rm[5], 10);
+            const ey = rm[6] ? parseInt(rm[6], 10) : year;
+            if (sm !== undefined && em !== undefined) {
+              const fmt = (y,m,d) => `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+              date = `${fmt(sy,sm,sd)} to ${fmt(ey,em,ed)}`;
+            }
+          }
+        }
+
+        // Venue from event details
+        const venueEl = el.querySelector(
+          '.tribe-events-calendar-list__event-venue, ' +
+          '[class*="venue"], ' +
+          '.tribe-venue'
+        );
+        const venue = venueEl?.textContent?.trim() || '';
+
+        // Description snippet
+        const descEl = el.querySelector(
+          '.tribe-events-calendar-list__event-description p, ' +
+          '[class*="description"] p, ' +
+          'p'
+        );
+        const description = (descEl?.textContent?.trim() || '').slice(0, 200);
+
+        r.push({ title: t, link, date, venue, description });
+      });
+      return r.slice(0, 40);
+    });
+
+    push(items, 'Its In Queens', 'Other', 'https://itsinqueens.com/explore/events/');
+    console.error(`Its In Queens: ${items.length}`);
+  } catch (e) { console.error('Its In Queens error:', e.message); }
+  finally { await page.close(); }
+}
+
 function printReport() {
   console.error('\n' + '='.repeat(70));
   console.error('SCRAPE REPORT — General Events');
@@ -723,7 +850,7 @@ function printReport() {
   console.error('Source'.padEnd(25) + 'Items'.padEnd(8) + 'Dates'.padEnd(8) + 'Time'.padEnd(8) + 'Method'.padEnd(10) + 'Status');
   console.error('-'.repeat(70));
   let failures = 0, zeroResults = 0;
-  const jsNames = new Set(['Eventbrite', 'Strand Bookstore']);
+  const jsNames = new Set(['Eventbrite', 'Strand Bookstore', 'Its In Queens']);
   for (const s of sourceLog) {
     const status = s.error ? `ERROR: ${s.error.slice(0, 35)}` : (s.count === 0 ? '⚠ ZERO' : '✓ OK');
     if (s.error) failures++;
@@ -762,6 +889,7 @@ function printReport() {
     browser = await chromium.launch({ headless: true });
     await runSource('Eventbrite', scrapeEventbrite, browser);
     await runSource('Strand Bookstore', scrapeStrand, browser);
+    await runSource('Its In Queens', scrapeItsInQueens, browser);
   } catch (e) {
     console.error('Playwright unavailable, skipping JS sources:', e.message);
   } finally {

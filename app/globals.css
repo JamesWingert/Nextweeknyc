@@ -2,18 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap');
 
 :root {
   --bg: #faf7f2;
   --bg-card: #ffffff;
   --bg-card-hover: #fef9f3;
+  --bg-tab: #f0ece6;
   --text-primary: #1a1a2e;
   --text-secondary: #4a4a68;
   --text-muted: #8888a0;
   --border: #e8e4de;
   --border-light: #f0ece6;
   --accent: #e07a5f;
+  --accent-light: #fde8e8;
+}
+
+[data-theme='dark'] {
+  --bg: #141420;
+  --bg-card: #1e1e30;
+  --bg-card-hover: #252540;
+  --bg-tab: #1e1e30;
+  --text-primary: #e8e6f0;
+  --text-secondary: #b0aec0;
+  --text-muted: #6e6c80;
+  --border: #2a2a40;
+  --border-light: #222238;
+  --accent: #e07a5f;
+  --accent-light: #3a2020;
 }
 
 * {
@@ -25,8 +41,112 @@ body {
   color: var(--text-primary);
   font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 ::selection {
   background: #e07a5f33;
+}
+
+/* Search input */
+.search-input {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  color: var(--text-primary);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(224, 122, 95, 0.12);
+}
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Bottom nav for mobile */
+@media (max-width: 640px) {
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    padding: 0.25rem 0;
+    padding-bottom: env(safe-area-inset-bottom, 0.25rem);
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+  }
+  .bottom-nav button {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.125rem;
+    padding: 0.5rem 0.25rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: color 0.15s ease;
+  }
+  .bottom-nav button.active {
+    color: var(--accent);
+  }
+  .bottom-nav .nav-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+  .bottom-nav .nav-badge {
+    font-size: 0.5625rem;
+    font-weight: 700;
+    background: var(--border-light);
+    color: var(--text-muted);
+    padding: 0.05rem 0.3rem;
+    border-radius: 999px;
+    min-width: 1.25rem;
+    text-align: center;
+  }
+  .bottom-nav button.active .nav-badge {
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+  /* Add bottom padding to main content so it's not hidden behind bottom nav */
+  .main-content {
+    padding-bottom: 5rem;
+  }
+  /* Hide desktop tab bar on mobile */
+  .desktop-tabs {
+    display: none !important;
+  }
+}
+
+@media (min-width: 641px) {
+  .bottom-nav {
+    display: none !important;
+  }
+}
+
+/* Dark mode toggle */
+.dark-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.15s ease;
+}
+.dark-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }

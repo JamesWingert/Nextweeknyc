@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Event, Category, EventsData } from '@/lib/types';
 import type { RawEvent } from '@/lib/types';
-import { format, isBefore, startOfDay, addDays, startOfMonth, endOfMonth, getDay, addMonths, subMonths, isSameMonth, isWithinInterval } from 'date-fns';
+import { format, isBefore, startOfDay, addDays, startOfMonth, endOfMonth, getDay, addMonths, subMonths, isSameMonth, isWithinInterval, isSameDay, isWeekend } from 'date-fns';
 
 // --- Date helpers ---
 
@@ -156,6 +156,21 @@ export default function Home() {
     const t = startOfDay(new Date());
     return `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
   });
+  const [searchQuery, setSearchQuery] = useState('');
+  const [quickFilter, setQuickFilter] = useState<'all' | 'today' | 'weekend'>('all');
+  const [darkMode, setDarkMode] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState<string | null>(null);
+
+  // Dark mode effect
+  useEffect(() => {
+    const saved = typeof window !== 'undefined' ? localStorage.getItem('nwnyc-dark') : null;
+    if (saved === 'true') setDarkMode(true);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
+    localStorage.setItem('nwnyc-dark', String(darkMode));
+  }, [darkMode]);
 
   useEffect(() => {
     Promise.all([
@@ -164,6 +179,11 @@ export default function Home() {
     ]).then(([raw1, raw2]) => {
       const arr1: RawEvent[] = Array.isArray(raw1) ? raw1 : (raw1.events || []);
       const arr2: RawEvent[] = Array.isArray(raw2) ? raw2 : (raw2.events || []);
+
+      // Try to get lastUpdated from either file
+      const ts = (raw1 as any)?.lastUpdated || (raw2 as any)?.lastUpdated || null;
+      if (ts) setLastUpdated(ts);
+
       const allRaw = [...arr1, ...arr2];
 
       const seen = new Set<string>();
@@ -201,75 +221,180 @@ export default function Home() {
     arr.findIndex(x => x.label === c.label) === i
   );
 
+  // Search filter
+  const searchFiltered = useMemo(() => {
+    if (!searchQuery.trim()) return eventsData.events;
+    const q = searchQuery.toLowerCase().trim();
+    return eventsData.events.filter(e =>
+      e.title.toLowerCase().includes(q) ||
+      e.venue.toLowerCase().includes(q) ||
+      (e.description || '').toLowerCase().includes(q) ||
+      e.category.toLowerCase().includes(q)
+    );
+  }, [eventsData.events, searchQuery]);
+
+  // Quick filter (today / this weekend)
+  const quickFiltered = useMemo(() => {
+    if (quickFilter === 'all') return searchFiltered;
+    if (quickFilter === 'today') {
+      const todayStr = toStr(today);
+      return searchFiltered.filter(e => eventOnDay(e, todayStr));
+    }
+    // weekend: Friday through Sunday
+    const fri = addDays(today, ((5 - today.getDay()) + 7) % 7);
+    const sat = addDays(fri, 1);
+    const sun = addDays(fri, 2);
+    const days = [toStr(fri), toStr(sat), toStr(sun)];
+    return searchFiltered.filter(e => days.some(d => eventOnDay(e, d)));
+  }, [searchFiltered, quickFilter, today]);
+
   const filteredEvents = selectedCategories.length > 0
-    ? eventsData.events.filter(e => selectedCategories.includes(e.category))
-    : eventsData.events;
+    ? quickFiltered.filter(e => selectedCategories.includes(e.category))
+    : quickFiltered;
 
   // Split showtimes and on-view from calendar events
   const showtimeEvents = filteredEvents.filter(isShowtime);
   const onViewEvents = filteredEvents.filter(e => !isShowtime(e) && isOnView(e));
   const calendarEvents = filteredEvents.filter(e => !isShowtime(e) && !isOnView(e));
 
+  // Tab counts (from full data, not filtered)
+  const allShowtimes = eventsData.events.filter(isShowtime);
+  const allOnView = eventsData.events.filter(e => !isShowtime(e) && isOnView(e));
+  const allCalendar = eventsData.events.filter(e => !isShowtime(e) && !isOnView(e));
+
+  const tabs: { mode: 'calendar' | 'showtimes' | 'onview' | 'category'; label: string; icon: string; count: number }[] = [
+    { mode: 'calendar', label: 'Calendar', icon: '\uD83D\uDCC5', count: allCalendar.length },
+    { mode: 'showtimes', label: 'Showtimes', icon: '\uD83C\uDFAC', count: allShowtimes.length },
+    { mode: 'onview', label: 'Ongoing', icon: '\uD83C\uDFA8', count: allOnView.length },
+    { mode: 'category', label: 'Category', icon: '\uD83D\uDCC2', count: allCalendar.length },
+  ];
+
   if (loading) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#faf7f2', color: '#4a4a68' }}>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg)', color: 'var(--text-muted)' }}>
         <p style={{ fontSize: '1.1rem' }}>Loading events...</p>
       </div>
     );
   }
 
   return (
-    <main style={{ minHeight: '100vh', padding: '2rem 1.5rem', maxWidth: '72rem', margin: '0 auto' }}>
-      <header style={{ marginBottom: '2rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' as const }}>
-          <h1 style={{ fontSize: '2.5rem', fontWeight: 300, letterSpacing: '-0.03em', color: '#1a1a2e', margin: 0, lineHeight: 1.1 }}>
-            <span style={{ fontWeight: 400, color: '#4a4a68' }}>next week</span>
-            {' '}
+    <>
+    <main className="main-content" style={{ minHeight: '100vh', padding: '2rem 1.5rem', maxWidth: '72rem', margin: '0 auto' }}>
+      <header style={{ marginBottom: '1.5rem' }}>
+        {/* Top row: title + dark mode toggle */}
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' as const }}>
+          <div>
+            <h1 style={{ fontSize: '2rem', fontWeight: 300, letterSpacing: '-0.03em', color: 'var(--text-primary)', margin: 0, lineHeight: 1.1 }}>
+              <span style={{ fontWeight: 400, color: 'var(--text-secondary)' }}>next week</span>
+              {' '}
+              <span style={{
+                fontWeight: 800, letterSpacing: '-0.01em',
+                background: 'linear-gradient(135deg, #e07a5f, #d4543a)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}>NYC</span>
+            </h1>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.75rem', marginTop: '0.125rem', fontStyle: 'italic', letterSpacing: '0.01em', margin: 0 }}>
+              curated film, art, music, theater & more for the city
+            </p>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <span style={{
-              fontWeight: 800, letterSpacing: '-0.01em',
-              background: 'linear-gradient(135deg, #e07a5f, #d4543a)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}>NYC</span>
-          </h1>
-          <span style={{
-            fontSize: '0.7rem', fontWeight: 700, color: '#e07a5f',
-            background: 'linear-gradient(135deg, #fde8e8, #fef3c7)',
-            padding: '0.3rem 0.875rem', borderRadius: '999px',
-            letterSpacing: '0.06em', textTransform: 'uppercase',
-          }}>
-            {format(currentMonth, 'MMMM yyyy')}
-          </span>
+              fontSize: '0.7rem', fontWeight: 700, color: '#e07a5f',
+              background: 'linear-gradient(135deg, #fde8e8, #fef3c7)',
+              padding: '0.3rem 0.875rem', borderRadius: '999px',
+              letterSpacing: '0.06em', textTransform: 'uppercase',
+            }}>
+              {format(currentMonth, 'MMMM yyyy')}
+            </span>
+            <button
+              className="dark-toggle"
+              onClick={() => setDarkMode(d => !d)}
+              aria-label="Toggle dark mode"
+            >
+              {darkMode ? '\u2600\uFE0F' : '\uD83C\uDF19'}
+            </button>
+          </div>
         </div>
-        <p style={{ color: '#a09585', fontSize: '0.8125rem', marginTop: '0.375rem', fontStyle: 'italic', letterSpacing: '0.01em' }}>
-          film, art, music, theater & more — curated for the city
-        </p>
-        <p style={{ color: '#8888a0', fontSize: '0.8125rem', marginTop: '0.375rem' }}>
-          {calendarEvents.length} event{calendarEvents.length !== 1 ? 's' : ''}
-          {showtimeEvents.length > 0 && ` · ${showtimeEvents.length} showtime${showtimeEvents.length !== 1 ? 's' : ''}`}
-          {onViewEvents.length > 0 && ` · ${onViewEvents.length} ongoing`}
-        </p>
-        {/* Tab bar — right below the counts */}
-        <div style={{ display: 'inline-flex', background: '#f0ece6', borderRadius: '0.5rem', padding: '3px', marginTop: '0.75rem' }}>
-          {([
-            { mode: 'calendar' as const, label: '📅 Calendar' },
-            { mode: 'showtimes' as const, label: '🎬 Showtimes' },
-            { mode: 'onview' as const, label: '🎨 Ongoing' },
-            { mode: 'category' as const, label: '📂 Category' },
-          ]).map(({ mode, label }) => (
+
+        {/* Stats + inline search */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', marginTop: '0.625rem', flexWrap: 'wrap' as const }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.8125rem', margin: 0 }}>
+            {allCalendar.length} event{allCalendar.length !== 1 ? 's' : ''}
+            {allShowtimes.length > 0 && ` \u00B7 ${allShowtimes.length} showtime${allShowtimes.length !== 1 ? 's' : ''}`}
+            {allOnView.length > 0 && ` \u00B7 ${allOnView.length} ongoing`}
+          </p>
+          <div style={{ position: 'relative', minWidth: '180px', maxWidth: '260px', flex: '0 1 260px' }}>
+            <span style={{ position: 'absolute', left: '0.625rem', top: '50%', transform: 'translateY(-50%)', fontSize: '0.75rem', color: 'var(--text-muted)', pointerEvents: 'none' }}>
+              {'\uD83D\uDD0D'}
+            </span>
+            <input
+              className="search-input"
+              type="text"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              style={{
+                width: '100%', padding: '0.4rem 0.625rem 0.4rem 1.875rem',
+                borderRadius: '0.5rem', fontSize: '0.8125rem',
+              }}
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                style={{
+                  position: 'absolute', right: '0.5rem', top: '50%', transform: 'translateY(-50%)',
+                  background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.75rem',
+                  color: 'var(--text-muted)', padding: '0.125rem',
+                }}
+                aria-label="Clear search"
+              >
+                {'\u2715'}
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Quick filters: Clear all when active */}
+        {(searchQuery || selectedCategories.length > 0) && (
+          <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.625rem', flexWrap: 'wrap' as const }}>
+            <button
+              onClick={() => { setSearchQuery(''); setSelectedCategories([]); }}
+              style={{
+                padding: '0.3rem 0.75rem', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 600,
+                border: '1.5px solid var(--border)', background: 'var(--bg-card)',
+                color: 'var(--text-muted)', cursor: 'pointer',
+              }}
+            >
+              Clear all
+            </button>
+          </div>
+        )}
+
+        {/* Desktop tab bar */}
+        <div className="desktop-tabs" style={{ display: 'inline-flex', background: 'var(--bg-tab)', borderRadius: '0.5rem', padding: '3px', marginTop: '0.75rem' }}>
+          {tabs.map(({ mode, label, icon, count }) => (
             <button
               key={mode}
               onClick={() => { setViewMode(mode); setSelectedCategories([]); }}
               style={{
-                padding: '0.4rem 1rem', borderRadius: '0.375rem', fontSize: '0.8125rem', fontWeight: 500,
-                border: 'none', cursor: 'pointer',
-                background: viewMode === mode ? '#fff' : 'transparent',
-                color: viewMode === mode ? '#1a1a2e' : '#8888a0',
+                padding: '0.4rem 0.875rem', borderRadius: '0.375rem', fontSize: '0.8125rem', fontWeight: 500,
+                border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.375rem',
+                background: viewMode === mode ? 'var(--bg-card)' : 'transparent',
+                color: viewMode === mode ? 'var(--text-primary)' : 'var(--text-muted)',
                 boxShadow: viewMode === mode ? '0 1px 3px rgba(0,0,0,0.08)' : 'none',
                 transition: 'all 0.15s ease',
               }}
             >
-              {label}
+              {icon} {label}
+              <span style={{
+                fontSize: '0.6875rem', fontWeight: 700,
+                background: viewMode === mode ? 'var(--accent-light)' : 'var(--border-light)',
+                color: viewMode === mode ? 'var(--accent)' : 'var(--text-muted)',
+                padding: '0.05rem 0.4rem', borderRadius: '999px', minWidth: '1.5rem', textAlign: 'center',
+              }}>
+                {count}
+              </span>
             </button>
           ))}
         </div>
@@ -293,8 +418,8 @@ export default function Home() {
                 style={{
                   display: 'flex', alignItems: 'center', gap: '0.375rem',
                   padding: '0.375rem 0.75rem', borderRadius: '999px', fontSize: '0.8125rem', fontWeight: 500,
-                  border: isActive ? `1.5px solid ${dot}` : '1.5px solid #e8e4de',
-                  background: isActive ? bg : '#fff', color: isActive ? text : '#8888a0',
+                  border: isActive ? `1.5px solid ${dot}` : '1.5px solid var(--border)',
+                  background: isActive ? bg : 'var(--bg-card)', color: isActive ? text : 'var(--text-muted)',
                   cursor: 'pointer', transition: 'all 0.15s ease',
                 }}
               >
@@ -322,8 +447,48 @@ export default function Home() {
           today={today}
         />
       )}
+
+      {/* Footer */}
+      <footer style={{
+        marginTop: '3rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border)',
+        textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.75rem',
+      }}>
+        <p style={{ margin: 0 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/favicon-16x16.png" alt="" width={14} height={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '0.25rem', borderRadius: '2px' }} />
+          Next Week NYC
+        </p>
+        {lastUpdated && (
+          <p style={{ margin: '0.25rem 0 0', fontSize: '0.6875rem' }}>
+            Last updated: {format(new Date(lastUpdated), 'MMM d, yyyy h:mm a')}
+          </p>
+        )}
+        {!lastUpdated && (
+          <p style={{ margin: '0.25rem 0 0', fontSize: '0.6875rem' }}>
+            Data refreshed Mon & Thu
+          </p>
+        )}
+      </footer>
+
       <ScrollToTop />
     </main>
+
+    {/* Mobile bottom nav */}
+    <nav className="bottom-nav" role="navigation" aria-label="Main navigation">
+      {tabs.map(({ mode, label, icon, count }) => (
+        <button
+          key={mode}
+          className={viewMode === mode ? 'active' : ''}
+          onClick={() => { setViewMode(mode); setSelectedCategories([]); }}
+          aria-label={label}
+        >
+          <span className="nav-icon">{icon}</span>
+          <span className="nav-badge">{count}</span>
+          <span>{label}</span>
+        </button>
+      ))}
+    </nav>
+    </>
   );
 }
 
@@ -345,9 +510,9 @@ function ScrollToTop() {
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       aria-label="Scroll to top"
       style={{
-        position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 50,
+        position: 'fixed', bottom: '5rem', right: '1.5rem', zIndex: 50,
         width: '44px', height: '44px', borderRadius: '50%',
-        background: '#1a1a2e', color: '#fff', border: 'none',
+        background: 'var(--text-primary)', color: 'var(--bg)', border: 'none',
         cursor: 'pointer', fontSize: '1.25rem', lineHeight: 1,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         boxShadow: '0 2px 12px rgba(0,0,0,0.15)',
@@ -358,7 +523,7 @@ function ScrollToTop() {
         e.currentTarget.style.transform = 'translateY(-2px)';
       }}
       onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
-        e.currentTarget.style.background = '#1a1a2e';
+        e.currentTarget.style.background = 'var(--text-primary)';
         e.currentTarget.style.transform = 'none';
       }}
     >
@@ -404,17 +569,17 @@ function EventCard({ event, showDate }: { event: Event; showDate?: boolean }) {
       target="_blank"
       rel="noopener noreferrer"
       style={{
-        display: 'block', padding: '1rem 1.25rem', background: '#fff',
-        borderRadius: '0.75rem', border: '1px solid #e8e4de',
+        display: 'block', padding: '1rem 1.25rem', background: 'var(--bg-card)',
+        borderRadius: '0.75rem', border: '1px solid var(--border)',
         textDecoration: 'none', color: 'inherit', transition: 'all 0.15s ease',
       }}
       onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
-        e.currentTarget.style.borderColor = '#d1ccc4';
+        e.currentTarget.style.borderColor = 'var(--text-muted)';
         e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
         e.currentTarget.style.transform = 'translateY(-1px)';
       }}
       onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
-        e.currentTarget.style.borderColor = '#e8e4de';
+        e.currentTarget.style.borderColor = 'var(--border)';
         e.currentTarget.style.boxShadow = 'none';
         e.currentTarget.style.transform = 'none';
       }}
@@ -425,18 +590,18 @@ function EventCard({ event, showDate }: { event: Event; showDate?: boolean }) {
             <CategoryTag category={event.category} />
             {showDate && <DateBadge date={event.date} />}
             {event.time && event.time !== 'TBA' && (
-              <span style={{ fontSize: '0.75rem', color: '#8888a0' }}>{event.time}</span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{event.time}</span>
             )}
           </div>
-          <h4 style={{ fontWeight: 600, fontSize: '0.9375rem', color: '#1a1a2e', marginBottom: '0.25rem' }}>
+          <h4 style={{ fontWeight: 600, fontSize: '0.9375rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
             {event.title}
           </h4>
-          <p style={{ fontSize: '0.8125rem', color: '#4a4a68', margin: 0 }}>{event.venue}</p>
+          <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', margin: 0 }}>{event.venue}</p>
         </div>
         {event.price && event.price !== 'TBA' && (
           <span style={{
-            fontSize: '0.75rem', fontWeight: 600, color: '#4a4a68',
-            background: '#f5f2ed', padding: '0.25rem 0.625rem',
+            fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)',
+            background: 'var(--border-light)', padding: '0.25rem 0.625rem',
             borderRadius: '0.375rem', whiteSpace: 'nowrap',
           }}>
             {event.price}
@@ -445,13 +610,27 @@ function EventCard({ event, showDate }: { event: Event; showDate?: boolean }) {
       </div>
       {event.description && (
         <p style={{
-          fontSize: '0.8125rem', color: '#8888a0', marginTop: '0.5rem', lineHeight: 1.5,
+          fontSize: '0.8125rem', color: 'var(--text-muted)', marginTop: '0.5rem', lineHeight: 1.5,
           display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
         }}>
           {event.description}
         </p>
       )}
     </a>
+  );
+}
+
+// --- Empty state ---
+
+function EmptyState({ icon, title, subtitle }: { icon: string; title: string; subtitle: string }) {
+  return (
+    <div style={{
+      textAlign: 'center', padding: '4rem 2rem', color: 'var(--text-muted)',
+    }}>
+      <div style={{ fontSize: '3rem', marginBottom: '0.75rem', opacity: 0.6 }}>{icon}</div>
+      <p style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>{title}</p>
+      <p style={{ fontSize: '0.875rem', margin: 0 }}>{subtitle}</p>
+    </div>
   );
 }
 
@@ -502,13 +681,13 @@ function EventList({ events }: { events: Event[] }) {
           <section key={category}>
             <div style={{
               display: 'flex', alignItems: 'center', gap: '0.625rem',
-              marginBottom: '1.25rem', paddingBottom: '0.75rem', borderBottom: '2px solid #f0ece6',
+              marginBottom: '1.25rem', paddingBottom: '0.75rem', borderBottom: '2px solid var(--border-light)',
             }}>
               <span style={{ width: '12px', height: '12px', borderRadius: '50%', background: style.dot }} />
-              <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#1a1a2e', margin: 0 }}>
+              <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
                 {style.label}
               </h2>
-              <span style={{ fontSize: '0.8125rem', color: '#8888a0', fontWeight: 400 }}>
+              <span style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', fontWeight: 400 }}>
                 ({totalCount})
               </span>
             </div>
@@ -516,7 +695,7 @@ function EventList({ events }: { events: Event[] }) {
             {multiEntries.length > 0 && (
               <div style={{ marginBottom: '1.25rem' }}>
                 <h3 style={{
-                  fontSize: '0.8125rem', fontWeight: 600, color: '#3730a3',
+                  fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-muted)',
                   textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.75rem',
                   display: 'flex', alignItems: 'center', gap: '0.375rem',
                 }}>
@@ -533,7 +712,7 @@ function EventList({ events }: { events: Event[] }) {
             {noDateEntries.length > 0 && (
               <div style={{ marginBottom: '1.25rem' }}>
                 <h3 style={{
-                  fontSize: '0.8125rem', fontWeight: 600, color: '#8888a0',
+                  fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-muted)',
                   textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.75rem',
                   display: 'flex', alignItems: 'center', gap: '0.375rem',
                 }}>
@@ -550,7 +729,7 @@ function EventList({ events }: { events: Event[] }) {
             {singleEntries.map(([date, dayEvents]) => (
               <div key={date} style={{ marginBottom: '1.25rem' }}>
                 <h3 style={{
-                  fontSize: '0.8125rem', fontWeight: 600, color: '#8888a0',
+                  fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-muted)',
                   textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.75rem',
                 }}>
                   {format(toDate(date), 'EEEE, MMMM d')}
@@ -567,9 +746,11 @@ function EventList({ events }: { events: Event[] }) {
       })}
 
       {events.length === 0 && (
-        <p style={{ textAlign: 'center', color: '#8888a0', padding: '3rem 0', fontSize: '1rem' }}>
-          No upcoming events found.
-        </p>
+        <EmptyState
+          icon={'\uD83C\uDFAD'}
+          title="Nothing here yet"
+          subtitle="Try adjusting your filters or check back later"
+        />
       )}
     </div>
   );
@@ -646,27 +827,27 @@ function MonthCalendar({
         <button
           onClick={() => { onMonthChange(subMonths(currentMonth, 1)); onSelectDay(null); }}
           style={{
-            background: '#fff', border: '1px solid #e8e4de', borderRadius: '0.5rem',
+            background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '0.5rem',
             padding: '0.5rem 1rem', cursor: 'pointer', fontSize: '0.875rem',
-            color: '#4a4a68', fontWeight: 500, transition: 'all 0.15s ease',
+            color: 'var(--text-secondary)', fontWeight: 500, transition: 'all 0.15s ease',
           }}
-          onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => { e.currentTarget.style.background = '#f5f2ed'; }}
-          onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => { e.currentTarget.style.background = '#fff'; }}
+          onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => { e.currentTarget.style.background = 'var(--border-light)'; }}
+          onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => { e.currentTarget.style.background = 'var(--bg-card)'; }}
         >
           ← {format(subMonths(currentMonth, 1), 'MMM')}
         </button>
-        <h2 style={{ fontSize: '1.375rem', fontWeight: 700, color: '#1a1a2e', margin: 0 }}>
+        <h2 style={{ fontSize: '1.375rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
           {format(currentMonth, 'MMMM yyyy')}
         </h2>
         <button
           onClick={() => { onMonthChange(addMonths(currentMonth, 1)); onSelectDay(null); }}
           style={{
-            background: '#fff', border: '1px solid #e8e4de', borderRadius: '0.5rem',
+            background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '0.5rem',
             padding: '0.5rem 1rem', cursor: 'pointer', fontSize: '0.875rem',
-            color: '#4a4a68', fontWeight: 500, transition: 'all 0.15s ease',
+            color: 'var(--text-secondary)', fontWeight: 500, transition: 'all 0.15s ease',
           }}
-          onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => { e.currentTarget.style.background = '#f5f2ed'; }}
-          onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => { e.currentTarget.style.background = '#fff'; }}
+          onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => { e.currentTarget.style.background = 'var(--border-light)'; }}
+          onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => { e.currentTarget.style.background = 'var(--bg-card)'; }}
         >
           {format(addMonths(currentMonth, 1), 'MMM')} →
         </button>
@@ -677,8 +858,8 @@ function MonthCalendar({
         {DOW_LABELS.map(d => (
           <div key={d} style={{
             textAlign: 'center', padding: '0.5rem', fontSize: '0.75rem',
-            fontWeight: 600, color: '#8888a0', textTransform: 'uppercase',
-            letterSpacing: '0.05em', background: '#f5f2ed', borderRadius: d === 'Sun' ? '0.5rem 0 0 0' : d === 'Sat' ? '0 0.5rem 0 0' : '0',
+            fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase',
+            letterSpacing: '0.05em', background: 'var(--border-light)', borderRadius: d === 'Sun' ? '0.5rem 0 0 0' : d === 'Sat' ? '0 0.5rem 0 0' : '0',
           }}>
             {d}
           </div>
@@ -688,7 +869,7 @@ function MonthCalendar({
       {/* Calendar grid */}
       <div style={{
         display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '1px',
-        background: '#e8e4de', borderRadius: '0 0 0.75rem 0.75rem', overflow: 'hidden',
+        background: 'var(--border)', borderRadius: '0 0 0.75rem 0.75rem', overflow: 'hidden',
       }}>
         {calendarDays.map(day => {
           const ds = toStr(day);
@@ -711,7 +892,7 @@ function MonthCalendar({
               key={ds}
               onClick={() => count > 0 ? onSelectDay(isSelected ? null : ds) : undefined}
               style={{
-                background: isSelected ? '#fef9f3' : isToday ? '#fffbf5' : inMonth ? '#fff' : '#faf7f2',
+                background: isSelected ? 'var(--bg-card-hover)' : isToday ? 'var(--bg-card-hover)' : inMonth ? 'var(--bg-card)' : 'var(--bg)',
                 border: 'none',
                 borderBottom: isSelected ? '3px solid #e07a5f' : '3px solid transparent',
                 padding: '0.5rem 0.375rem',
@@ -725,7 +906,7 @@ function MonthCalendar({
             >
               <span style={{
                 fontSize: '0.9375rem', fontWeight: isToday ? 700 : 500,
-                color: isToday ? '#fff' : isPast && inMonth ? '#b0aec0' : inMonth ? '#1a1a2e' : '#c4c0b8',
+                color: isToday ? '#fff' : isPast && inMonth ? 'var(--text-muted)' : inMonth ? 'var(--text-primary)' : 'var(--text-muted)',
                 background: isToday ? '#e07a5f' : 'transparent',
                 width: '28px', height: '28px', borderRadius: '50%',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -737,7 +918,7 @@ function MonthCalendar({
               {count > 0 && (
                 <span style={{
                   fontSize: '0.6875rem', fontWeight: 600,
-                  color: isSelected ? '#e07a5f' : '#4a4a68',
+                  color: isSelected ? '#e07a5f' : 'var(--text-secondary)',
                   lineHeight: 1,
                 }}>
                   {count}
@@ -763,21 +944,21 @@ function MonthCalendar({
         <div style={{ marginTop: '1.5rem' }}>
           <div style={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            marginBottom: '1rem', paddingBottom: '0.75rem', borderBottom: '2px solid #f0ece6',
+            marginBottom: '1rem', paddingBottom: '0.75rem', borderBottom: '2px solid var(--border-light)',
           }}>
-            <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#1a1a2e', margin: 0 }}>
+            <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
               {format(toDate(selectedDay), 'EEEE, MMMM d')}
             </h3>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <span style={{ fontSize: '0.8125rem', color: '#8888a0' }}>
+              <span style={{ fontSize: '0.8125rem', color: 'var(--text-muted)' }}>
                 {selectedDayEvents.length} event{selectedDayEvents.length !== 1 ? 's' : ''}
               </span>
               <button
                 onClick={() => onSelectDay(null)}
                 style={{
-                  background: '#f0ece6', border: 'none', borderRadius: '0.375rem',
+                  background: 'var(--border-light)', border: 'none', borderRadius: '0.375rem',
                   padding: '0.25rem 0.625rem', cursor: 'pointer', fontSize: '0.75rem',
-                  color: '#8888a0', fontWeight: 500,
+                  color: 'var(--text-muted)', fontWeight: 500,
                 }}
               >
                 ✕ Close
@@ -789,9 +970,7 @@ function MonthCalendar({
               <EventCard key={event.id} event={event} showDate={isDateRange(event.date || '')} />
             ))}
             {selectedDayEvents.length === 0 && (
-              <p style={{ textAlign: 'center', color: '#8888a0', padding: '2rem 0' }}>
-                No events on this day.
-              </p>
+              <EmptyState icon={'\uD83D\uDCC5'} title="No events on this day" subtitle="Select another day or browse the calendar" />
             )}
           </div>
         </div>
@@ -847,9 +1026,9 @@ function NowPlayingGrid({ films, vc }: { films: Event[]; vc: { accent: string; b
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              display: 'block', textDecoration: 'none', color: '#1a1a2e',
+              display: 'block', textDecoration: 'none', color: 'var(--text-primary)',
               padding: '0.375rem 0.625rem', borderRadius: '0.375rem',
-              background: '#fff', border: `1px solid ${vc.border}`,
+              background: 'var(--bg-card)', border: `1px solid ${vc.border}`,
               borderLeft: `3px solid ${vc.accent}`,
               transition: 'all 0.15s ease',
               overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' as const,
@@ -877,7 +1056,7 @@ function NowPlayingGrid({ films, vc }: { films: Event[]; vc: { accent: string; b
           style={{
             display: 'block', margin: '0.5rem auto 0', padding: '0.25rem 0.75rem',
             borderRadius: '999px', fontSize: '0.6875rem', fontWeight: 600,
-            border: `1px solid ${vc.border}`, background: '#fff', color: vc.accent,
+            border: `1px solid ${vc.border}`, background: 'var(--bg-card)', color: vc.accent,
             cursor: 'pointer', transition: 'all 0.15s ease',
           }}
         >
@@ -941,9 +1120,9 @@ function ShowtimesView({ events, currentMonth, today }: { events: Event[]; curre
                 style={{
                   display: 'flex', alignItems: 'center', gap: '0.375rem',
                   padding: '0.4rem 0.875rem', borderRadius: '999px', fontSize: '0.8125rem', fontWeight: 500,
-                  border: `1.5px solid ${isActive ? vc.accent : '#e8e4de'}`,
-                  background: isActive ? vc.bg : '#fff',
-                  color: isActive ? vc.text : '#8888a0',
+                  border: `1.5px solid ${isActive ? vc.accent : 'var(--border)'}`,
+                  background: isActive ? vc.bg : 'var(--bg-card)',
+                  color: isActive ? vc.text : 'var(--text-muted)',
                   cursor: 'pointer', transition: 'all 0.15s ease',
                 }}
               >
@@ -993,8 +1172,8 @@ function ShowtimesView({ events, currentMonth, today }: { events: Event[]; curre
                     display: 'flex', flexDirection: 'column' as const,
                     padding: '0.625rem 0.875rem',
                     borderRadius: '0.5rem', fontSize: '0.8125rem',
-                    textDecoration: 'none', color: '#1a1a2e',
-                    background: '#fff', border: `1px solid ${vc.border}`,
+                    textDecoration: 'none', color: 'var(--text-primary)',
+                    background: 'var(--bg-card)', border: `1px solid ${vc.border}`,
                     borderLeft: `3px solid ${vc.accent}`,
                     transition: 'all 0.15s ease',
                   }}
@@ -1004,7 +1183,7 @@ function ShowtimesView({ events, currentMonth, today }: { events: Event[]; curre
                     e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
                   }}
                   onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                    e.currentTarget.style.background = '#fff';
+                    e.currentTarget.style.background = 'var(--bg-card)';
                     e.currentTarget.style.transform = 'none';
                     e.currentTarget.style.boxShadow = 'none';
                   }}
@@ -1058,10 +1237,10 @@ function ShowtimesView({ events, currentMonth, today }: { events: Event[]; curre
               <span style={{
                 width: '10px', height: '10px', borderRadius: '50%', background: vc.accent,
               }} />
-              <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#1a1a2e', margin: 0 }}>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
                 {venue}
               </h3>
-              <span style={{ fontSize: '0.8125rem', color: '#8888a0', fontWeight: 400 }}>
+              <span style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', fontWeight: 400 }}>
                 {venueTotal} screening{venueTotal !== 1 ? 's' : ''}
               </span>
             </div>
@@ -1126,20 +1305,20 @@ function ShowtimesView({ events, currentMonth, today }: { events: Event[]; curre
                             display: 'block', padding: '0.5rem 0.75rem',
                             borderRadius: '0.5rem', fontSize: '0.8125rem',
                             textDecoration: 'none',
-                            color: isPast ? '#a09bb2' : '#1a1a2e',
-                            background: isPast ? '#faf8fc' : '#fff',
-                            border: `1px solid ${isPast ? '#e8e4ee' : vc.border}`,
-                            borderLeft: `3px solid ${isPast ? '#d4d0de' : vc.accent}`,
+                            color: isPast ? 'var(--text-muted)' : 'var(--text-primary)',
+                            background: isPast ? 'var(--bg)' : 'var(--bg-card)',
+                            border: `1px solid ${isPast ? 'var(--border)' : vc.border}`,
+                            borderLeft: `3px solid ${isPast ? 'var(--border)' : vc.accent}`,
                             transition: 'all 0.15s ease',
                             overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                           }}
                           onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                            e.currentTarget.style.background = isPast ? '#f5f2f8' : vc.bg;
+                            e.currentTarget.style.background = isPast ? 'var(--border-light)' : vc.bg;
                             e.currentTarget.style.transform = 'translateY(-1px)';
                             e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
                           }}
                           onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                            e.currentTarget.style.background = isPast ? '#faf8fc' : '#fff';
+                            e.currentTarget.style.background = isPast ? 'var(--bg)' : 'var(--bg-card)';
                             e.currentTarget.style.transform = 'none';
                             e.currentTarget.style.boxShadow = 'none';
                           }}
@@ -1166,9 +1345,7 @@ function ShowtimesView({ events, currentMonth, today }: { events: Event[]; curre
       })}
 
       {filteredByMonth.length === 0 && (
-        <p style={{ textAlign: 'center', color: '#8888a0', padding: '3rem 0', fontSize: '1rem' }}>
-          No showtimes found for {format(currentMonth, 'MMMM yyyy')}.
-        </p>
+        <EmptyState icon={'\uD83C\uDFAC'} title="No showtimes this month" subtitle={`Check back for ${format(addMonths(currentMonth, 1), 'MMMM')}`} />
       )}
     </div>
   );
@@ -1266,9 +1443,9 @@ function OnViewTab({ events, today }: { events: Event[]; today: Date }) {
                 style={{
                   display: 'flex', alignItems: 'center', gap: '0.375rem',
                   padding: '0.4rem 0.875rem', borderRadius: '999px', fontSize: '0.8125rem', fontWeight: 500,
-                  border: `1.5px solid ${isActive ? vc.accent : '#e8e4de'}`,
-                  background: isActive ? vc.bg : '#fff',
-                  color: isActive ? vc.text : '#8888a0',
+                  border: `1.5px solid ${isActive ? vc.accent : 'var(--border)'}`,
+                  background: isActive ? vc.bg : 'var(--bg-card)',
+                  color: isActive ? vc.text : 'var(--text-muted)',
                   cursor: 'pointer', transition: 'all 0.15s ease',
                 }}
               >
@@ -1298,10 +1475,10 @@ function OnViewTab({ events, today }: { events: Event[]; today: Date }) {
               <span style={{
                 width: '10px', height: '10px', borderRadius: '50%', background: vc.accent,
               }} />
-              <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#1a1a2e', margin: 0 }}>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
                 {venue}
               </h3>
-              <span style={{ fontSize: '0.8125rem', color: '#8888a0', fontWeight: 400 }}>
+              <span style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', fontWeight: 400 }}>
                 {venueEvents.length} exhibition{venueEvents.length !== 1 ? 's' : ''}
               </span>
             </div>
@@ -1317,8 +1494,8 @@ function OnViewTab({ events, today }: { events: Event[]; today: Date }) {
                   style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                     gap: '1rem', padding: '0.75rem 1rem',
-                    borderRadius: '0.5rem', textDecoration: 'none', color: '#1a1a2e',
-                    background: '#fff', border: `1px solid ${vc.border}`,
+                    borderRadius: '0.5rem', textDecoration: 'none', color: 'var(--text-primary)',
+                    background: 'var(--bg-card)', border: `1px solid ${vc.border}`,
                     borderLeft: `3px solid ${vc.accent}`,
                     transition: 'all 0.15s ease',
                   }}
@@ -1328,7 +1505,7 @@ function OnViewTab({ events, today }: { events: Event[]; today: Date }) {
                     e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
                   }}
                   onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                    e.currentTarget.style.background = '#fff';
+                    e.currentTarget.style.background = 'var(--bg-card)';
                     e.currentTarget.style.transform = 'none';
                     e.currentTarget.style.boxShadow = 'none';
                   }}
@@ -1355,9 +1532,7 @@ function OnViewTab({ events, today }: { events: Event[]; today: Date }) {
       })}
 
       {events.length === 0 && (
-        <p style={{ textAlign: 'center', color: '#8888a0', padding: '3rem 0', fontSize: '1rem' }}>
-          No ongoing events found.
-        </p>
+        <EmptyState icon={'\uD83D\uDDBC\uFE0F'} title="No ongoing exhibitions" subtitle="Check back later for new exhibitions" />
       )}
     </div>
   );
@@ -1373,19 +1548,19 @@ function OngoingEvents({ events }: { events: Event[] }) {
 
   return (
     <div style={{
-      marginTop: '1.5rem', background: '#fff', borderRadius: '0.75rem',
-      border: '1px solid #e8e4de', overflow: 'hidden',
+      marginTop: '1.5rem', background: 'var(--bg-card)', borderRadius: '0.75rem',
+      border: '1px solid var(--border)', overflow: 'hidden',
     }}>
       <button
         onClick={() => setShowOngoing(prev => !prev)}
         style={{
           width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          padding: '0.75rem 1rem', background: '#f5f2ed', border: 'none',
-          cursor: 'pointer', fontSize: '0.875rem', fontWeight: 600, color: '#4a4a68',
+          padding: '0.75rem 1rem', background: 'var(--border-light)', border: 'none',
+          cursor: 'pointer', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-secondary)',
         }}
       >
         <span>📌 Ongoing / Date TBD ({noDate.length})</span>
-        <span style={{ fontSize: '0.75rem', color: '#8888a0' }}>
+        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
           {showOngoing ? '▲ Hide' : '▼ Show'}
         </span>
       </button>
