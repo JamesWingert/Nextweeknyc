@@ -232,14 +232,14 @@ export default function Home() {
         <p style={{ color: '#8888a0', fontSize: '0.875rem', marginTop: '0.5rem' }}>
           {calendarEvents.length} event{calendarEvents.length !== 1 ? 's' : ''}
           {showtimeEvents.length > 0 && ` · ${showtimeEvents.length} showtime${showtimeEvents.length !== 1 ? 's' : ''}`}
-          {onViewEvents.length > 0 && ` · ${onViewEvents.length} on view`}
+          {onViewEvents.length > 0 && ` · ${onViewEvents.length} ongoing`}
         </p>
         {/* Tab bar — right below the counts */}
         <div style={{ display: 'inline-flex', background: '#f0ece6', borderRadius: '0.5rem', padding: '3px', marginTop: '0.75rem' }}>
           {([
             { mode: 'calendar' as const, label: '📅 Calendar' },
             { mode: 'showtimes' as const, label: '🎬 Showtimes' },
-            { mode: 'onview' as const, label: '🎨 On View' },
+            { mode: 'onview' as const, label: '🎨 Ongoing' },
             { mode: 'category' as const, label: '📂 Category' },
           ]).map(({ mode, label }) => (
             <button
@@ -1101,7 +1101,7 @@ function ShowtimesView({ events, currentMonth, today }: { events: Event[]; curre
                       gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
                       gap: '0.375rem',
                     }}>
-                      {films.map(film => (
+                      {films.sort((a, b) => a.title.localeCompare(b.title)).map(film => (
                         <a
                           key={film.id}
                           href={film.sourceUrl}
@@ -1341,7 +1341,7 @@ function OnViewTab({ events, today }: { events: Event[]; today: Date }) {
 
       {events.length === 0 && (
         <p style={{ textAlign: 'center', color: '#8888a0', padding: '3rem 0', fontSize: '1rem' }}>
-          No exhibitions currently on view.
+          No ongoing events found.
         </p>
       )}
     </div>
