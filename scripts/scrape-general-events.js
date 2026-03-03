@@ -324,24 +324,9 @@ async function scrapeTheSkint() {
   } catch (e) { console.error('The Skint ongoing error:', e.message); }
 }
 
-async function scrapeTimeOut() {
-  // /things-to-do is the working URL (not /this-week-in-new-york which 404s)
-  try {
-    const { html } = await fetchHTML('https://www.timeout.com/newyork/things-to-do');
-    const $ = cheerio.load(html);
-    const items = [];
-    $('article, [class*="card"], [class*="tile"]').each((_, el) => {
-      const $el = $(el);
-      const title = $el.find('h2, h3, [class*="title"]').first().text().trim();
-      const link = $el.find('a').first().attr('href') || '';
-      const fullLink = link.startsWith('/') ? `https://www.timeout.com${link}` : link;
-      const rawDate = $el.find('time[datetime]').first().attr('datetime') || '';
-      if (title && title.length > 5 && title.length < 120) items.push({ title, link: fullLink, date: rawDate });
-    });
-    push(items, 'Time Out NY', 'Other', 'https://www.timeout.com/newyork/things-to-do');
-    console.error(`Time Out: ${items.length}`);
-  } catch (e) { console.error('Time Out error:', e.message); }
-}
+// Time Out NY removed — their /things-to-do page is editorial content (listicles,
+// neighborhood guides, reviews), not structured events. Our other sources cover
+// actual events better.
 
 async function scrapeSecretNYC() {
   try {
@@ -648,7 +633,6 @@ function printReport() {
   // Cheerio sources (fast, no browser)
   await runSource('doNYC', scrapeDoNYC);
   await runSource('The Skint', scrapeTheSkint);
-  await runSource('Time Out NY', scrapeTimeOut);
   await runSource('Secret NYC', scrapeSecretNYC);
   await runSource('Brooklyn Paper', scrapeBrooklynPaper);
   await runSource('NYC Parks', scrapeNYCParks);

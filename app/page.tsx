@@ -76,6 +76,21 @@ function isShowtime(event: Event): boolean {
   return true;
 }
 
+/** Returns true if this event is a long-running exhibition / "on view" item */
+function isOnView(event: Event): boolean {
+  // No date → on view
+  if (!event.date) return true;
+  // Date range > 14 days → on view
+  if (isDateRange(event.date)) {
+    const range = parseDateRange(event.date);
+    if (range) {
+      const days = (range.end.getTime() - range.start.getTime()) / (1000 * 60 * 60 * 24);
+      if (days > 14) return true;
+    }
+  }
+  return false;
+}
+
 // --- Category config ---
 
 const categoryConfig: { key: Category; label: string; bg: string; text: string; dot: string }[] = [
@@ -133,7 +148,7 @@ function normalizeCategory(raw: string): Category {
 export default function Home() {
   const [eventsData, setEventsData] = useState<EventsData>({ weekOf: '', events: [] });
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
-  const [viewMode, setViewMode] = useState<'calendar' | 'category' | 'showtimes'>('calendar');
+  const [viewMode, setViewMode] = useState<'calendar' | 'category' | 'showtimes' | 'onview'>('calendar');
   const [loading, setLoading] = useState(true);
   const [today] = useState(() => startOfDay(new Date()));
   const [currentMonth, setCurrentMonth] = useState(() => startOfMonth(new Date()));
@@ -187,9 +202,10 @@ export default function Home() {
     ? eventsData.events.filter(e => selectedCategories.includes(e.category))
     : eventsData.events;
 
-  // Split showtimes from calendar events
+  // Split showtimes and on-view from calendar events
   const showtimeEvents = filteredEvents.filter(isShowtime);
-  const calendarEvents = filteredEvents.filter(e => !isShowtime(e));
+  const onViewEvents = filteredEvents.filter(e => !isShowtime(e) && isOnView(e));
+  const calendarEvents = filteredEvents.filter(e => !isShowtime(e) && !isOnView(e));
 
   if (loading) {
     return (
@@ -213,49 +229,19 @@ export default function Home() {
         <p style={{ color: '#8888a0', fontSize: '0.875rem', marginTop: '0.5rem' }}>
           {calendarEvents.length} event{calendarEvents.length !== 1 ? 's' : ''}
           {showtimeEvents.length > 0 && ` · ${showtimeEvents.length} showtime${showtimeEvents.length !== 1 ? 's' : ''}`}
+          {onViewEvents.length > 0 && ` · ${onViewEvents.length} on view`}
         </p>
-      </header>
-
-      {/* Category filters (hidden on Showtimes) + view toggle */}
-      <div style={{ display: 'flex', flexWrap: 'wrap' as const, alignItems: 'center', justifyContent: 'space-between', gap: '1rem', marginBottom: '1.5rem' }}>
-        {viewMode !== 'showtimes' ? (
-          <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem' }}>
-            {deduped.map(({ key, label, bg, text, dot }) => {
-              const matchingKeys = categoryConfig.filter(c => c.label === label).map(c => c.key);
-              const isActive = matchingKeys.some(k => selectedCategories.includes(k));
-              return (
-                <button
-                  key={key}
-                  onClick={() => {
-                    setSelectedCategories(prev => {
-                      if (isActive) return prev.filter(c => !matchingKeys.includes(c));
-                      return [...prev, ...matchingKeys.filter(k => !prev.includes(k))];
-                    });
-                  }}
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: '0.375rem',
-                    padding: '0.375rem 0.75rem', borderRadius: '999px', fontSize: '0.8125rem', fontWeight: 500,
-                    border: isActive ? `1.5px solid ${dot}` : '1.5px solid #e8e4de',
-                    background: isActive ? bg : '#fff', color: isActive ? text : '#8888a0',
-                    cursor: 'pointer', transition: 'all 0.15s ease',
-                  }}
-                >
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: isActive ? dot : '#d1d1d1' }} />
-                  {label}
-                </button>
-              );
-            })}
-          </div>
-        ) : <div />}
-        <div style={{ display: 'flex', background: '#f0ece6', borderRadius: '0.5rem', padding: '3px' }}>
+        {/* Tab bar — right below the counts */}
+        <div style={{ display: 'flex', background: '#f0ece6', borderRadius: '0.5rem', padding: '3px', marginTop: '0.75rem', alignSelf: 'flex-start' }}>
           {([
             { mode: 'calendar' as const, label: '📅 Calendar' },
             { mode: 'showtimes' as const, label: '🎬 Showtimes' },
+            { mode: 'onview' as const, label: '🎨 On View' },
             { mode: 'category' as const, label: '📂 Category' },
           ]).map(({ mode, label }) => (
             <button
               key={mode}
-              onClick={() => setViewMode(mode)}
+              onClick={() => { setViewMode(mode); setSelectedCategories([]); }}
               style={{
                 padding: '0.4rem 1rem', borderRadius: '0.375rem', fontSize: '0.8125rem', fontWeight: 500,
                 border: 'none', cursor: 'pointer',
@@ -269,12 +255,45 @@ export default function Home() {
             </button>
           ))}
         </div>
-      </div>
+      </header>
+
+      {/* Category filters (hidden on Showtimes / On View) */}
+      {viewMode !== 'showtimes' && viewMode !== 'onview' && (
+        <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem', marginBottom: '1.5rem' }}>
+          {deduped.map(({ key, label, bg, text, dot }) => {
+            const matchingKeys = categoryConfig.filter(c => c.label === label).map(c => c.key);
+            const isActive = matchingKeys.some(k => selectedCategories.includes(k));
+            return (
+              <button
+                key={key}
+                onClick={() => {
+                  setSelectedCategories(prev => {
+                    if (isActive) return prev.filter(c => !matchingKeys.includes(c));
+                    return [...prev, ...matchingKeys.filter(k => !prev.includes(k))];
+                  });
+                }}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: '0.375rem',
+                  padding: '0.375rem 0.75rem', borderRadius: '999px', fontSize: '0.8125rem', fontWeight: 500,
+                  border: isActive ? `1.5px solid ${dot}` : '1.5px solid #e8e4de',
+                  background: isActive ? bg : '#fff', color: isActive ? text : '#8888a0',
+                  cursor: 'pointer', transition: 'all 0.15s ease',
+                }}
+              >
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: isActive ? dot : '#d1d1d1' }} />
+                {label}
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       {viewMode === 'category' ? (
         <EventList events={calendarEvents} />
       ) : viewMode === 'showtimes' ? (
         <ShowtimesView events={showtimeEvents} currentMonth={currentMonth} today={today} />
+      ) : viewMode === 'onview' ? (
+        <OnViewTab events={onViewEvents} today={today} />
       ) : (
         <MonthCalendar
           events={calendarEvents}
@@ -1063,6 +1082,193 @@ function ShowtimesView({ events, currentMonth, today }: { events: Event[]; curre
       {filteredByMonth.length === 0 && (
         <p style={{ textAlign: 'center', color: '#8888a0', padding: '3rem 0', fontSize: '1rem' }}>
           No showtimes found for {format(currentMonth, 'MMMM yyyy')}.
+        </p>
+      )}
+    </div>
+  );
+}
+
+// --- On View Tab ---
+
+const ON_VIEW_VENUE_COLORS: Record<string, { accent: string; bg: string; text: string; border: string; dot: string }> = {
+  'the metropolitan museum of art': { accent: '#b91c1c', bg: '#fef2f2', text: '#991b1b', border: '#fecaca', dot: '#ef4444' },
+  'the met':                        { accent: '#b91c1c', bg: '#fef2f2', text: '#991b1b', border: '#fecaca', dot: '#ef4444' },
+  'whitney museum of american art':  { accent: '#0369a1', bg: '#f0f9ff', text: '#075985', border: '#bae6fd', dot: '#0ea5e9' },
+  'whitney museum':                  { accent: '#0369a1', bg: '#f0f9ff', text: '#075985', border: '#bae6fd', dot: '#0ea5e9' },
+  'solomon r. guggenheim museum':    { accent: '#c2410c', bg: '#fff7ed', text: '#9a3412', border: '#fed7aa', dot: '#f97316' },
+  'guggenheim':                      { accent: '#c2410c', bg: '#fff7ed', text: '#9a3412', border: '#fed7aa', dot: '#f97316' },
+  'the museum of modern art':        { accent: '#1d4ed8', bg: '#eff6ff', text: '#1e40af', border: '#bfdbfe', dot: '#3b82f6' },
+  'moma':                            { accent: '#1d4ed8', bg: '#eff6ff', text: '#1e40af', border: '#bfdbfe', dot: '#3b82f6' },
+  'new museum':                      { accent: '#7c3aed', bg: '#f5f3ff', text: '#6d28d9', border: '#c4b5fd', dot: '#8b5cf6' },
+  'neue galerie':                    { accent: '#a16207', bg: '#fefce8', text: '#854d0e', border: '#fde68a', dot: '#eab308' },
+  'the frick collection':            { accent: '#166534', bg: '#f0fdf4', text: '#15803d', border: '#bbf7d0', dot: '#22c55e' },
+  'the frick':                       { accent: '#166534', bg: '#f0fdf4', text: '#15803d', border: '#bbf7d0', dot: '#22c55e' },
+  'bam':                             { accent: '#9d174d', bg: '#fdf2f8', text: '#be185d', border: '#fbcfe8', dot: '#ec4899' },
+  'brooklyn academy of music':       { accent: '#9d174d', bg: '#fdf2f8', text: '#be185d', border: '#fbcfe8', dot: '#ec4899' },
+  'carnegie hall':                   { accent: '#b45309', bg: '#fffbeb', text: '#92400e', border: '#fde68a', dot: '#f59e0b' },
+  '92ny':                            { accent: '#0d9488', bg: '#f0fdfa', text: '#115e59', border: '#99f6e4', dot: '#14b8a6' },
+  '92nd street y':                   { accent: '#0d9488', bg: '#f0fdfa', text: '#115e59', border: '#99f6e4', dot: '#14b8a6' },
+  'lincoln center':                  { accent: '#4338ca', bg: '#eef2ff', text: '#3730a3', border: '#c7d2fe', dot: '#6366f1' },
+  'the morgan library & museum':     { accent: '#78350f', bg: '#fffbeb', text: '#92400e', border: '#fde68a', dot: '#d97706' },
+  'the jewish museum':               { accent: '#1e3a5f', bg: '#eff6ff', text: '#1e40af', border: '#bfdbfe', dot: '#3b82f6' },
+  'museum of arts and design':       { accent: '#be185d', bg: '#fdf2f8', text: '#9d174d', border: '#fbcfe8', dot: '#ec4899' },
+  'cooper hewitt':                   { accent: '#059669', bg: '#ecfdf5', text: '#047857', border: '#a7f3d0', dot: '#10b981' },
+  'met opera':                       { accent: '#b91c1c', bg: '#fef2f2', text: '#991b1b', border: '#fecaca', dot: '#ef4444' },
+  'metropolitan opera':              { accent: '#b91c1c', bg: '#fef2f2', text: '#991b1b', border: '#fecaca', dot: '#ef4444' },
+};
+const DEFAULT_ON_VIEW_COLOR = { accent: '#6b7280', bg: '#f9fafb', text: '#374151', border: '#d1d5db', dot: '#9ca3af' };
+
+function getOnViewVenueColor(venue: string) {
+  return ON_VIEW_VENUE_COLORS[venue.toLowerCase()] || DEFAULT_ON_VIEW_COLOR;
+}
+
+function getOnViewDateLabel(event: Event): string {
+  if (!event.date) return 'Ongoing';
+  if (isDateRange(event.date)) {
+    const range = parseDateRange(event.date);
+    if (!range) return event.date;
+    const startStr = format(range.start, 'MMM d');
+    const endMonth = range.end.getMonth();
+    const startMonth = range.start.getMonth();
+    const endStr = startMonth === endMonth ? format(range.end, 'd') : format(range.end, 'MMM d');
+    return `${startStr} – ${endStr}`;
+  }
+  return format(toDate(event.date), 'MMM d');
+}
+
+function OnViewTab({ events, today }: { events: Event[]; today: Date }) {
+  const [selectedVenue, setSelectedVenue] = useState<string | null>(null);
+
+  const venues = Array.from(new Set(events.map(e => e.venue))).sort();
+
+  // Group events by venue
+  const grouped: Record<string, Event[]> = {};
+  for (const e of events) {
+    if (!grouped[e.venue]) grouped[e.venue] = [];
+    grouped[e.venue].push(e);
+  }
+
+  // Sort events within each venue: ones with dates first (by start date), then ongoing
+  for (const v of Object.keys(grouped)) {
+    grouped[v].sort((a, b) => {
+      if (!a.date && !b.date) return a.title.localeCompare(b.title);
+      if (!a.date) return 1;
+      if (!b.date) return -1;
+      const aStart = isDateRange(a.date) ? (parseDateRange(a.date)?.start || toDate(a.date)) : toDate(a.date);
+      const bStart = isDateRange(b.date) ? (parseDateRange(b.date)?.start || toDate(b.date)) : toDate(b.date);
+      return aStart.getTime() - bStart.getTime();
+    });
+  }
+
+  const activeVenues = selectedVenue ? [selectedVenue] : venues;
+
+  return (
+    <div>
+      {/* Venue filter pills */}
+      <div style={{ marginBottom: '1.5rem' }}>
+        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' as const }}>
+          {venues.map(v => {
+            const vc = getOnViewVenueColor(v);
+            const isActive = selectedVenue === v;
+            const count = grouped[v]?.length || 0;
+            return (
+              <button
+                key={v}
+                onClick={() => setSelectedVenue(isActive ? null : v)}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: '0.375rem',
+                  padding: '0.4rem 0.875rem', borderRadius: '999px', fontSize: '0.8125rem', fontWeight: 500,
+                  border: `1.5px solid ${isActive ? vc.accent : '#e8e4de'}`,
+                  background: isActive ? vc.bg : '#fff',
+                  color: isActive ? vc.text : '#8888a0',
+                  cursor: 'pointer', transition: 'all 0.15s ease',
+                }}
+              >
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: isActive ? vc.dot : '#d1d1d1' }} />
+                {v}
+                <span style={{ fontSize: '0.75rem', opacity: 0.7 }}>({count})</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Venue sections */}
+      {activeVenues.map(venue => {
+        const venueEvents = grouped[venue];
+        if (!venueEvents || venueEvents.length === 0) return null;
+        const vc = getOnViewVenueColor(venue);
+
+        return (
+          <div key={venue} style={{ marginBottom: '2.5rem' }}>
+            {/* Venue header */}
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: '0.625rem',
+              marginBottom: '1.25rem', paddingBottom: '0.75rem',
+              borderBottom: `2px solid ${vc.border}`,
+            }}>
+              <span style={{
+                width: '10px', height: '10px', borderRadius: '50%', background: vc.accent,
+              }} />
+              <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#1a1a2e', margin: 0 }}>
+                {venue}
+              </h3>
+              <span style={{ fontSize: '0.8125rem', color: '#8888a0', fontWeight: 400 }}>
+                {venueEvents.length} exhibition{venueEvents.length !== 1 ? 's' : ''}
+              </span>
+            </div>
+
+            {/* Exhibition list */}
+            <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '0.5rem' }}>
+              {venueEvents.map(event => (
+                <a
+                  key={event.id}
+                  href={event.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                    gap: '1rem', padding: '0.75rem 1rem',
+                    borderRadius: '0.5rem', textDecoration: 'none', color: '#1a1a2e',
+                    background: '#fff', border: `1px solid ${vc.border}`,
+                    borderLeft: `3px solid ${vc.accent}`,
+                    transition: 'all 0.15s ease',
+                  }}
+                  onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                    e.currentTarget.style.background = vc.bg;
+                    e.currentTarget.style.transform = 'translateY(-1px)';
+                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+                  }}
+                  onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                    e.currentTarget.style.background = '#fff';
+                    e.currentTarget.style.transform = 'none';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontWeight: 600, fontSize: '0.875rem' }}>{event.title}</div>
+                    <div style={{ marginTop: '0.25rem' }}>
+                      <CategoryTag category={event.category} />
+                    </div>
+                  </div>
+                  <span style={{
+                    fontSize: '0.75rem', fontWeight: 500, color: vc.text,
+                    background: vc.bg, padding: '0.25rem 0.625rem',
+                    borderRadius: '999px', whiteSpace: 'nowrap',
+                    border: `1px solid ${vc.border}`,
+                  }}>
+                    {getOnViewDateLabel(event)}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+
+      {events.length === 0 && (
+        <p style={{ textAlign: 'center', color: '#8888a0', padding: '3rem 0', fontSize: '1rem' }}>
+          No exhibitions currently on view.
         </p>
       )}
     </div>

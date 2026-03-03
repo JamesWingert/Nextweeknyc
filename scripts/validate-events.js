@@ -99,6 +99,7 @@ const JUNK_PATTERNS = [
   /\bLLC\b/i,
   /\bmerch(andise)?\s*submission/i,
   /\bMORE PERFORMANCES?\b/i,
+  /\bSiriusXM\b/i,
   /\bgroup travel advisor/i,
   /\bholistic healing\b/i,
   /\bgemstone jewelry\b/i,
@@ -252,6 +253,9 @@ function validateEvent(raw, index) {
 
   if (!title) errors.push(`[${index}] missing title`);
   if (isJunkTitle(title)) errors.push(`[${index}] junk title: "${title.slice(0, 60)}"`);
+  // Reject events from dropped/non-venue sources
+  const JUNK_VENUES = ['time out ny', 'time out'];
+  if (JUNK_VENUES.includes(venue.toLowerCase())) errors.push(`[${index}] junk venue: "${venue}"`);
   // Allow events with null/empty dates — they won't show on specific calendar days
   // but are still valid (e.g. ongoing exhibitions, events with unparseable dates)
   if (date && !isValidDate(date)) errors.push(`[${index}] invalid date format: "${date}"`);

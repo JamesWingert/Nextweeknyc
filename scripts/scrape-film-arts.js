@@ -1062,6 +1062,8 @@ async function scrapeMetOpera(browser) {
         // Skip known non-title lines
         if (/^(ON STAGE|ON RADIO|IN CINEMAS|BACKSTAGE|ALL EVENTS|ONSTAGE|Page|Date|Previous|Next|Enter|Filter|Subscribe|Buy|View|Calendar|FIND STATION|LAST PERFORMANCE|TO |SuMoTu|PrevNext)/i.test(line)) continue;
         if (/\bMORE PERFORMANCES?\b/i.test(line)) continue;
+        if (/\bSiriusXM\b/i.test(line)) continue;
+        if (/\bTuesday Talk\b/i.test(line)) continue;
         if (/^\d{1,2}:\d{2}\s*(AM|PM)$/i.test(line)) continue;
         // Skip ALL CAPS lines (composer names like "RICHARD WAGNER", "GIACOMO PUCCINI")
         if (/^[A-Z\s.,'()-]+$/.test(line) && line.length < 50) continue;
@@ -1073,8 +1075,13 @@ async function scrapeMetOpera(browser) {
         const key = line.toLowerCase();
         if (!seen.has(key)) {
           seen.add(key);
-          // Try to find a matching season link
-          const link = linkMap.get(key) || '';
+          // Try exact match first, then fuzzy (title contains an opera name from linkMap)
+          let link = linkMap.get(key) || '';
+          if (!link) {
+            for (const [mapKey, mapUrl] of linkMap.entries()) {
+              if (key.includes(mapKey) || mapKey.includes(key)) { link = mapUrl; break; }
+            }
+          }
           r.push({ title: line, date: currentDate, link: link || 'https://www.metopera.org/season/2025-26-season/' });
         }
       }
