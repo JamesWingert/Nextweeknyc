@@ -81,7 +81,7 @@ const JUNK_PATTERNS = [
   /^(buy tickets?|get tickets?|tickets?|rsvp|sold out)$/i,
   /^(free|paid|donation)$/i,
   /^(more info|learn more|read more|details|info)$/i,
-  /^(image|photo|video|gallery|slideshow)/i,
+  /^(image|photo|video|slideshow)$/i,
   /^(advertisement|sponsored|ad)$/i,
   /\(SPONSORED\)/i,
 

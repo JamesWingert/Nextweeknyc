@@ -449,41 +449,41 @@ async function scrapeNeueGalerie() {
 }
 
 async function scrapeFrick() {
-  // The Frick has a Trumba RSS calendar feed with structured dates
+  // The Frick has a Trumba JSON calendar feed — much richer than the RSS (which caps at ~7)
   try {
-    const { html: rssXml } = await fetchHTML('https://www.trumba.com/calendars/frick2.rss');
+    const { html: raw } = await fetchHTML('https://www.trumba.com/calendars/frick2.json');
+    const data = JSON.parse(raw);
     const items = [];
-    const itemRegex = /<item>([\s\S]*?)<\/item>/g;
-    let match;
-    while ((match = itemRegex.exec(rssXml)) !== null) {
-      const xml = match[1];
-      const get = (tag) => {
-        const m = xml.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`));
-        return m ? m[1].trim() : '';
-      };
-      const title = get('title');
-      const localstart = get('x-trumba:localstart'); // "2026-03-04T15:30:00"
-      const link = get('link');
-      const location = get('xCal:location');
-      const formatted = get('x-trumba:formatteddatetime'); // "Wednesday, March 4, 2026, 3:30 - 3:45 p.m. EST"
+    const rangeStart = WEEK.start;
+    const rangeEnd = WEEK.end;
 
+    for (const ev of data) {
+      const title = (ev.title || '').replace(/&#39;/g, "'").replace(/&quot;/g, '"')
+        .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').trim();
       if (!title || title.length < 4) continue;
 
-      // Extract date from localstart (ISO format)
-      const dateStr = localstart ? localstart.slice(0, 10) : '';
-      // Extract time from formatted string
-      const timeMatch = formatted.match(/(\d{1,2}(?::\d{2})?\s*(?:-|–)\s*\d{1,2}(?::\d{2})?\s*(?:a\.m\.|p\.m\.|AM|PM)?\s*(?:a\.m\.|p\.m\.|AM|PM|EST|EDT)?)/i);
-      const time = timeMatch ? timeMatch[1].replace(/\s+/g, ' ').trim() : '';
+      // startDateTime: "2026-03-04T15:30:00"
+      const dateStr = ev.startDateTime ? ev.startDateTime.slice(0, 10) : '';
+      // Filter to our scrape range
+      if (dateStr && (dateStr < rangeStart || dateStr > rangeEnd)) continue;
 
-      // Clean up location — strip "In-Person: " prefix
-      const venue = location.replace(/^In[- ]Person:\s*/i, '').trim() || 'The Frick Collection';
+      // Extract time from dateTimeFormatted: "Wednesday, March 4, 2026, 6 – 7pm EST"
+      const formatted = (ev.dateTimeFormatted || '')
+        .replace(/&nbsp;/g, ' ').replace(/&ndash;/g, '–').replace(/\s+/g, ' ').trim();
+      const timeMatch = formatted.match(/(\d{1,2}(?::\d{2})?\s*(?:–|-)\s*\d{1,2}(?::\d{2})?\s*(?:a\.?m\.?|p\.?m\.?|AM|PM)?\s*(?:a\.?m\.?|p\.?m\.?|AM|PM|EST|EDT)?)/i);
+      const time = timeMatch ? timeMatch[1].trim() : '';
 
-      // Strip HTML from description for a clean summary
-      const rawDesc = get('description');
-      const desc = rawDesc
+      // Location — strip "In-Person: " prefix
+      const location = (ev.location || '').replace(/^In[- ]Person:\s*/i, '').trim() || 'The Frick Collection';
+
+      // Build link from eventID
+      const link = ev.permaLinkUrl || `https://www.frick.org/calendar?trumbaEmbed=view%3devent%26eventid%3d${ev.eventID}`;
+
+      // Clean description
+      const desc = (ev.description || '')
         .replace(/<[^>]+>/g, ' ')
-        .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
-        .replace(/&#160;/g, ' ').replace(/&quot;/g, '"')
+        .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&#160;/g, ' ')
+        .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#39;/g, "'").replace(/&quot;/g, '"')
         .replace(/\s+/g, ' ').trim()
         .slice(0, 200);
 
@@ -491,12 +491,13 @@ async function scrapeFrick() {
         title,
         date: dateStr,
         link,
+        venue: location,
         time,
         description: desc || undefined,
       });
     }
     push(items, 'The Frick Collection', 'Art', 'https://www.frick.org/calendar');
-    console.error(`The Frick (RSS): ${items.length}`);
+    console.error(`The Frick (JSON): ${items.length}`);
   } catch (e) { console.error('The Frick error:', e.message); }
 }
 
