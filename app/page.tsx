@@ -223,12 +223,15 @@ export default function Home() {
       <header style={{ marginBottom: '2rem' }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.75rem', flexWrap: 'wrap' as const }}>
           <h1 style={{ fontSize: '2rem', fontWeight: 700, letterSpacing: '-0.02em', color: '#1a1a2e' }}>
-            NYC Events
+            Next Week NYC
           </h1>
           <span style={{ fontSize: '0.875rem', fontWeight: 500, color: '#e07a5f', background: '#fde8e8', padding: '0.25rem 0.75rem', borderRadius: '999px' }}>
             {format(currentMonth, 'MMMM yyyy')}
           </span>
         </div>
+        <p style={{ color: '#b0a090', fontSize: '0.8125rem', marginTop: '0.25rem', fontStyle: 'italic' }}>
+          Film, art, music, theater & more — curated for the city
+        </p>
         <p style={{ color: '#8888a0', fontSize: '0.875rem', marginTop: '0.5rem' }}>
           {calendarEvents.length} event{calendarEvents.length !== 1 ? 's' : ''}
           {showtimeEvents.length > 0 && ` · ${showtimeEvents.length} showtime${showtimeEvents.length !== 1 ? 's' : ''}`}
