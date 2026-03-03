@@ -162,6 +162,13 @@ const MANHATTAN_VENUES = new Set([
   'the gramercy theatre', 'the joyce theater', 'the met', 'the shed',
   'the slipper room', 'the stand', 'the stone pony', 'webster hall',
   'whitney museum', 'american ballet theatre',
+  // Additional Manhattan venues
+  'arlene\'s grocery', 'new york comedy club east village',
+  'new york comedy club upper west side', 'new york comedy club',
+  'stephen a. schwarzman auditorium', 'onsite: stephen a. schwarzman auditorium',
+  'library gallery', 'west gallery', 'dining room',
+  'ronald s. lauder exhibition galleries', 'sleepwalk',
+  'the skint', 'secret nyc', 'joe\'s pub',
 ]);
 
 const BROOKLYN_VENUES = new Set([
@@ -171,6 +178,8 @@ const BROOKLYN_VENUES = new Set([
   'littlefield', 'music hall of williamsburg', 'public records',
   'rough trade nyc', 'the bell house', 'the sultan room', 'tv eye',
   'union pool', 'warsaw', 'xanadu',
+  // Additional Brooklyn venues
+  '3 dollar bill', 'alphaville',
 ]);
 
 const QUEENS_VENUES = new Set([
@@ -187,13 +196,12 @@ function inferBorough(venue: string): Borough {
   if (BROOKLYN_VENUES.has(v)) return 'Brooklyn';
   if (QUEENS_VENUES.has(v)) return 'Queens';
   if (BRONX_VENUES.has(v)) return 'Bronx';
-  // NYC Parks venues have borough in the name
-  if (v.includes('manhattan') || v.includes('central park')) return 'Manhattan';
+  // NYC Parks venues and others with borough in the name
+  if (v.includes('manhattan') || v.includes('central park') || v.includes('high line')) return 'Manhattan';
   if (v.includes('brooklyn')) return 'Brooklyn';
-  if (v.includes('queens') || v.includes('elmhurst') || v.includes('flushing')) return 'Queens';
+  if (v.includes('queens') || v.includes('elmhurst') || v.includes('flushing') || v.includes('astoria') || v.includes('lic')) return 'Queens';
   if (v.includes('bronx')) return 'Bronx';
   if (v.includes('staten island')) return 'Other';
-  // Default: most NYC events are Manhattan
   return 'Other';
 }
 
@@ -469,9 +477,37 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Category + Borough filters (hidden on Showtimes / On View) */}
+      {/* Borough filter — sits between tabs and category pills, visible on all tabs */}
+      <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem', marginBottom: '0.75rem', alignItems: 'center' }}>
+        {boroughConfig.map(({ key, label, emoji }) => {
+          const isActive = selectedBoroughs.includes(key);
+          return (
+            <button
+              key={key}
+              onClick={() => {
+                setSelectedBoroughs(prev =>
+                  isActive ? prev.filter(b => b !== key) : [...prev, key]
+                );
+              }}
+              style={{
+                display: 'flex', alignItems: 'center', gap: '0.3rem',
+                padding: '0.375rem 0.75rem', borderRadius: '999px', fontSize: '0.8125rem', fontWeight: 500,
+                border: isActive ? '1.5px solid #e07a5f' : '1.5px solid var(--border)',
+                background: isActive ? '#fde8e8' : 'var(--bg-card)',
+                color: isActive ? '#b91c1c' : 'var(--text-muted)',
+                cursor: 'pointer', transition: 'all 0.15s ease',
+              }}
+            >
+              <span style={{ fontSize: '0.75rem' }}>{emoji}</span>
+              {label}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Category filters (hidden on Showtimes / On View) */}
       {viewMode !== 'showtimes' && viewMode !== 'onview' && (
-        <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem', marginBottom: '1.5rem', alignItems: 'center' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem', marginBottom: '1.5rem' }}>
           {deduped.map(({ key, label, bg, text, dot }) => {
             const matchingKeys = categoryConfig.filter(c => c.label === label).map(c => c.key);
             const isActive = matchingKeys.some(k => selectedCategories.includes(k));
@@ -493,63 +529,6 @@ export default function Home() {
                 }}
               >
                 <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: isActive ? dot : '#d1d1d1' }} />
-                {label}
-              </button>
-            );
-          })}
-          {/* Borough divider + pills */}
-          <span style={{ width: '1px', height: '1.25rem', background: 'var(--border)', margin: '0 0.125rem' }} />
-          {boroughConfig.map(({ key, label, emoji }) => {
-            const isActive = selectedBoroughs.includes(key);
-            return (
-              <button
-                key={key}
-                onClick={() => {
-                  setSelectedBoroughs(prev =>
-                    isActive ? prev.filter(b => b !== key) : [...prev, key]
-                  );
-                }}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: '0.3rem',
-                  padding: '0.375rem 0.75rem', borderRadius: '999px', fontSize: '0.8125rem', fontWeight: 500,
-                  border: isActive ? '1.5px solid #e07a5f' : '1.5px solid var(--border)',
-                  background: isActive ? '#fde8e8' : 'var(--bg-card)',
-                  color: isActive ? '#b91c1c' : 'var(--text-muted)',
-                  cursor: 'pointer', transition: 'all 0.15s ease',
-                }}
-              >
-                <span style={{ fontSize: '0.75rem' }}>{emoji}</span>
-                {label}
-              </button>
-            );
-          })}
-        </div>
-      )}
-
-      {/* Borough-only filter for Showtimes / On View tabs */}
-      {(viewMode === 'showtimes' || viewMode === 'onview') && (
-        <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem', marginBottom: '1.5rem', alignItems: 'center' }}>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 500, marginRight: '0.25rem' }}>📍</span>
-          {boroughConfig.map(({ key, label, emoji }) => {
-            const isActive = selectedBoroughs.includes(key);
-            return (
-              <button
-                key={key}
-                onClick={() => {
-                  setSelectedBoroughs(prev =>
-                    isActive ? prev.filter(b => b !== key) : [...prev, key]
-                  );
-                }}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: '0.3rem',
-                  padding: '0.375rem 0.75rem', borderRadius: '999px', fontSize: '0.8125rem', fontWeight: 500,
-                  border: isActive ? '1.5px solid #e07a5f' : '1.5px solid var(--border)',
-                  background: isActive ? '#fde8e8' : 'var(--bg-card)',
-                  color: isActive ? '#b91c1c' : 'var(--text-muted)',
-                  cursor: 'pointer', transition: 'all 0.15s ease',
-                }}
-              >
-                <span style={{ fontSize: '0.75rem' }}>{emoji}</span>
                 {label}
               </button>
             );
