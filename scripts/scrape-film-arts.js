@@ -1322,8 +1322,82 @@ const JS_SOURCES = new Set([
   'Metrograph', 'Guggenheim', 'New Museum', 'Japan Society',
   'NY Philharmonic', 'Carnegie Hall', 'Met Opera', 'NYCB',
   'Joyce Theater', 'Lincoln Center', 'Moving Image', '92NY',
-  'Angelika', 'Film at Lincoln Center'
+  'Angelika', 'Film at Lincoln Center', 'ABT'
 ]);
+
+// ---------------------------------------------------------------------------
+// American Ballet Theatre — FullCalendar DOM scraper
+// ---------------------------------------------------------------------------
+
+async function scrapeABT(browser) {
+  const page = await browser.newPage();
+  page.setDefaultTimeout(45000);
+  try {
+    // Map ABT categories to ours
+    const CAT_MAP = {
+      'performance': 'Ballet',
+      'special events': 'Ballet',
+      'community': 'Ballet',
+    };
+    const SKIP_CATS = new Set(['training']);
+
+    const allItems = [];
+
+    // Scrape current month view, then click "next" for next month
+    for (let m = 0; m < 2; m++) {
+      if (m === 0) {
+        await page.goto('https://www.abt.org/performances/master-calendar/', { waitUntil: 'domcontentloaded' });
+        await page.waitForTimeout(10000);
+      } else {
+        // Click the next-month button
+        const nextBtn = await page.$('.fc-next-button, .fc-button-next, button.fc-next-button');
+        if (nextBtn) {
+          await nextBtn.click();
+          await page.waitForTimeout(5000);
+        } else break;
+      }
+
+      const items = await page.evaluate(() => {
+        const wrappers = document.querySelectorAll('.event-wrapper');
+        return Array.from(wrappers).map(w => {
+          const dataId = w.getAttribute('data-id') || '';
+          const cat = w.querySelector('.category');
+          const catText = cat ? cat.childNodes[0].textContent.trim().toLowerCase() : '';
+          const location = w.querySelector('.event-location');
+          const titleEl = w.querySelector('.fc-title');
+          const time = w.querySelector('.fc-time');
+          return {
+            date: dataId ? dataId.slice(0, 4) + '-' + dataId.slice(4, 6) + '-' + dataId.slice(6, 8) : '',
+            catText,
+            location: location ? location.textContent.trim() : '',
+            title: titleEl ? titleEl.childNodes[0].textContent.trim() : '',
+            time: time ? time.textContent.trim() : '',
+          };
+        });
+      });
+      allItems.push(...items);
+    }
+
+    // Filter: NYC only, skip training, skip school closures, dedup by title+date
+    const seen = new Set();
+    const filtered = [];
+    for (const item of allItems) {
+      if (!item.title || item.title.length < 3) continue;
+      if (SKIP_CATS.has(item.catText)) continue;
+      if (!/new york/i.test(item.location)) continue;
+      if (/school closed/i.test(item.title)) continue;
+      const cat = CAT_MAP[item.catText] || 'Ballet';
+      const key = item.title.toLowerCase() + '|' + item.date;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      filtered.push({ title: item.title, date: item.date, time: item.time || undefined, category: cat });
+    }
+
+    push(filtered, 'American Ballet Theatre', 'Ballet', 'https://www.abt.org/performances/master-calendar/');
+    console.error(`ABT: ${filtered.length} NYC events`);
+  } catch (e) { console.error('ABT error:', e.message); }
+  finally { await page.close(); }
+}
 
 async function scrapeAngelika(browser) {
   const page = await browser.newPage();
@@ -1509,6 +1583,7 @@ function printReport() {
     await runSource('Lincoln Center', scrapeLincolnCenter, browser);
     await runSource('Moving Image', scrapeMovingImage, browser);
     await runSource('92NY', scrape92NY, browser);
+    await runSource('ABT', scrapeABT, browser);
   } catch (e) {
     console.error('Playwright unavailable, skipping JS sources:', e.message);
   } finally {

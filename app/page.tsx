@@ -94,23 +94,23 @@ function isOnView(event: Event): boolean {
 // --- Category config ---
 
 const categoryConfig: { key: Category; label: string; bg: string; text: string; dot: string }[] = [
-  { key: 'Film', label: 'Film', bg: '#fde8e8', text: '#b91c1c', dot: '#ef4444' },
   { key: 'Art', label: 'Art & Museums', bg: '#ede9fe', text: '#6d28d9', dot: '#8b5cf6' },
-  { key: 'Classical Music', label: 'Classical', bg: '#dbeafe', text: '#1d4ed8', dot: '#3b82f6' },
   { key: 'Ballet', label: 'Ballet', bg: '#fce7f3', text: '#be185d', dot: '#ec4899' },
-  { key: 'Opera', label: 'Opera', bg: '#fef3c7', text: '#92400e', dot: '#f59e0b' },
-  { key: 'Dance', label: 'Dance', bg: '#d1fae5', text: '#065f46', dot: '#10b981' },
-  { key: 'Jazz', label: 'Jazz', bg: '#e0e7ff', text: '#3730a3', dot: '#6366f1' },
-  { key: 'Theater', label: 'Theater', bg: '#fef3c7', text: '#78350f', dot: '#d97706' },
-  { key: 'Comedy', label: 'Comedy', bg: '#fef9c3', text: '#713f12', dot: '#facc15' },
-  { key: 'Music/Performing Arts', label: 'Performing Arts', bg: '#fce7f3', text: '#9d174d', dot: '#f472b6' },
-  { key: 'Family', label: 'Family', bg: '#fce7f3', text: '#9d174d', dot: '#f472b6' },
-  { key: 'Talk', label: 'Talks', bg: '#f3e8ff', text: '#7e22ce', dot: '#a855f7' },
-  { key: 'Food/Drink', label: 'Food & Drink', bg: '#ffedd5', text: '#c2410c', dot: '#f97316' },
-  { key: 'Shopping/Markets', label: 'Markets', bg: '#dcfce7', text: '#166534', dot: '#22c55e' },
   { key: 'Cars & Coffee', label: 'Cars & Coffee', bg: '#cffafe', text: '#155e75', dot: '#06b6d4' },
   { key: 'Chinatown/Flushing/LIC', label: 'Chinatown/Flushing', bg: '#fef9c3', text: '#854d0e', dot: '#eab308' },
+  { key: 'Classical Music', label: 'Classical', bg: '#dbeafe', text: '#1d4ed8', dot: '#3b82f6' },
+  { key: 'Comedy', label: 'Comedy', bg: '#fef9c3', text: '#713f12', dot: '#facc15' },
+  { key: 'Dance', label: 'Dance', bg: '#d1fae5', text: '#065f46', dot: '#10b981' },
+  { key: 'Family', label: 'Family', bg: '#fce7f3', text: '#9d174d', dot: '#f472b6' },
+  { key: 'Film', label: 'Film', bg: '#fde8e8', text: '#b91c1c', dot: '#ef4444' },
+  { key: 'Food/Drink', label: 'Food & Drink', bg: '#ffedd5', text: '#c2410c', dot: '#f97316' },
+  { key: 'Jazz', label: 'Jazz', bg: '#e0e7ff', text: '#3730a3', dot: '#6366f1' },
+  { key: 'Shopping/Markets', label: 'Markets', bg: '#dcfce7', text: '#166534', dot: '#22c55e' },
+  { key: 'Opera', label: 'Opera', bg: '#fef3c7', text: '#92400e', dot: '#f59e0b' },
   { key: 'Outdoor/Parks', label: 'Outdoor', bg: '#d1fae5', text: '#14532d', dot: '#22c55e' },
+  { key: 'Music/Performing Arts', label: 'Performing Arts', bg: '#fce7f3', text: '#9d174d', dot: '#f472b6' },
+  { key: 'Talk', label: 'Talks', bg: '#f3e8ff', text: '#7e22ce', dot: '#a855f7' },
+  { key: 'Theater', label: 'Theater', bg: '#fef3c7', text: '#78350f', dot: '#d97706' },
   { key: 'Other', label: 'Other', bg: '#f3f4f6', text: '#4b5563', dot: '#9ca3af' },
 ];
 
@@ -119,7 +119,7 @@ const categoryAliases: Record<string, Category> = {
   'museum': 'Art', 'exhibition': 'Art', 'gallery': 'Art',
   'classical': 'Classical Music', 'classical music': 'Classical Music',
   'orchestra': 'Classical Music', 'symphony': 'Classical Music', 'chamber music': 'Classical Music',
-  'ballet': 'Ballet', 'opera': 'Opera', 'dance': 'Dance',
+  'ballet': 'Ballet', 'american ballet theatre': 'Ballet', 'opera': 'Opera', 'dance': 'Dance',
   'comedy': 'Comedy', 'standup': 'Comedy', 'stand-up': 'Comedy', 'improv': 'Comedy',
   'jazz': 'Jazz', 'theater': 'Theater', 'theatre': 'Theater',
   'musical': 'Theater', 'broadway': 'Theater', 'off-broadway': 'Theater',
@@ -232,7 +232,7 @@ export default function Home() {
           {onViewEvents.length > 0 && ` · ${onViewEvents.length} on view`}
         </p>
         {/* Tab bar — right below the counts */}
-        <div style={{ display: 'flex', background: '#f0ece6', borderRadius: '0.5rem', padding: '3px', marginTop: '0.75rem', alignSelf: 'flex-start' }}>
+        <div style={{ display: 'inline-flex', background: '#f0ece6', borderRadius: '0.5rem', padding: '3px', marginTop: '0.75rem' }}>
           {([
             { mode: 'calendar' as const, label: '📅 Calendar' },
             { mode: 'showtimes' as const, label: '🎬 Showtimes' },
@@ -1157,6 +1157,8 @@ const ON_VIEW_VENUE_COLORS: Record<string, { accent: string; bg: string; text: s
   'cooper hewitt':                   { accent: '#059669', bg: '#ecfdf5', text: '#047857', border: '#a7f3d0', dot: '#10b981' },
   'met opera':                       { accent: '#b91c1c', bg: '#fef2f2', text: '#991b1b', border: '#fecaca', dot: '#ef4444' },
   'metropolitan opera':              { accent: '#b91c1c', bg: '#fef2f2', text: '#991b1b', border: '#fecaca', dot: '#ef4444' },
+  'american ballet theatre':         { accent: '#be185d', bg: '#fdf2f8', text: '#9d174d', border: '#fbcfe8', dot: '#ec4899' },
+  'abt':                             { accent: '#be185d', bg: '#fdf2f8', text: '#9d174d', border: '#fbcfe8', dot: '#ec4899' },
 };
 const DEFAULT_ON_VIEW_COLOR = { accent: '#6b7280', bg: '#f9fafb', text: '#374151', border: '#d1d5db', dot: '#9ca3af' };
 
