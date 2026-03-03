@@ -269,6 +269,9 @@ async function scrapeFilmForum(browser) {
         const href = $(el).attr('href') || '';
         const fullLink = href.startsWith('http') ? href : `https://filmforum.org${href}`;
 
+        // Clean up Film Forum title quirks (e.g. "Ray'sDAYS" → "Ray's DAYS")
+        const cleanedTitle = t.replace(/([a-z])([A-Z])/g, '$1 $2');
+
         // Walk up to find date context in parent containers
         let dateText = '';
         let container = $(el).parent();
@@ -285,7 +288,7 @@ async function scrapeFilmForum(browser) {
           if (singleMatch) { dateText = singleMatch[1]; break; }
           container = container.parent();
         }
-        items.push({ title: t, link: fullLink, date: dateText });
+        items.push({ title: cleanedTitle, link: fullLink, date: dateText });
       });
     }
 
