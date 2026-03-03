@@ -3988,12 +3988,12 @@
     "sourceUrl": "https://events.newyorkfamily.com/event/aladdin-the-wonderful-lamp/"
   },
   {
-    "id": "at-virtual-online-events-virtual-yoga-486",
-    "title": "Virtual Yoga",
-    "venue": "at Virtual/Online Events",
-    "date": "2026-03-02",
+    "id": "at-ps-329q-east-elmhurst-community-school-dance-fitness-486",
+    "title": "Dance Fitness",
+    "venue": "at PS 329Q - East Elmhurst Community School",
+    "date": "2026-03-03",
     "category": "Outdoor/Parks",
-    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/02/virtual-yoga"
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/dance-fitness1"
   },
   {
     "id": "at-gymnasium-in-st-john-s-recreation-center-brooklyn-total-body-fitness-487",
@@ -4004,12 +4004,12 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/total-body-fitness"
   },
   {
-    "id": "at-ps-329q-east-elmhurst-community-school-dance-fitness-488",
-    "title": "Dance Fitness",
-    "venue": "at PS 329Q - East Elmhurst Community School",
+    "id": "at-arsenal-in-central-park-manhattan-arsenal-gallery-celebrating-40-years-of-ebony-488",
+    "title": "Arsenal Gallery: Celebrating 40 Years of Ebony",
+    "venue": "at Arsenal (in Central Park), Manhattan",
     "date": "2026-03-03",
     "category": "Outdoor/Parks",
-    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/dance-fitness1"
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/arsenal-gallery-celebrating-40-years-of-ebony"
   },
   {
     "id": "at-sunnyside-community-services-queens-senior-cardio-sculpt-489",
@@ -4020,15 +4020,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/senior-cardio-sculpt"
   },
   {
-    "id": "at-arsenal-in-central-park-manhattan-arsenal-gallery-celebrating-40-years-of-ebony-490",
-    "title": "Arsenal Gallery: Celebrating 40 Years of Ebony",
-    "venue": "at Arsenal (in Central Park), Manhattan",
-    "date": "2026-03-03",
-    "category": "Outdoor/Parks",
-    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/arsenal-gallery-celebrating-40-years-of-ebony"
-  },
-  {
-    "id": "at-dance-room-in-highbridge-recreation-center-manhattan-yoga-en-espa-ol-yoga-in-spanish-491",
+    "id": "at-dance-room-in-highbridge-recreation-center-manhattan-yoga-en-espa-ol-yoga-in-spanish-490",
     "title": "Yoga en Español (Yoga in Spanish)",
     "venue": "at Dance Room (in Highbridge Recreation Center), Manhattan",
     "date": "2026-03-03",
@@ -4036,7 +4028,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/yoga-en-espaol-yoga-in-spanish"
   },
   {
-    "id": "at-sunset-park-recreation-center-in-sunset-park-recreation-c-it-s-my-park-at-sunset-park-492",
+    "id": "at-sunset-park-recreation-center-in-sunset-park-recreation-c-it-s-my-park-at-sunset-park-491",
     "title": "It's My Park at Sunset Park",
     "venue": "at Sunset Park Recreation Center (in Sunset Park Recreation Center), Brooklyn",
     "date": "2026-03-03",
@@ -4044,7 +4036,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/its-my-park-at-sunset-park"
   },
   {
-    "id": "at-hart-island-bronx-hart-island-tour-north-island-493",
+    "id": "at-hart-island-bronx-hart-island-tour-north-island-492",
     "title": "Hart Island Tour (North Island)",
     "venue": "at Hart Island, Bronx",
     "date": "2026-03-03",
@@ -4052,7 +4044,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/hart-island-tour-north-island"
   },
   {
-    "id": "at-high-rock-playground-in-seton-falls-park-bronx-it-s-my-park-at-seton-falls-park-494",
+    "id": "at-high-rock-playground-in-seton-falls-park-bronx-it-s-my-park-at-seton-falls-park-493",
     "title": "It's My Park at Seton Falls Park",
     "venue": "at High Rock Playground (in Seton Falls Park), Bronx",
     "date": "2026-03-03",
@@ -4060,7 +4052,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/its-my-park-at-seton-falls-park"
   },
   {
-    "id": "at-1370-westchester-avenue-in-concrete-plant-park-bronx-winter-pruning-at-the-foodway-495",
+    "id": "at-1370-westchester-avenue-in-concrete-plant-park-bronx-winter-pruning-at-the-foodway-494",
     "title": "Winter Pruning at the Foodway",
     "venue": "at 1370 Westchester Avenue (in Concrete Plant Park), Bronx",
     "date": "2026-03-03",
@@ -4068,7 +4060,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/winter-pruning-at-the-foodway"
   },
   {
-    "id": "at-visitor-center-satterlee-street-and-hylan-boulevard-in-co-exhibition-think-global-act-local-496",
+    "id": "at-visitor-center-satterlee-street-and-hylan-boulevard-in-co-exhibition-think-global-act-local-495",
     "title": "Exhibition: Think Global. Act Local.",
     "venue": "at Visitor Center - Satterlee Street and Hylan Boulevard (in Conference House Park), Staten Island",
     "date": "2026-03-03",
@@ -4076,7 +4068,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/exhibition-think-global-act-local"
   },
   {
-    "id": "at-conference-house-museum-in-conference-house-park-staten-i-volunteering-at-conference-house-park-the-blue-wave-497",
+    "id": "at-conference-house-museum-in-conference-house-park-staten-i-volunteering-at-conference-house-park-the-blue-wave-496",
     "title": "Volunteering at Conference House Park - The Blue Wave",
     "venue": "at Conference House Museum (in Conference House Park), Staten Island",
     "date": "2026-03-03",
@@ -4084,47 +4076,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/volunteering-at-conference-house-park-the-blue-wave"
   },
   {
-    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-outdoor-museum-exhibit-alice-s-terracotta-garden-498",
-    "title": "Ongoing Outdoor Museum Exhibit: Alice's Terracotta Garden",
-    "venue": "at H.H. Biddle House (in Conference House Park), Staten Island",
-    "date": "2026-03-03",
-    "category": "Outdoor/Parks",
-    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/ongoing-outdoor-museum-exhibit-alices-terracotta-garden"
-  },
-  {
-    "id": "at-rutan-becket-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-still-waters-reflections-of-a-maritim-499",
-    "title": "Ongoing Museum Exhibit: Still Waters: Reflections of a Maritime Community",
-    "venue": "at Rutan-Becket House (in Conference House Park), Staten Island",
-    "date": "2026-03-03",
-    "category": "Outdoor/Parks",
-    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/ongoing-museum-exhibit-still-waters-reflections-of-a-maritime-community"
-  },
-  {
-    "id": "at-rutan-becket-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-out-of-the-box-biodiversity-student-a-500",
-    "title": "Ongoing Museum Exhibit: Out of the Box Biodiversity: Student Art",
-    "venue": "at Rutan-Becket House (in Conference House Park), Staten Island",
-    "date": "2026-03-03",
-    "category": "Outdoor/Parks",
-    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/ongoing-museum-exhibit-out-of-the-box-biodiversity-student-art"
-  },
-  {
-    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-new-york-s-brick-terra-cotta-industri-501",
-    "title": "Ongoing Museum Exhibit: New York's Brick & Terra Cotta Industries",
-    "venue": "at H.H. Biddle House (in Conference House Park), Staten Island",
-    "date": "2026-03-03",
-    "category": "Outdoor/Parks",
-    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/ongoing-museum-exhibit-new-yorks-brick-terra-cotta-industries"
-  },
-  {
-    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-clay-sculptor-darren-thomas-corona-502",
-    "title": "Ongoing Museum Exhibit: Clay Sculptor Darren Thomas Corona",
-    "venue": "at H.H. Biddle House (in Conference House Park), Staten Island",
-    "date": "2026-03-03",
-    "category": "Outdoor/Parks",
-    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/ongoing-museum-exhibit-clay-sculptor-darren-thomas-corona"
-  },
-  {
-    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-artist-sculptor-donna-napoli-steele-o-503",
+    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-artist-sculptor-donna-napoli-steele-o-497",
     "title": "Ongoing Museum Exhibit: Artist & Sculptor Donna Napoli-Steele: Out of the Box Biodiversity",
     "venue": "at H.H. Biddle House (in Conference House Park), Staten Island",
     "date": "2026-03-03",
@@ -4132,7 +4084,39 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/ongoing-museum-exhibit-artist-sculptor-donna-napolisteele-out-of-the-box-biodiversity"
   },
   {
-    "id": "at-ralph-bunche-park-manhattan-cancelled-it-s-my-park-at-ralph-bunche-park-504",
+    "id": "at-rutan-becket-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-still-waters-reflections-of-a-maritim-498",
+    "title": "Ongoing Museum Exhibit: Still Waters: Reflections of a Maritime Community",
+    "venue": "at Rutan-Becket House (in Conference House Park), Staten Island",
+    "date": "2026-03-03",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/ongoing-museum-exhibit-still-waters-reflections-of-a-maritime-community"
+  },
+  {
+    "id": "at-rutan-becket-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-out-of-the-box-biodiversity-student-a-499",
+    "title": "Ongoing Museum Exhibit: Out of the Box Biodiversity: Student Art",
+    "venue": "at Rutan-Becket House (in Conference House Park), Staten Island",
+    "date": "2026-03-03",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/ongoing-museum-exhibit-out-of-the-box-biodiversity-student-art"
+  },
+  {
+    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-new-york-s-brick-terra-cotta-industri-500",
+    "title": "Ongoing Museum Exhibit: New York's Brick & Terra Cotta Industries",
+    "venue": "at H.H. Biddle House (in Conference House Park), Staten Island",
+    "date": "2026-03-03",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/ongoing-museum-exhibit-new-yorks-brick-terra-cotta-industries"
+  },
+  {
+    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-clay-sculptor-darren-thomas-corona-501",
+    "title": "Ongoing Museum Exhibit: Clay Sculptor Darren Thomas Corona",
+    "venue": "at H.H. Biddle House (in Conference House Park), Staten Island",
+    "date": "2026-03-03",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/ongoing-museum-exhibit-clay-sculptor-darren-thomas-corona"
+  },
+  {
+    "id": "at-ralph-bunche-park-manhattan-cancelled-it-s-my-park-at-ralph-bunche-park-502",
     "title": "CANCELLED: It's My Park at Ralph Bunche Park",
     "venue": "at Ralph Bunche Park, Manhattan",
     "date": "2026-03-03",
@@ -4140,7 +4124,15 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/its-my-park-at-ralph-bunche-park"
   },
   {
-    "id": "at-queensbridge-park-house-in-queensbridge-park-queens-cardio-sculpt-505",
+    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-outdoor-museum-exhibit-alice-s-terracotta-garden-503",
+    "title": "Ongoing Outdoor Museum Exhibit: Alice's Terracotta Garden",
+    "venue": "at H.H. Biddle House (in Conference House Park), Staten Island",
+    "date": "2026-03-03",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/ongoing-outdoor-museum-exhibit-alices-terracotta-garden"
+  },
+  {
+    "id": "at-queensbridge-park-house-in-queensbridge-park-queens-cardio-sculpt-504",
     "title": "Cardio Sculpt",
     "venue": "at Queensbridge Park House (in Queensbridge Park), Queens",
     "date": "2026-03-03",
@@ -4148,7 +4140,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/cardio-sculpt"
   },
   {
-    "id": "at-multi-use-room-in-williamsbridge-oval-recreation-center-b-zumba-gold-506",
+    "id": "at-multi-use-room-in-williamsbridge-oval-recreation-center-b-zumba-gold-505",
     "title": "Zumba Gold®",
     "venue": "at Multi-Use Room (in Williamsbridge Oval Recreation Center), Bronx",
     "date": "2026-03-03",
@@ -4156,7 +4148,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/zumba-gold"
   },
   {
-    "id": "at-the-high-line-manhattan-artist-talk-raven-halfmoon-in-conversation-with-cecilia-alem-507",
+    "id": "at-the-high-line-manhattan-artist-talk-raven-halfmoon-in-conversation-with-cecilia-alem-506",
     "title": "Artist Talk: Raven Halfmoon in conversation with Cecilia Alemani (Indoor Event)",
     "venue": "at The High Line, Manhattan",
     "date": "2026-03-03",
@@ -4164,7 +4156,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/artist-talk-raven-halfmoon-in-conversation-with-cecilia-alem"
   },
   {
-    "id": "at-central-park-gardens-community-room-manhattan-tone-up-tuesday-509",
+    "id": "at-central-park-gardens-community-room-manhattan-tone-up-tuesday-508",
     "title": "Tone Up Tuesday",
     "venue": "at Central Park Gardens - Community Room, Manhattan",
     "date": "2026-03-03",
@@ -4172,12 +4164,20 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/tone-up-tuesday"
   },
   {
-    "id": "at-nypl-bloomingdale-library-manhattan-electro-burn-510",
+    "id": "at-nypl-bloomingdale-library-manhattan-electro-burn-509",
     "title": "Electro Burn",
     "venue": "at NYPL- Bloomingdale Library, Manhattan",
     "date": "2026-03-03",
     "category": "Outdoor/Parks",
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/electro-burn"
+  },
+  {
+    "id": "at-dance-room-in-highbridge-recreation-center-manhattan-canceled-bodyweight-circuit-training-510",
+    "title": "CANCELED: Bodyweight Circuit Training",
+    "venue": "at Dance Room (in Highbridge Recreation Center), Manhattan",
+    "date": "2026-03-03",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/bodyweight-circuit-training2"
   },
   {
     "id": "at-hope-gardens-community-center-brooklyn-rhythm-and-vibes-511",
@@ -4188,15 +4188,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/rhythm-and-vibes"
   },
   {
-    "id": "at-dance-room-in-highbridge-recreation-center-manhattan-canceled-bodyweight-circuit-training-512",
-    "title": "CANCELED: Bodyweight Circuit Training",
-    "venue": "at Dance Room (in Highbridge Recreation Center), Manhattan",
-    "date": "2026-03-03",
-    "category": "Outdoor/Parks",
-    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/bodyweight-circuit-training2"
-  },
-  {
-    "id": "at-multi-use-room-full-in-a-r-r-o-w-field-house-queens-bodyweight-circuit-training-513",
+    "id": "at-multi-use-room-full-in-a-r-r-o-w-field-house-queens-bodyweight-circuit-training-512",
     "title": "Bodyweight Circuit Training",
     "venue": "at Multi-Use Room - Full (in A.R.R.O.W. Field House), Queens",
     "date": "2026-03-03",
@@ -4204,7 +4196,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/bodyweight-circuit-training"
   },
   {
-    "id": "at-dance-room-in-thomas-jefferson-recreation-center-manhatta-dance-fitness-for-fun-514",
+    "id": "at-dance-room-in-thomas-jefferson-recreation-center-manhatta-dance-fitness-for-fun-513",
     "title": "Dance Fitness for Fun",
     "venue": "at Dance Room (in Thomas Jefferson Recreation Center), Manhattan",
     "date": "2026-03-03",
@@ -4212,7 +4204,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/dance-fitness-for-fun"
   },
   {
-    "id": "at-pier-6-in-brooklyn-bridge-park-brooklyn-nyrr-open-run-brooklyn-bridge-park-516",
+    "id": "at-pier-6-in-brooklyn-bridge-park-brooklyn-nyrr-open-run-brooklyn-bridge-park-515",
     "title": "NYRR Open Run: Brooklyn Bridge Park",
     "venue": "at Pier 6 (in Brooklyn Bridge Park), Brooklyn",
     "date": "2026-03-03",
@@ -4220,7 +4212,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/03/nyrr-open-run-brooklyn-bridge-park"
   },
   {
-    "id": "at-multipurpose-room-in-betsy-head-park-brooklyn-line-dancing-517",
+    "id": "at-multipurpose-room-in-betsy-head-park-brooklyn-line-dancing-516",
     "title": "Line Dancing",
     "venue": "at Multipurpose Room (in Betsy Head Park), Brooklyn",
     "date": "2026-03-04",
@@ -4228,7 +4220,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/line-dancing"
   },
   {
-    "id": "at-athletic-courts-in-torsney-playground-queens-interval-walking-sessions-518",
+    "id": "at-athletic-courts-in-torsney-playground-queens-interval-walking-sessions-517",
     "title": "Interval Walking Sessions",
     "venue": "at Athletic Courts (in Torsney Playground), Queens",
     "date": "2026-03-04",
@@ -4236,7 +4228,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/interval-walking-sessions"
   },
   {
-    "id": "at-arsenal-in-central-park-manhattan-arsenal-gallery-celebrating-40-years-of-ebony-519",
+    "id": "at-arsenal-in-central-park-manhattan-arsenal-gallery-celebrating-40-years-of-ebony-518",
     "title": "Arsenal Gallery: Celebrating 40 Years of Ebony",
     "venue": "at Arsenal (in Central Park), Manhattan",
     "date": "2026-03-04",
@@ -4244,12 +4236,20 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/arsenal-gallery-celebrating-40-years-of-ebony"
   },
   {
-    "id": "at-102nd-street-field-house-in-riverside-park-manhattan-riverside-field-house-spring-yoga-520",
+    "id": "at-102nd-street-field-house-in-riverside-park-manhattan-riverside-field-house-spring-yoga-519",
     "title": "Riverside Field House: Spring Yoga",
     "venue": "at 102nd Street Field House (in Riverside Park), Manhattan",
     "date": "2026-03-04",
     "category": "Outdoor/Parks",
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/riverside-field-house-fall-yoga"
+  },
+  {
+    "id": "at-conference-house-museum-in-conference-house-park-staten-i-volunteering-at-conference-house-park-the-blue-wave-520",
+    "title": "Volunteering at Conference House Park - The Blue Wave",
+    "venue": "at Conference House Museum (in Conference House Park), Staten Island",
+    "date": "2026-03-04",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/volunteering-at-conference-house-park-the-blue-wave"
   },
   {
     "id": "at-visitor-center-satterlee-street-and-hylan-boulevard-in-co-exhibition-think-global-act-local-521",
@@ -4260,15 +4260,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/exhibition-think-global-act-local"
   },
   {
-    "id": "at-conference-house-museum-in-conference-house-park-staten-i-volunteering-at-conference-house-park-the-blue-wave-522",
-    "title": "Volunteering at Conference House Park - The Blue Wave",
-    "venue": "at Conference House Museum (in Conference House Park), Staten Island",
-    "date": "2026-03-04",
-    "category": "Outdoor/Parks",
-    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/volunteering-at-conference-house-park-the-blue-wave"
-  },
-  {
-    "id": "at-seth-low-playground-in-seth-low-playground-bealin-square--it-s-my-park-at-seth-low-playground-bealin-square-523",
+    "id": "at-seth-low-playground-in-seth-low-playground-bealin-square--it-s-my-park-at-seth-low-playground-bealin-square-522",
     "title": "It's My Park at Seth Low Playground/ Bealin Square",
     "venue": "at Seth Low Playground (in Seth Low Playground/ Bealin Square), Brooklyn",
     "date": "2026-03-04",
@@ -4276,7 +4268,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/its-my-park-at-seth-low-playground-bealin-square"
   },
   {
-    "id": "at-sunnyside-community-services-queens-senior-cardio-sculpt-524",
+    "id": "at-sunnyside-community-services-queens-senior-cardio-sculpt-523",
     "title": "Senior Cardio Sculpt",
     "venue": "at Sunnyside Community Services, Queens",
     "date": "2026-03-04",
@@ -4284,7 +4276,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/senior-cardio-sculpt"
   },
   {
-    "id": "at-pure-life-movement-studio-dance-fitness-525",
+    "id": "at-pure-life-movement-studio-dance-fitness-524",
     "title": "Dance Fitness",
     "venue": "at Pure Life Movement Studio",
     "date": "2026-03-04",
@@ -4292,7 +4284,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/dance-fitness"
   },
   {
-    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-outdoor-museum-exhibit-alice-s-terracotta-garden-526",
+    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-outdoor-museum-exhibit-alice-s-terracotta-garden-525",
     "title": "Ongoing Outdoor Museum Exhibit: Alice's Terracotta Garden",
     "venue": "at H.H. Biddle House (in Conference House Park), Staten Island",
     "date": "2026-03-04",
@@ -4300,7 +4292,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/ongoing-outdoor-museum-exhibit-alices-terracotta-garden"
   },
   {
-    "id": "at-multi-use-room-full-in-a-r-r-o-w-field-house-queens-little-sprouts-jump-and-play-527",
+    "id": "at-multi-use-room-full-in-a-r-r-o-w-field-house-queens-little-sprouts-jump-and-play-526",
     "title": "Little Sprouts: Jump and Play",
     "venue": "at Multi-Use Room - Full (in A.R.R.O.W. Field House), Queens",
     "date": "2026-03-04",
@@ -4308,7 +4300,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/little-sprouts-jump-and-play"
   },
   {
-    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-artist-sculptor-donna-napoli-steele-o-528",
+    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-artist-sculptor-donna-napoli-steele-o-527",
     "title": "Ongoing Museum Exhibit: Artist & Sculptor Donna Napoli-Steele: Out of the Box Biodiversity",
     "venue": "at H.H. Biddle House (in Conference House Park), Staten Island",
     "date": "2026-03-04",
@@ -4316,7 +4308,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/ongoing-museum-exhibit-artist-sculptor-donna-napolisteele-out-of-the-box-biodiversity"
   },
   {
-    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-clay-sculptor-darren-thomas-corona-529",
+    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-clay-sculptor-darren-thomas-corona-528",
     "title": "Ongoing Museum Exhibit: Clay Sculptor Darren Thomas Corona",
     "venue": "at H.H. Biddle House (in Conference House Park), Staten Island",
     "date": "2026-03-04",
@@ -4324,7 +4316,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/ongoing-museum-exhibit-clay-sculptor-darren-thomas-corona"
   },
   {
-    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-new-york-s-brick-terra-cotta-industri-530",
+    "id": "at-h-h-biddle-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-new-york-s-brick-terra-cotta-industri-529",
     "title": "Ongoing Museum Exhibit: New York's Brick & Terra Cotta Industries",
     "venue": "at H.H. Biddle House (in Conference House Park), Staten Island",
     "date": "2026-03-04",
@@ -4332,7 +4324,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/ongoing-museum-exhibit-new-yorks-brick-terra-cotta-industries"
   },
   {
-    "id": "at-rutan-becket-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-out-of-the-box-biodiversity-student-a-531",
+    "id": "at-rutan-becket-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-out-of-the-box-biodiversity-student-a-530",
     "title": "Ongoing Museum Exhibit: Out of the Box Biodiversity: Student Art",
     "venue": "at Rutan-Becket House (in Conference House Park), Staten Island",
     "date": "2026-03-04",
@@ -4340,7 +4332,7 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/ongoing-museum-exhibit-out-of-the-box-biodiversity-student-art"
   },
   {
-    "id": "at-rutan-becket-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-still-waters-reflections-of-a-maritim-532",
+    "id": "at-rutan-becket-house-in-conference-house-park-staten-island-ongoing-museum-exhibit-still-waters-reflections-of-a-maritim-531",
     "title": "Ongoing Museum Exhibit: Still Waters: Reflections of a Maritime Community",
     "venue": "at Rutan-Becket House (in Conference House Park), Staten Island",
     "date": "2026-03-04",
@@ -4348,15 +4340,31 @@
     "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/ongoing-museum-exhibit-still-waters-reflections-of-a-maritime-community"
   },
   {
-    "id": "broadway-hadestown-534",
-    "title": "Hadestown",
-    "venue": "Broadway",
-    "date": "2019-03-22",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/hadestownwalter-kerr-theatre-2018-2019"
+    "id": "at-nypl-spuyten-duyvil-bronx-static-stretching-532",
+    "title": "Static Stretching",
+    "venue": "at NYPL - Spuyten Duyvil, Bronx",
+    "date": "2026-03-04",
+    "category": "Outdoor/Parks",
+    "sourceUrl": "https://www.nycgovparks.org/events/2026/03/04/static-stretching"
   },
   {
-    "id": "broadway-the-great-gatsby-535",
+    "id": "broadway-chess-534",
+    "title": "Chess",
+    "venue": "Broadway",
+    "date": "2025-10-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/chess-broadway-imperial-theatre-2025"
+  },
+  {
+    "id": "broadway-wicked-535",
+    "title": "Wicked",
+    "venue": "Broadway",
+    "date": "2003-10-08",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/wicked-broadway-gershwin-theatre-2003"
+  },
+  {
+    "id": "broadway-the-great-gatsby-536",
     "title": "The Great Gatsby",
     "venue": "Broadway",
     "date": "2024-03-29",
@@ -4364,28 +4372,20 @@
     "sourceUrl": "https://playbill.com/production/the-great-gatsby-broadway-broadway-theatre-2024"
   },
   {
-    "id": "broadway-operation-mincemeat-536",
-    "title": "Operation Mincemeat",
+    "id": "broadway-the-lion-king-537",
+    "title": "The Lion King",
     "venue": "Broadway",
-    "date": "2025-02-15",
+    "date": "1997-10-15",
     "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/operation-mincemeat-broadway-john-golden-theatre-2025"
+    "sourceUrl": "https://playbill.com/production/the-lion-king-new-amsterdam-theatre-vault-0000008729"
   },
   {
-    "id": "broadway-harry-potter-and-the-cursed-child-537",
-    "title": "Harry Potter and the Cursed Child",
+    "id": "broadway-aladdin-538",
+    "title": "Aladdin",
     "venue": "Broadway",
-    "date": "2018-03-16",
+    "date": "2014-02-26",
     "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/harry-potter-and-the-cursed-childlyric-theatre-2017-2018"
-  },
-  {
-    "id": "broadway-chess-538",
-    "title": "Chess",
-    "venue": "Broadway",
-    "date": "2025-10-15",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/chess-broadway-imperial-theatre-2025"
+    "sourceUrl": "https://playbill.com/production/aladdin-new-amsterdam-theatre-vault-0000014037"
   },
   {
     "id": "broadway-two-strangers-carry-a-cake-across-new-york-539",
@@ -4396,28 +4396,28 @@
     "sourceUrl": "https://playbill.com/production/two-strangers-carry-a-cake-across-new-york-broadway-longacre-theatre-2025"
   },
   {
-    "id": "broadway-oh-mary-540",
-    "title": "Oh, Mary!",
+    "id": "broadway-hadestown-540",
+    "title": "Hadestown",
     "venue": "Broadway",
-    "date": "2024-06-26",
+    "date": "2019-03-22",
     "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/oh-mary-broadway-lyceum-theatre-2024"
+    "sourceUrl": "https://playbill.com/production/hadestownwalter-kerr-theatre-2018-2019"
   },
   {
-    "id": "broadway-the-book-of-mormon-541",
-    "title": "The Book of Mormon",
-    "venue": "Broadway",
-    "date": "2011-02-24",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/the-book-of-mormon-eugene-oneill-theatre-vault-0000013715"
-  },
-  {
-    "id": "broadway-six-the-musical-542",
+    "id": "broadway-six-the-musical-541",
     "title": "SIX: The Musical",
     "venue": "Broadway",
     "date": "2020-02-13",
     "category": "Theater",
     "sourceUrl": "https://playbill.com/production/six-the-musicallena-horne-theatre-2021-2022"
+  },
+  {
+    "id": "broadway-just-in-time-542",
+    "title": "Just in Time",
+    "venue": "Broadway",
+    "date": "2025-03-31",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/just-in-time-broadway-circle-in-the-square-theatre-2025"
   },
   {
     "id": "broadway-death-becomes-her-543",
@@ -4428,63 +4428,55 @@
     "sourceUrl": "https://playbill.com/production/death-becomes-her-broadway-lunt-fontanne-theatre-2024"
   },
   {
-    "id": "broadway-just-in-time-544",
-    "title": "Just in Time",
+    "id": "broadway-operation-mincemeat-544",
+    "title": "Operation Mincemeat",
     "venue": "Broadway",
-    "date": "2025-03-31",
+    "date": "2025-02-15",
     "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/just-in-time-broadway-circle-in-the-square-theatre-2025"
+    "sourceUrl": "https://playbill.com/production/operation-mincemeat-broadway-john-golden-theatre-2025"
   },
   {
-    "id": "broadway-the-lion-king-545",
-    "title": "The Lion King",
+    "id": "broadway-oh-mary-545",
+    "title": "Oh, Mary!",
     "venue": "Broadway",
-    "date": "1997-10-15",
+    "date": "2024-06-26",
     "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/the-lion-king-new-amsterdam-theatre-vault-0000008729"
+    "sourceUrl": "https://playbill.com/production/oh-mary-broadway-lyceum-theatre-2024"
   },
   {
-    "id": "broadway-aladdin-546",
-    "title": "Aladdin",
+    "id": "broadway-the-book-of-mormon-546",
+    "title": "The Book of Mormon",
     "venue": "Broadway",
-    "date": "2014-02-26",
+    "date": "2011-02-24",
     "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/aladdin-new-amsterdam-theatre-vault-0000014037"
+    "sourceUrl": "https://playbill.com/production/the-book-of-mormon-eugene-oneill-theatre-vault-0000013715"
   },
   {
-    "id": "broadway-wicked-547",
-    "title": "Wicked",
+    "id": "broadway-harry-potter-and-the-cursed-child-547",
+    "title": "Harry Potter and the Cursed Child",
     "venue": "Broadway",
-    "date": "2003-10-08",
+    "date": "2018-03-16",
     "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/wicked-broadway-gershwin-theatre-2003"
+    "sourceUrl": "https://playbill.com/production/harry-potter-and-the-cursed-childlyric-theatre-2017-2018"
   },
   {
-    "id": "broadway-stranger-things-the-first-shadow-548",
-    "title": "Stranger Things: The First Shadow",
+    "id": "broadway-every-brilliant-thing-548",
+    "title": "Every Brilliant Thing",
     "venue": "Broadway",
-    "date": "2025-03-28",
+    "date": "2026-02-21",
     "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/stranger-things-the-first-shadow-broadway-marquis-theatre-2025"
+    "sourceUrl": "https://playbill.com/production/every-brilliant-thing-broadway-hudson-theatre-2026"
   },
   {
-    "id": "broadway-hamilton-549",
-    "title": "Hamilton",
+    "id": "broadway-moulin-rouge-the-musical-549",
+    "title": "Moulin Rouge! The Musical",
     "venue": "Broadway",
-    "date": "2015-07-13",
+    "date": "2019-06-28",
     "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/hamilton-broadway-richard-rodgers-theatre-2015"
+    "sourceUrl": "https://playbill.com/production/moulin-rouge-the-musical-hirschfeld-theatre-2019-2020"
   },
   {
-    "id": "broadway-all-out-comedy-about-ambition-550",
-    "title": "All Out: Comedy About Ambition",
-    "venue": "Broadway",
-    "date": "2025-12-12",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/all-out-comedy-about-ambition-broadway-nederlander-theatre-2025"
-  },
-  {
-    "id": "broadway-ragtime-551",
+    "id": "broadway-ragtime-550",
     "title": "Ragtime",
     "venue": "Broadway",
     "date": "2025-09-26",
@@ -4492,15 +4484,15 @@
     "sourceUrl": "https://playbill.com/production/ragtime-broadway-vivian-beaumont-theater-2025"
   },
   {
-    "id": "broadway-chicago-552",
-    "title": "Chicago",
+    "id": "broadway-all-out-comedy-about-ambition-551",
+    "title": "All Out: Comedy About Ambition",
     "venue": "Broadway",
-    "date": "1996-10-23",
+    "date": "2025-12-12",
     "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/chicago-richard-rodgers-theatre-vault-0000003074"
+    "sourceUrl": "https://playbill.com/production/all-out-comedy-about-ambition-broadway-nederlander-theatre-2025"
   },
   {
-    "id": "broadway-mj-the-musical-553",
+    "id": "broadway-mj-the-musical-552",
     "title": "MJ The Musical",
     "venue": "Broadway",
     "date": "2021-12-06",
@@ -4508,12 +4500,20 @@
     "sourceUrl": "https://playbill.com/production/mj-the-musicalneil-simon-theatre-2021-2022"
   },
   {
-    "id": "broadway-every-brilliant-thing-554",
-    "title": "Every Brilliant Thing",
+    "id": "broadway-the-outsiders-553",
+    "title": "The Outsiders",
     "venue": "Broadway",
-    "date": "2026-02-21",
+    "date": "2024-03-16",
     "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/every-brilliant-thing-broadway-hudson-theatre-2026"
+    "sourceUrl": "https://playbill.com/production/the-outsiders-broadway-bernard-b-jacobs-theatre-2024"
+  },
+  {
+    "id": "broadway-maybe-happy-ending-554",
+    "title": "Maybe Happy Ending",
+    "venue": "Broadway",
+    "date": "2024-10-16",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/maybe-happy-ending-broadway-belasco-theatre-2024"
   },
   {
     "id": "broadway-buena-vista-social-club-555",
@@ -4532,55 +4532,31 @@
     "sourceUrl": "https://playbill.com/production/juliet-broadway-stephen-sondheim-theatre-2022"
   },
   {
-    "id": "broadway-the-outsiders-557",
-    "title": "The Outsiders",
+    "id": "broadway-stranger-things-the-first-shadow-557",
+    "title": "Stranger Things: The First Shadow",
     "venue": "Broadway",
-    "date": "2024-03-16",
+    "date": "2025-03-28",
     "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/the-outsiders-broadway-bernard-b-jacobs-theatre-2024"
+    "sourceUrl": "https://playbill.com/production/stranger-things-the-first-shadow-broadway-marquis-theatre-2025"
   },
   {
-    "id": "broadway-moulin-rouge-the-musical-558",
-    "title": "Moulin Rouge! The Musical",
+    "id": "broadway-hamilton-558",
+    "title": "Hamilton",
     "venue": "Broadway",
-    "date": "2019-06-28",
+    "date": "2015-07-13",
     "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/moulin-rouge-the-musical-hirschfeld-theatre-2019-2020"
+    "sourceUrl": "https://playbill.com/production/hamilton-broadway-richard-rodgers-theatre-2015"
   },
   {
-    "id": "broadway-maybe-happy-ending-559",
-    "title": "Maybe Happy Ending",
+    "id": "broadway-chicago-559",
+    "title": "Chicago",
     "venue": "Broadway",
-    "date": "2024-10-16",
+    "date": "1996-10-23",
     "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/maybe-happy-ending-broadway-belasco-theatre-2024"
+    "sourceUrl": "https://playbill.com/production/chicago-richard-rodgers-theatre-vault-0000003074"
   },
   {
-    "id": "eventbrite-singles-night-radegast-hall-biergarten-ages-25-35-560",
-    "title": "Singles Night @ Radegast Hall & Biergarten (Ages 25-35)",
-    "venue": "Eventbrite",
-    "date": "2026-03-05",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.com/e/singles-night-radegast-hall-biergarten-ages-25-35-tickets-1982030458456?aff=ebdssbdestsearch"
-  },
-  {
-    "id": "eventbrite-the-violet-hour-book-launch-british-novelist-james-cahill-in-561",
-    "title": "THE VIOLET HOUR book launch: British novelist James Cahill in conversation",
-    "venue": "Eventbrite",
-    "date": "2026-03-03",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.co.uk/e/the-violet-hour-book-launch-british-novelist-james-cahill-in-conversation-tickets-1983791058458?aff=ebdssbdestsearch"
-  },
-  {
-    "id": "eventbrite-the-high-line-magic-room-magic-show-mini-golf-562",
-    "title": "The High Line Magic Room | Magic Show + Mini-Golf",
-    "venue": "Eventbrite",
-    "date": "2026-03-04",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.com/e/the-high-line-magic-room-magic-show-mini-golf-tickets-1983547144906?aff=ebdssbdestsearch"
-  },
-  {
-    "id": "eventbrite-friday-night-lights-everyone-free-b4-12am-w-rsvp-at-mama-tac-563",
+    "id": "eventbrite-friday-night-lights-everyone-free-b4-12am-w-rsvp-at-mama-tac-560",
     "title": "Friday Night Lights Everyone FREE B4 12am w/RSVP at Mama Taco Bk",
     "venue": "Eventbrite",
     "date": "2026-03-06",
@@ -4588,7 +4564,7 @@
     "sourceUrl": "https://www.eventbrite.com/e/friday-night-lights-everyone-free-b4-12am-wrsvp-at-mama-taco-bk-tickets-1977459767396?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-90s-2000s-hip-hop-r-b-party-everyone-free-w-rsvp-564",
+    "id": "eventbrite-90s-2000s-hip-hop-r-b-party-everyone-free-w-rsvp-561",
     "title": "90s & 2000s Hip-Hop & R&B Party | Everyone Free w/ RSVP",
     "venue": "Eventbrite",
     "date": "2026-03-07",
@@ -4596,7 +4572,7 @@
     "sourceUrl": "https://www.eventbrite.com/e/90s-2000s-hip-hop-rb-party-everyone-free-w-rsvp-tickets-1981480280860?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-salon-du-chocolat-nyc-2026-565",
+    "id": "eventbrite-salon-du-chocolat-nyc-2026-562",
     "title": "SALON DU CHOCOLAT NYC 2026",
     "venue": "Eventbrite",
     "date": "",
@@ -4604,7 +4580,7 @@
     "sourceUrl": "https://www.eventbrite.com/e/salon-du-chocolat-nyc-2026-tickets-1367292571889?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-mary-droppinz-twonski-le-camille-skepsis-kc-more-566",
+    "id": "eventbrite-mary-droppinz-twonski-le-camille-skepsis-kc-more-563",
     "title": "Mary Droppinz, TWONSKi, Le Camille, Skepsis, KC + more",
     "venue": "Eventbrite",
     "date": "2026-03-06",
@@ -4612,7 +4588,7 @@
     "sourceUrl": "https://www.eventbrite.com/e/mary-droppinz-twonski-le-camille-skepsis-kc-more-tickets-1970800277683?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-asgtg-12th-annual-e-commerce-amazon-sellers-conference-ed-ro-567",
+    "id": "eventbrite-asgtg-12th-annual-e-commerce-amazon-sellers-conference-ed-ro-564",
     "title": "ASGTG 12th Annual E-Commerce Amazon Sellers Conference – Ed Rosenberg",
     "venue": "Eventbrite",
     "date": "2026-03-05",
@@ -4620,7 +4596,7 @@
     "sourceUrl": "https://www.eventbrite.com/e/asgtg-12th-annual-e-commerce-amazon-sellers-conference-ed-rosenberg-tickets-1500246320129?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-grammy-nominated-jamal-roberts-performs-at-still-i-rise-awar-568",
+    "id": "eventbrite-grammy-nominated-jamal-roberts-performs-at-still-i-rise-awar-565",
     "title": "Grammy-Nominated Jamal Roberts Performs at \"Still I Rise!\" Award Ceremony",
     "venue": "Eventbrite",
     "date": "2026-03-06",
@@ -4628,7 +4604,7 @@
     "sourceUrl": "https://www.eventbrite.com/e/grammy-nominated-jamal-roberts-performs-at-still-i-rise-award-ceremony-tickets-1979414993530?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-this-is-40ish-80s-00s-569",
+    "id": "eventbrite-this-is-40ish-80s-00s-566",
     "title": "This is 40ish [80s-00s]",
     "venue": "Eventbrite",
     "date": "2026-03-07",
@@ -4636,7 +4612,7 @@
     "sourceUrl": "https://www.eventbrite.com/e/this-is-40ish-80s-00s-tickets-1981534312470?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-health-tech-summit-2026-570",
+    "id": "eventbrite-health-tech-summit-2026-567",
     "title": "Health Tech Summit 2026",
     "venue": "Eventbrite",
     "date": "2026-03-02",
@@ -4644,7 +4620,7 @@
     "sourceUrl": "https://www.eventbrite.com/e/health-tech-summit-2026-tickets-1980419295424?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-vendredi-sur-mer-lila-drew-571",
+    "id": "eventbrite-vendredi-sur-mer-lila-drew-568",
     "title": "Vendredi Sur Mer, Lila Drew",
     "venue": "Eventbrite",
     "date": "2026-03-06",
@@ -4652,7 +4628,7 @@
     "sourceUrl": "https://www.eventbrite.com/e/vendredi-sur-mer-lila-drew-tickets-1865217960129?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-imanu-full-venue-takeover-w-sinistarr-the-librarian-velle-mo-572",
+    "id": "eventbrite-imanu-full-venue-takeover-w-sinistarr-the-librarian-velle-mo-569",
     "title": "IMANU full venue takeover w/ Sinistarr, The Librarian, Velle + more",
     "venue": "Eventbrite",
     "date": "2026-03-07",
@@ -4660,7 +4636,7 @@
     "sourceUrl": "https://www.eventbrite.com/e/imanu-full-venue-takeover-w-sinistarr-the-librarian-velle-more-tickets-1865396102959?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-kpop-club-night-in-new-york-573",
+    "id": "eventbrite-kpop-club-night-in-new-york-570",
     "title": "Kpop Club Night in New York",
     "venue": "Eventbrite",
     "date": "2026-03-06",
@@ -4668,7 +4644,7 @@
     "sourceUrl": "https://www.eventbrite.ca/e/kpop-club-night-in-new-york-tickets-1980344318165?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-old-school-4-life-presents-old-school-saturdays-at-the-dl-ro-574",
+    "id": "eventbrite-old-school-4-life-presents-old-school-saturdays-at-the-dl-ro-571",
     "title": "Old School 4 Life presents Old School Saturdays - at The DL Rooftop",
     "venue": "Eventbrite",
     "date": "2026-03-07",
@@ -4676,7 +4652,7 @@
     "sourceUrl": "https://www.eventbrite.com/e/old-school-4-life-presents-old-school-saturdays-at-the-dl-rooftop-tickets-1977913660001?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-champagne-day-champagnefrenchyy-official-birthday-bash-575",
+    "id": "eventbrite-champagne-day-champagnefrenchyy-official-birthday-bash-572",
     "title": "CHAMPAGNE DAY: CHAMPAGNEFRENCHYY OFFICIAL BIRTHDAY BASH",
     "venue": "Eventbrite",
     "date": "2026-03-07",
@@ -4684,7 +4660,7 @@
     "sourceUrl": "https://www.eventbrite.com/e/champagne-day-champagnefrenchyy-official-birthday-bash-tickets-1979762105752?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-new-classics-at-the-library-for-the-performing-arts-little-w-576",
+    "id": "eventbrite-new-classics-at-the-library-for-the-performing-arts-little-w-573",
     "title": "New Classics at the Library for the Performing Arts: Little Women",
     "venue": "Eventbrite",
     "date": "2026-03-07",
@@ -4692,7 +4668,7 @@
     "sourceUrl": "https://www.eventbrite.com/e/new-classics-at-the-library-for-the-performing-arts-little-women-tickets-1978306993472?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-carna-funk-it-26-577",
+    "id": "eventbrite-carna-funk-it-26-574",
     "title": "CARNA FUNK IT' 26",
     "venue": "Eventbrite",
     "date": "2026-03-07",
@@ -4700,7 +4676,7 @@
     "sourceUrl": "https://www.eventbrite.com/e/carna-funk-it-26-tickets-1980556338323?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-rang-de-new-york-holi-fest-2026-230-fifth-rooftop-bar-578",
+    "id": "eventbrite-rang-de-new-york-holi-fest-2026-230-fifth-rooftop-bar-575",
     "title": "RANG DE NEW YORK- HOLI FEST 2026 @230 FIFTH ROOFTOP BAR",
     "venue": "Eventbrite",
     "date": "2026-03-07",
@@ -4708,7 +4684,7 @@
     "sourceUrl": "https://www.eventbrite.com/e/rang-de-new-york-holi-fest-2026-230-fifth-rooftop-bar-tickets-1980169066984?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-vintage-purim-579",
+    "id": "eventbrite-vintage-purim-576",
     "title": "Vintage Purim",
     "venue": "Eventbrite",
     "date": "2026-03-02",
@@ -4716,7 +4692,7 @@
     "sourceUrl": "https://www.eventbrite.com/e/vintage-purim-tickets-1982106302307?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-nyc-pride-march-2026-corporate-summit-580",
+    "id": "eventbrite-nyc-pride-march-2026-corporate-summit-577",
     "title": "NYC Pride March 2026 Corporate Summit",
     "venue": "Eventbrite",
     "date": "2026-03-05",
@@ -4724,7 +4700,7 @@
     "sourceUrl": "https://www.eventbrite.com/e/nyc-pride-march-2026-corporate-summit-tickets-1979745890251?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-stuy-sing-2026-friday-student-union-581",
+    "id": "eventbrite-stuy-sing-2026-friday-student-union-578",
     "title": "Stuy SING! 2026 - Friday | Student Union",
     "venue": "Eventbrite",
     "date": "2026-03-06",
@@ -4732,11 +4708,323 @@
     "sourceUrl": "https://www.eventbrite.com/e/stuy-sing-2026-friday-student-union-tickets-1983127395424?aff=ebdssbdestsearch"
   },
   {
-    "id": "eventbrite-houdini-speaks-to-the-living-582",
+    "id": "eventbrite-houdini-speaks-to-the-living-579",
     "title": "Houdini Speaks to the Living",
     "venue": "Eventbrite",
     "date": "2026-03-06",
     "category": "Other",
     "sourceUrl": "https://www.eventbrite.com/e/houdini-speaks-to-the-living-tickets-1978621046814?aff=ebdssbdestsearch"
+  },
+  {
+    "id": "strand-bookstore-offsite-at-cooper-union-alphapussy-gina-gershon-in-conversat-585",
+    "title": "Offsite at Cooper Union - AlphaPussy: Gina Gershon in Conversation with Bowen Yang",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-03",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/offsite-at-cooper-union-alphapussy-gina-gershon-in-conversation.html"
+  },
+  {
+    "id": "strand-bookstore-sold-out-markus-zusak-adam-gidwitz-the-book-thief-20th-anniv-586",
+    "title": "SOLD OUT - Markus Zusak + Adam Gidwitz: The Book Thief - 20th Anniversary Celebration",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-03",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/markus-zusak-20th-anniversary-celebration-for-the-book-thief.html"
+  },
+  {
+    "id": "strand-bookstore-a-natasha-joukovsky-erin-somers-elizabeth-winkler-medium-rar-587",
+    "title": "A. Natasha Joukovsky + Erin Somers & Elizabeth Winkler: Medium Rare",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-04",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/a-natasha-joukovsky-erin-somers-elizabeth-winkler-medium-rare.html"
+  },
+  {
+    "id": "strand-bookstore-offsite-at-kaufman-music-center-corinne-bailey-rae-put-your--588",
+    "title": "Offsite at Kaufman Music Center - Corinne Bailey Rae: Put Your Records On",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-04",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/corinne-bailey-ray-put-your-records-on.html"
+  },
+  {
+    "id": "strand-bookstore-sold-out-cazzie-david-zosia-mamet-delusions-589",
+    "title": "SOLD OUT - Cazzie David + Zosia Mamet: Delusions",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-05",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/cazzie-david-delusions.html"
+  },
+  {
+    "id": "strand-bookstore-edward-a-new-play-by-ed-schmidt-590",
+    "title": "Edward - A New Play by Ed Schmidt",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-06",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/edward-a-new-play-by-ed-schmidt.html"
+  },
+  {
+    "id": "strand-bookstore-sold-out-t-kira-madden-carmen-maria-machado-whidbey-591",
+    "title": "SOLD OUT - T Kira Madden + Carmen Maria Machado: Whidbey",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-09",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/t-kira-madden-carmen-maria-machado-whidbey.html"
+  },
+  {
+    "id": "strand-bookstore-rebecca-serle-jessica-knoll-once-and-again-592",
+    "title": "Rebecca Serle + Jessica Knoll: Once and Again",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-10",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/rebecca-serle-once-and-again.html"
+  },
+  {
+    "id": "strand-bookstore-natalie-haynes-no-friend-to-this-house-593",
+    "title": "Natalie Haynes: No Friend to This House",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-11",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/natalie-haynes-no-friend-to-this-house.html"
+  },
+  {
+    "id": "strand-bookstore-alice-hoffman-ann-leary-laura-zigman-the-best-dog-in-the-wor-594",
+    "title": "Alice Hoffman + Ann Leary & Laura Zigman: The Best Dog in the World",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-12",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/alice-hoffman-the-best-dog-in-the-world.html"
+  },
+  {
+    "id": "strand-bookstore-jordy-rosenberg-molly-crabapple-morgan-bassichis-night-night-595",
+    "title": "Jordy Rosenberg & Molly Crabapple + Morgan Bassichis: Night Night Fawn",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-13",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/jordy-rosenberg-night-night-fawn.html"
+  },
+  {
+    "id": "strand-bookstore-feminist-giant-the-strand-present-sheima-benembarek-mona-elt-596",
+    "title": "Feminist Giant & The Strand Present: Sheima Benembarek + Mona Eltahawy",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-16",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/feminist-giant-the-strand-present-sheima-benembarek-mona-eltahawy.html"
+  },
+  {
+    "id": "strand-bookstore-sold-out-melissa-auf-der-maur-naomi-fry-even-the-good-girls--597",
+    "title": "SOLD OUT - Melissa Auf der Maur + Naomi Fry: Even the Good Girls Will Cry",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-17",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/melissa-auf-der-maur-naomi-fry-even-the-good-girls-will-cry.html"
+  },
+  {
+    "id": "strand-bookstore-felicia-day-the-lost-daughter-of-sparta-598",
+    "title": "Felicia Day: The Lost Daughter of Sparta",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-18",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/felicia-day-the-lost-daughter-of-sparta.html"
+  },
+  {
+    "id": "strand-bookstore-offsite-at-cooper-union-marina-abramovi-live-in-conversation-599",
+    "title": "Offsite at Cooper Union: Marina Abramović – Live In Conversation on March 18",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-18",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/offsite-at-cooper-union-marina-abramovic-live-in-conversation-2.html"
+  },
+  {
+    "id": "strand-bookstore-philip-schultz-rosanna-warren-enormous-morning-poems-600",
+    "title": "Philip Schultz + Rosanna Warren: Enormous Morning: Poems",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-20",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/philip-schultz-rosanna-warren-enormous-morning-poems.html"
+  },
+  {
+    "id": "strand-bookstore-kiran-hargrave-ada-calhoun-almost-life-601",
+    "title": "Kiran Hargrave + Ada Calhoun: Almost Life",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-23",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/kiran-hargrave-eli-rallo-almost-life.html"
+  },
+  {
+    "id": "strand-bookstore-ham-el-waylly-sohla-el-waylly-hello-home-cooking-602",
+    "title": "Ham El-Waylly + Sohla El-Waylly: Hello, Home Cooking",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-24",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/ham-el-waylly-hello-home-cooking.html"
+  },
+  {
+    "id": "strand-bookstore-george-condo-special-guests-the-mad-and-the-lonely-603",
+    "title": "George Condo + Special Guests: The Mad and the Lonely",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-25",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/george-condo-guests-the-mad-and-the-lonely.html"
+  },
+  {
+    "id": "strand-bookstore-offsite-at-the-cooper-union-s-great-hall-daniel-arsham-futur-604",
+    "title": "Offsite at The Cooper Union's Great Hall - Daniel Arsham: Future Relic",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-25",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/offsite-at-cooper-union-daniel-arsham-future-relic.html"
+  },
+  {
+    "id": "strand-bookstore-t-kingfisher-wolf-worm-605",
+    "title": "T. Kingfisher: Wolf Worm",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-26",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/t-kingfisher-wolf-worm.html"
+  },
+  {
+    "id": "strand-bookstore-katrina-manson-project-maven-606",
+    "title": "Katrina Manson: Project Maven",
+    "venue": "Strand Bookstore",
+    "date": "2026-03-27",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/katrina-manson-project-maven.html"
+  },
+  {
+    "id": "strand-bookstore-marlene-zuk-isabella-rossellini-outsider-animals-607",
+    "title": "Marlene Zuk + Isabella Rossellini: Outsider Animals",
+    "venue": "Strand Bookstore",
+    "date": "2026-04-02",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/marlene-zuk-isabella-rossellini-outsider-animals.html"
+  },
+  {
+    "id": "strand-bookstore-jesse-malin-john-varvatos-almost-grown-608",
+    "title": "Jesse Malin + John Varvatos: Almost Grown",
+    "venue": "Strand Bookstore",
+    "date": "2026-04-08",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/jesse-malin-almost-grown.html"
+  },
+  {
+    "id": "strand-bookstore-rachel-khong-mary-h-k-choi-my-dear-you-609",
+    "title": "Rachel Khong + Mary H.K. Choi: My Dear You",
+    "venue": "Strand Bookstore",
+    "date": "2026-04-09",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/rachel-khong-mary-h-k-choi-my-dear-you.html"
+  },
+  {
+    "id": "strand-bookstore-offsite-at-cooper-union-director-darren-aronofsky-on-storyte-610",
+    "title": "Offsite at Cooper Union - Director Darren Aronofsky on Storytelling",
+    "venue": "Strand Bookstore",
+    "date": "2026-04-11",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/offsite-at-cooper-union-director-darren-aronofsky-on-storytelling-live-in-conversation-in-new-york.html"
+  },
+  {
+    "id": "strand-bookstore-olivia-levin-kelly-keegs-gia-mariano-the-story-of-us-611",
+    "title": "Olivia Levin + Kelly Keegs & Gia Mariano: The Story of Us",
+    "venue": "Strand Bookstore",
+    "date": "2026-04-13",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/olivia-levin-the-story-of-us.html"
+  },
+  {
+    "id": "strand-bookstore-aaww-the-strand-present-amin-ahmad-kirthana-ramisetti-612",
+    "title": "AAWW & The Strand Present: Amin Ahmad + Kirthana Ramisetti",
+    "venue": "Strand Bookstore",
+    "date": "2026-04-14",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/amin-ahmad-jafreen-uddin-a-killer-in-the-family.html"
+  },
+  {
+    "id": "strand-bookstore-sold-out-patrick-radden-keefe-david-marchese-london-falling-613",
+    "title": "SOLD OUT - Patrick Radden Keefe + David Marchese: London Falling",
+    "venue": "Strand Bookstore",
+    "date": "2026-04-17",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/patrick-radden-keefe-david-marchese-london-falling.html"
+  },
+  {
+    "id": "strand-bookstore-sold-out-steve-schirripa-michael-imperioli-willieboy-eats-th-614",
+    "title": "SOLD OUT - Steve Schirripa + Michael Imperioli: WillieBoy Eats the World",
+    "venue": "Strand Bookstore",
+    "date": "2026-04-20",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/steve-schirripa-michael-imperioli-willieboy-eats-the-world.html"
+  },
+  {
+    "id": "strand-bookstore-jayne-anne-phillips-lily-king-small-town-girls-615",
+    "title": "Jayne Anne Phillips + Lily King: Small Town Girls",
+    "venue": "Strand Bookstore",
+    "date": "2026-04-21",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/jayne-anne-phillips-lily-king-small-town-girls.html"
+  },
+  {
+    "id": "strand-bookstore-volume-11-boys-boys-boys-release-panel-616",
+    "title": "Volume 11: BOYS! BOYS! BOYS! Release Panel",
+    "venue": "Strand Bookstore",
+    "date": "2026-04-23",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/boys-boys-boys-panel-volume-11-launch.html"
+  },
+  {
+    "id": "strand-bookstore-ellen-burstyn-poetry-says-it-better-617",
+    "title": "Ellen Burstyn: Poetry Says It Better",
+    "venue": "Strand Bookstore",
+    "date": "2026-04-28",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/ellen-burstyn-poetry-says-it-better.html"
+  },
+  {
+    "id": "strand-bookstore-isaac-fitzgerald-american-rambler-618",
+    "title": "Isaac Fitzgerald: American Rambler",
+    "venue": "Strand Bookstore",
+    "date": "2026-05-12",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/isaac-fitzgerald-american-rambler.html"
+  },
+  {
+    "id": "strand-bookstore-storytime-with-jill-santopolo-at-usq-619",
+    "title": "Storytime with Jill Santopolo at USQ",
+    "venue": "Strand Bookstore",
+    "date": "2026-05-16",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/storytime-with-jill-santopolo-at-usq.html"
+  },
+  {
+    "id": "strand-bookstore-mike-schur-joe-posnanski-big-fan-620",
+    "title": "Mike Schur & Joe Posnanski: Big Fan",
+    "venue": "Strand Bookstore",
+    "date": "2026-05-18",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/mike-shur-joe-posnanski-big-fan.html"
+  },
+  {
+    "id": "strand-bookstore-sara-van-os-rachel-harrison-decomposition-book-621",
+    "title": "Sara Van Os + Rachel Harrison: Decomposition Book",
+    "venue": "Strand Bookstore",
+    "date": "2026-05-21",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/sara-van-os-decomposition-book.html"
+  },
+  {
+    "id": "strand-bookstore-hugh-ryan-my-bad-622",
+    "title": "Hugh Ryan: My Bad",
+    "venue": "Strand Bookstore",
+    "date": "2026-05-28",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/hugh-ryan-my-bad.html"
+  },
+  {
+    "id": "strand-bookstore-joseph-osmundson-spawning-season-623",
+    "title": "Joseph Osmundson: Spawning Season",
+    "venue": "Strand Bookstore",
+    "date": "2026-05-29",
+    "category": "Talk",
+    "sourceUrl": "https://www.strandbooks.com/joseph-osmundson-spawning-season.html"
   }
 ]

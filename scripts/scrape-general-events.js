@@ -538,6 +538,79 @@ async function runSource(name, fn, browserOrNull) {
   sourceLog.push({ name, count, datesExtracted, elapsed, error });
 }
 
+// ---------------------------------------------------------------------------
+// PLAYWRIGHT SOURCE — Strand Bookstore
+// ---------------------------------------------------------------------------
+
+async function scrapeStrand(browser) {
+  const page = await browser.newPage();
+  page.setDefaultTimeout(15000);
+  try {
+    await page.goto('https://www.strandbooks.com/events.html', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(8000);
+
+    const MONTHS_MAP = {
+      january:'01',february:'02',march:'03',april:'04',may:'05',june:'06',
+      july:'07',august:'08',september:'09',october:'10',november:'11',december:'12'
+    };
+
+    const items = await page.evaluate((monthsMap) => {
+      const r = [];
+      // Structure: ul.products > li.col-span-full (month sections)
+      // Each col-span-full contains a month header ("March 2026") AND the event items
+      // Event items are form.product-item with .event-date-day (day badge) and .product-item-link (title)
+      const sections = document.querySelectorAll('ul.products > li.col-span-full');
+
+      for (const section of sections) {
+        const sectionText = section.textContent.replace(/\s+/g, ' ').trim();
+
+        // Extract month/year from section header
+        let currentMonth = '';
+        let currentYear = '';
+        const m = sectionText.match(/(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})/i);
+        if (m) {
+          currentMonth = m[1];
+          currentYear = m[2];
+        }
+
+        // Find all event items within this month section
+        const eventItems = section.querySelectorAll('form.product-item');
+        for (const item of eventItems) {
+          const nameEl = item.querySelector('.product-item-link');
+          if (!nameEl) continue;
+          const title = nameEl.textContent.trim();
+          const link = nameEl.href || '';
+
+          // Day badge: .event-date-day contains day-of-week + day number
+          const dateBadge = item.querySelector('.event-date-day');
+          let dayNum = 0;
+          if (dateBadge) {
+            const dayText = dateBadge.textContent.replace(/\s+/g, ' ').trim();
+            const dm = dayText.match(/(\d{1,2})/);
+            if (dm) dayNum = parseInt(dm[1], 10);
+          }
+
+          // Build ISO date from month context + day number
+          let dateStr = '';
+          if (currentMonth && currentYear && dayNum) {
+            const mon = monthsMap[currentMonth.toLowerCase()];
+            if (mon) dateStr = currentYear + '-' + mon + '-' + String(dayNum).padStart(2, '0');
+          }
+
+          if (title.length > 5 && title.length < 150) {
+            r.push({ title, date: dateStr, venue: '', link });
+          }
+        }
+      }
+      return r;
+    }, MONTHS_MAP);
+
+    push(items, 'Strand Bookstore', 'Talk', 'https://www.strandbooks.com/events.html');
+    console.error(`Strand Bookstore: ${items.length}`);
+  } catch (e) { console.error('Strand Bookstore error:', e.message); }
+  finally { await page.close(); }
+}
+
 function printReport() {
   console.error('\n' + '='.repeat(70));
   console.error('SCRAPE REPORT — General Events');
@@ -548,7 +621,7 @@ function printReport() {
   console.error('Source'.padEnd(25) + 'Items'.padEnd(8) + 'Dates'.padEnd(8) + 'Time'.padEnd(8) + 'Method'.padEnd(10) + 'Status');
   console.error('-'.repeat(70));
   let failures = 0, zeroResults = 0;
-  const jsNames = new Set(['Eventbrite']);
+  const jsNames = new Set(['Eventbrite', 'Strand Bookstore']);
   for (const s of sourceLog) {
     const status = s.error ? `ERROR: ${s.error.slice(0, 35)}` : (s.count === 0 ? '⚠ ZERO' : '✓ OK');
     if (s.error) failures++;
@@ -587,6 +660,7 @@ function printReport() {
     const { chromium } = require('playwright');
     browser = await chromium.launch({ headless: true });
     await runSource('Eventbrite', scrapeEventbrite, browser);
+    await runSource('Strand Bookstore', scrapeStrand, browser);
   } catch (e) {
     console.error('Playwright unavailable, skipping JS sources:', e.message);
   } finally {

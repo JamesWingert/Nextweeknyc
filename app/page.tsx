@@ -917,10 +917,10 @@ function ShowtimesView({ events, currentMonth, today }: { events: Event[]; curre
                 const isToday = date === todayStr;
 
                 return (
-                  <div key={date} style={{ opacity: isPast ? 0.45 : 1 }}>
+                  <div key={date}>
                     <div style={{
                       fontSize: '0.75rem', fontWeight: 600,
-                      color: isToday ? '#e07a5f' : '#8888a0',
+                      color: isToday ? '#e07a5f' : isPast ? '#b8b5c4' : '#8888a0',
                       textTransform: 'uppercase', letterSpacing: '0.04em',
                       marginBottom: '0.5rem',
                       display: 'flex', alignItems: 'center', gap: '0.375rem',
@@ -929,6 +929,15 @@ function ShowtimesView({ events, currentMonth, today }: { events: Event[]; curre
                         width: '6px', height: '6px', borderRadius: '50%', background: '#e07a5f',
                       }} />}
                       {isToday ? 'Today' : format(toDate(date), 'EEE, MMM d')}
+                      {isPast && (
+                        <span style={{
+                          fontSize: '0.625rem', fontWeight: 600, color: '#a09bb2',
+                          background: '#f0eef4', padding: '0.1rem 0.4rem',
+                          borderRadius: '999px', letterSpacing: '0.05em',
+                        }}>
+                          PAST
+                        </span>
+                      )}
                     </div>
                     <div style={{
                       display: 'grid',
@@ -944,19 +953,21 @@ function ShowtimesView({ events, currentMonth, today }: { events: Event[]; curre
                           style={{
                             display: 'block', padding: '0.5rem 0.75rem',
                             borderRadius: '0.5rem', fontSize: '0.8125rem',
-                            textDecoration: 'none', color: '#1a1a2e',
-                            background: '#fff', border: `1px solid ${vc.border}`,
-                            borderLeft: `3px solid ${vc.accent}`,
+                            textDecoration: 'none',
+                            color: isPast ? '#a09bb2' : '#1a1a2e',
+                            background: isPast ? '#faf8fc' : '#fff',
+                            border: `1px solid ${isPast ? '#e8e4ee' : vc.border}`,
+                            borderLeft: `3px solid ${isPast ? '#d4d0de' : vc.accent}`,
                             transition: 'all 0.15s ease',
                             overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                           }}
                           onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                            e.currentTarget.style.background = vc.bg;
+                            e.currentTarget.style.background = isPast ? '#f5f2f8' : vc.bg;
                             e.currentTarget.style.transform = 'translateY(-1px)';
                             e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
                           }}
                           onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                            e.currentTarget.style.background = '#fff';
+                            e.currentTarget.style.background = isPast ? '#faf8fc' : '#fff';
                             e.currentTarget.style.transform = 'none';
                             e.currentTarget.style.boxShadow = 'none';
                           }}
