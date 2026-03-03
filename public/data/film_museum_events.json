@@ -272,8 +272,8 @@
     "sourceUrl": "https://www.ifccenter.com/films/the-last-one-for-the-road/"
   },
   {
-    "id": "film-forum-satyajit-ray-sdays-and-nights-in-the-forest-57",
-    "title": "Satyajit Ray’sDAYS AND NIGHTS IN THE FOREST",
+    "id": "film-forum-satyajit-ray-s-days-and-nights-in-the-forest-57",
+    "title": "Satyajit Ray’s DAYS AND NIGHTS IN THE FOREST",
     "venue": "Film Forum",
     "date": "2026-03-05",
     "category": "Film",
@@ -350,14 +350,6 @@
     "date": "2026-03-05",
     "category": "Film",
     "sourceUrl": "https://filmforum.org/film/mouse-hunt-ffjr-2026"
-  },
-  {
-    "id": "film-forum-satyajit-ray-s-days-and-nights-in-the-forest-67",
-    "title": "Satyajit Ray’s DAYS AND NIGHTS IN THE FOREST",
-    "venue": "Film Forum",
-    "date": "2026-02-27 to 2026-03-12",
-    "category": "Film",
-    "sourceUrl": "https://filmforum.org/film/days-and-nights-in-the-forest"
   },
   {
     "id": "film-forum-ida-lupino-s-the-bigamist-68",
@@ -2296,52 +2288,52 @@
     "sourceUrl": "https://www.joyce.org/performances/parsons-dance-zxz4"
   },
   {
-    "id": "lincoln-center-march-03-at-7-30-pm-335",
+    "id": "lincoln-center-march-03-at-7-30-pm-334",
     "title": "March 03 at 7:30 pm",
     "venue": "Lincoln Center",
     "date": "2026-03-03",
     "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.lincolncenter.org/calendar"
+    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/mirga-grazinyte-tyla-and-emanuel-ax/"
   },
   {
-    "id": "lincoln-center-the-violin-today-336",
-    "title": "The Violin Today",
-    "venue": "Lincoln Center",
-    "date": "",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.chambermusicsociety.org/our-concerts/at-lincoln-center/lectures/the-violin-today-2/"
-  },
-  {
-    "id": "lincoln-center-march-04-at-6-30-pm-337",
+    "id": "lincoln-center-march-04-at-6-30-pm-336",
     "title": "March 04 at 6:30 pm",
     "venue": "Lincoln Center",
     "date": "2026-03-04",
     "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.lincolncenter.org/calendar"
+    "sourceUrl": "https://www.chambermusicsociety.org/our-concerts/at-lincoln-center/lectures/the-violin-today-2/"
   },
   {
-    "id": "lincoln-center-march-05-at-1-00-pm-339",
+    "id": "lincoln-center-the-violin-today-337",
+    "title": "The Violin Today",
+    "venue": "Lincoln Center",
+    "date": "2026-03-04",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.chambermusicsociety.org/our-concerts/at-lincoln-center/lectures/the-violin-today-2/"
+  },
+  {
+    "id": "lincoln-center-march-05-at-1-00-pm-338",
     "title": "March 05 at 1:00 pm",
     "venue": "Lincoln Center",
     "date": "2026-03-05",
     "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.lincolncenter.org/calendar"
+    "sourceUrl": "https://www.lincolncenter.org/series/accessibility-at-lincoln-center/juilliard-gluck-community-fellows-duet-of-air-262"
   },
   {
-    "id": "lincoln-center-houdini-speaks-to-the-living-340",
-    "title": "Houdini Speaks to the Living",
-    "venue": "Lincoln Center",
-    "date": "",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.nypl.org/events/programs/2026/03/06/houdini-speaks-living"
-  },
-  {
-    "id": "lincoln-center-march-06-at-7-00-pm-341",
+    "id": "lincoln-center-march-06-at-7-00-pm-340",
     "title": "March 06 at 7:00 pm",
     "venue": "Lincoln Center",
     "date": "2026-03-06",
     "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.lincolncenter.org/calendar"
+    "sourceUrl": "https://www.nypl.org/events/programs/2026/03/06/houdini-speaks-living"
+  },
+  {
+    "id": "lincoln-center-houdini-speaks-to-the-living-341",
+    "title": "Houdini Speaks to the Living",
+    "venue": "Lincoln Center",
+    "date": "2026-03-06",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.nypl.org/events/programs/2026/03/06/houdini-speaks-living"
   },
   {
     "id": "92ny-stardust-from-tin-pan-alley-to-broadway-342",
