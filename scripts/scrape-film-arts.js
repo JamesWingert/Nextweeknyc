@@ -448,38 +448,56 @@ async function scrapeNeueGalerie() {
   } catch (e) { console.error('Neue Galerie error:', e.message); }
 }
 
-async function scrapeFrick(browser) {
-  const page = await browser.newPage();
-  page.setDefaultTimeout(15000);
+async function scrapeFrick() {
+  // The Frick has a Trumba RSS calendar feed with structured dates
   try {
-    await page.goto('https://www.frick.org/exhibitions', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(3000);
-    const items = await page.evaluate(() => {
-      const r = [], seen = new Set();
-      document.querySelectorAll('a[href*="/exhibitions/"]').forEach(el => {
-        const t = el.textContent?.trim();
-        if (t && t.length > 5 && t.length < 120 && !seen.has(t.toLowerCase())
-            && !/^(exhibitions?|current|upcoming|past|virtual|view|read more|all past|explore)/i.test(t)) {
-          seen.add(t.toLowerCase());
-          // Look for date in parent container
-          const card = el.closest('article, [class*="card"], li, div, section');
-          const cardText = card?.textContent?.replace(/\s+/g, ' ')?.trim() || '';
-          let dateText = '';
-          const throughMatch = cardText.match(/(through\s+[A-Za-z]+(?:\s+\d{1,2})?(?:\s*,?\s*\d{4})?)/i);
-          if (throughMatch) dateText = throughMatch[1];
-          if (!dateText) {
-            const rangeMatch = cardText.match(/([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})\s*[–—-]\s*([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})/);
-            if (rangeMatch) dateText = `${rangeMatch[1]} – ${rangeMatch[2]}`;
-          }
-          r.push({ title: t, link: el.href, date: dateText });
-        }
+    const { html: rssXml } = await fetchHTML('https://www.trumba.com/calendars/frick2.rss');
+    const items = [];
+    const itemRegex = /<item>([\s\S]*?)<\/item>/g;
+    let match;
+    while ((match = itemRegex.exec(rssXml)) !== null) {
+      const xml = match[1];
+      const get = (tag) => {
+        const m = xml.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`));
+        return m ? m[1].trim() : '';
+      };
+      const title = get('title');
+      const localstart = get('x-trumba:localstart'); // "2026-03-04T15:30:00"
+      const link = get('link');
+      const location = get('xCal:location');
+      const formatted = get('x-trumba:formatteddatetime'); // "Wednesday, March 4, 2026, 3:30 - 3:45 p.m. EST"
+
+      if (!title || title.length < 4) continue;
+
+      // Extract date from localstart (ISO format)
+      const dateStr = localstart ? localstart.slice(0, 10) : '';
+      // Extract time from formatted string
+      const timeMatch = formatted.match(/(\d{1,2}(?::\d{2})?\s*(?:-|–)\s*\d{1,2}(?::\d{2})?\s*(?:a\.m\.|p\.m\.|AM|PM)?\s*(?:a\.m\.|p\.m\.|AM|PM|EST|EDT)?)/i);
+      const time = timeMatch ? timeMatch[1].replace(/\s+/g, ' ').trim() : '';
+
+      // Clean up location — strip "In-Person: " prefix
+      const venue = location.replace(/^In[- ]Person:\s*/i, '').trim() || 'The Frick Collection';
+
+      // Strip HTML from description for a clean summary
+      const rawDesc = get('description');
+      const desc = rawDesc
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+        .replace(/&#160;/g, ' ').replace(/&quot;/g, '"')
+        .replace(/\s+/g, ' ').trim()
+        .slice(0, 200);
+
+      items.push({
+        title,
+        date: dateStr,
+        link,
+        time,
+        description: desc || undefined,
       });
-      return r;
-    });
-    push(items, 'The Frick Collection', 'Art', 'https://www.frick.org/exhibitions');
-    console.error(`The Frick: ${items.length}`);
+    }
+    push(items, 'The Frick Collection', 'Art', 'https://www.frick.org/calendar');
+    console.error(`The Frick (RSS): ${items.length}`);
   } catch (e) { console.error('The Frick error:', e.message); }
-  finally { await page.close(); }
 }
 
 async function scrapeBAM() {
@@ -1203,11 +1221,10 @@ async function scrape92NY(browser) {
 
 const sourceLog = [];
 const JS_SOURCES = new Set([
-  'Metrograph', 'The Frick', 'Guggenheim', 'New Museum', 'Japan Society',
+  'Metrograph', 'Guggenheim', 'New Museum', 'Japan Society',
   'NY Philharmonic', 'Carnegie Hall', 'Met Opera', 'NYCB',
   'Joyce Theater', 'Lincoln Center', 'Moving Image', '92NY',
-  'Angelika', 'Film at Lincoln Center',
-  'Joyce Theater', 'Lincoln Center', 'Moving Image', '92NY'
+  'Angelika', 'Film at Lincoln Center'
 ]);
 
 async function scrapeAngelika(browser) {
@@ -1372,6 +1389,7 @@ function printReport() {
   await runSource('Whitney', scrapeWhitney);
   await runSource('Neue Galerie', scrapeNeueGalerie);
   await runSource('BAM', scrapeBAM);
+  await runSource('The Frick', scrapeFrick);
 
   // Playwright sources
   let browser = null;
@@ -1382,7 +1400,6 @@ function printReport() {
     await runSource('Metrograph', scrapeMetrograph, browser);
     await runSource('Angelika', scrapeAngelika, browser);
     await runSource('Film at Lincoln Center', scrapeFilmLinc, browser);
-    await runSource('The Frick', scrapeFrick, browser);
     await runSource('Guggenheim', scrapeGuggenheim, browser);
     await runSource('New Museum', scrapeNewMuseum, browser);
     await runSource('Japan Society', scrapeJapanSociety, browser);
