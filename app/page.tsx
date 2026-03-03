@@ -221,18 +221,25 @@ export default function Home() {
   return (
     <main style={{ minHeight: '100vh', padding: '2rem 1.5rem', maxWidth: '72rem', margin: '0 auto' }}>
       <header style={{ marginBottom: '2rem' }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.75rem', flexWrap: 'wrap' as const }}>
-          <h1 style={{ fontSize: '2rem', fontWeight: 700, letterSpacing: '-0.02em', color: '#1a1a2e' }}>
-            Next Week NYC
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' as const }}>
+          <h1 style={{ fontSize: '2.25rem', fontWeight: 300, letterSpacing: '-0.03em', color: '#1a1a2e', margin: 0, lineHeight: 1.1 }}>
+            <span style={{ fontWeight: 300, color: '#8888a0' }}>next week</span>
+            {' '}
+            <span style={{ fontWeight: 700, color: '#e07a5f', letterSpacing: '-0.02em' }}>NYC</span>
           </h1>
-          <span style={{ fontSize: '0.875rem', fontWeight: 500, color: '#e07a5f', background: '#fde8e8', padding: '0.25rem 0.75rem', borderRadius: '999px' }}>
+          <span style={{
+            fontSize: '0.75rem', fontWeight: 600, color: '#e07a5f',
+            background: 'linear-gradient(135deg, #fde8e8, #fef3c7)',
+            padding: '0.3rem 0.875rem', borderRadius: '999px',
+            letterSpacing: '0.03em', textTransform: 'uppercase',
+          }}>
             {format(currentMonth, 'MMMM yyyy')}
           </span>
         </div>
-        <p style={{ color: '#b0a090', fontSize: '0.8125rem', marginTop: '0.25rem', fontStyle: 'italic' }}>
-          Film, art, music, theater & more — curated for the city
+        <p style={{ color: '#b0a090', fontSize: '0.8125rem', marginTop: '0.375rem', fontStyle: 'italic', letterSpacing: '0.01em' }}>
+          film, art, music, theater & more — curated for the city
         </p>
-        <p style={{ color: '#8888a0', fontSize: '0.875rem', marginTop: '0.5rem' }}>
+        <p style={{ color: '#8888a0', fontSize: '0.8125rem', marginTop: '0.375rem' }}>
           {calendarEvents.length} event{calendarEvents.length !== 1 ? 's' : ''}
           {showtimeEvents.length > 0 && ` · ${showtimeEvents.length} showtime${showtimeEvents.length !== 1 ? 's' : ''}`}
           {onViewEvents.length > 0 && ` · ${onViewEvents.length} ongoing`}
