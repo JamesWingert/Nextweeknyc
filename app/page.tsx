@@ -432,21 +432,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Quick filters: Clear all when active */}
-        {(searchQuery || selectedCategories.length > 0 || selectedBoroughs.length > 0) && (
-          <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.625rem', flexWrap: 'wrap' as const }}>
-            <button
-              onClick={() => { setSearchQuery(''); setSelectedCategories([]); setSelectedBoroughs([]); }}
-              style={{
-                padding: '0.3rem 0.75rem', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 600,
-                border: '1.5px solid var(--border)', background: 'var(--bg-card)',
-                color: 'var(--text-muted)', cursor: 'pointer',
-              }}
-            >
-              Clear all
-            </button>
-          </div>
-        )}
+        {/* Quick filters: Clear all moved to borough row */}
 
         {/* Desktop tab bar */}
         <div className="desktop-tabs" style={{ display: 'inline-flex', background: 'var(--bg-tab)', borderRadius: '0.5rem', padding: '3px', marginTop: '0.75rem' }}>
@@ -478,7 +464,7 @@ export default function Home() {
       </header>
 
       {/* Borough filter — sits between tabs and category pills, visible on all tabs */}
-      <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem', marginBottom: '1rem', alignItems: 'center' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem', marginBottom: '1rem', paddingTop: '0.75rem', borderTop: '1px solid var(--border-light)', alignItems: 'center' }}>
         {boroughConfig.map(({ key, label, emoji }) => {
           const isActive = selectedBoroughs.includes(key);
           return (
@@ -503,6 +489,19 @@ export default function Home() {
             </button>
           );
         })}
+        {/* Inline clear all — only visible when filters are active */}
+        {(searchQuery || selectedCategories.length > 0 || selectedBoroughs.length > 0) && (
+          <button
+            onClick={() => { setSearchQuery(''); setSelectedCategories([]); setSelectedBoroughs([]); }}
+            style={{
+              padding: '0.3rem 0.625rem', borderRadius: '999px', fontSize: '0.7rem', fontWeight: 600,
+              border: '1.5px solid var(--border)', background: 'var(--bg-card)',
+              color: 'var(--text-muted)', cursor: 'pointer', marginLeft: '0.25rem',
+            }}
+          >
+            ✕ Clear
+          </button>
+        )}
       </div>
 
       {/* Category filters (hidden on Showtimes / On View) */}
