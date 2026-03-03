@@ -4436,18 +4436,10 @@
     "sourceUrl": "https://www.joyce.org/performances/parsons-dance-zxz4"
   },
   {
-    "id": "lincoln-center-mirga-gra-inyt-tyla-emanuel-ax-606",
-    "title": "Mirga Gražinytė-Tyla & Emanuel Ax",
-    "venue": "Lincoln Center",
-    "date": "",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.nyphil.org/concerts-tickets/2526/mirga-grazinyte-tyla-and-emanuel-ax/"
-  },
-  {
     "id": "lincoln-center-the-violin-today-607",
     "title": "The Violin Today",
     "venue": "Lincoln Center",
-    "date": "",
+    "date": "2026-03-04",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.chambermusicsociety.org/our-concerts/at-lincoln-center/lectures/the-violin-today-2/"
   },
@@ -4455,7 +4447,7 @@
     "id": "lincoln-center-houdini-speaks-to-the-living-609",
     "title": "Houdini Speaks to the Living",
     "venue": "Lincoln Center",
-    "date": "",
+    "date": "2026-03-06",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.nypl.org/events/programs/2026/03/06/houdini-speaks-living"
   },
@@ -4595,16 +4587,7 @@
     "time": "7:30 PM"
   },
   {
-    "id": "american-ballet-theatre-tomorrow-s-stars-abt-studio-company-at-new-york-city-center--625",
-    "title": "Tomorrow's Stars: ABT Studio Company at New York City Center's Studio 5",
-    "venue": "American Ballet Theatre",
-    "date": "2026-05-04",
-    "category": "Ballet",
-    "sourceUrl": "https://www.abt.org/performances/master-calendar/",
-    "time": "6:30 PM"
-  },
-  {
-    "id": "museum-of-the-moving-image-lu-yang-the-great-adventure-of-material-world-626",
+    "id": "museum-of-the-moving-image-lu-yang-the-great-adventure-of-material-world-625",
     "title": "Lu Yang: The Great Adventure of Material World",
     "venue": "Museum of the Moving Image",
     "date": "2025-09-26",
@@ -4612,7 +4595,7 @@
     "sourceUrl": "https://movingimage.org/event/lu-yang-the-great-adventure-of-material-world/"
   },
   {
-    "id": "museum-of-the-moving-image-gumby-adventures-restored-animated-classics-from-the-gumby-s-627",
+    "id": "museum-of-the-moving-image-gumby-adventures-restored-animated-classics-from-the-gumby-s-626",
     "title": "Gumby Adventures: Restored Animated Classics from The Gumby Show",
     "venue": "Museum of the Moving Image",
     "date": "2025-12-04",
@@ -4620,7 +4603,7 @@
     "sourceUrl": "https://movingimage.org/event/gumby-adventures/"
   },
   {
-    "id": "museum-of-the-moving-image-stories-and-set-designs-for-the-sopranos-628",
+    "id": "museum-of-the-moving-image-stories-and-set-designs-for-the-sopranos-627",
     "title": "Stories and Set Designs for The Sopranos",
     "venue": "Museum of the Moving Image",
     "date": "2026-02-14",
@@ -4628,7 +4611,7 @@
     "sourceUrl": "https://movingimage.org/event/stories-and-sets-for-the-sopranos/"
   },
   {
-    "id": "museum-of-the-moving-image-lick-pic-629",
+    "id": "museum-of-the-moving-image-lick-pic-628",
     "title": "Lick Pic",
     "venue": "Museum of the Moving Image",
     "date": "2026-02-19",
@@ -4636,7 +4619,7 @@
     "sourceUrl": "https://movingimage.org/event/lick-pic/"
   },
   {
-    "id": "museum-of-the-moving-image-celebrating-the-sopranos-season-3-an-evening-with-david-chas-630",
+    "id": "museum-of-the-moving-image-celebrating-the-sopranos-season-3-an-evening-with-david-chas-629",
     "title": "Celebrating The Sopranos Season 3: An Evening with David Chase, Steven Van Zandt, and Ariel Kiley",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4644,7 +4627,7 @@
     "sourceUrl": "https://movingimage.org/event/celebrating-the-sopranos-evening-one/"
   },
   {
-    "id": "museum-of-the-moving-image-silent-reading-at-momi-631",
+    "id": "museum-of-the-moving-image-silent-reading-at-momi-630",
     "title": "Silent Reading at MoMI",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4652,7 +4635,7 @@
     "sourceUrl": "https://movingimage.org/event/silent-reading/"
   },
   {
-    "id": "museum-of-the-moving-image-celebrating-the-sopranos-season-3-an-evening-with-david-chas-632",
+    "id": "museum-of-the-moving-image-celebrating-the-sopranos-season-3-an-evening-with-david-chas-631",
     "title": "Celebrating The Sopranos Season 3: An Evening with David Chase, Dominic Chianese, and Edie Falco",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4660,7 +4643,7 @@
     "sourceUrl": "https://movingimage.org/event/celebrating-the-sopranos-evening-two/"
   },
   {
-    "id": "museum-of-the-moving-image-spirited-away-633",
+    "id": "museum-of-the-moving-image-spirited-away-632",
     "title": "Spirited Away",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4668,7 +4651,7 @@
     "sourceUrl": "https://movingimage.org/event/spirited-away-2001/2026-02-27/"
   },
   {
-    "id": "museum-of-the-moving-image-access-mornings-at-momi-634",
+    "id": "museum-of-the-moving-image-access-mornings-at-momi-633",
     "title": "Access Mornings at MoMI",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4676,7 +4659,7 @@
     "sourceUrl": "https://movingimage.org/event/access-mornings-at-momi-2/2026-02-28/"
   },
   {
-    "id": "museum-of-the-moving-image-touch-object-experience-635",
+    "id": "museum-of-the-moving-image-touch-object-experience-634",
     "title": "Touch Object Experience",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4684,7 +4667,7 @@
     "sourceUrl": "https://movingimage.org/event/touch-object-experience/2026-02-28/"
   },
   {
-    "id": "museum-of-the-moving-image-werckmeister-harmonies-636",
+    "id": "museum-of-the-moving-image-werckmeister-harmonies-635",
     "title": "Werckmeister Harmonies",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4692,7 +4675,7 @@
     "sourceUrl": "https://movingimage.org/event/werckmeister-harmonies-3/"
   },
   {
-    "id": "museum-of-the-moving-image-jim-henson-exhibition-guided-tours-637",
+    "id": "museum-of-the-moving-image-jim-henson-exhibition-guided-tours-636",
     "title": "Jim Henson Exhibition Guided Tours",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4700,7 +4683,7 @@
     "sourceUrl": "https://movingimage.org/event/30518/2026-02-28/"
   },
   {
-    "id": "museum-of-the-moving-image-celebrating-the-sopranos-season-3-an-evening-with-david-chas-638",
+    "id": "museum-of-the-moving-image-celebrating-the-sopranos-season-3-an-evening-with-david-chas-637",
     "title": "Celebrating The Sopranos Season 3: An Evening with David Chase and Annabella Sciorra",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4708,7 +4691,7 @@
     "sourceUrl": "https://movingimage.org/event/celebrating-the-sopranos-evening-three/"
   },
   {
-    "id": "museum-of-the-moving-image-moving-image-studio-639",
+    "id": "museum-of-the-moving-image-moving-image-studio-638",
     "title": "Moving Image Studio",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4716,7 +4699,7 @@
     "sourceUrl": "https://movingimage.org/event/moving-image-studio-2/2026-03-01/"
   },
   {
-    "id": "museum-of-the-moving-image-the-thing-from-another-world-640",
+    "id": "museum-of-the-moving-image-the-thing-from-another-world-639",
     "title": "The Thing from Another World",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4724,7 +4707,7 @@
     "sourceUrl": "https://movingimage.org/event/the-thing-from-another-world/"
   },
   {
-    "id": "museum-of-the-moving-image-cutting-through-rocks-641",
+    "id": "museum-of-the-moving-image-cutting-through-rocks-640",
     "title": "Cutting Through Rocks",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4732,7 +4715,7 @@
     "sourceUrl": "https://movingimage.org/event/cutting-through-rocks/"
   },
   {
-    "id": "museum-of-the-moving-image-chaat-gpt-642",
+    "id": "museum-of-the-moving-image-chaat-gpt-641",
     "title": "Chaat GPT",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4740,7 +4723,7 @@
     "sourceUrl": "https://movingimage.org/event/chaat-gpt/"
   },
   {
-    "id": "museum-of-the-moving-image-sneak-preview-the-blue-trail-643",
+    "id": "museum-of-the-moving-image-sneak-preview-the-blue-trail-642",
     "title": "Sneak Preview: The Blue Trail",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4748,7 +4731,7 @@
     "sourceUrl": "https://movingimage.org/event/the-blue-trail/"
   },
   {
-    "id": "museum-of-the-moving-image-silsila-644",
+    "id": "museum-of-the-moving-image-silsila-643",
     "title": "Silsila",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4756,7 +4739,7 @@
     "sourceUrl": "https://movingimage.org/event/silsila/"
   },
   {
-    "id": "museum-of-the-moving-image-yuri-norstein-three-tail-tales-645",
+    "id": "museum-of-the-moving-image-yuri-norstein-three-tail-tales-644",
     "title": "Yuri Norstein: Three Tail Tales",
     "venue": "Museum of the Moving Image",
     "date": "2026-03-05",
@@ -4764,7 +4747,7 @@
     "sourceUrl": "https://movingimage.org/event/yuri-norstein-three-tail-tales/"
   },
   {
-    "id": "museum-of-the-moving-image-mulholland-drive-646",
+    "id": "museum-of-the-moving-image-mulholland-drive-645",
     "title": "Mulholland Drive",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4772,7 +4755,7 @@
     "sourceUrl": "https://movingimage.org/event/mulholland-drive-3-6/"
   },
   {
-    "id": "museum-of-the-moving-image-the-wiz-presented-by-ashley-clark-647",
+    "id": "museum-of-the-moving-image-the-wiz-presented-by-ashley-clark-646",
     "title": "The Wiz—Presented by Ashley Clark",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4780,7 +4763,7 @@
     "sourceUrl": "https://movingimage.org/event/the-wiz-2026/"
   },
   {
-    "id": "museum-of-the-moving-image-west-indies-the-fugitive-slaves-of-liberty-presented-by-ashl-648",
+    "id": "museum-of-the-moving-image-west-indies-the-fugitive-slaves-of-liberty-presented-by-ashl-647",
     "title": "West Indies: The Fugitive Slaves of Liberty—Presented by Ashley Clark",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4788,7 +4771,7 @@
     "sourceUrl": "https://movingimage.org/event/west-indies/"
   },
   {
-    "id": "museum-of-the-moving-image-monsters-inc-in-3d-649",
+    "id": "museum-of-the-moving-image-monsters-inc-in-3d-648",
     "title": "Monsters, Inc. (in 3D)",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4796,7 +4779,7 @@
     "sourceUrl": "https://movingimage.org/event/monsters-inc-2001/"
   },
   {
-    "id": "museum-of-the-moving-image-space-is-the-place-650",
+    "id": "museum-of-the-moving-image-space-is-the-place-649",
     "title": "Space Is the Place",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4804,7 +4787,7 @@
     "sourceUrl": "https://movingimage.org/event/space-is-the-place/"
   },
   {
-    "id": "museum-of-the-moving-image-memento-651",
+    "id": "museum-of-the-moving-image-memento-650",
     "title": "Memento",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4812,7 +4795,7 @@
     "sourceUrl": "https://movingimage.org/event/memento/"
   },
   {
-    "id": "museum-of-the-moving-image-i-m-going-home-652",
+    "id": "museum-of-the-moving-image-i-m-going-home-651",
     "title": "I’m Going Home",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4820,7 +4803,7 @@
     "sourceUrl": "https://movingimage.org/event/im-going-home/"
   },
   {
-    "id": "museum-of-the-moving-image-pulse-653",
+    "id": "museum-of-the-moving-image-pulse-652",
     "title": "Pulse",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4828,7 +4811,7 @@
     "sourceUrl": "https://movingimage.org/event/pulse-2001/"
   },
   {
-    "id": "museum-of-the-moving-image-overexposed-art-technology-and-the-body-654",
+    "id": "museum-of-the-moving-image-overexposed-art-technology-and-the-body-653",
     "title": "Overexposed: Art, Technology, and the Body",
     "venue": "Museum of the Moving Image",
     "date": "2026-03-14",
@@ -4836,7 +4819,7 @@
     "sourceUrl": "https://movingimage.org/event/overexposed/"
   },
   {
-    "id": "museum-of-the-moving-image-fantastic-voyage-with-dr-zahi-a-fayad-in-person-655",
+    "id": "museum-of-the-moving-image-fantastic-voyage-with-dr-zahi-a-fayad-in-person-654",
     "title": "Fantastic Voyage—with Dr. Zahi A. Fayad in person",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4844,7 +4827,7 @@
     "sourceUrl": "https://movingimage.org/event/fantastic-voyage/"
   },
   {
-    "id": "museum-of-the-moving-image-de-humani-corporis-fabrica-656",
+    "id": "museum-of-the-moving-image-de-humani-corporis-fabrica-655",
     "title": "De Humani Corporis Fabrica",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4852,7 +4835,7 @@
     "sourceUrl": "https://movingimage.org/event/de-humani-corporis-fabrica-2026/"
   },
   {
-    "id": "museum-of-the-moving-image-fat-girl-657",
+    "id": "museum-of-the-moving-image-fat-girl-656",
     "title": "Fat Girl",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4860,7 +4843,7 @@
     "sourceUrl": "https://movingimage.org/event/fat-girl/"
   },
   {
-    "id": "museum-of-the-moving-image-story-studio-women-s-history-month-658",
+    "id": "museum-of-the-moving-image-story-studio-women-s-history-month-657",
     "title": "Story Studio: Women’s History Month",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4868,7 +4851,7 @@
     "sourceUrl": "https://movingimage.org/event/story-studio-womens-history-month/"
   },
   {
-    "id": "museum-of-the-moving-image-the-royal-tenenbaums-659",
+    "id": "museum-of-the-moving-image-the-royal-tenenbaums-658",
     "title": "The Royal Tenenbaums",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4876,7 +4859,7 @@
     "sourceUrl": "https://movingimage.org/event/the-royal-tenenbaums-2001/2026-03-15/"
   },
   {
-    "id": "museum-of-the-moving-image-wishbone-660",
+    "id": "museum-of-the-moving-image-wishbone-659",
     "title": "Wishbone",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4884,7 +4867,7 @@
     "sourceUrl": "https://movingimage.org/event/wishbone/"
   },
   {
-    "id": "museum-of-the-moving-image-oscars-watch-party-661",
+    "id": "museum-of-the-moving-image-oscars-watch-party-660",
     "title": "Oscars Watch Party",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4892,7 +4875,7 @@
     "sourceUrl": "https://movingimage.org/event/oscars-watch-party/"
   },
   {
-    "id": "museum-of-the-moving-image-gosford-park-662",
+    "id": "museum-of-the-moving-image-gosford-park-661",
     "title": "Gosford Park",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4900,7 +4883,7 @@
     "sourceUrl": "https://movingimage.org/event/gosford-park/"
   },
   {
-    "id": "museum-of-the-moving-image-on-production-design-with-dean-taucher-663",
+    "id": "museum-of-the-moving-image-on-production-design-with-dean-taucher-662",
     "title": "“On Production Design” with Dean Taucher",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4908,7 +4891,7 @@
     "sourceUrl": "https://movingimage.org/event/on-production-design-with-dean-taucher/"
   },
   {
-    "id": "museum-of-the-moving-image-atanarjuat-the-fast-runner-664",
+    "id": "museum-of-the-moving-image-atanarjuat-the-fast-runner-663",
     "title": "Atanarjuat: The Fast Runner",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4916,7 +4899,7 @@
     "sourceUrl": "https://movingimage.org/event/atanarjuat-the-fast-runner/"
   },
   {
-    "id": "museum-of-the-moving-image-in-praise-of-love-665",
+    "id": "museum-of-the-moving-image-in-praise-of-love-664",
     "title": "In Praise of Love",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4924,7 +4907,7 @@
     "sourceUrl": "https://movingimage.org/event/in-praise-of-love-3-21/"
   },
   {
-    "id": "museum-of-the-moving-image-the-piano-teacher-666",
+    "id": "museum-of-the-moving-image-the-piano-teacher-665",
     "title": "The Piano Teacher",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4932,7 +4915,7 @@
     "sourceUrl": "https://movingimage.org/event/the-piano-teacher/"
   },
   {
-    "id": "museum-of-the-moving-image-ghost-world-667",
+    "id": "museum-of-the-moving-image-ghost-world-666",
     "title": "Ghost World",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4940,7 +4923,7 @@
     "sourceUrl": "https://movingimage.org/event/ghost-world/"
   },
   {
-    "id": "museum-of-the-moving-image-va-savoir-668",
+    "id": "museum-of-the-moving-image-va-savoir-667",
     "title": "Va Savoir",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4948,7 +4931,7 @@
     "sourceUrl": "https://movingimage.org/event/va-savoir/"
   },
   {
-    "id": "museum-of-the-moving-image-the-others-669",
+    "id": "museum-of-the-moving-image-the-others-668",
     "title": "The Others",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4956,7 +4939,7 @@
     "sourceUrl": "https://movingimage.org/event/the-others-2001/"
   },
   {
-    "id": "museum-of-the-moving-image-johnny-carson-presents-jim-henson-celebrating-johnny-carson--670",
+    "id": "museum-of-the-moving-image-johnny-carson-presents-jim-henson-celebrating-johnny-carson--669",
     "title": "Johnny Carson Presents Jim Henson: Celebrating Johnny Carson’s Centennial",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4964,7 +4947,7 @@
     "sourceUrl": "https://movingimage.org/event/johnny-carson-presents/2026-03-29/"
   },
   {
-    "id": "museum-of-the-moving-image-millennium-mambo-671",
+    "id": "museum-of-the-moving-image-millennium-mambo-670",
     "title": "Millennium Mambo",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4972,7 +4955,7 @@
     "sourceUrl": "https://movingimage.org/event/millennium-mambo-3-29/"
   },
   {
-    "id": "museum-of-the-moving-image-trouble-every-day-672",
+    "id": "museum-of-the-moving-image-trouble-every-day-671",
     "title": "Trouble Every Day",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4980,7 +4963,7 @@
     "sourceUrl": "https://movingimage.org/event/trouble-every-day-3-29/"
   },
   {
-    "id": "museum-of-the-moving-image-what-time-is-it-there-673",
+    "id": "museum-of-the-moving-image-what-time-is-it-there-672",
     "title": "What Time Is It There?",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4988,7 +4971,7 @@
     "sourceUrl": "https://movingimage.org/event/what-time-is-it-there/"
   },
   {
-    "id": "museum-of-the-moving-image-waking-life-674",
+    "id": "museum-of-the-moving-image-waking-life-673",
     "title": "Waking Life",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -4996,7 +4979,7 @@
     "sourceUrl": "https://movingimage.org/event/waking-life/"
   },
   {
-    "id": "museum-of-the-moving-image-donnie-darko-675",
+    "id": "museum-of-the-moving-image-donnie-darko-674",
     "title": "Donnie Darko",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -5004,7 +4987,7 @@
     "sourceUrl": "https://movingimage.org/event/donnie-darko-2/"
   },
   {
-    "id": "museum-of-the-moving-image-the-lady-and-the-duke-676",
+    "id": "museum-of-the-moving-image-the-lady-and-the-duke-675",
     "title": "The Lady and the Duke",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -5012,7 +4995,7 @@
     "sourceUrl": "https://movingimage.org/event/the-lady-and-the-duke/"
   },
   {
-    "id": "museum-of-the-moving-image-that-old-dream-that-moves-real-cool-time-677",
+    "id": "museum-of-the-moving-image-that-old-dream-that-moves-real-cool-time-676",
     "title": "That Old Dream That Moves (Real Cool Time)",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -5020,7 +5003,7 @@
     "sourceUrl": "https://movingimage.org/event/that-old-dream-that-moves/"
   },
   {
-    "id": "museum-of-the-moving-image-sloan-science-and-film-reception-and-celebration-678",
+    "id": "museum-of-the-moving-image-sloan-science-and-film-reception-and-celebration-677",
     "title": "Sloan Science and Film Reception and Celebration",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -5028,7 +5011,7 @@
     "sourceUrl": "https://movingimage.org/event/sloan-reception-2026/"
   },
   {
-    "id": "museum-of-the-moving-image-the-seven-year-itch-book-event-679",
+    "id": "museum-of-the-moving-image-the-seven-year-itch-book-event-678",
     "title": "The Seven-Year Itch + Book Event",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -5036,7 +5019,7 @@
     "sourceUrl": "https://movingimage.org/event/the-seven-year-itch/"
   },
   {
-    "id": "museum-of-the-moving-image-how-to-marry-a-millionaire-680",
+    "id": "museum-of-the-moving-image-how-to-marry-a-millionaire-679",
     "title": "How to Marry a Millionaire",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -5044,7 +5027,7 @@
     "sourceUrl": "https://movingimage.org/event/how-to-marry-a-millionaire/"
   },
   {
-    "id": "museum-of-the-moving-image-hedwig-and-the-angry-inch-681",
+    "id": "museum-of-the-moving-image-hedwig-and-the-angry-inch-680",
     "title": "Hedwig and the Angry Inch",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -5052,7 +5035,7 @@
     "sourceUrl": "https://movingimage.org/event/hedwig-and-the-angry-inch/"
   },
   {
-    "id": "museum-of-the-moving-image-horse-feathers-marx-brothers-council-podcast-live-682",
+    "id": "museum-of-the-moving-image-horse-feathers-marx-brothers-council-podcast-live-681",
     "title": "Horse Feathers + Marx Brothers Council Podcast Live",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -5060,7 +5043,7 @@
     "sourceUrl": "https://movingimage.org/event/horse-feathers/"
   },
   {
-    "id": "museum-of-the-moving-image-don-t-bother-to-knock-683",
+    "id": "museum-of-the-moving-image-don-t-bother-to-knock-682",
     "title": "Don’t Bother to Knock",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -5068,7 +5051,7 @@
     "sourceUrl": "https://movingimage.org/event/dont-bother-to-knock/"
   },
   {
-    "id": "museum-of-the-moving-image-the-sound-of-music-singalong-version-684",
+    "id": "museum-of-the-moving-image-the-sound-of-music-singalong-version-683",
     "title": "The Sound of Music (Singalong Version)",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -5076,7 +5059,7 @@
     "sourceUrl": "https://movingimage.org/event/soundofmusic_singalong/"
   },
   {
-    "id": "museum-of-the-moving-image-kyuka-before-summer-s-end-685",
+    "id": "museum-of-the-moving-image-kyuka-before-summer-s-end-684",
     "title": "Kyuka: Before Summer’s End",
     "venue": "Museum of the Moving Image",
     "date": "",
@@ -5084,16 +5067,16 @@
     "sourceUrl": "https://movingimage.org/event/kyuka-before-summers-end/"
   },
   {
-    "id": "92ny-is-fighting-antisemitism-a-losing-battle-686",
+    "id": "92ny-is-fighting-antisemitism-a-losing-battle-685",
     "title": "Is Fighting Antisemitism a Losing Battle?",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-01",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/is-fighting-antisemitism-a-losing-battle",
     "time": "7:30 PM"
   },
   {
-    "id": "92ny-stardust-from-tin-pan-alley-to-broadway-687",
+    "id": "92ny-stardust-from-tin-pan-alley-to-broadway-686",
     "title": "Stardust: From Tin Pan Alley to Broadway",
     "venue": "92NY",
     "date": "2026-03-02",
@@ -5102,7 +5085,7 @@
     "time": "7:30 PM"
   },
   {
-    "id": "92ny-crime-on-prime-an-evening-with-the-casts-of-cross-and-scarpe-688",
+    "id": "92ny-crime-on-prime-an-evening-with-the-casts-of-cross-and-scarpe-687",
     "title": "Crime on Prime: An Evening with the Casts of Cross and Scarpetta",
     "venue": "92NY",
     "date": "2026-03-02",
@@ -5111,46 +5094,55 @@
     "time": "8:30 PM"
   },
   {
-    "id": "92ny-35th-annual-faculty-exhibition-opening-reception-689",
+    "id": "92ny-35th-annual-faculty-exhibition-opening-reception-688",
     "title": "35th Annual Faculty Exhibition Opening Reception",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-03",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/event/35th-annual-faculty-exhibition-opening-reception",
     "time": "5:00 PM"
   },
   {
-    "id": "92ny-uptown-rhythm-dance-festival-690",
+    "id": "92ny-uptown-rhythm-dance-festival-689",
     "title": "Uptown Rhythm Dance Festival",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-03",
     "category": "Dance",
     "sourceUrl": "https://www.92ny.org/event/uptown-rhythm-dance-festival",
     "time": "7:00 PM"
   },
   {
-    "id": "92ny-92ny-s-goodbye-to-starz-s-outlander-691",
+    "id": "92ny-92ny-s-goodbye-to-starz-s-outlander-690",
     "title": "92NY’s Goodbye to Starz’s Outlander",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-03",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/92ny-s-goodbye-to-starz-s-outlander",
     "time": "7:00 PM"
   },
   {
-    "id": "92ny-richard-holmes-young-tennyson-and-the-boundless-deep-692",
+    "id": "92ny-richard-holmes-young-tennyson-and-the-boundless-deep-691",
     "title": "Richard Holmes: Young Tennyson and The Boundless Deep",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-04",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/richard-holmes",
     "time": "6:00 PM"
   },
   {
+    "id": "92ny-uptown-rhythm-dance-festival-692",
+    "title": "Uptown Rhythm Dance Festival",
+    "venue": "92NY",
+    "date": "2026-03-04",
+    "category": "Dance",
+    "sourceUrl": "https://www.92ny.org/event/uptown-rhythm-dance-festival",
+    "time": "7:00 PM"
+  },
+  {
     "id": "92ny-taylor-tomlinson-in-conversation-with-alex-morris-screening--693",
     "title": "Taylor Tomlinson in Conversation with Alex Morris: Screening of Netflix’s Prodigal Daughter",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-04",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/taylor-tomlinson-netflix-s-prodigal-daughter",
     "time": "7:00 PM"
@@ -5159,430 +5151,610 @@
     "id": "92ny-israeli-folk-dance-open-session-694",
     "title": "Israeli Folk Dance (Open Session)",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-04",
     "category": "Dance",
     "sourceUrl": "https://www.92ny.org/whats-on/calendar",
     "time": "8:15 PM"
   },
   {
-    "id": "92ny-ladies-in-the-shoe-tap-conference-695",
+    "id": "92ny-uptown-rhythm-dance-festival-695",
+    "title": "Uptown Rhythm Dance Festival",
+    "venue": "92NY",
+    "date": "2026-03-05",
+    "category": "Dance",
+    "sourceUrl": "https://www.92ny.org/event/uptown-rhythm-dance-festival",
+    "time": "7:00 PM"
+  },
+  {
+    "id": "92ny-uptown-rhythm-dance-festival-696",
+    "title": "Uptown Rhythm Dance Festival",
+    "venue": "92NY",
+    "date": "2026-03-06",
+    "category": "Dance",
+    "sourceUrl": "https://www.92ny.org/event/uptown-rhythm-dance-festival",
+    "time": "7:00 PM"
+  },
+  {
+    "id": "92ny-ladies-in-the-shoe-tap-conference-697",
     "title": "“Ladies in the Shoe” Tap Conference",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-07",
     "category": "Dance",
     "sourceUrl": "https://www.92ny.org/event/ladies-in-the-shoe-tap-conference",
     "time": "9:00 AM"
   },
   {
-    "id": "92ny-ice-queen-696",
+    "id": "92ny-ice-queen-698",
     "title": "Ice Queen",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-07",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/event/ice-queen",
     "time": "10:30 AM"
   },
   {
-    "id": "92ny-shababa-queens-pop-up-purim-697",
+    "id": "92ny-shababa-queens-pop-up-purim-699",
     "title": "Shababa Queens: Pop-Up Purim!",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-07",
     "category": "Family",
     "sourceUrl": "https://www.92ny.org/event/shababa-queens-pop-up-purim",
     "time": "4:00 PM"
   },
   {
-    "id": "92ny-the-rhythm-lounge-698",
+    "id": "92ny-the-rhythm-lounge-700",
     "title": "The Rhythm Lounge",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-07",
     "category": "Dance",
     "sourceUrl": "https://www.92ny.org/event/the-rhythm-lounge",
     "time": "8:30 PM"
   },
   {
-    "id": "92ny-phil-lily-rosenthal-in-conversation-with-jake-cohen-just-try-699",
+    "id": "92ny-ladies-in-the-shoe-tap-conference-701",
+    "title": "“Ladies in the Shoe” Tap Conference",
+    "venue": "92NY",
+    "date": "2026-03-08",
+    "category": "Dance",
+    "sourceUrl": "https://www.92ny.org/event/ladies-in-the-shoe-tap-conference",
+    "time": "9:00 AM"
+  },
+  {
+    "id": "92ny-ice-queen-702",
+    "title": "Ice Queen",
+    "venue": "92NY",
+    "date": "2026-03-08",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.92ny.org/event/ice-queen",
+    "time": "10:30 AM"
+  },
+  {
+    "id": "92ny-phil-lily-rosenthal-in-conversation-with-jake-cohen-just-try-703",
     "title": "Phil & Lily Rosenthal in Conversation with Jake Cohen: Just Try It! Someplace New!",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-08",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/phil-and-lily-rosenthal-in-conversation",
     "time": "3:00 PM"
   },
   {
-    "id": "92ny-lloyd-blankfein-in-conversation-with-andrew-ross-sorkin-stre-700",
+    "id": "92ny-lloyd-blankfein-in-conversation-with-andrew-ross-sorkin-stre-704",
     "title": "Lloyd Blankfein in Conversation with Andrew Ross Sorkin: Streetwise",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-09",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/lloyd-blankfein-with-andrew-ross-sorkin",
     "time": "6:00 PM"
   },
   {
-    "id": "92ny-viola-davis-and-james-patterson-in-conversation-with-sarah-l-701",
+    "id": "92ny-viola-davis-and-james-patterson-in-conversation-with-sarah-l-705",
     "title": "Viola Davis and James Patterson in Conversation with Sarah Lyall: Judge Stone",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-09",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/viola-davis-and-james-patterson",
     "time": "8:00 PM"
   },
   {
-    "id": "92ny-drew-barrymore-in-conversation-with-valerie-bertinelli-getti-702",
+    "id": "92ny-drew-barrymore-in-conversation-with-valerie-bertinelli-getti-706",
     "title": "Drew Barrymore in Conversation with Valerie Bertinelli — Getting Naked: The Quiet Work of Becoming Perfectly Imperfect",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-10",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/drew-barrymore-with-valerie-bertinelli",
     "time": "7:30 PM"
   },
   {
-    "id": "92ny-georgette-bennett-acts-of-courage-a-live-detours-destination-703",
+    "id": "92ny-georgette-bennett-acts-of-courage-a-live-detours-destination-707",
     "title": "Georgette Bennett – Acts of Courage: A Live Detours & Destinations Podcast Taping",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-10",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/detours-and-destinations-georgette-bennett",
     "time": "7:30 PM"
   },
   {
-    "id": "92ny-maya-kornberg-in-conversation-with-ed-pilkington-how-money-m-704",
+    "id": "92ny-maya-kornberg-in-conversation-with-ed-pilkington-how-money-m-708",
     "title": "Maya Kornberg in Conversation with Ed Pilkington: How Money, Media and Violence Prevent Change in Congress",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-11",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/maya-kornberg-with-ed-pilkington",
     "time": "7:00 PM"
   },
   {
-    "id": "92ny-line-of-authority-ice-protest-and-the-boundaries-of-law-705",
+    "id": "92ny-line-of-authority-ice-protest-and-the-boundaries-of-law-709",
     "title": "Line of Authority: ICE, Protest and the Boundaries of Law",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-11",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/lines-of-authority",
     "time": "7:30 PM"
   },
   {
-    "id": "92ny-tom-junod-with-taffy-brodesser-akner-in-the-days-of-my-youth-706",
+    "id": "92ny-tom-junod-with-taffy-brodesser-akner-in-the-days-of-my-youth-710",
     "title": "Tom Junod with Taffy Brodesser-Akner: In the Days of My Youth I Was Told What It Means to Be a Man",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-11",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/tom-junod-with-taffy-brodesser-akner",
     "time": "7:30 PM"
   },
   {
-    "id": "92ny-garry-kasparov-in-conversation-with-bret-stephens-the-world--707",
+    "id": "92ny-israeli-folk-dance-open-session-711",
+    "title": "Israeli Folk Dance (Open Session)",
+    "venue": "92NY",
+    "date": "2026-03-11",
+    "category": "Dance",
+    "sourceUrl": "https://www.92ny.org/whats-on/calendar",
+    "time": "8:15 PM"
+  },
+  {
+    "id": "92ny-garry-kasparov-in-conversation-with-bret-stephens-the-world--712",
     "title": "Garry Kasparov in Conversation with Bret Stephens: The World of Fake Values Join In-Person Wait List",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-12",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/garry-kasparov-with-bret-stephens",
     "time": "7:00 PM"
   },
   {
-    "id": "92ny-interfaith-ramadan-dinner-healing-over-hate-708",
+    "id": "92ny-interfaith-ramadan-dinner-healing-over-hate-713",
     "title": "Interfaith Ramadan Dinner: Healing Over Hate",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-12",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/event/ramadan-dinner-healing-over-hate",
     "time": "7:00 PM"
   },
   {
-    "id": "92ny-le-consort-709",
+    "id": "92ny-le-consort-714",
     "title": "Le Consort",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-12",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/event/le-consort",
     "time": "7:30 PM"
   },
   {
-    "id": "92ny-shababa-jackson-heights-710",
+    "id": "92ny-shababa-jackson-heights-715",
     "title": "Shababa Jackson Heights",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-13",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/whats-on/calendar",
     "time": "5:15 PM"
   },
   {
-    "id": "92ny-shabbat-b-ivrit-hebrew-speaking-shabbat-dinner-shabbat-b-ivr-711",
+    "id": "92ny-shabbat-b-ivrit-hebrew-speaking-shabbat-dinner-shabbat-b-ivr-716",
     "title": "Shabbat B’ivrit (Hebrew Speaking Shabbat Dinner) & Shabbat B’Ivrit After Dark",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-13",
     "category": "Family",
     "sourceUrl": "https://www.92ny.org/event/shabbat-b-ivrit",
     "time": "5:30 PM"
   },
   {
-    "id": "92ny-oneg-a-shabbat-experience-at-92ny-free-streaming-access-712",
+    "id": "92ny-oneg-a-shabbat-experience-at-92ny-free-streaming-access-717",
     "title": "ONEG: A Shabbat Experience at 92NY Free Streaming Access",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-13",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/event/oneg",
     "time": "6:30 PM"
   },
   {
-    "id": "92ny-you-re-a-good-man-charlie-brown-713",
+    "id": "92ny-ice-queen-718",
+    "title": "Ice Queen",
+    "venue": "92NY",
+    "date": "2026-03-14",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.92ny.org/event/ice-queen",
+    "time": "10:30 AM"
+  },
+  {
+    "id": "92ny-you-re-a-good-man-charlie-brown-719",
     "title": "You’re a Good Man, Charlie Brown",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-14",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/event/you-re-a-good-man-charlie-brown",
     "time": "1:30 PM"
   },
   {
-    "id": "92ny-s-rgio-odair-assad-714",
+    "id": "92ny-s-rgio-odair-assad-720",
     "title": "Sérgio & Odair Assad",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-14",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/event/sergio-and-odair-assad",
     "time": "7:30 PM"
   },
   {
-    "id": "92ny-chagigat-aviv-spring-festival-israeli-folk-dance-party-715",
+    "id": "92ny-chagigat-aviv-spring-festival-israeli-folk-dance-party-721",
     "title": "Chagigat Aviv: Spring Festival Israeli Folk Dance Party",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-14",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/event/chagigat-aviv",
     "time": "8:30 PM"
   },
   {
-    "id": "92ny-maggie-haberman-and-alex-burns-in-conversation-with-jeff-gre-716",
+    "id": "92ny-ice-queen-722",
+    "title": "Ice Queen",
+    "venue": "92NY",
+    "date": "2026-03-15",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.92ny.org/event/ice-queen",
+    "time": "10:30 AM"
+  },
+  {
+    "id": "92ny-you-re-a-good-man-charlie-brown-723",
+    "title": "You’re a Good Man, Charlie Brown",
+    "venue": "92NY",
+    "date": "2026-03-15",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.92ny.org/event/you-re-a-good-man-charlie-brown",
+    "time": "1:30 PM"
+  },
+  {
+    "id": "92ny-maggie-haberman-and-alex-burns-in-conversation-with-jeff-gre-724",
     "title": "Maggie Haberman and Alex Burns in Conversation with Jeff Greenfield: American Politics 2026",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-15",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/maggie-haberman-and-alex-burns-with-jeff-greenfield",
     "time": "6:00 PM"
   },
   {
-    "id": "92ny-bianna-golodryga-and-yonit-levi-in-conversation-with-juliann-717",
+    "id": "92ny-bianna-golodryga-and-yonit-levi-in-conversation-with-juliann-725",
     "title": "Bianna Golodryga and Yonit Levi in Conversation with Julianna Margulies: Don’t Feed the Lion",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-16",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/bianna-golodryga-and-yonit-levi-with-julianna-margulies",
     "time": "7:30 PM"
   },
   {
-    "id": "92ny-demi-lovato-in-conversation-one-plate-at-a-time-718",
+    "id": "92ny-demi-lovato-in-conversation-one-plate-at-a-time-726",
     "title": "Demi Lovato in Conversation: One Plate at a Time",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-17",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/event/demi-lovato-in-conversation",
     "time": "7:00 PM"
   },
   {
-    "id": "92ny-yoga-nidra-sound-bath-719",
+    "id": "92ny-yoga-nidra-sound-bath-727",
     "title": "Yoga Nidra & Sound Bath",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-18",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/whats-on/calendar",
     "time": "6:30 PM"
   },
   {
-    "id": "92ny-america-s-next-chapter-around-the-globe-and-at-home-ian-brem-720",
+    "id": "92ny-america-s-next-chapter-around-the-globe-and-at-home-ian-brem-728",
     "title": "America’s Next Chapter Around the Globe and at Home: Ian Bremmer with Rahm Emanuel",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-18",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/ian-bremmer-with-rahm-emanuel",
     "time": "7:00 PM"
   },
   {
-    "id": "92ny-ruthie-rogers-and-sarah-jessica-parker-in-conversation-with--721",
+    "id": "92ny-ruthie-rogers-and-sarah-jessica-parker-in-conversation-with--729",
     "title": "Ruthie Rogers and Sarah Jessica Parker in Conversation with Gayle King — Table 4 at The River Café: Conversations about Food and Life Join In-Person Wait List",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-18",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/ruthie-rogers-and-sarah-jessica-parker",
     "time": "7:30 PM"
   },
   {
-    "id": "92ny-breathing-easier-what-to-know-about-pulmonary-fibrosis-and-h-722",
+    "id": "92ny-israeli-folk-dance-open-session-730",
+    "title": "Israeli Folk Dance (Open Session)",
+    "venue": "92NY",
+    "date": "2026-03-18",
+    "category": "Dance",
+    "sourceUrl": "https://www.92ny.org/whats-on/calendar",
+    "time": "8:15 PM"
+  },
+  {
+    "id": "92ny-breathing-easier-what-to-know-about-pulmonary-fibrosis-and-h-731",
     "title": "Breathing Easier: What to Know about Pulmonary Fibrosis — and How Pulmonary Rehab Can Help",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-19",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/breathing-easier",
     "time": "6:00 PM"
   },
   {
-    "id": "92ny-an-evening-with-brian-stokes-mitchell-723",
+    "id": "92ny-an-evening-with-brian-stokes-mitchell-732",
     "title": "An Evening with Brian Stokes Mitchell",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-19",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/event/an-evening-with-brian-stokes-mitchell",
     "time": "7:30 PM"
   },
   {
-    "id": "92ny-jack-quartet-724",
+    "id": "92ny-jack-quartet-733",
     "title": "JACK Quartet",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-20",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/event/jack-quartet",
     "time": "7:30 PM"
   },
   {
-    "id": "92ny-nexus-exclusive-morgan-library-museum-tour-725",
+    "id": "92ny-ice-queen-734",
+    "title": "Ice Queen",
+    "venue": "92NY",
+    "date": "2026-03-21",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.92ny.org/event/ice-queen",
+    "time": "10:30 AM"
+  },
+  {
+    "id": "92ny-you-re-a-good-man-charlie-brown-735",
+    "title": "You’re a Good Man, Charlie Brown",
+    "venue": "92NY",
+    "date": "2026-03-21",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.92ny.org/event/you-re-a-good-man-charlie-brown",
+    "time": "1:30 PM"
+  },
+  {
+    "id": "92ny-ice-queen-736",
+    "title": "Ice Queen",
+    "venue": "92NY",
+    "date": "2026-03-22",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.92ny.org/event/ice-queen",
+    "time": "10:30 AM"
+  },
+  {
+    "id": "92ny-nexus-exclusive-morgan-library-museum-tour-737",
     "title": "NEXUS: Exclusive Morgan Library & Museum Tour",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-22",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/event/nexus-exclusive-morgan-library-and-museum-tour",
     "time": "1:15 PM"
   },
   {
-    "id": "92ny-matti-friedman-and-abigail-pogrebin-in-conversation-out-of-t-726",
+    "id": "92ny-you-re-a-good-man-charlie-brown-738",
+    "title": "You’re a Good Man, Charlie Brown",
+    "venue": "92NY",
+    "date": "2026-03-22",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.92ny.org/event/you-re-a-good-man-charlie-brown",
+    "time": "1:30 PM"
+  },
+  {
+    "id": "92ny-matti-friedman-and-abigail-pogrebin-in-conversation-out-of-t-739",
     "title": "Matti Friedman and Abigail Pogrebin in Conversation: Out of the Sky",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-23",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/matti-friedman-and-abigail-pogrebin",
     "time": "7:30 PM"
   },
   {
-    "id": "92ny-shared-struggles-shared-stories-black-power-jewish-politics--727",
+    "id": "92ny-shared-struggles-shared-stories-black-power-jewish-politics--740",
     "title": "Shared Struggles, Shared Stories: Black Power, Jewish Politics, and the Fight for Justice",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-24",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/shared-struggles-shared-stories",
     "time": "7:30 PM"
   },
   {
-    "id": "92ny-coping-with-challenging-situations-in-dementia-care-728",
+    "id": "92ny-coping-with-challenging-situations-in-dementia-care-741",
     "title": "Coping with Challenging Situations in Dementia Care",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-25",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/coping-with-challenging-situations-in-dementia-care",
     "time": "5:00 PM"
   },
   {
-    "id": "92ny-dr-nicole-lepera-in-conversation-with-dr-ellen-vora-reparent-729",
+    "id": "92ny-dr-nicole-lepera-in-conversation-with-dr-ellen-vora-reparent-742",
     "title": "Dr. Nicole LePera in Conversation with Dr. Ellen Vora: Reparenting the Inner Child",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-25",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/dr-nicole-lepera-in-conversation-with-dr-ellen-vora",
     "time": "6:00 PM"
   },
   {
-    "id": "92ny-alexi-kenney-violin-janice-carissa-piano-730",
+    "id": "92ny-alexi-kenney-violin-janice-carissa-piano-743",
     "title": "Alexi Kenney, violin; Janice Carissa, piano",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-25",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/event/alexi-kenney,-violin;-janice-carissa,-piano-dreams-visions",
     "time": "7:30 PM"
   },
   {
-    "id": "92ny-jewish-or-antisemitic-live-hosted-by-eitan-levine-featuring--731",
+    "id": "92ny-jewish-or-antisemitic-live-hosted-by-eitan-levine-featuring--744",
     "title": "Jewish or Antisemitic LIVE: Hosted by Eitan Levine featuring music by Max Ash and special mystery guests",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-25",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/jewish-or-antisemitic-live",
     "time": "8:00 PM"
   },
   {
-    "id": "92ny-songs-of-spring-732",
+    "id": "92ny-israeli-folk-dance-open-session-745",
+    "title": "Israeli Folk Dance (Open Session)",
+    "venue": "92NY",
+    "date": "2026-03-25",
+    "category": "Dance",
+    "sourceUrl": "https://www.92ny.org/whats-on/calendar",
+    "time": "8:15 PM"
+  },
+  {
+    "id": "92ny-songs-of-spring-746",
     "title": "Songs of Spring",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-26",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/whats-on/calendar",
     "time": "7:00 PM"
   },
   {
-    "id": "92ny-teen-open-mic-night-733",
+    "id": "92ny-teen-open-mic-night-747",
     "title": "Teen Open Mic Night",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-27",
     "category": "Family",
     "sourceUrl": "https://www.92ny.org/event/teen-open-mic-night",
     "time": "5:00 PM"
   },
   {
-    "id": "92ny-jodi-melnick-and-sara-mearns-superbloom-dancing-into-choreog-734",
+    "id": "92ny-jodi-melnick-and-sara-mearns-superbloom-dancing-into-choreog-748",
     "title": "Jodi Melnick and Sara Mearns: Superbloom (Dancing Into Choreographic Forms) (World Premiere)",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-27",
     "category": "Dance",
     "sourceUrl": "https://www.92ny.org/event/superbloom-dancing-into-choreographic-forms",
     "time": "7:00 PM"
   },
   {
-    "id": "92ny-rafiq-bhatia-environments-735",
+    "id": "92ny-rafiq-bhatia-environments-749",
     "title": "Rafiq Bhatia: Environments",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-27",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/event/rafiq-bhatia-environments",
     "time": "7:30 PM"
   },
   {
-    "id": "92ny-orpheus-chamber-orchestra-jeremy-denk-piano-736",
+    "id": "92ny-ice-queen-750",
+    "title": "Ice Queen",
+    "venue": "92NY",
+    "date": "2026-03-28",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.92ny.org/event/ice-queen",
+    "time": "10:30 AM"
+  },
+  {
+    "id": "92ny-you-re-a-good-man-charlie-brown-751",
+    "title": "You’re a Good Man, Charlie Brown",
+    "venue": "92NY",
+    "date": "2026-03-28",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.92ny.org/event/you-re-a-good-man-charlie-brown",
+    "time": "1:30 PM"
+  },
+  {
+    "id": "92ny-jodi-melnick-and-sara-mearns-superbloom-dancing-into-choreog-752",
+    "title": "Jodi Melnick and Sara Mearns: Superbloom (Dancing Into Choreographic Forms) (World Premiere)",
+    "venue": "92NY",
+    "date": "2026-03-28",
+    "category": "Dance",
+    "sourceUrl": "https://www.92ny.org/event/superbloom-dancing-into-choreographic-forms",
+    "time": "7:00 PM"
+  },
+  {
+    "id": "92ny-ice-queen-753",
+    "title": "Ice Queen",
+    "venue": "92NY",
+    "date": "2026-03-29",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.92ny.org/event/ice-queen",
+    "time": "10:30 AM"
+  },
+  {
+    "id": "92ny-jodi-melnick-and-sara-mearns-superbloom-dancing-into-choreog-754",
+    "title": "Jodi Melnick and Sara Mearns: Superbloom (Dancing Into Choreographic Forms) (World Premiere)",
+    "venue": "92NY",
+    "date": "2026-03-29",
+    "category": "Dance",
+    "sourceUrl": "https://www.92ny.org/event/superbloom-dancing-into-choreographic-forms",
+    "time": "12:00 PM"
+  },
+  {
+    "id": "92ny-you-re-a-good-man-charlie-brown-755",
+    "title": "You’re a Good Man, Charlie Brown",
+    "venue": "92NY",
+    "date": "2026-03-29",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.92ny.org/event/you-re-a-good-man-charlie-brown",
+    "time": "1:30 PM"
+  },
+  {
+    "id": "92ny-orpheus-chamber-orchestra-jeremy-denk-piano-756",
     "title": "Orpheus Chamber Orchestra & Jeremy Denk, piano",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-29",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/event/orpheus-chamber-orchestra-and-jeremy-denk",
     "time": "2:00 PM"
   },
   {
-    "id": "92ny-faculty-concert-series-cyrus-von-hochstetter-737",
+    "id": "92ny-faculty-concert-series-cyrus-von-hochstetter-757",
     "title": "Faculty Concert Series: Cyrus von Hochstetter",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-29",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://www.92ny.org/event/faculty-concert-series-cyrus-von-hochstetter",
     "time": "3:00 PM"
   },
   {
-    "id": "92ny-gis-le-pelicot-in-conversation-a-hymn-to-life-738",
+    "id": "92ny-gis-le-pelicot-in-conversation-a-hymn-to-life-758",
     "title": "Gisèle Pelicot in Conversation: A Hymn to Life",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-30",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/gisele-pelicot-in-conversation-a-hymn-to-life",
     "time": "7:00 PM"
   },
   {
-    "id": "92ny-tom-hardin-in-conversation-with-anthony-scaramucci-wired-on--739",
+    "id": "92ny-tom-hardin-in-conversation-with-anthony-scaramucci-wired-on--759",
     "title": "Tom Hardin in Conversation with Anthony Scaramucci — Wired on Wall Street: The Rise and Fall of Tipper X, One of the FBI’s Most Prolific Informants",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-03-31",
     "category": "Talk",
     "sourceUrl": "https://www.92ny.org/event/tom-hardin-with-anthony-scaramucci",
     "time": "7:30 PM"
   },
   {
-    "id": "92ny-creative-family-seder-740",
+    "id": "92ny-creative-family-seder-760",
     "title": "Creative Family Seder",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-04-02",
     "category": "Family",
     "sourceUrl": "https://www.92ny.org/event/creative-family-seder",
     "time": "4:00 PM"
   },
   {
-    "id": "92ny-92ny-romemu-community-seder-741",
+    "id": "92ny-92ny-romemu-community-seder-761",
     "title": "92NY & Romemu Community Seder",
     "venue": "92NY",
-    "date": "2026-03-02",
+    "date": "2026-04-02",
     "category": "Family",
     "sourceUrl": "https://www.92ny.org/event/92ny-community-seder",
     "time": "6:30 PM"
