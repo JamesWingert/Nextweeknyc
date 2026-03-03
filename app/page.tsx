@@ -143,6 +143,67 @@ function normalizeCategory(raw: string): Category {
   return match ? match.key : 'Other';
 }
 
+// --- Borough inference ---
+
+type Borough = 'Manhattan' | 'Brooklyn' | 'Queens' | 'Bronx' | 'Other';
+
+const MANHATTAN_VENUES = new Set([
+  '92ny', 'angelika film center', 'astor place theatre', 'beacon theatre',
+  'blue note jazz club', 'bowery palace', 'broadway', 'cafe wha?', 'carnegie hall',
+  'caveat', 'city winery', 'club cumming', 'film forum', 'groove', 'guggenheim',
+  'hard rock hotel & casino', 'ifc center', 'ihop', 'iridium jazz club',
+  'irving plaza', 'japan society', 'joe\'s pub', 'le poisson rouge', 'lincoln center',
+  'madison square garden', 'marquee new york', 'mercury lounge', 'metrograph',
+  'metropolitan opera', 'neue galerie', 'new museum', 'new york city ballet',
+  'new york philharmonic', 'night club 101', 'nublu 151', 'pianos',
+  'racket', 'sid gold\'s request room', 'smalls jazz club', 'sofar sounds - secret location',
+  'sony hall', 'strand bookstore', 'terra blues', 'terminal 5',
+  'the bowery ballroom', 'the cooper union', 'the frick collection',
+  'the gramercy theatre', 'the joyce theater', 'the met', 'the shed',
+  'the slipper room', 'the stand', 'the stone pony', 'webster hall',
+  'whitney museum', 'american ballet theatre',
+]);
+
+const BROOKLYN_VENUES = new Set([
+  'bam', 'baby\'s all right', 'barclays center', 'brooklyn bowl', 'brooklyn paper',
+  'brooklyn paramount', 'brooklyn steel', 'c\'mon everybody', 'elsewhere',
+  'elsewhere the hall', 'good judy', 'good room', 'knockdown center',
+  'littlefield', 'music hall of williamsburg', 'public records',
+  'rough trade nyc', 'the bell house', 'the sultan room', 'tv eye',
+  'union pool', 'warsaw', 'xanadu',
+]);
+
+const QUEENS_VENUES = new Set([
+  'its in queens', 'museum of the moving image', 'pregones theater',
+]);
+
+const BRONX_VENUES = new Set([
+  'daryl\'s house',
+]);
+
+function inferBorough(venue: string): Borough {
+  const v = venue.toLowerCase().trim();
+  if (MANHATTAN_VENUES.has(v)) return 'Manhattan';
+  if (BROOKLYN_VENUES.has(v)) return 'Brooklyn';
+  if (QUEENS_VENUES.has(v)) return 'Queens';
+  if (BRONX_VENUES.has(v)) return 'Bronx';
+  // NYC Parks venues have borough in the name
+  if (v.includes('manhattan') || v.includes('central park')) return 'Manhattan';
+  if (v.includes('brooklyn')) return 'Brooklyn';
+  if (v.includes('queens') || v.includes('elmhurst') || v.includes('flushing')) return 'Queens';
+  if (v.includes('bronx')) return 'Bronx';
+  if (v.includes('staten island')) return 'Other';
+  // Default: most NYC events are Manhattan
+  return 'Other';
+}
+
+const boroughConfig: { key: Borough; label: string; emoji: string }[] = [
+  { key: 'Manhattan', label: 'Manhattan', emoji: '🏙️' },
+  { key: 'Brooklyn', label: 'Brooklyn', emoji: '🌉' },
+  { key: 'Queens', label: 'Queens', emoji: '👑' },
+  { key: 'Bronx', label: 'Bronx', emoji: '🏟️' },
+];
+
 // --- Main component ---
 
 export default function Home() {
@@ -158,6 +219,7 @@ export default function Home() {
   });
   const [searchQuery, setSearchQuery] = useState('');
   const [quickFilter, setQuickFilter] = useState<'all' | 'today' | 'weekend'>('all');
+  const [selectedBoroughs, setSelectedBoroughs] = useState<Borough[]>([]);
   const [darkMode, setDarkMode] = useState(false);
   const [lastUpdated, setLastUpdated] = useState<string | null>(null);
 
@@ -248,9 +310,16 @@ export default function Home() {
     return searchFiltered.filter(e => days.some(d => eventOnDay(e, d)));
   }, [searchFiltered, quickFilter, today]);
 
-  const filteredEvents = selectedCategories.length > 0
-    ? quickFiltered.filter(e => selectedCategories.includes(e.category))
-    : quickFiltered;
+  const filteredEvents = useMemo(() => {
+    let result = quickFiltered;
+    if (selectedCategories.length > 0) {
+      result = result.filter(e => selectedCategories.includes(e.category));
+    }
+    if (selectedBoroughs.length > 0) {
+      result = result.filter(e => selectedBoroughs.includes(inferBorough(e.venue)));
+    }
+    return result;
+  }, [quickFiltered, selectedCategories, selectedBoroughs]);
 
   // Split showtimes and on-view from calendar events
   const showtimeEvents = filteredEvents.filter(isShowtime);
@@ -356,10 +425,10 @@ export default function Home() {
         </div>
 
         {/* Quick filters: Clear all when active */}
-        {(searchQuery || selectedCategories.length > 0) && (
+        {(searchQuery || selectedCategories.length > 0 || selectedBoroughs.length > 0) && (
           <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.625rem', flexWrap: 'wrap' as const }}>
             <button
-              onClick={() => { setSearchQuery(''); setSelectedCategories([]); }}
+              onClick={() => { setSearchQuery(''); setSelectedCategories([]); setSelectedBoroughs([]); }}
               style={{
                 padding: '0.3rem 0.75rem', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 600,
                 border: '1.5px solid var(--border)', background: 'var(--bg-card)',
@@ -400,9 +469,9 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Category filters (hidden on Showtimes / On View) */}
+      {/* Category + Borough filters (hidden on Showtimes / On View) */}
       {viewMode !== 'showtimes' && viewMode !== 'onview' && (
-        <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem', marginBottom: '1.5rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem', marginBottom: '1.5rem', alignItems: 'center' }}>
           {deduped.map(({ key, label, bg, text, dot }) => {
             const matchingKeys = categoryConfig.filter(c => c.label === label).map(c => c.key);
             const isActive = matchingKeys.some(k => selectedCategories.includes(k));
@@ -424,6 +493,63 @@ export default function Home() {
                 }}
               >
                 <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: isActive ? dot : '#d1d1d1' }} />
+                {label}
+              </button>
+            );
+          })}
+          {/* Borough divider + pills */}
+          <span style={{ width: '1px', height: '1.25rem', background: 'var(--border)', margin: '0 0.125rem' }} />
+          {boroughConfig.map(({ key, label, emoji }) => {
+            const isActive = selectedBoroughs.includes(key);
+            return (
+              <button
+                key={key}
+                onClick={() => {
+                  setSelectedBoroughs(prev =>
+                    isActive ? prev.filter(b => b !== key) : [...prev, key]
+                  );
+                }}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: '0.3rem',
+                  padding: '0.375rem 0.75rem', borderRadius: '999px', fontSize: '0.8125rem', fontWeight: 500,
+                  border: isActive ? '1.5px solid #e07a5f' : '1.5px solid var(--border)',
+                  background: isActive ? '#fde8e8' : 'var(--bg-card)',
+                  color: isActive ? '#b91c1c' : 'var(--text-muted)',
+                  cursor: 'pointer', transition: 'all 0.15s ease',
+                }}
+              >
+                <span style={{ fontSize: '0.75rem' }}>{emoji}</span>
+                {label}
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Borough-only filter for Showtimes / On View tabs */}
+      {(viewMode === 'showtimes' || viewMode === 'onview') && (
+        <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.5rem', marginBottom: '1.5rem', alignItems: 'center' }}>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 500, marginRight: '0.25rem' }}>📍</span>
+          {boroughConfig.map(({ key, label, emoji }) => {
+            const isActive = selectedBoroughs.includes(key);
+            return (
+              <button
+                key={key}
+                onClick={() => {
+                  setSelectedBoroughs(prev =>
+                    isActive ? prev.filter(b => b !== key) : [...prev, key]
+                  );
+                }}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: '0.3rem',
+                  padding: '0.375rem 0.75rem', borderRadius: '999px', fontSize: '0.8125rem', fontWeight: 500,
+                  border: isActive ? '1.5px solid #e07a5f' : '1.5px solid var(--border)',
+                  background: isActive ? '#fde8e8' : 'var(--bg-card)',
+                  color: isActive ? '#b91c1c' : 'var(--text-muted)',
+                  cursor: 'pointer', transition: 'all 0.15s ease',
+                }}
+              >
+                <span style={{ fontSize: '0.75rem' }}>{emoji}</span>
                 {label}
               </button>
             );

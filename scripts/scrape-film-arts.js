@@ -517,11 +517,10 @@ async function scrapeBAM(browser) {
 
       function parseDate(s) {
         if (!s) return '';
-        // "Now Playing" / "ONGOING" / "Opens Mar 20"
         if (/now playing|ongoing/i.test(s)) return '';
         const opens = s.match(/opens\s+((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\w*\s+\d{1,2})/i);
         if (opens) s = opens[1];
-        // Range with days: "Mar 4—Mar 5, 2026" or "Apr 19—May 17, 2026"
+        // Range: "Mar 4—Mar 5, 2026"
         const rangeM = s.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\w*)\s+(\d{1,2})\s*[\u2014\u2013-]\s*((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
         if (rangeM) {
           const y = parseInt(rangeM[5] || year, 10);
@@ -532,7 +531,7 @@ async function scrapeBAM(browser) {
             return `${y}-${String(m1+1).padStart(2,'0')}-${String(parseInt(rangeM[2],10)).padStart(2,'0')} to ${y2}-${String(m2+1).padStart(2,'0')}-${String(parseInt(rangeM[4],10)).padStart(2,'0')}`;
           }
         }
-        // Month-only range: "Oct 2025—Apr 2026" or "Jan—Jun 2026"
+        // Month-only range: "Oct 2025—Apr 2026"
         const monthRange = s.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\w*)(?:\s+(\d{4}))?\s*[\u2014\u2013-]\s*((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\w*)(?:\s+(\d{4}))?/i);
         if (monthRange) {
           const m1 = MONTHS[monthRange[1].slice(0,3).toLowerCase()];
@@ -540,12 +539,11 @@ async function scrapeBAM(browser) {
           if (m1 !== undefined && m2 !== undefined) {
             const y1 = parseInt(monthRange[2] || monthRange[4] || year, 10);
             const y2 = parseInt(monthRange[4] || monthRange[2] || year, 10);
-            // Last day of end month
             const lastDay = new Date(y2, m2 + 1, 0).getDate();
             return `${y1}-${String(m1+1).padStart(2,'0')}-01 to ${y2}-${String(m2+1).padStart(2,'0')}-${String(lastDay).padStart(2,'0')}`;
           }
         }
-        // Single: "Thu, Mar 12, 2026" or "Wed, Mar 18, 2026" or "Mar 25, 2026"
+        // Single: "Thu, Mar 12, 2026" or "Mar 25, 2026"
         const singleM = s.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\w*)\s+(\d{1,2})(?:\s*,?\s*(\d{4}))?/i);
         if (singleM) {
           const y = parseInt(singleM[3] || year, 10);
@@ -555,13 +553,11 @@ async function scrapeBAM(browser) {
         return '';
       }
 
-      // BAM category label -> our category
       const CAT_MAP = {
         'film': 'Film', 'film series': 'Film',
         'music': 'Music/Performing Arts', 'community | music': 'Music/Performing Arts',
         'theater': 'Theater', 'theater | music': 'Theater',
-        'dance': 'Dance',
-        'talks': 'Talk',
+        'dance': 'Dance', 'talks': 'Talk',
         'opera': 'Opera', 'live broadcast | opera | film': 'Opera',
         'poetry': 'Music/Performing Arts', 'music | poetry': 'Music/Performing Arts',
         'kids': 'Family', 'kids | community': 'Family', 'kids | theater | music': 'Family',
@@ -570,46 +566,48 @@ async function scrapeBAM(browser) {
         'galas & events': 'Other', 'community': 'Other',
       };
 
-      const lines = document.body.innerText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
       const results = [];
       const seen = new Set();
 
-      // Walk through lines looking for category labels followed by event data
-      for (let i = 0; i < lines.length; i++) {
-        const catKey = lines[i].toLowerCase();
-        const cat = CAT_MAP[catKey];
-        if (!cat) continue;
+      // Scrape structured .eventInfo cards (main event listings)
+      document.querySelectorAll('.eventInfo').forEach(info => {
+        const genreEl = info.querySelector('.genre');
+        const titleEl = info.querySelector('.title, h3');
+        const dateEl = info.querySelector('.mobileModuleDate');
+        const descEl = info.querySelector('.description');
 
-        // Next line should be the title
-        const title = lines[i + 1] || '';
-        if (!title || title.length < 3 || title.length > 150) continue;
-        // Skip navigation/chrome/labels
-        if (/^(MORE|BUY TICKETS|RSVP|REGISTER|Previous|Next|Goto|Click|NEW RELEASE|NEW PRODUCTION|REVIVAL|MET PREMIERE|NEXT WAVE|BAM FREE MUSIC)/i.test(title)) continue;
-        // Skip if title is itself a category label, compound label, or CAT_MAP key
-        if (/^(Film|Music|Theater|Dance|Talks|Opera|Poetry|Kids|Visual Art|Performance Art|Galas|Community|Calendar|Featured)(\s*[|&].*)?$/i.test(title)) continue;
-        // Skip site chrome / nav items
-        if (/^(Visit|PROGRAMS|Programs|Senior Cinema|Community Programs|Community Resources|Support BAM|Fisher Takeovers|DanceAfrica and the BAM)$/i.test(title)) continue;
-        if (/^(MON|TUE|WED|THU|FRI|SAT|SUN)$/i.test(title)) continue;
-        if (/^AGES\s+\d/i.test(title)) continue;
+        const title = titleEl?.textContent?.trim() || '';
+        if (!title || title.length < 3 || title.length > 150) return;
 
-        // Line after title should be date or "Now Playing"
-        const dateLine = lines[i + 2] || '';
+        const catKey = (genreEl?.textContent?.trim() || '').toLowerCase();
+        const category = CAT_MAP[catKey] || '';
+        if (!category) return;
 
-        // Dedup by title (case-insensitive)
+        const dateLine = dateEl?.textContent?.trim() || '';
+        const date = parseDate(dateLine);
+        const description = descEl?.textContent?.trim() || '';
+
+        // Walk up to find parent <a> for the event URL
+        let link = '';
+        let el = info.parentElement;
+        while (el && el !== document.body) {
+          if (el.tagName === 'A' && el.href) { link = el.href; break; }
+          el = el.parentElement;
+        }
+
         const key = title.toLowerCase().replace(/[\u201c\u201d\u2018\u2019"']/g, '');
-        if (seen.has(key)) continue;
+        if (seen.has(key)) return;
         seen.add(key);
 
-        const date = parseDate(dateLine);
-        results.push({ title, date, category: cat });
-      }
+        results.push({ title, date, category, link, description });
+      });
+
       return results;
     });
 
-    // Filter out junk: prints, galas, merch, leaked section labels, site chrome
+    // Filter out junk
     const JUNK = /\b(limited edition|print series|print$|gala|ball$|member first|behavioral strategies)\b/i;
-    const LABEL_JUNK = /^(KIDS|VISUAL ART|MUSIC|PERFORMANCE ART|COMMUNITY|GALAS|SUPPORT BAM|Share the Brooklyn|Visit|PROGRAMS|Senior Cinema|Community Programs|Community Resources|Fisher Takeovers|DanceAfrica and the BAM)(\s*[|&].*)?$/i;
-    const filtered = items.filter(i => !JUNK.test(i.title) && !LABEL_JUNK.test(i.title));
+    const filtered = items.filter(i => !JUNK.test(i.title));
 
     // Group by category and push each group
     const groups = {};
