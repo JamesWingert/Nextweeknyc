@@ -256,15 +256,25 @@ export default function Home() {
 
       const allRaw = [...arr1, ...arr2];
 
-      const seen = new Set<string>();
-      const unique = allRaw.filter(e => {
-        const title = e.title || e.name || '';
-        const venue = e.venue || e.location || '';
-        const key = `${title}|${venue}|${e.date}`;
-        if (seen.has(key)) return false;
-        seen.add(key);
-        return true;
-      });
+      // Dedup on title|venue — prefer the entry that has a date
+      const bestByKey = new Map<string, RawEvent>();
+      for (const e of allRaw) {
+        const title = (e.title || e.name || '').trim().toLowerCase();
+        const venue = (e.venue || e.location || '').trim().toLowerCase();
+        const key = `${title}|${venue}`;
+        const existing = bestByKey.get(key);
+        if (!existing) {
+          bestByKey.set(key, e);
+        } else {
+          // Prefer the one with a date; if both have dates, prefer the more specific one
+          const existingHasDate = !!existing.date;
+          const newHasDate = !!e.date;
+          if (!existingHasDate && newHasDate) {
+            bestByKey.set(key, e);
+          }
+        }
+      }
+      const unique = Array.from(bestByKey.values());
 
       const processed: Event[] = unique
         .map((e, i) => ({

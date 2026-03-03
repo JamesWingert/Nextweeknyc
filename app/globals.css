@@ -64,7 +64,7 @@ body {
   color: var(--text-muted);
 }
 
-/* Bottom nav for mobile */
+/* Bottom nav for mobile — use dvh-aware trick to handle Chrome's dynamic viewport */
 @media (max-width: 640px) {
   .bottom-nav {
     position: fixed;
@@ -78,6 +78,9 @@ body {
     padding: 0.25rem 0;
     padding-bottom: env(safe-area-inset-bottom, 0.25rem);
     box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+    /* Ensure it sticks to the actual viewport bottom, not the layout viewport */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
   .bottom-nav button {
     flex: 1;
@@ -123,9 +126,9 @@ body {
   .desktop-tabs {
     display: none !important;
   }
-  /* Push scroll-to-top well above bottom nav + Chrome's disappearing URL bar */
+  /* Scroll-to-top sits just above the bottom nav */
   .scroll-to-top {
-    bottom: 7rem !important;
+    bottom: calc(4rem + env(safe-area-inset-bottom, 0.25rem) + 0.75rem) !important;
   }
 }
 
