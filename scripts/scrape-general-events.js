@@ -301,33 +301,49 @@ async function scrapeDoNYC() {
 async function scrapeTheSkint() {
   const year = new Date(WEEK.start).getFullYear();
 
-  // Keyword-based category detection for The Skint events
+  // Keyword-based category detection for The Skint events.
   // The Skint is plain-text blog style with no structured category data,
   // so we infer category from title + description keywords.
+  // Rules are ordered by specificity — more specific genres first.
   const SKINT_CAT_RULES = [
-    { cat: 'Film', re: /\bfilm\b|cinema|screening|movie|documentary|short[s ]|fest.*film|film.*fest/i },
-    { cat: 'Comedy', re: /\bcomedy\b|comedian|stand-?up|improv|sketch|laugh|comic|funny|humor|roast/i },
-    { cat: 'Classical Music', re: /\bclassical\b|symphony|orchestra|chamber music|philharmonic|carnegie hall/i },
-    { cat: 'Opera', re: /\bopera\b|puccini|verdi|rossini|suor angelica|la traviata|tosca/i },
+    { cat: 'Opera', re: /\bopera\b|puccini|verdi|rossini|suor angelica|la traviata|tosca|rigoletto|carmen\b/i },
     { cat: 'Ballet', re: /\bballet\b/i },
-    { cat: 'Dance', re: /\bdance\b|\bdancing\b/i },
+    { cat: 'Film', re: /\bfilm\b|cinema|screening|movie|documentary|short[s ]|double.?feature/i },
+    { cat: 'Comedy', re: /\bcomedy\b|comedian|stand-?up|improv\b|sketch comedy|laugh|standup|funny|humor|roast\b/i },
+    { cat: 'Classical Music', re: /\bclassical\b|symphony|orchestra|chamber music|philharmonic/i },
     { cat: 'Jazz', re: /\bjazz\b/i },
-    { cat: 'Theater', re: /\btheater\b|\btheatre\b|broadway|off-broadway|musical|play\b|playwright|drama|cabaret|shadowcast|one-act/i },
-    { cat: 'Art', re: /\bart\b|exhibition|gallery|museum|sculpture|painting|mural|retrospective|installation|curator/i },
-    { cat: 'Music/Performing Arts', re: /\bmusic\b|\bconcert\b|band\b|singer|songwriter|indie|rock\b|punk|hip-?hop|dj\b|karaoke|open mic|live.*music|music.*live/i },
-    { cat: 'Talk', re: /\breading\b|book launch|storytelling|lecture|author|discussion|panel|talk\b|speaker|literary|poetry|book.*event|reading series/i },
-    { cat: 'Food/Drink', re: /\bfood\b|restaurant|tasting|chili|pancake|brunch|dinner|cook|bake|beer|wine|cocktail|market.*food/i },
-    { cat: 'Shopping/Markets', re: /\bmarket\b|flea|bazaar|warehouse sale|pop-?up.*shop|craft.*fair|vintage|comics.*fest|zine/i },
-    { cat: 'Outdoor/Parks', re: /\boutdoor\b|park\b|garden|nature|walk|hike|bike|skating|ice rink|botanic/i },
-    { cat: 'Family', re: /\bkids\b|children|family|puppet/i },
+    { cat: 'Dance', re: /\bdance show\b|\bdance party\b|\bdance performance/i },
+    { cat: 'Theater', re: /\btheater\b|\btheatre\b|broadway|off-broadway|musical\b|playwright|cabaret|shadowcast|one-act|dramaturg/i },
+    { cat: 'Art', re: /\bexhibition\b|\bgallery\b|\bmuseum\b|sculpture|painting|mural|retrospective|installation\b|curator|photograph/i },
+    { cat: 'Music/Performing Arts', re: /\bmusic\b|\bconcert\b|\bband\b|singer|songwriter|indie music|rock\b|punk|hip-?hop|\bdj\b|karaoke|open mic|live.*music|music.*live/i },
+    { cat: 'Talk', re: /\breading series\b|book launch|storytelling|lecture|author\b|discussion|panel\b|\btalk\b|speaker|literary|poetry|reading\b/i },
+    { cat: 'Food/Drink', re: /\bfood\b|restaurant week|tasting|chili|pancake|brunch|dinner\b|cook-?off|beer fest|wine\b|cocktail/i },
+    { cat: 'Shopping/Markets', re: /\bmarket\b|flea\b|bazaar|warehouse sale|craft.*fair|vintage.*sale|zine\b|comics.*fest/i },
+    { cat: 'Outdoor/Parks', re: /\bgarden\b|nature walk|botanic|ice.?skat/i },
+    { cat: 'Family', re: /\bkids\b|children|family\b|puppet/i },
   ];
 
+  // Junk filter for sponsored content fragments and non-event text
+  const SKINT_JUNK_RE = /^(use code|use the individual|get tickets|fees apply|more info|promo code|CLB\d|MCP\w|book tickets)/i;
+
   function categorizeSkintEvent(title, description) {
-    const text = ((title || '') + ' ' + (description || '')).toLowerCase();
+    // Categorize primarily from title, fall back to description
+    const titleLower = (title || '').toLowerCase();
     for (const rule of SKINT_CAT_RULES) {
-      if (rule.re.test(text)) return rule.cat;
+      if (rule.re.test(titleLower)) return rule.cat;
+    }
+    const descLower = (description || '').toLowerCase();
+    for (const rule of SKINT_CAT_RULES) {
+      if (rule.re.test(descLower)) return rule.cat;
     }
     return 'Other';
+  }
+
+  function isSkintJunk(title) {
+    if (SKINT_JUNK_RE.test(title)) return true;
+    // Skip single-word titles under 15 chars (likely fragments like "Carnegie Hall")
+    if (title.length < 15 && !/\s/.test(title)) return true;
+    return false;
   }
 
   // Homepage — daily picks (blog-post style)
@@ -335,18 +351,31 @@ async function scrapeTheSkint() {
     const { html } = await fetchHTML('https://theskint.com/');
     const $ = cheerio.load(html);
     const byCategory = {};
+    // Track sponsored blocks — skip paragraphs between "sponsored" header and next day header
+    let inSponsored = false;
+    const DAY_RE = /^(monday|tuesday|wednesday|thursday|friday|saturday|sunday|ongoing|stay safe)$/i;
     // Each event is a <p> inside .entry-content with a <b> bold title
     $('.entry-content p').each((_, el) => {
       const $el = $(el);
       const text = $el.text().trim();
       const bold = $el.find('b').first().text().trim();
-      const link = $el.find('a').last().attr('href') || '';
-      // Skip day headers (just "tuesday", "wednesday", etc.), sponsored labels, short lines
-      if (!bold || bold.length < 4 || bold.length > 120) return;
-      if (/^(monday|tuesday|wednesday|thursday|friday|saturday|sunday|ongoing|sponsored|stay safe)$/i.test(bold)) return;
-      if (text.length < 15) return;
+      const underline = $el.find('u').first().text().trim();
+      // Detect sponsored section headers (bold + underlined "sponsored")
+      if (/^sponsored$/i.test(underline) || /^sponsored$/i.test(bold)) { inSponsored = true; return; }
+      // Day headers end sponsored blocks
+      if (DAY_RE.test(bold) || DAY_RE.test(underline)) { inSponsored = false; return; }
+      // Skip inline "sponsored:" prefix events (individual sponsored listings are fine to keep)
+      if (inSponsored) return;
 
-      // Extract date from text prefix: "tues 7pm:", "thurs thru 3/15:", "sat 1pm:"
+      const link = $el.find('a').last().attr('href') || '';
+      if (!bold || bold.length < 4 || bold.length > 120) return;
+      if (text.length < 15) return;
+      if (isSkintJunk(bold)) return;
+      // Skip "our roundup of..." meta-links
+      if (/^our roundup/i.test(bold)) return;
+      // Real Skint events always have a >> link; paragraphs without links are ad body text
+      if (!link) return;
+
       let dateText = '';
       const mmddMatch = text.match(/(\d{1,2})\/(\d{1,2})/);
       if (mmddMatch) {
@@ -389,8 +418,8 @@ async function scrapeTheSkint() {
       if (!bold || bold.length < 4 || bold.length > 120) return;
       if (/^(ongoing|sponsored|stay safe|ice skating|film fests)/i.test(bold)) return;
       if (text.length < 15) return;
-
-      // Extract "thru 3/8" or "thru 3/30" dates from text
+      if (isSkintJunk(bold)) return;
+      if (/^our roundup/i.test(bold)) return;
       let dateText = '';
       const thruMatch = text.match(/thru\s+(\d{1,2})\/(\d{1,2})/i);
       if (thruMatch) {
