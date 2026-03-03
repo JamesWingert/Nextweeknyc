@@ -123,9 +123,9 @@ body {
   .desktop-tabs {
     display: none !important;
   }
-  /* Push scroll-to-top above bottom nav */
+  /* Push scroll-to-top well above bottom nav + Chrome's disappearing URL bar */
   .scroll-to-top {
-    bottom: 5.5rem !important;
+    bottom: 7rem !important;
   }
 }
 
