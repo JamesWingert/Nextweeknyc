@@ -84,12 +84,13 @@ function isShowtime(event: Event): boolean {
 function isOnView(event: Event): boolean {
   // No date → on view
   if (!event.date) return true;
-  // Date range > 14 days → on view
+  // Date range > 2 days → on view (e.g. "Mar 1 to Mar 4" goes to ongoing,
+  // but "Mar 1 to Mar 2" stays on calendar)
   if (isDateRange(event.date)) {
     const range = parseDateRange(event.date);
     if (range) {
       const days = (range.end.getTime() - range.start.getTime()) / (1000 * 60 * 60 * 24);
-      if (days > 14) return true;
+      if (days > 2) return true;
     }
   }
   return false;
