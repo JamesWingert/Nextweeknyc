@@ -595,6 +595,11 @@ async function scrapeEventbrite(browser) {
     'https://www.eventbrite.com/d/ny--new-york/food-and-drink--events--this-week/',
     'https://www.eventbrite.com/d/ny--new-york/arts--events--next-week/',
     'https://www.eventbrite.com/d/ny--new-york/music--events--next-week/',
+    'https://www.eventbrite.com/d/ny--new-york/food-and-drink--events--next-week/',
+    'https://www.eventbrite.com/d/ny--new-york/community--events--this-week/',
+    'https://www.eventbrite.com/d/ny--new-york/community--events--next-week/',
+    'https://www.eventbrite.com/d/ny--new-york/family--events--this-week/',
+    'https://www.eventbrite.com/d/ny--new-york/family--events--next-week/',
   ];
 
   const allItems = [];
@@ -608,9 +613,9 @@ async function scrapeEventbrite(browser) {
       await page.waitForTimeout(5000);
 
       // Scroll aggressively to load more cards
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i < 12; i++) {
         await page.evaluate(() => window.scrollBy(0, 1500));
-        await page.waitForTimeout(1500);
+        await page.waitForTimeout(1200);
       }
 
       const items = await page.evaluate(() => {
