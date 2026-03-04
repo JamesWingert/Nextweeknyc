@@ -25,9 +25,15 @@ jobs:
 
       - name: Scrape Film/Arts Events
         id: scrape
-        run: node scripts/scrape-film-arts.js > /tmp/raw-film-arts.json
+        run: |
+          node scripts/scrape-film-arts.js > /tmp/raw-film-full.txt 2>/tmp/scrape-film.log
+          sed -n '/^\[/,/^\]/p' /tmp/raw-film-full.txt > /tmp/raw-film-arts.json
         env:
           NODE_ENV: production
+
+      - name: Show scraper log
+        if: always()
+        run: cat /tmp/scrape-film.log 2>/dev/null || true
 
       - name: Validate and normalize
         run: node scripts/validate-events.js /tmp/raw-film-arts.json public/data/film_museum_events.json

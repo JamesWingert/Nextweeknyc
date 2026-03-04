@@ -25,9 +25,15 @@ jobs:
 
       - name: Scrape General Events
         id: scrape
-        run: node scripts/scrape-general-events.js > /tmp/raw-general.json
+        run: |
+          node scripts/scrape-general-events.js > /tmp/raw-general-full.txt 2>/tmp/scrape-general.log
+          sed -n '/^\[/,/^\]/p' /tmp/raw-general-full.txt > /tmp/raw-general.json
         env:
           NODE_ENV: production
+
+      - name: Show scraper log
+        if: always()
+        run: cat /tmp/scrape-general.log 2>/dev/null || true
 
       - name: Validate and normalize
         run: node scripts/validate-events.js /tmp/raw-general.json public/data/events.json
