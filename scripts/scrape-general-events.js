@@ -885,6 +885,89 @@ async function scrapeItsInQueens(browser) {
   finally { await page.close(); }
 }
 
+// ---------------------------------------------------------------------------
+// National Arts Club (cheerio — list view, no browser needed)
+// ---------------------------------------------------------------------------
+async function scrapeNAC() {
+  const MONTHS = { january:1,february:2,march:3,april:4,may:5,june:6,
+    july:7,august:8,september:9,october:10,november:11,december:12 };
+  const url = 'https://www.nacnyc.org/default.aspx?p=.NET_Calendar&noReset=yes&mtab=true&ssid=323485&qfilter=&startdate=&title=Events+Calendar&subtitle=&showfilter=&chgs=&view=l5';
+  const { html } = await fetchHTML(url);
+  const $ = cheerio.load(html);
+
+  let currentDate = null;
+  const items = [];
+
+  $('tr').each((i, tr) => {
+    const $tr = $(tr);
+    // Date header row: "Tuesday, March 3, 2026"
+    const dateLink = $tr.find('td.modCalWeekDayHeader a.calendarEventDateLink');
+    if (dateLink.length) {
+      const text = dateLink.text().trim();
+      const m = text.match(/(\w+),\s+(\w+)\s+(\d{1,2}),\s+(\d{4})/);
+      if (m) {
+        const mon = MONTHS[m[2].toLowerCase()];
+        if (mon) currentDate = `${m[4]}-${String(mon).padStart(2,'0')}-${m[3].padStart(2,'0')}`;
+      }
+      return;
+    }
+    // Event row
+    const eventLink = $tr.find('td.modCalWeekRow a[href*="EventView"]');
+    if (eventLink.length && currentDate) {
+      const title = eventLink.text().trim();
+      const href = eventLink.attr('href') || '';
+      const timeTd = $tr.find('td.modCalWeekRow font.smallerfont');
+      const time = timeTd.length ? timeTd.text().trim() : '';
+      // Skip recurring exhibitions and closure notices
+      if (/exhibition/i.test(title)) return;
+      if (/closed/i.test(title)) return;
+      if (/will close/i.test(title)) return;
+      if (/brunch\s*@/i.test(title)) return;
+      if (title) items.push({ title, date: currentDate, time, link: href });
+    }
+  });
+
+  push(items, 'National Arts Club', 'Other', 'https://www.nacnyc.org/arts-and-programs/events-calendar');
+  console.error(`National Arts Club: ${items.length}`);
+}
+
+// ---------------------------------------------------------------------------
+// McNally Jackson (Playwright — site blocks plain HTTP)
+// ---------------------------------------------------------------------------
+async function scrapeMcNally(browser) {
+  const page = await browser.newPage();
+  page.setDefaultTimeout(15000);
+  try {
+    await page.goto('https://www.mcnallyjackson.com/event', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(5000);
+
+    const items = await page.evaluate(() => {
+      const results = [];
+      const contentDivs = document.querySelectorAll('div[class*="contents"]');
+      for (const div of contentDivs) {
+        const titleLink = div.querySelector('.views-field-title .field-content a');
+        if (!titleLink) continue;
+        const title = titleLink.textContent.trim();
+        const href = titleLink.href;
+        const fullText = div.textContent.trim();
+        const dateMatch = fullText.match(/(\d{2})\/(\d{2})\/(\d{4})\s*-\s*(\d{1,2}:\d{2}(?:am|pm))/i);
+        let date = '';
+        let time = '';
+        if (dateMatch) {
+          date = dateMatch[3] + '-' + dateMatch[1] + '-' + dateMatch[2];
+          time = dateMatch[4];
+        }
+        if (title.length > 3) results.push({ title, date, time, link: href });
+      }
+      return results;
+    });
+
+    push(items, 'McNally Jackson', 'Talk', 'https://www.mcnallyjackson.com/event');
+    console.error(`McNally Jackson: ${items.length}`);
+  } catch (e) { console.error('McNally Jackson error:', e.message); }
+  finally { await page.close(); }
+}
+
 function printReport() {
   console.error('\n' + '='.repeat(70));
   console.error('SCRAPE REPORT — General Events');
@@ -895,7 +978,7 @@ function printReport() {
   console.error('Source'.padEnd(25) + 'Items'.padEnd(8) + 'Dates'.padEnd(8) + 'Time'.padEnd(8) + 'Method'.padEnd(10) + 'Status');
   console.error('-'.repeat(70));
   let failures = 0, zeroResults = 0;
-  const jsNames = new Set(['Eventbrite', 'Strand Bookstore', 'Its In Queens']);
+  const jsNames = new Set(['Eventbrite', 'Strand Bookstore', 'Its In Queens', 'McNally Jackson']);
   for (const s of sourceLog) {
     const status = s.error ? `ERROR: ${s.error.slice(0, 35)}` : (s.count === 0 ? '⚠ ZERO' : '✓ OK');
     if (s.error) failures++;
@@ -926,11 +1009,9 @@ function printReport() {
   await runSource('Brooklyn Paper', scrapeBrooklynPaper);
   await runSource('NYC Parks', scrapeNYCParks);
   await runSource('Playbill', scrapePlaybill);
+  await runSource('National Arts Club', scrapeNAC);
 
-  // API-based sources (no browser needed)
-  // (none currently)
-
-  // Playwright sources (only Eventbrite + Strand truly need JS)
+  // Playwright sources (need JS rendering)
   let browser = null;
   try {
     const { chromium } = require('playwright');
@@ -938,6 +1019,7 @@ function printReport() {
     await runSource('Eventbrite', scrapeEventbrite, browser);
     await runSource('Strand Bookstore', scrapeStrand, browser);
     await runSource('Its In Queens', scrapeItsInQueens, browser);
+    await runSource('McNally Jackson', scrapeMcNally, browser);
   } catch (e) {
     console.error('Playwright unavailable, skipping JS sources:', e.message);
   } finally {
