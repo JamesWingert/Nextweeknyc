@@ -1092,15 +1092,48 @@ function printReport() {
   let browser = null;
   try {
     const { chromium } = require('playwright');
+    const BROWSER_ARGS = IS_CI ? ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] : [];
     browser = await chromium.launch({
       headless: true,
       proxy: PROXY_CONFIG || undefined,
-      args: IS_CI ? ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] : [],
+      args: BROWSER_ARGS,
     });
-    await runSource('Eventbrite', scrapeEventbrite, browser);
-    await runSource('Strand Bookstore', scrapeStrand, browser);
-    await runSource('Its In Queens', scrapeItsInQueens, browser);
-    await runSource('McNally Jackson', scrapeMcNally, browser);
+
+    const playwrightSources = [
+      ['Eventbrite', scrapeEventbrite],
+      ['Strand Bookstore', scrapeStrand],
+      ['Its In Queens', scrapeItsInQueens],
+      ['McNally Jackson', scrapeMcNally],
+    ];
+
+    for (const [name, fn] of playwrightSources) {
+      await runSource(name, fn, browser);
+    }
+
+    // If proxy tunnel failed for most sources, retry without proxy
+    if (PROXY_CONFIG) {
+      const pwFails = sourceLog.filter(s =>
+        playwrightSources.some(([n]) => n === s.name) && s.count === 0
+      );
+      if (pwFails.length >= 2) {
+        console.error(`\n⚠ ${pwFails.length}/${playwrightSources.length} Playwright sources returned 0 — retrying without proxy...`);
+        let noproxyBrowser = null;
+        try {
+          noproxyBrowser = await chromium.launch({ headless: true, args: BROWSER_ARGS });
+          for (const tf of pwFails) {
+            const src = playwrightSources.find(([n]) => n === tf.name);
+            if (!src) continue;
+            const idx = sourceLog.indexOf(tf);
+            if (idx !== -1) sourceLog.splice(idx, 1);
+            await runSource(src[0], src[1], noproxyBrowser);
+          }
+        } catch (e) {
+          console.error('No-proxy browser launch failed:', e.message);
+        } finally {
+          try { if (noproxyBrowser) await noproxyBrowser.close(); } catch (_) {}
+        }
+      }
+    }
   } catch (e) {
     console.error('Playwright unavailable, skipping JS sources:', e.message);
   } finally {
