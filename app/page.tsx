@@ -30,6 +30,10 @@ function getDateLabel(date: string): string {
   if (!isDateRange(date)) return format(toDate(date), 'EEEE, MMMM d');
   const range = parseDateRange(date);
   if (!range) return date;
+  // Same start and end — show as single date
+  if (range.start.getTime() === range.end.getTime()) {
+    return format(range.start, 'EEEE, MMMM d');
+  }
   if (range.start.getMonth() === range.end.getMonth()) {
     return `${format(range.start, 'MMM d')} – ${format(range.end, 'd')}`;
   }
@@ -1520,6 +1524,10 @@ function getOnViewDateLabel(event: Event): string {
   if (isDateRange(event.date)) {
     const range = parseDateRange(event.date);
     if (!range) return event.date;
+    // Same start and end — show as single date
+    if (range.start.getTime() === range.end.getTime()) {
+      return format(range.start, 'MMM d');
+    }
     const startStr = format(range.start, 'MMM d');
     const endMonth = range.end.getMonth();
     const startMonth = range.start.getMonth();

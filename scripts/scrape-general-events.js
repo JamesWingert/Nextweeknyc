@@ -272,6 +272,7 @@ function push(items, venue, category, fallbackUrl) {
       url: item.link || item.url || fallbackUrl,
       ...(item.time ? { time: item.time } : {}),
       ...(item.description ? { description: item.description } : {}),
+      ...(item.price ? { price: item.price } : {}),
     });
   });
 }

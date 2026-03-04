@@ -563,7 +563,7 @@ async function scrapeBAM(browser) {
         'kids': 'Family', 'kids | community': 'Family', 'kids | theater | music': 'Family',
         'visual art': 'Art', 'visual art | performance art': 'Art',
         'performance art': 'Music/Performing Arts',
-        'galas & events': 'Other', 'community': 'Other',
+        'galas & events': 'Other',
       };
 
       const results = [];
@@ -606,7 +606,7 @@ async function scrapeBAM(browser) {
     });
 
     // Filter out junk
-    const JUNK = /\b(limited edition|print series|print$|gala|ball$|member first|behavioral strategies)\b/i;
+    const JUNK = /\b(limited edition|print series|print$|gala|ball$|member first|behavioral strategies|fisher takeover|community program|community resource|get involved|facilities|education)s?\b/i;
     const filtered = items.filter(i => !JUNK.test(i.title));
 
     // Group by category and push each group

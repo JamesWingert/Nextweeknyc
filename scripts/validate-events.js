@@ -75,6 +75,7 @@ const JUNK_PATTERNS = [
   /^(translate|accessibility|contact us|for business|jobs at|facilities|programs|permits|get involved)/i,
   /^(translate this|get email|email updates)/i,
   /^(site navigation|what.?s playing|editorial|industry resources|more from|playbill editorial)/i,
+  /^(fisher takeover|community program|community resource|get involved)s?$/i,
 
   // Generic non-event labels
   /^(featured|trending|popular|recommended|editor.?s? picks?)$/i,
@@ -266,9 +267,16 @@ function validateEvent(raw, index) {
   // but are still valid (e.g. ongoing exhibitions, events with unparseable dates)
   if (date && !isValidDate(date)) errors.push(`[${index}] invalid date format: "${date}"`);
 
+  // Normalize same-day ranges ("2026-03-03 to 2026-03-03") into single dates
+  let normalizedDate = date;
+  if (VALID_RANGE_RE.test(date)) {
+    const [s, e] = date.split(' to ');
+    if (s === e) normalizedDate = s;
+  }
+
   if (errors.length > 0) return { valid: false, errors };
 
-  const event = { id, title, venue, date, category, sourceUrl };
+  const event = { id, title, venue, date: normalizedDate, category, sourceUrl };
   if (time) event.time = time;
   if (description) event.description = description;
   if (price) event.price = price;
