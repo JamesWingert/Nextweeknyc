@@ -25,6 +25,11 @@ const http = require('http');
 
 const events = [];
 
+// CI-aware wait multiplier — GitHub Actions VMs are slower and more likely to be flagged
+const IS_CI = !!process.env.CI;
+const WAIT_MULT = IS_CI ? 2.0 : 1.0;
+function ciWait(ms) { return Math.round(ms * WAIT_MULT); }
+
 // ---------------------------------------------------------------------------
 // Date range — current month + next month
 // ---------------------------------------------------------------------------
@@ -610,12 +615,12 @@ async function scrapeEventbrite(browser) {
     page.setDefaultTimeout(20000);
     try {
       await page.goto(url, { waitUntil: 'domcontentloaded' });
-      await page.waitForTimeout(5000);
+      await page.waitForTimeout(ciWait(5000));
 
       // Scroll aggressively to load more cards
       for (let i = 0; i < 12; i++) {
         await page.evaluate(() => window.scrollBy(0, 1500));
-        await page.waitForTimeout(1200);
+        await page.waitForTimeout(ciWait(1200));
       }
 
       const items = await page.evaluate(() => {
@@ -725,19 +730,33 @@ async function scrapeEventbrite(browser) {
 const sourceLog = [];
 
 async function runSource(name, fn, browserOrNull) {
-  const before = events.length;
-  const start = Date.now();
-  let error = null;
-  try {
-    if (browserOrNull) await fn(browserOrNull);
-    else await fn();
-  } catch (e) {
-    error = e.message;
+  const MAX_ATTEMPTS = IS_CI ? 2 : 1;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    const before = events.length;
+    const start = Date.now();
+    let error = null;
+    try {
+      if (browserOrNull) await fn(browserOrNull);
+      else await fn();
+    } catch (e) {
+      error = e.message;
+    }
+    const count = events.length - before;
+    const elapsed = ((Date.now() - start) / 1000).toFixed(1);
+    const datesExtracted = events.slice(before).filter(e => e.date && (/^\d{4}-\d{2}-\d{2}$/.test(e.date) || /^\d{4}-\d{2}-\d{2} to \d{4}-\d{2}-\d{2}$/.test(e.date))).length;
+
+    // Retry in CI if source errored or returned 0 results
+    if (IS_CI && attempt < MAX_ATTEMPTS && (error || count === 0)) {
+      // Remove any partial results from this failed attempt
+      events.length = before;
+      console.error(`⟳ ${name}: ${error ? 'error' : '0 results'}, retrying in 5s (attempt ${attempt}/${MAX_ATTEMPTS})...`);
+      await new Promise(r => setTimeout(r, 5000));
+      continue;
+    }
+
+    sourceLog.push({ name, count, datesExtracted, elapsed, error });
+    break;
   }
-  const count = events.length - before;
-  const elapsed = ((Date.now() - start) / 1000).toFixed(1);
-  const datesExtracted = events.slice(before).filter(e => e.date && (/^\d{4}-\d{2}-\d{2}$/.test(e.date) || /^\d{4}-\d{2}-\d{2} to \d{4}-\d{2}-\d{2}$/.test(e.date))).length;
-  sourceLog.push({ name, count, datesExtracted, elapsed, error });
 }
 
 // ---------------------------------------------------------------------------
@@ -749,7 +768,7 @@ async function scrapeStrand(browser) {
   page.setDefaultTimeout(15000);
   try {
     await page.goto('https://www.strandbooks.com/events.html', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(8000);
+    await page.waitForTimeout(ciWait(8000));
 
     const MONTHS_MAP = {
       january:'01',february:'02',march:'03',april:'04',may:'05',june:'06',
@@ -842,12 +861,12 @@ async function scrapeItsInQueens(browser) {
 
     // Load posterboard — triggers first API call (6 items)
     await page.goto('https://events.timely.fun/jxrw1att/posterboard', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(ciWait(5000));
 
     // Scroll to bottom repeatedly to trigger infinite scroll pagination
     for (let i = 0; i < 15; i++) {
       await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-      await page.waitForTimeout(2000);
+      await page.waitForTimeout(ciWait(2000));
       if (allApiItems.length >= apiTotal && apiTotal > 0) break;
     }
 
@@ -945,7 +964,7 @@ async function scrapeMcNally(browser) {
   page.setDefaultTimeout(15000);
   try {
     await page.goto('https://www.mcnallyjackson.com/event', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(ciWait(5000));
 
     const items = await page.evaluate(() => {
       const results = [];
@@ -1021,7 +1040,10 @@ function printReport() {
   let browser = null;
   try {
     const { chromium } = require('playwright');
-    browser = await chromium.launch({ headless: true });
+    browser = await chromium.launch({
+      headless: true,
+      args: IS_CI ? ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] : [],
+    });
     await runSource('Eventbrite', scrapeEventbrite, browser);
     await runSource('Strand Bookstore', scrapeStrand, browser);
     await runSource('Its In Queens', scrapeItsInQueens, browser);

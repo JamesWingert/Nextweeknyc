@@ -57,10 +57,32 @@ jobs:
           echo "=== Raw stdout (first 5 lines, film) ==="
           head -5 /tmp/raw-film-full.txt 2>/dev/null || echo "(no file)"
 
+      - name: Write job summary
+        if: always()
+        run: |
+          echo "## Scrape Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### General Events" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          grep -E '(Source|---|✓|⚠|⛔|📅|ERROR|ZERO|REPORT|Total|Date range)' /tmp/scrape-general.log 2>/dev/null || echo "(no report)"
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Film/Arts" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          grep -E '(Source|---|✓|⚠|⛔|📅|ERROR|ZERO|REPORT|Total|Date range)' /tmp/scrape-film.log 2>/dev/null || echo "(no report)"
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
       - name: Validate and normalize general events
         run: |
           if [ -s /tmp/raw-events.json ]; then
-            node scripts/validate-events.js /tmp/raw-events.json public/data/events.json
+            node scripts/validate-events.js /tmp/raw-events.json /tmp/validated-events.json
+            COUNT=$(node -e "console.log(JSON.parse(require('fs').readFileSync('/tmp/validated-events.json','utf8')).length)")
+            echo "General events validated: $COUNT"
+            if [ "$COUNT" -ge 50 ]; then
+              cp /tmp/validated-events.json public/data/events.json
+            else
+              echo "⚠ Only $COUNT events (min 50) — keeping existing data to avoid overwriting with bad scrape"
+            fi
           else
             echo "General scraper produced no output, keeping existing data"
           fi
@@ -68,7 +90,14 @@ jobs:
       - name: Validate and normalize film/arts events
         run: |
           if [ -s /tmp/raw-film.json ]; then
-            node scripts/validate-events.js /tmp/raw-film.json public/data/film_museum_events.json
+            node scripts/validate-events.js /tmp/raw-film.json /tmp/validated-film.json
+            COUNT=$(node -e "console.log(JSON.parse(require('fs').readFileSync('/tmp/validated-film.json','utf8')).length)")
+            echo "Film/arts events validated: $COUNT"
+            if [ "$COUNT" -ge 50 ]; then
+              cp /tmp/validated-film.json public/data/film_museum_events.json
+            else
+              echo "⚠ Only $COUNT events (min 50) — keeping existing data to avoid overwriting with bad scrape"
+            fi
           else
             echo "Film/arts scraper produced no output, keeping existing data"
           fi

@@ -25,6 +25,11 @@ const http = require('http');
 
 const events = [];
 
+// CI-aware wait multiplier — GitHub Actions VMs are slower and more likely to be flagged
+const IS_CI = !!process.env.CI;
+const WAIT_MULT = IS_CI ? 2.0 : 1.0;
+function ciWait(ms) { return Math.round(ms * WAIT_MULT); }
+
 // ---------------------------------------------------------------------------
 // Date range — current month + next month
 // ---------------------------------------------------------------------------
@@ -506,10 +511,10 @@ async function scrapeBAM(browser) {
   page.setDefaultTimeout(30000);
   try {
     await page.goto('https://www.bam.org', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(8000);
+    await page.waitForTimeout(ciWait(8000));
     // Scroll to load lazy content
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(ciWait(3000));
 
     const items = await page.evaluate(() => {
       const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,sept:8,oct:9,nov:10,dec:11};
@@ -644,7 +649,7 @@ async function scrapeMetrograph(browser) {
   filmPage.setDefaultTimeout(15000);
   try {
     await filmPage.goto('https://metrograph.com/film/', { waitUntil: 'domcontentloaded' });
-    await filmPage.waitForTimeout(5000);
+    await filmPage.waitForTimeout(ciWait(5000));
 
     const films = await filmPage.evaluate(() => {
       const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11,
@@ -757,7 +762,7 @@ async function scrapeMetrograph(browser) {
   eventsPage.setDefaultTimeout(15000);
   try {
     await eventsPage.goto('https://metrograph.com/events/', { waitUntil: 'domcontentloaded' });
-    await eventsPage.waitForTimeout(5000);
+    await eventsPage.waitForTimeout(ciWait(5000));
 
     const evts = await eventsPage.evaluate(() => {
       const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11,
@@ -843,7 +848,7 @@ async function scrapeGuggenheim(browser) {
   page.setDefaultTimeout(15000);
   try {
     await page.goto('https://www.guggenheim.org/exhibitions', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(ciWait(5000));
     const items = await page.evaluate(() => {
       const r = [], seen = new Set();
       // Each exhibition card — look for links + nearby date text
@@ -887,7 +892,7 @@ async function scrapeNewMuseum(browser) {
   page.setDefaultTimeout(20000);
   try {
     await page.goto('https://www.newmuseum.org/exhibitions', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(ciWait(5000));
     const items = await page.evaluate(() => {
       const r = [], seen = new Set();
       // Helper: strip date suffixes that get concatenated into titles
@@ -953,7 +958,7 @@ async function scrapeJapanSociety(browser) {
   page.setDefaultTimeout(15000);
   try {
     await page.goto('https://www.japansociety.org/events', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(4000);
+    await page.waitForTimeout(ciWait(4000));
     const items = await page.evaluate(() => {
       const r = [], seen = new Set();
       document.querySelectorAll('a[href*="/events/"]').forEach(el => {
@@ -989,7 +994,7 @@ async function scrapeNYPhil(browser) {
   page.setDefaultTimeout(15000);
   try {
     await page.goto('https://nyphil.org/calendar', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(ciWait(5000));
     const items = await page.evaluate(() => {
       const r = [];
       // Each li.calendar-performance has date-holder + details with title
@@ -1030,10 +1035,10 @@ async function scrapeCarnegieHall(browser) {
       }
     });
     await page.goto('https://www.carnegiehall.org/calendar', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(8000);
+    await page.waitForTimeout(ciWait(8000));
     // Scroll to trigger lazy loading
     await page.evaluate(() => window.scrollBy(0, 2000));
-    await page.waitForTimeout(4000);
+    await page.waitForTimeout(ciWait(4000));
 
     if (apiData && apiData.length > 0) {
       const items = apiData.slice(0, 30).map(e => ({
@@ -1086,7 +1091,7 @@ async function scrapeMetOpera(browser) {
   page.setDefaultTimeout(30000);
   try {
     await page.goto('https://www.metopera.org/calendar/', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(8000);
+    await page.waitForTimeout(ciWait(8000));
     // Click "All Events" to get the list view
     await page.evaluate(() => {
       const links = Array.from(document.querySelectorAll('a, button, [ng-click]'));
@@ -1094,7 +1099,7 @@ async function scrapeMetOpera(browser) {
         if (l.textContent?.trim().includes('All Events')) { l.click(); break; }
       }
     });
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(ciWait(5000));
 
     const items = await page.evaluate(() => {
       const r = [], seen = new Set();
@@ -1175,7 +1180,7 @@ async function scrapeNYCB(browser) {
   page.setDefaultTimeout(15000);
   try {
     await page.goto('https://www.nycballet.com/season-and-tickets/', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(4000);
+    await page.waitForTimeout(ciWait(4000));
     const items = await page.evaluate(() => {
       const r = [], seen = new Set();
       // Each slide has .season-slide__title + .season-slide__start-date / __end-date
@@ -1205,7 +1210,7 @@ async function scrapeJoyce(browser) {
   page.setDefaultTimeout(15000);
   try {
     await page.goto('https://www.joyce.org/performances', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(4000);
+    await page.waitForTimeout(ciWait(4000));
     const items = await page.evaluate(() => {
       const r = [];
       // Each .eventCard has h3.title for name, a.desc for link, .top-date > .start for date
@@ -1235,7 +1240,7 @@ async function scrapeLincolnCenter(browser) {
   page.setDefaultTimeout(15000);
   try {
     await page.goto('https://www.lincolncenter.org/calendar', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(4000);
+    await page.waitForTimeout(ciWait(4000));
     const items = await page.evaluate(() => {
       const r = [], seen = new Set();
       document.querySelectorAll('[class*="event"], .card, article').forEach(el => {
@@ -1279,7 +1284,7 @@ async function scrapeMovingImage(stealthBrowser) {
       console.error(`Moving Image: fetching ${url}`);
 
       await page.goto(url, { waitUntil: 'domcontentloaded' });
-      await page.waitForTimeout(8000);
+      await page.waitForTimeout(ciWait(8000));
 
       const items = await page.evaluate((seenKeys) => {
         const r = [];
@@ -1406,12 +1411,12 @@ async function scrape92NY(stealthBrowser) {
     // Step 1: First load — triggers Incapsula captcha/challenge, sets cookies
     console.error('92NY: first load (captcha challenge)...');
     await page.goto('https://www.92ny.org/whats-on/calendar', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(8000);
+    await page.waitForTimeout(ciWait(8000));
 
     // Step 2: Refresh — cookies are now set, should get real page
     console.error('92NY: refreshing after captcha...');
     await page.reload({ waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(10000);
+    await page.waitForTimeout(ciWait(10000));
 
     const pageTitle = await page.title();
     console.error(`92NY page title after refresh: "${pageTitle}"`);
@@ -1424,9 +1429,9 @@ async function scrape92NY(stealthBrowser) {
 
     if (blocked) {
       console.error('92NY: still blocked, trying one more refresh...');
-      await page.waitForTimeout(5000);
+      await page.waitForTimeout(ciWait(5000));
       await page.reload({ waitUntil: 'domcontentloaded' });
-      await page.waitForTimeout(10000);
+      await page.waitForTimeout(ciWait(10000));
       const stillBlocked = await page.evaluate(() => {
         const html = document.documentElement.innerHTML.toLowerCase();
         return html.includes('incapsula') && html.includes('iframe') && document.body.children.length <= 2;
@@ -1442,9 +1447,9 @@ async function scrape92NY(stealthBrowser) {
       // Scroll to trigger lazy loading
       for (let i = 0; i < 6; i++) {
         await page.evaluate(() => window.scrollBy(0, 600));
-        await page.waitForTimeout(600);
+        await page.waitForTimeout(ciWait(600));
       }
-      await page.waitForTimeout(2000);
+      await page.waitForTimeout(ciWait(2000));
 
       return page.evaluate(() => {
         const r = [];
@@ -1552,7 +1557,7 @@ async function scrape92NY(stealthBrowser) {
     if (nextBtn) {
       console.error('92NY: clicking next month...');
       await nextBtn.click();
-      await page.waitForTimeout(5000);
+      await page.waitForTimeout(ciWait(5000));
 
       const month2Items = await scrapeCurrentView();
       console.error(`92NY: next month DOM items: ${month2Items.length}`);
@@ -1615,13 +1620,13 @@ async function scrapeABT(browser) {
     for (let m = 0; m < 2; m++) {
       if (m === 0) {
         await page.goto('https://www.abt.org/performances/master-calendar/', { waitUntil: 'domcontentloaded' });
-        await page.waitForTimeout(10000);
+        await page.waitForTimeout(ciWait(10000));
       } else {
         // Click the next-month button
         const nextBtn = await page.$('.fc-next-button, .fc-button-next, button.fc-next-button');
         if (nextBtn) {
           await nextBtn.click();
-          await page.waitForTimeout(5000);
+          await page.waitForTimeout(ciWait(5000));
         } else break;
       }
 
@@ -1672,7 +1677,7 @@ async function scrapeAngelika(browser) {
   page.setDefaultTimeout(15000);
   try {
     await page.goto('https://angelikafilmcenter.com/nyc/now-playing', { waitUntil: 'networkidle' });
-    await page.waitForTimeout(4000);
+    await page.waitForTimeout(ciWait(4000));
 
     // Get all date tabs (e.g. "Today, 3/2", "Tomorrow, 3/3", "Wednesday 3/4")
     const dateTabs = await page.evaluate(() => {
@@ -1701,7 +1706,7 @@ async function scrapeAngelika(browser) {
             if (el.textContent.trim() === tabText) el.click();
           });
         }, tab.text);
-        await page.waitForTimeout(1500);
+        await page.waitForTimeout(ciWait(1500));
 
         const dateStr = `${year}-${String(tab.month).padStart(2, '0')}-${String(tab.day).padStart(2, '0')}`;
         const movies = await page.evaluate(() => {
@@ -1741,7 +1746,7 @@ async function scrapeFilmLinc(browser) {
   page.setDefaultTimeout(20000);
   try {
     await page.goto('https://www.filmlinc.org/now-playing/', { waitUntil: 'networkidle' });
-    await page.waitForTimeout(6000);
+    await page.waitForTimeout(ciWait(6000));
     const bodyText = await page.evaluate(() => document.body.textContent.replace(/\s+/g, ' ').trim().slice(0, 200));
     if (/security verification|enable javascript|just a moment/i.test(bodyText)) {
       console.error('Film at Lincoln Center: blocked by Cloudflare');
@@ -1768,19 +1773,32 @@ async function scrapeFilmLinc(browser) {
 }
 
 async function runSource(name, fn, browserOrNull) {
-  const before = events.length;
-  const start = Date.now();
-  let error = null;
-  try {
-    if (browserOrNull) await fn(browserOrNull);
-    else await fn();
-  } catch (e) {
-    error = e.message;
+  const MAX_ATTEMPTS = IS_CI ? 2 : 1;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    const before = events.length;
+    const start = Date.now();
+    let error = null;
+    try {
+      if (browserOrNull) await fn(browserOrNull);
+      else await fn();
+    } catch (e) {
+      error = e.message;
+    }
+    const count = events.length - before;
+    const elapsed = ((Date.now() - start) / 1000).toFixed(1);
+    const datesExtracted = events.slice(before).filter(e => e.date && (/^\d{4}-\d{2}-\d{2}$/.test(e.date) || /^\d{4}-\d{2}-\d{2} to \d{4}-\d{2}-\d{2}$/.test(e.date))).length;
+
+    // Retry in CI if source errored or returned 0 results
+    if (IS_CI && attempt < MAX_ATTEMPTS && (error || count === 0)) {
+      events.length = before;
+      console.error(`⟳ ${name}: ${error ? 'error' : '0 results'}, retrying in 5s (attempt ${attempt}/${MAX_ATTEMPTS})...`);
+      await new Promise(r => setTimeout(r, 5000));
+      continue;
+    }
+
+    sourceLog.push({ name, count, datesExtracted, elapsed, error });
+    break;
   }
-  const count = events.length - before;
-  const elapsed = ((Date.now() - start) / 1000).toFixed(1);
-  const datesExtracted = events.slice(before).filter(e => e.date && (/^\d{4}-\d{2}-\d{2}$/.test(e.date) || /^\d{4}-\d{2}-\d{2} to \d{4}-\d{2}-\d{2}$/.test(e.date))).length;
-  sourceLog.push({ name, count, datesExtracted, elapsed, error });
 }
 
 function printReport() {
@@ -1835,7 +1853,10 @@ function printReport() {
   let stealthBrowser = null;
   try {
     const { chromium } = require('playwright');
-    browser = await chromium.launch({ headless: true });
+    browser = await chromium.launch({
+      headless: true,
+      args: IS_CI ? ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] : [],
+    });
 
     await runSource('Metrograph', scrapeMetrograph, browser);
     await runSource('BAM', scrapeBAM, browser);

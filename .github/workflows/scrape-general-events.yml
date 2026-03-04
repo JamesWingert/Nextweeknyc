@@ -12,7 +12,7 @@ permissions:
 jobs:
   scrape-general:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
 
     steps:
       - uses: actions/checkout@v4
@@ -24,22 +24,43 @@ jobs:
         run: npm ci
 
       - name: Install Playwright
-        run: npx playwright install chromium
+        run: npx playwright install chromium --with-deps
 
       - name: Scrape General Events
         id: scrape
         run: |
-          node scripts/scrape-general-events.js > /tmp/raw-general-full.txt 2>/tmp/scrape-general.log
+          node scripts/scrape-general-events.js > /tmp/raw-general-full.txt 2>/tmp/scrape-general.log || true
           sed -n '/^\[/,/^\]/p' /tmp/raw-general-full.txt > /tmp/raw-general.json
         env:
           NODE_ENV: production
 
       - name: Show scraper log
         if: always()
-        run: cat /tmp/scrape-general.log 2>/dev/null || true
+        run: |
+          echo "=== Full Scraper Log ==="
+          cat /tmp/scrape-general.log 2>/dev/null || true
+          echo ""
+          echo "=== SOURCE SUMMARY ==="
+          grep -E '(Source|---|✓|⚠|⛔|📅|ERROR|ZERO|REPORT|Total|Date range)' /tmp/scrape-general.log 2>/dev/null || echo "(no report found)"
+
+      - name: Write job summary
+        if: always()
+        run: |
+          echo "## General Events Scrape Report" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          grep -E '(Source|---|✓|⚠|⛔|📅|ERROR|ZERO|REPORT|Total|Date range)' /tmp/scrape-general.log 2>/dev/null >> $GITHUB_STEP_SUMMARY || echo "(no report)" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
 
       - name: Validate and normalize
-        run: node scripts/validate-events.js /tmp/raw-general.json public/data/events.json
+        run: |
+          node scripts/validate-events.js /tmp/raw-general.json /tmp/validated-general.json
+          COUNT=$(node -e "console.log(JSON.parse(require('fs').readFileSync('/tmp/validated-general.json','utf8')).length)")
+          echo "General events validated: $COUNT"
+          if [ "$COUNT" -ge 50 ]; then
+            cp /tmp/validated-general.json public/data/events.json
+          else
+            echo "⚠ Only $COUNT events (min 50) — keeping existing data to avoid overwriting with bad scrape"
+          fi
 
       - name: Commit updated data
         run: |
