@@ -297,22 +297,22 @@
     "time": "7:00PM"
   },
   {
-    "id": "the-bowery-ballroom-bryce-vine-35",
-    "title": "Bryce Vine",
-    "venue": "The Bowery Ballroom",
-    "date": "2026-03-05",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://donyc.com/events/2026/3/5/bryce-vine-tickets",
-    "time": "8:00PM"
-  },
-  {
-    "id": "joe-s-pub-todd-glass-the-event-of-a-lifetime-36",
+    "id": "joe-s-pub-todd-glass-the-event-of-a-lifetime-35",
     "title": "Todd Glass: The Event of a Lifetime",
     "venue": "Joe's Pub",
     "date": "2026-03-05",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://donyc.com/events/2026/3/5/todd-glass-the-event-of-a-lifetime-tickets-nepomoq",
     "time": "9:30PM"
+  },
+  {
+    "id": "the-bowery-ballroom-bryce-vine-36",
+    "title": "Bryce Vine",
+    "venue": "The Bowery Ballroom",
+    "date": "2026-03-05",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://donyc.com/events/2026/3/5/bryce-vine-tickets",
+    "time": "8:00PM"
   },
   {
     "id": "mercury-lounge-caroline-jones-37",
@@ -576,22 +576,22 @@
     "time": "6:30PM"
   },
   {
-    "id": "public-records-aerae-elias-garcia-martyn-viiaan-kels-68",
+    "id": "joe-s-pub-todd-glass-the-event-of-a-lifetime-68",
+    "title": "Todd Glass: The Event of a Lifetime",
+    "venue": "Joe's Pub",
+    "date": "2026-03-06",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://donyc.com/events/2026/3/6/todd-glass-the-event-of-a-lifetime-tickets",
+    "time": "9:30PM"
+  },
+  {
+    "id": "public-records-aerae-elias-garcia-martyn-viiaan-kels-69",
     "title": "AERAE + Elias Garcia / Martyn + Viiaan / Kels",
     "venue": "Public Records",
     "date": "2026-03-06",
     "category": "Music/Performing Arts",
     "sourceUrl": "https://donyc.com/events/2026/3/6/aerae-elias-garcia-martyn-viiaan-kels-tickets",
     "time": "11:00PM"
-  },
-  {
-    "id": "flagstar-at-westbury-music-fair-joe-bonamassa-69",
-    "title": "Joe Bonamassa",
-    "venue": "Flagstar at Westbury Music Fair",
-    "date": "2026-03-06",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://donyc.com/events/2026/3/6/joe-bonamassa-tickets",
-    "time": "8:00PM"
   },
   {
     "id": "xanadu-presented-by-xanadu-presents-weekend-warm-up-skate-70",
@@ -3216,7 +3216,7 @@
     "id": "the-skint-doc-nyc-selects-winter-2026-372",
     "title": "doc nyc selects: winter 2026",
     "venue": "The Skint",
-    "date": "2026-03-04 to 2026-03-03",
+    "date": "2026-03-03 to 2026-03-04",
     "category": "Other",
     "sourceUrl": "https://www.ifccenter.com/series/doc-nyc-selects-winter-2026/",
     "description": "► thru 3/3: doc nyc selects: winter 2026: ifc center (greenwich village). >>"
@@ -3510,7 +3510,15 @@
     "description": "thru 8/16: art of noise: a new exhibition at cooper hewitt celebrates the groundbreaking designs that have shaped how people experience music over the past century. organized by the san francisco muse"
   },
   {
-    "id": "brooklyn-paper-purim-discovery-room-405",
+    "id": "brooklyn-paper-queer-trivia-extravaganza-good-judy-405",
+    "title": "Queer Trivia Extravaganza @ Good Judy",
+    "venue": "Brooklyn Paper",
+    "date": "2026-03-03",
+    "category": "Other",
+    "sourceUrl": "https://events.gaycitynews.com/event/queer-trivia-extravaganza-good-judy/"
+  },
+  {
+    "id": "brooklyn-paper-purim-discovery-room-406",
     "title": "Purim Discovery Room",
     "venue": "Brooklyn Paper",
     "date": "2026-03-04",
@@ -3518,7 +3526,7 @@
     "sourceUrl": "https://events.newyorkfamily.com/event/purim-discovery-room/"
   },
   {
-    "id": "brooklyn-paper-audatours-brooklyn-audio-tour-from-cannons-to-craft-brews-406",
+    "id": "brooklyn-paper-audatours-brooklyn-audio-tour-from-cannons-to-craft-brews-407",
     "title": "AudaTours Brooklyn Audio Tour: From Cannons to Craft Brews",
     "venue": "Brooklyn Paper",
     "date": "2026-03-04",
@@ -3526,7 +3534,7 @@
     "sourceUrl": "https://events.brooklynpaper.com/event/audatours-brooklyn-audio-tour-from-cannons-to-craft-brews/"
   },
   {
-    "id": "brooklyn-paper-empire-skate-of-mind-407",
+    "id": "brooklyn-paper-empire-skate-of-mind-408",
     "title": "Empire Skate of Mind",
     "venue": "Brooklyn Paper",
     "date": "2026-03-04",
@@ -3534,7 +3542,7 @@
     "sourceUrl": "https://events.newyorkfamily.com/event/empire-skate-of-mind-grand-opening/"
   },
   {
-    "id": "brooklyn-paper-the-wonder-years-at-brooklyn-paramount-408",
+    "id": "brooklyn-paper-the-wonder-years-at-brooklyn-paramount-409",
     "title": "The Wonder Years at Brooklyn Paramount",
     "venue": "Brooklyn Paper",
     "date": "2026-03-04",
@@ -3542,7 +3550,7 @@
     "sourceUrl": "https://events.brooklynpaper.com/event/the-wonder-years-at-brooklyn-paramount/"
   },
   {
-    "id": "brooklyn-paper-bluegrass-wednesdays-at-mathilde-409",
+    "id": "brooklyn-paper-bluegrass-wednesdays-at-mathilde-410",
     "title": "Bluegrass Wednesdays at MATHILDE",
     "venue": "Brooklyn Paper",
     "date": "2026-03-04",
@@ -3550,7 +3558,7 @@
     "sourceUrl": "https://events.brooklynpaper.com/event/bluegrass-wednesdays-at-mathilde/"
   },
   {
-    "id": "brooklyn-paper-audatours-brooklyn-audio-tour-from-cannons-to-craft-brews-410",
+    "id": "brooklyn-paper-audatours-brooklyn-audio-tour-from-cannons-to-craft-brews-411",
     "title": "AudaTours Brooklyn Audio Tour: From Cannons to Craft Brews",
     "venue": "Brooklyn Paper",
     "date": "2026-03-05",
@@ -3558,7 +3566,7 @@
     "sourceUrl": "https://events.brooklynpaper.com/event/audatours-brooklyn-audio-tour-from-cannons-to-craft-brews/"
   },
   {
-    "id": "brooklyn-paper-empire-skate-of-mind-411",
+    "id": "brooklyn-paper-empire-skate-of-mind-412",
     "title": "Empire Skate of Mind",
     "venue": "Brooklyn Paper",
     "date": "2026-03-05",
@@ -3566,7 +3574,7 @@
     "sourceUrl": "https://events.newyorkfamily.com/event/empire-skate-of-mind-grand-opening/"
   },
   {
-    "id": "brooklyn-paper-lavender-blues-remixes-a-family-hip-hop-concert-412",
+    "id": "brooklyn-paper-lavender-blues-remixes-a-family-hip-hop-concert-413",
     "title": "Lavender Blues: REMIXES, a Family Hip-Hop Concert",
     "venue": "Brooklyn Paper",
     "date": "2026-03-05",
@@ -3574,7 +3582,7 @@
     "sourceUrl": "https://events.newyorkfamily.com/event/lavender-blues-remixes-a-family-hip-hop-concert/"
   },
   {
-    "id": "brooklyn-paper-slander-factory-at-talon-bar-free-stand-up-comedy-every-thur-413",
+    "id": "brooklyn-paper-slander-factory-at-talon-bar-free-stand-up-comedy-every-thur-414",
     "title": "Slander Factory at Talon Bar! Free Stand-Up Comedy Every Thurs. in Bushwick",
     "venue": "Brooklyn Paper",
     "date": "2026-03-05",
@@ -3582,7 +3590,7 @@
     "sourceUrl": "https://events.brooklynpaper.com/event/slander-factory-at-talon-bar-free-stand-up-comedy-every-thurs-in-bushwick/"
   },
   {
-    "id": "brooklyn-paper-amber-mark-at-brooklyn-steel-414",
+    "id": "brooklyn-paper-amber-mark-at-brooklyn-steel-415",
     "title": "Amber Mark at Brooklyn Steel",
     "venue": "Brooklyn Paper",
     "date": "2026-03-05",
@@ -3590,7 +3598,7 @@
     "sourceUrl": "https://events.brooklynpaper.com/event/amber-mark-at-brooklyn-steel/"
   },
   {
-    "id": "brooklyn-paper-geeks-who-drink-trivia-at-the-tiny-cupboard-415",
+    "id": "brooklyn-paper-geeks-who-drink-trivia-at-the-tiny-cupboard-416",
     "title": "Geeks Who Drink Trivia at The Tiny Cupboard",
     "venue": "Brooklyn Paper",
     "date": "2026-03-05",
@@ -3598,7 +3606,7 @@
     "sourceUrl": "https://events.brooklynpaper.com/event/geeks-who-drink-trivia-at-the-tiny-cupboard/"
   },
   {
-    "id": "brooklyn-paper-superstar-open-set-416",
+    "id": "brooklyn-paper-superstar-open-set-417",
     "title": "Superstar Open Set",
     "venue": "Brooklyn Paper",
     "date": "2026-03-05",
@@ -3606,7 +3614,7 @@
     "sourceUrl": "https://events.gaycitynews.com/event/superstar-open-set/"
   },
   {
-    "id": "brooklyn-paper-audatours-brooklyn-audio-tour-from-cannons-to-craft-brews-417",
+    "id": "brooklyn-paper-audatours-brooklyn-audio-tour-from-cannons-to-craft-brews-418",
     "title": "AudaTours Brooklyn Audio Tour: From Cannons to Craft Brews",
     "venue": "Brooklyn Paper",
     "date": "2026-03-06",
@@ -3614,7 +3622,7 @@
     "sourceUrl": "https://events.brooklynpaper.com/event/audatours-brooklyn-audio-tour-from-cannons-to-craft-brews/"
   },
   {
-    "id": "brooklyn-paper-empire-skate-of-mind-418",
+    "id": "brooklyn-paper-empire-skate-of-mind-419",
     "title": "Empire Skate of Mind",
     "venue": "Brooklyn Paper",
     "date": "2026-03-06",
@@ -3622,7 +3630,7 @@
     "sourceUrl": "https://events.newyorkfamily.com/event/empire-skate-of-mind-grand-opening/"
   },
   {
-    "id": "brooklyn-paper-zoomies-a-comedy-show-in-a-cat-cafe-419",
+    "id": "brooklyn-paper-zoomies-a-comedy-show-in-a-cat-cafe-420",
     "title": "Zoomies! A Comedy Show in a Cat Cafe",
     "venue": "Brooklyn Paper",
     "date": "2026-03-06",
@@ -3630,7 +3638,7 @@
     "sourceUrl": "https://events.brooklynpaper.com/event/zoomies-a-comedy-show-in-a-cat-cafe/"
   },
   {
-    "id": "brooklyn-paper-she-ate-the-drag-dinner-experience-420",
+    "id": "brooklyn-paper-she-ate-the-drag-dinner-experience-421",
     "title": "SHE ATE! The Drag Dinner Experience",
     "venue": "Brooklyn Paper",
     "date": "2026-03-06",
@@ -3638,7 +3646,7 @@
     "sourceUrl": "https://events.gaycitynews.com/event/she-ate-the-drag-dinner-experience/"
   },
   {
-    "id": "brooklyn-paper-all-ages-rupaul-s-drag-race-watch-party-in-coney-island-421",
+    "id": "brooklyn-paper-all-ages-rupaul-s-drag-race-watch-party-in-coney-island-422",
     "title": "All-Ages RuPaul’s Drag Race Watch Party in Coney Island",
     "venue": "Brooklyn Paper",
     "date": "2026-03-06",
@@ -3646,7 +3654,7 @@
     "sourceUrl": "https://events.gaycitynews.com/event/all-ages-rupauls-drag-race-watch-party-in-coney-island/"
   },
   {
-    "id": "brooklyn-paper-brooklyn-bridge-parkrun-422",
+    "id": "brooklyn-paper-brooklyn-bridge-parkrun-423",
     "title": "Brooklyn Bridge parkrun",
     "venue": "Brooklyn Paper",
     "date": "2026-03-07",
@@ -3654,7 +3662,7 @@
     "sourceUrl": "https://events.brooklynpaper.com/event/brooklyn-bridge-parkrun/"
   },
   {
-    "id": "brooklyn-paper-walk-talk-about-life-s-big-questions-423",
+    "id": "brooklyn-paper-walk-talk-about-life-s-big-questions-424",
     "title": "Walk & Talk About Life’s Big Questions",
     "venue": "Brooklyn Paper",
     "date": "2026-03-07",
@@ -3662,7 +3670,7 @@
     "sourceUrl": "https://events.brooklynpaper.com/event/walk-talk-about-lifes-big-questions/"
   },
   {
-    "id": "brooklyn-paper-empire-skate-of-mind-424",
+    "id": "brooklyn-paper-empire-skate-of-mind-425",
     "title": "Empire Skate of Mind",
     "venue": "Brooklyn Paper",
     "date": "2026-03-07",
@@ -3670,7 +3678,7 @@
     "sourceUrl": "https://events.newyorkfamily.com/event/empire-skate-of-mind-grand-opening/"
   },
   {
-    "id": "brooklyn-paper-suzi-shelton-benjamin-s-album-release-party-for-families-425",
+    "id": "brooklyn-paper-suzi-shelton-benjamin-s-album-release-party-for-families-426",
     "title": "Suzi Shelton & Benjamin’s Album Release Party for Families",
     "venue": "Brooklyn Paper",
     "date": "2026-03-07",
@@ -3678,7 +3686,7 @@
     "sourceUrl": "https://events.newyorkfamily.com/event/suzi-shelton-benjamins-album-release-party-for-families/"
   },
   {
-    "id": "brooklyn-paper-made-bush-terminal-lunar-new-year-celebration-426",
+    "id": "brooklyn-paper-made-bush-terminal-lunar-new-year-celebration-427",
     "title": "MADE Bush Terminal Lunar New Year Celebration",
     "venue": "Brooklyn Paper",
     "date": "2026-03-07",
@@ -3686,7 +3694,7 @@
     "sourceUrl": "https://events.newyorkfamily.com/event/made-bush-terminal-lunar-new-year-celebration/"
   },
   {
-    "id": "brooklyn-paper-audatours-brooklyn-audio-tour-from-cannons-to-craft-brews-427",
+    "id": "brooklyn-paper-audatours-brooklyn-audio-tour-from-cannons-to-craft-brews-428",
     "title": "AudaTours Brooklyn Audio Tour: From Cannons to Craft Brews",
     "venue": "Brooklyn Paper",
     "date": "2026-03-07",
@@ -3694,7 +3702,7 @@
     "sourceUrl": "https://events.brooklynpaper.com/event/audatours-brooklyn-audio-tour-from-cannons-to-craft-brews/"
   },
   {
-    "id": "brooklyn-paper-aladdin-the-wonderful-lamp-428",
+    "id": "brooklyn-paper-aladdin-the-wonderful-lamp-429",
     "title": "Aladdin & the Wonderful Lamp",
     "venue": "Brooklyn Paper",
     "date": "2026-03-07",
@@ -3702,7 +3710,7 @@
     "sourceUrl": "https://events.newyorkfamily.com/event/aladdin-the-wonderful-lamp/"
   },
   {
-    "id": "brooklyn-paper-ride-a-motorcycle-for-free-430",
+    "id": "brooklyn-paper-ride-a-motorcycle-for-free-431",
     "title": "Ride a Motorcycle….FOR FREE!!!",
     "venue": "Brooklyn Paper",
     "date": "2026-03-07",
@@ -3710,7 +3718,7 @@
     "sourceUrl": "https://events.brooklynpaper.com/event/ride-a-motorcycle-for-free/"
   },
   {
-    "id": "brooklyn-paper-regina-opera-presents-suor-angelica-concert-with-orchestra-431",
+    "id": "brooklyn-paper-regina-opera-presents-suor-angelica-concert-with-orchestra-432",
     "title": "Regina Opera presents ”Suor Angelica” + Concert with orchestra",
     "venue": "Brooklyn Paper",
     "date": "2026-03-07",
@@ -3718,7 +3726,7 @@
     "sourceUrl": "https://events.brooklynpaper.com/event/regina-opera-presents-suor-angelica-concert-with-orchestra/"
   },
   {
-    "id": "brooklyn-paper-silence-wang-at-barclays-center-432",
+    "id": "brooklyn-paper-silence-wang-at-barclays-center-433",
     "title": "Silence Wang at Barclays Center",
     "venue": "Brooklyn Paper",
     "date": "2026-03-07",
@@ -3726,87 +3734,7 @@
     "sourceUrl": "https://events.brooklynpaper.com/event/silence-wang-at-barclays-center/"
   },
   {
-    "id": "brooklyn-paper-malev-friends-comedy-show-434",
-    "title": "Malev & Friends Comedy Show",
-    "venue": "Brooklyn Paper",
-    "date": "2026-03-07",
-    "category": "Comedy",
-    "sourceUrl": "https://events.brooklynpaper.com/event/malevfriends-comedy-show-2/"
-  },
-  {
-    "id": "broadway-the-book-of-mormon-436",
-    "title": "The Book of Mormon",
-    "venue": "Broadway",
-    "date": "2011-02-24",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/the-book-of-mormon-eugene-oneill-theatre-vault-0000013715"
-  },
-  {
-    "id": "broadway-just-in-time-437",
-    "title": "Just in Time",
-    "venue": "Broadway",
-    "date": "2025-03-31",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/just-in-time-broadway-circle-in-the-square-theatre-2025"
-  },
-  {
-    "id": "broadway-oh-mary-438",
-    "title": "Oh, Mary!",
-    "venue": "Broadway",
-    "date": "2024-06-26",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/oh-mary-broadway-lyceum-theatre-2024"
-  },
-  {
-    "id": "broadway-death-becomes-her-439",
-    "title": "Death Becomes Her",
-    "venue": "Broadway",
-    "date": "2024-10-23",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/death-becomes-her-broadway-lunt-fontanne-theatre-2024"
-  },
-  {
-    "id": "broadway-the-lion-king-440",
-    "title": "The Lion King",
-    "venue": "Broadway",
-    "date": "1997-10-15",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/the-lion-king-new-amsterdam-theatre-vault-0000008729"
-  },
-  {
-    "id": "broadway-harry-potter-and-the-cursed-child-441",
-    "title": "Harry Potter and the Cursed Child",
-    "venue": "Broadway",
-    "date": "2018-03-16",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/harry-potter-and-the-cursed-childlyric-theatre-2017-2018"
-  },
-  {
-    "id": "broadway-hadestown-442",
-    "title": "Hadestown",
-    "venue": "Broadway",
-    "date": "2019-03-22",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/hadestownwalter-kerr-theatre-2018-2019"
-  },
-  {
-    "id": "broadway-chess-443",
-    "title": "Chess",
-    "venue": "Broadway",
-    "date": "2025-10-15",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/chess-broadway-imperial-theatre-2025"
-  },
-  {
-    "id": "broadway-two-strangers-carry-a-cake-across-new-york-444",
-    "title": "Two Strangers (Carry a Cake Across New York)",
-    "venue": "Broadway",
-    "date": "2025-11-01",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/two-strangers-carry-a-cake-across-new-york-broadway-longacre-theatre-2025"
-  },
-  {
-    "id": "broadway-operation-mincemeat-445",
+    "id": "broadway-operation-mincemeat-436",
     "title": "Operation Mincemeat",
     "venue": "Broadway",
     "date": "2025-02-15",
@@ -3814,23 +3742,15 @@
     "sourceUrl": "https://playbill.com/production/operation-mincemeat-broadway-john-golden-theatre-2025"
   },
   {
-    "id": "broadway-six-the-musical-446",
-    "title": "SIX: The Musical",
+    "id": "broadway-oh-mary-437",
+    "title": "Oh, Mary!",
     "venue": "Broadway",
-    "date": "2020-02-13",
+    "date": "2024-06-26",
     "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/six-the-musicallena-horne-theatre-2021-2022"
+    "sourceUrl": "https://playbill.com/production/oh-mary-broadway-lyceum-theatre-2024"
   },
   {
-    "id": "broadway-aladdin-447",
-    "title": "Aladdin",
-    "venue": "Broadway",
-    "date": "2014-02-26",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/aladdin-new-amsterdam-theatre-vault-0000014037"
-  },
-  {
-    "id": "broadway-wicked-448",
+    "id": "broadway-wicked-438",
     "title": "Wicked",
     "venue": "Broadway",
     "date": "2003-10-08",
@@ -3838,7 +3758,63 @@
     "sourceUrl": "https://playbill.com/production/wicked-broadway-gershwin-theatre-2003"
   },
   {
-    "id": "broadway-the-great-gatsby-449",
+    "id": "broadway-the-book-of-mormon-439",
+    "title": "The Book of Mormon",
+    "venue": "Broadway",
+    "date": "2011-02-24",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/the-book-of-mormon-eugene-oneill-theatre-vault-0000013715"
+  },
+  {
+    "id": "broadway-two-strangers-carry-a-cake-across-new-york-440",
+    "title": "Two Strangers (Carry a Cake Across New York)",
+    "venue": "Broadway",
+    "date": "2025-11-01",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/two-strangers-carry-a-cake-across-new-york-broadway-longacre-theatre-2025"
+  },
+  {
+    "id": "broadway-aladdin-441",
+    "title": "Aladdin",
+    "venue": "Broadway",
+    "date": "2014-02-26",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/aladdin-new-amsterdam-theatre-vault-0000014037"
+  },
+  {
+    "id": "broadway-death-becomes-her-442",
+    "title": "Death Becomes Her",
+    "venue": "Broadway",
+    "date": "2024-10-23",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/death-becomes-her-broadway-lunt-fontanne-theatre-2024"
+  },
+  {
+    "id": "broadway-harry-potter-and-the-cursed-child-443",
+    "title": "Harry Potter and the Cursed Child",
+    "venue": "Broadway",
+    "date": "2018-03-16",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/harry-potter-and-the-cursed-childlyric-theatre-2017-2018"
+  },
+  {
+    "id": "broadway-just-in-time-444",
+    "title": "Just in Time",
+    "venue": "Broadway",
+    "date": "2025-03-31",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/just-in-time-broadway-circle-in-the-square-theatre-2025"
+  },
+  {
+    "id": "broadway-chess-445",
+    "title": "Chess",
+    "venue": "Broadway",
+    "date": "2025-10-15",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/chess-broadway-imperial-theatre-2025"
+  },
+  {
+    "id": "broadway-the-great-gatsby-446",
     "title": "The Great Gatsby",
     "venue": "Broadway",
     "date": "2024-03-29",
@@ -3846,87 +3822,31 @@
     "sourceUrl": "https://playbill.com/production/the-great-gatsby-broadway-broadway-theatre-2024"
   },
   {
-    "id": "broadway-buena-vista-social-club-450",
-    "title": "Buena Vista Social Club",
+    "id": "broadway-the-lion-king-447",
+    "title": "The Lion King",
     "venue": "Broadway",
-    "date": "2025-02-21",
+    "date": "1997-10-15",
     "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/buena-vista-social-club-broadway-gerald-schoenfeld-theatre-2025"
+    "sourceUrl": "https://playbill.com/production/the-lion-king-new-amsterdam-theatre-vault-0000008729"
   },
   {
-    "id": "broadway-all-out-comedy-about-ambition-451",
-    "title": "All Out: Comedy About Ambition",
+    "id": "broadway-hadestown-448",
+    "title": "Hadestown",
     "venue": "Broadway",
-    "date": "2025-12-12",
+    "date": "2019-03-22",
     "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/all-out-comedy-about-ambition-broadway-nederlander-theatre-2025"
+    "sourceUrl": "https://playbill.com/production/hadestownwalter-kerr-theatre-2018-2019"
   },
   {
-    "id": "broadway-juliet-452",
-    "title": "& Juliet",
+    "id": "broadway-six-the-musical-449",
+    "title": "SIX: The Musical",
     "venue": "Broadway",
-    "date": "2022-10-28",
+    "date": "2020-02-13",
     "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/juliet-broadway-stephen-sondheim-theatre-2022"
+    "sourceUrl": "https://playbill.com/production/six-the-musicallena-horne-theatre-2021-2022"
   },
   {
-    "id": "broadway-hamilton-453",
-    "title": "Hamilton",
-    "venue": "Broadway",
-    "date": "2015-07-13",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/hamilton-broadway-richard-rodgers-theatre-2015"
-  },
-  {
-    "id": "broadway-mj-the-musical-454",
-    "title": "MJ The Musical",
-    "venue": "Broadway",
-    "date": "2021-12-06",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/mj-the-musicalneil-simon-theatre-2021-2022"
-  },
-  {
-    "id": "broadway-ragtime-455",
-    "title": "Ragtime",
-    "venue": "Broadway",
-    "date": "2025-09-26",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/ragtime-broadway-vivian-beaumont-theater-2025"
-  },
-  {
-    "id": "broadway-the-outsiders-456",
-    "title": "The Outsiders",
-    "venue": "Broadway",
-    "date": "2024-03-16",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/the-outsiders-broadway-bernard-b-jacobs-theatre-2024"
-  },
-  {
-    "id": "broadway-chicago-457",
-    "title": "Chicago",
-    "venue": "Broadway",
-    "date": "1996-10-23",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/chicago-richard-rodgers-theatre-vault-0000003074"
-  },
-  {
-    "id": "broadway-every-brilliant-thing-458",
-    "title": "Every Brilliant Thing",
-    "venue": "Broadway",
-    "date": "2026-02-21",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/every-brilliant-thing-broadway-hudson-theatre-2026"
-  },
-  {
-    "id": "broadway-stranger-things-the-first-shadow-459",
-    "title": "Stranger Things: The First Shadow",
-    "venue": "Broadway",
-    "date": "2025-03-28",
-    "category": "Theater",
-    "sourceUrl": "https://playbill.com/production/stranger-things-the-first-shadow-broadway-marquis-theatre-2025"
-  },
-  {
-    "id": "broadway-moulin-rouge-the-musical-460",
+    "id": "broadway-moulin-rouge-the-musical-450",
     "title": "Moulin Rouge! The Musical",
     "venue": "Broadway",
     "date": "2019-06-28",
@@ -3934,12 +3854,92 @@
     "sourceUrl": "https://playbill.com/production/moulin-rouge-the-musical-hirschfeld-theatre-2019-2020"
   },
   {
-    "id": "broadway-maybe-happy-ending-461",
+    "id": "broadway-maybe-happy-ending-451",
     "title": "Maybe Happy Ending",
     "venue": "Broadway",
     "date": "2024-10-16",
     "category": "Theater",
     "sourceUrl": "https://playbill.com/production/maybe-happy-ending-broadway-belasco-theatre-2024"
+  },
+  {
+    "id": "broadway-every-brilliant-thing-452",
+    "title": "Every Brilliant Thing",
+    "venue": "Broadway",
+    "date": "2026-02-21",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/every-brilliant-thing-broadway-hudson-theatre-2026"
+  },
+  {
+    "id": "broadway-buena-vista-social-club-453",
+    "title": "Buena Vista Social Club",
+    "venue": "Broadway",
+    "date": "2025-02-21",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/buena-vista-social-club-broadway-gerald-schoenfeld-theatre-2025"
+  },
+  {
+    "id": "broadway-juliet-454",
+    "title": "& Juliet",
+    "venue": "Broadway",
+    "date": "2022-10-28",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/juliet-broadway-stephen-sondheim-theatre-2022"
+  },
+  {
+    "id": "broadway-stranger-things-the-first-shadow-455",
+    "title": "Stranger Things: The First Shadow",
+    "venue": "Broadway",
+    "date": "2025-03-28",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/stranger-things-the-first-shadow-broadway-marquis-theatre-2025"
+  },
+  {
+    "id": "broadway-ragtime-456",
+    "title": "Ragtime",
+    "venue": "Broadway",
+    "date": "2025-09-26",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/ragtime-broadway-vivian-beaumont-theater-2025"
+  },
+  {
+    "id": "broadway-hamilton-457",
+    "title": "Hamilton",
+    "venue": "Broadway",
+    "date": "2015-07-13",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/hamilton-broadway-richard-rodgers-theatre-2015"
+  },
+  {
+    "id": "broadway-chicago-458",
+    "title": "Chicago",
+    "venue": "Broadway",
+    "date": "1996-10-23",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/chicago-richard-rodgers-theatre-vault-0000003074"
+  },
+  {
+    "id": "broadway-the-outsiders-459",
+    "title": "The Outsiders",
+    "venue": "Broadway",
+    "date": "2024-03-16",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/the-outsiders-broadway-bernard-b-jacobs-theatre-2024"
+  },
+  {
+    "id": "broadway-all-out-comedy-about-ambition-460",
+    "title": "All Out: Comedy About Ambition",
+    "venue": "Broadway",
+    "date": "2025-12-12",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/all-out-comedy-about-ambition-broadway-nederlander-theatre-2025"
+  },
+  {
+    "id": "broadway-mj-the-musical-461",
+    "title": "MJ The Musical",
+    "venue": "Broadway",
+    "date": "2021-12-06",
+    "category": "Theater",
+    "sourceUrl": "https://playbill.com/production/mj-the-musicalneil-simon-theatre-2021-2022"
   },
   {
     "id": "national-arts-club-alois-musil-an-explorer-462",
@@ -4466,7 +4466,227 @@
     "price": "From $30.00"
   },
   {
-    "id": "3db-yard-holi-in-the-city-march-7th-the-biggest-open-air-color-party--516",
+    "id": "la-brochette-steakhouse-networking-mixer-private-equity-venture-capital-law-fintech-516",
+    "title": "Networking Mixer | Private Equity | Venture Capital | Law | Fintech",
+    "venue": "La Brochette Steakhouse",
+    "date": "2026-03-23",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/networking-mixer-private-equity-venture-capital-law-fintech-tickets-1975161706835?aff=ebdssbdestsearch",
+    "time": "6:00 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "fordham-university-at-lincoln-center-quantvision-2026-fordham-s-quantitative-conference-517",
+    "title": "QuantVision 2026: Fordham’s Quantitative Conference",
+    "venue": "Fordham University at Lincoln Center",
+    "date": "2026-03-19",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/quantvision-2026-fordhams-quantitative-conference-tickets-1720181371789?aff=ebdssbdestsearch",
+    "time": "8:00 AM",
+    "price": "From $139.49"
+  },
+  {
+    "id": "barnes-noble-b-n-book-festival-at-union-square-day-2-signings-panels-518",
+    "title": "B&N Book Festival at Union Square! - Day 2 Signings & Panels",
+    "venue": "Barnes & Noble",
+    "date": "2026-03-21",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/bn-book-festival-at-union-square-day-2-signings-panels-tickets-1982444989329?aff=ebdssbdestsearch",
+    "time": "10:00 AM",
+    "price": "From $26.03"
+  },
+  {
+    "id": "harborside-atrium-jersey-city-craft-beer-fest-519",
+    "title": "Jersey City Craft Beer Fest",
+    "venue": "Harborside Atrium",
+    "date": "2026-03-21",
+    "category": "Food/Drink",
+    "sourceUrl": "https://www.eventbrite.com/e/jersey-city-craft-beer-fest-tickets-1979397339727?aff=ebdssbdestsearch",
+    "time": "6:00 PM",
+    "price": "From $18.33"
+  },
+  {
+    "id": "elsewhere-the-hall-gurriers-native-sun-520",
+    "title": "Gurriers, Native Sun",
+    "venue": "Elsewhere - The Hall",
+    "date": "2026-03-16",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/gurriers-native-sun-tickets-1657779335619?aff=ebdssbdestsearch",
+    "time": "7:00 PM",
+    "price": "From $27.84"
+  },
+  {
+    "id": "the-temple-emanu-el-streicker-center-in-person-liza-minnelli-michael-feinstein-522",
+    "title": "(In-Person) Liza Minnelli & Michael Feinstein",
+    "venue": "The Temple Emanu-El Streicker Center",
+    "date": "2026-03-23",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/in-person-liza-minnelli-michael-feinstein-tickets-1981936628809?aff=ebdssbdestsearch",
+    "time": "7:30 PM",
+    "price": "From $66.11"
+  },
+  {
+    "id": "cultural-center-lyc-e-fran-ais-de-new-york-new-date-special-screening-al-jarreau-the-enchanter-523",
+    "title": "NEW DATE - Special Screening - Al Jarreau, the enchanter",
+    "venue": "Cultural Center, Lycée Français de New York",
+    "date": "2026-03-04",
+    "category": "Film",
+    "sourceUrl": "https://www.eventbrite.com/e/new-date-special-screening-al-jarreau-the-enchanter-tickets-1981800116497?aff=ebdssbdestsearch",
+    "time": "6:30 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "the-national-arts-club-family-romance-an-evening-with-jean-strouse-524",
+    "title": "Family Romance: An Evening with Jean Strouse",
+    "venue": "The National Arts Club",
+    "date": "2026-03-04",
+    "category": "Family",
+    "sourceUrl": "https://www.eventbrite.com/e/family-romance-an-evening-with-jean-strouse-registration-1981768457805?aff=ebdssbdestsearch",
+    "time": "6:30 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "hk-hall-blue-glove-presents-1-official-nyc-neon-holi-sh-t-2026-ft-ar-525",
+    "title": "Blue Glove Presents: #1 OFFICIAL NYC NEON HOLI SH*T 2026 |ft ARJUN @HK HALL",
+    "venue": "HK Hall",
+    "date": "2026-03-07",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/blue-glove-presents-1-official-nyc-neon-holi-sht-2026-ft-arjun-hk-hall-tickets-1983746731876?aff=ebdssbdestsearch",
+    "time": "10:00 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "union-hall-devon-walker-help-me-put-this-hour-together-before-the-tour-526",
+    "title": "Devon Walker: Help me put this hour together before the tour",
+    "venue": "Union Hall",
+    "date": "2026-03-05",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/devon-walker-help-me-put-this-hour-together-before-the-tour-tickets-1984069534387?aff=ebdssbdestsearch",
+    "time": "10:00 PM",
+    "price": "From $15.92"
+  },
+  {
+    "id": "caveat-good-work-live-looksmaxxing-with-dan-toomey-527",
+    "title": "Good Work_Live: Looksmaxxing with Dan Toomey",
+    "venue": "Caveat",
+    "date": "2026-03-05",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/good-work-live-looksmaxxing-with-dan-toomey-tickets-1983548187023?aff=ebdssbdestsearch",
+    "time": "7:00 PM",
+    "price": "From $24.41"
+  },
+  {
+    "id": "melrose-ballroom-miku-only-2026-528",
+    "title": "Miku Only 2026",
+    "venue": "Melrose Ballroom",
+    "date": "2026-03-07",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/miku-only-2026-tickets-1981990473861?aff=ebdssbdestsearch",
+    "time": "12:00 PM",
+    "price": "From $31.71"
+  },
+  {
+    "id": "national-academy-of-design-who-built-america-529",
+    "title": "Who Built America?",
+    "venue": "National Academy of Design",
+    "date": "2026-03-05",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/who-built-america-tickets-1982299727848?aff=ebdssbdestsearch",
+    "time": "6:00 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "greenlight-bookstore-in-fort-greene-book-launch-ronen-givony-with-nabil-ayers-and-music-by-dan-f-530",
+    "title": "Book Launch: Ronen Givony with Nabil Ayers (and music by Dan Friel)",
+    "venue": "Greenlight Bookstore in Fort Greene",
+    "date": "2026-03-05",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.eventbrite.com/e/book-launch-ronen-givony-with-nabil-ayers-and-music-by-dan-friel-tickets-1981461926963?aff=ebdssbdestsearch",
+    "time": "7:30 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "the-ailey-studios-crwn-2nd-annual-foundation-fundraiser-531",
+    "title": "CRWN 2nd Annual Foundation Fundraiser",
+    "venue": "The Ailey Studios",
+    "date": "2026-03-07",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/crwn-2nd-annual-foundation-fundraiser-tickets-1976745895185?aff=ebdssbdestsearch",
+    "time": "5:00 PM",
+    "price": "From $40.00"
+  },
+  {
+    "id": "caveat-tom-d-s-big-new-york-show-532",
+    "title": "Tom D's Big New York Show",
+    "venue": "Caveat",
+    "date": "2026-03-07",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/tom-ds-big-new-york-show-tickets-1977399366736?aff=ebdssbdestsearch",
+    "time": "7:00 PM",
+    "price": "From $18.76"
+  },
+  {
+    "id": "the-poetry-project-mel-elberg-don-yorty-533",
+    "title": "Mel Elberg + Don Yorty",
+    "venue": "The Poetry Project",
+    "date": "2026-03-04",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/mel-elberg-don-yorty-tickets-1982216635316?aff=ebdssbdestsearch",
+    "time": "8:00 PM",
+    "price": "From $10.00"
+  },
+  {
+    "id": "union-hall-alison-leiby-for-this-534",
+    "title": "Alison Leiby: For This?",
+    "venue": "Union Hall",
+    "date": "2026-03-07",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/alison-leiby-for-this-tickets-1982450992284?aff=ebdssbdestsearch",
+    "time": "7:30 PM",
+    "price": "From $15.92"
+  },
+  {
+    "id": "julia-richman-education-complex-east-67th-street-new-york-ny-ella-baker-school-presents-shrek-the-musical-kids-535",
+    "title": "Ella Baker School Presents Shrek the Musical, Kids",
+    "venue": "Julia Richman Education Complex, East 67th Street, New York, NY, USA",
+    "date": "2026-03-05",
+    "category": "Theater",
+    "sourceUrl": "https://www.eventbrite.com/e/ella-baker-school-presents-shrek-the-musical-kids-tickets-1980410862200?aff=ebdssbdestsearch",
+    "time": "6:00 PM",
+    "price": "From $12.51"
+  },
+  {
+    "id": "high-line-comedy-club-comedy-mob-showcase-high-line-comedy-club-537",
+    "title": "Comedy Mob Showcase @ High Line Comedy Club",
+    "venue": "High Line Comedy Club",
+    "date": "2026-03-07",
+    "category": "Comedy",
+    "sourceUrl": "https://www.eventbrite.com/e/comedy-mob-showcase-high-line-comedy-club-tickets-1979884188906?aff=ebdssbdestsearch",
+    "time": "5:00 PM",
+    "price": "From $24.79"
+  },
+  {
+    "id": "greenlight-bookstore-in-fort-greene-laura-mauldin-with-brittney-cooper-538",
+    "title": "Laura Mauldin  with Brittney Cooper",
+    "venue": "Greenlight Bookstore in Fort Greene",
+    "date": "2026-03-04",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/laura-mauldin-with-brittney-cooper-tickets-1981461608009?aff=ebdssbdestsearch",
+    "time": "7:30 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "pete-s-candy-store-sanvi-belwal-blair-lamb-varsha-539",
+    "title": "Sanvi Belwal / Blair Lamb / Varsha",
+    "venue": "Pete's Candy Store",
+    "date": "2026-03-05",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/sanvi-belwal-blair-lamb-varsha-tickets-1980654721590?aff=ebdssbdestsearch",
+    "time": "9:00 PM",
+    "price": "From $12.51"
+  },
+  {
+    "id": "3db-yard-holi-in-the-city-march-7th-the-biggest-open-air-color-party--540",
     "title": "HOLI IN THE CITY : MARCH 7TH - THE BIGGEST OPEN AIR COLOR PARTY IN NYC",
     "venue": "3DB Yard",
     "date": "2026-03-07",
@@ -4476,7 +4696,7 @@
     "price": "From $20.00"
   },
   {
-    "id": "70-scott-ave-renegade-x-justin-jay-517",
+    "id": "70-scott-ave-renegade-x-justin-jay-541",
     "title": "RENEGADE X JUSTIN JAY",
     "venue": "70 Scott Ave",
     "date": "2026-03-06",
@@ -4486,7 +4706,7 @@
     "price": "From $24.14"
   },
   {
-    "id": "hk-hall-nyc-holi-sh-t-hk-hall-518",
+    "id": "hk-hall-nyc-holi-sh-t-hk-hall-542",
     "title": "NYC HOLI SH*T  @HK HALL",
     "venue": "HK Hall",
     "date": "2026-03-07",
@@ -4496,7 +4716,17 @@
     "price": "From $0.00"
   },
   {
-    "id": "brooklyn-masonic-temple-uevr-line-seven-year-ache-519",
+    "id": "90-scott-ave-purim-after-dark-at-silo-brooklyn-543",
+    "title": "PURIM: AFTER DARK AT SILO BROOKLYN",
+    "venue": "90 Scott Ave",
+    "date": "",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/purim-after-dark-at-silo-brooklyn-tickets-1982830704012?aff=ebdssbdestsearch",
+    "time": "9:00 PM",
+    "price": "From $23.18"
+  },
+  {
+    "id": "brooklyn-masonic-temple-uevr-line-seven-year-ache-544",
     "title": "UEVR LINE  ˚ ༘♡ ·˚ ₊˚༄ؘ  Seven Year Ache",
     "venue": "Brooklyn Masonic Temple",
     "date": "2026-03-04",
@@ -4506,7 +4736,17 @@
     "price": "From $28.52"
   },
   {
-    "id": "221-washington-st-holi-after-dark-new-jersey-520",
+    "id": "polygon-brooklyn-groupchat-fridays-545",
+    "title": "GROUPCHAT FRIDAYS",
+    "venue": "POLYGON BROOKLYN",
+    "date": "2026-03-06",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/groupchat-fridays-tickets-1982472550766?aff=ebdssbdestsearch",
+    "time": "9:00 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "221-washington-st-holi-after-dark-new-jersey-546",
     "title": "Holi After Dark- New Jersey",
     "venue": "221 Washington St",
     "date": "2026-03-05",
@@ -4516,7 +4756,7 @@
     "price": "From $0.00"
   },
   {
-    "id": "third-street-music-school-settlement-third-street-live-sounds-harlem-chamber-players-521",
+    "id": "third-street-music-school-settlement-third-street-live-sounds-harlem-chamber-players-547",
     "title": "Third Street Live Sounds: Harlem Chamber Players",
     "venue": "Third Street Music School Settlement",
     "date": "2026-03-06",
@@ -4526,37 +4766,17 @@
     "price": "From $0.00"
   },
   {
-    "id": "refuge-refuge-saturdays-w-sonja-moonear-dj-vibe-make-a-dance-kurill-522",
-    "title": "Refuge Saturdays w/ Sonja Moonear, DJ Vibe, Make A Dance, Kurillo, M.P.C.",
-    "venue": "Refuge",
-    "date": "2026-03-07",
+    "id": "cafe-wha-the-cafe-wha-house-band-friday-set-2-11-45-pm-548",
+    "title": "The Cafe Wha? House Band | Friday Set 2 | 11:45 pm",
+    "venue": "Cafe Wha?",
+    "date": "2026-03-06",
     "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.eventbrite.com/e/refuge-saturdays-w-sonja-moonear-dj-vibe-make-a-dance-kurillo-mpc-tickets-1983044480423?aff=ebdssbdestsearch",
-    "time": "10:00 PM",
-    "price": "From $25.00"
-  },
-  {
-    "id": "silver-lining-lounge-reggaeton-on-bowery-y2k-latin-night-party-nyc-523",
-    "title": "REGGAETON on Bowery - Y2K LATIN NIGHT Party NYC",
-    "venue": "Silver Lining Lounge",
-    "date": "2026-03-07",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.com/e/reggaeton-on-bowery-y2k-latin-night-party-nyc-tickets-1983276782244?aff=ebdssbdestsearch",
-    "time": "11:00 PM",
+    "sourceUrl": "https://www.eventbrite.com/e/the-cafe-wha-house-band-friday-set-2-1145-pm-tickets-1977671507717?aff=ebdssbdestsearch",
+    "time": "11:45 PM",
     "price": "From $0.00"
   },
   {
-    "id": "atolye-venue-bar-the-scenario-90s-dance-party-the-decades-remix-524",
-    "title": "The Scenario 90s Dance Party: The Decades Remix!",
-    "venue": "Atolye Venue & Bar",
-    "date": "2026-03-07",
-    "category": "Dance",
-    "sourceUrl": "https://www.eventbrite.com/e/the-scenario-90s-dance-party-the-decades-remix-tickets-1982596080246?aff=ebdssbdestsearch",
-    "time": "8:00 PM",
-    "price": "From $30.00"
-  },
-  {
-    "id": "gems-bar-lounge-year-of-the-champions-525",
+    "id": "gems-bar-lounge-year-of-the-champions-549",
     "title": "YEAR OF THE CHAMPIONS",
     "venue": "GEMS BAR & LOUNGE",
     "date": "2026-03-07",
@@ -4566,7 +4786,7 @@
     "price": "From $0.00"
   },
   {
-    "id": "the-hoxton-williamsburg-3-5-i-ll-bring-the-apps-on-tour-brooklyn-ny-526",
+    "id": "the-hoxton-williamsburg-3-5-i-ll-bring-the-apps-on-tour-brooklyn-ny-550",
     "title": "3/5 - I'll Bring the Apps On Tour - Brooklyn, NY",
     "venue": "The Hoxton, Williamsburg",
     "date": "2026-03-05",
@@ -4576,7 +4796,7 @@
     "price": "From $49.29"
   },
   {
-    "id": "630second-nyc-winter-wine-food-festival-527",
+    "id": "630second-nyc-winter-wine-food-festival-551",
     "title": "NYC Winter Wine & Food Festival®",
     "venue": "630SECOND",
     "date": "2026-03-07",
@@ -4586,7 +4806,7 @@
     "price": "From $39.00"
   },
   {
-    "id": "morton-s-the-steakhouse-a-taste-of-two-legends-morton-s-new-york-5th-ave-528",
+    "id": "morton-s-the-steakhouse-a-taste-of-two-legends-morton-s-new-york-5th-ave-552",
     "title": "A Taste of Two Legends - Morton's New York (5th Ave.)",
     "venue": "Morton's The Steakhouse",
     "date": "2026-03-07",
@@ -4596,7 +4816,7 @@
     "price": "From $155.00"
   },
   {
-    "id": "pier-36-nyc-holi-glow-bollywood-cruise-party-desi-dinner-buffet-saturday-529",
+    "id": "pier-36-nyc-holi-glow-bollywood-cruise-party-desi-dinner-buffet-saturday-553",
     "title": "Holi Glow Bollywood Cruise Party Desi Dinner Buffet Saturday Night  March 7",
     "venue": "Pier 36 NYC",
     "date": "2026-03-07",
@@ -4606,7 +4826,7 @@
     "price": "From $39.00"
   },
   {
-    "id": "murray-s-cheese-shop-french-cheese-wine-tasting-530",
+    "id": "murray-s-cheese-shop-french-cheese-wine-tasting-554",
     "title": "French Cheese & Wine Tasting",
     "venue": "Murray's Cheese Shop",
     "date": "2026-03-07",
@@ -4616,7 +4836,7 @@
     "price": "From $119.09"
   },
   {
-    "id": "105-07-metropolitan-ave-wine-tasting-of-south-america-531",
+    "id": "105-07-metropolitan-ave-wine-tasting-of-south-america-555",
     "title": "Wine Tasting of South America",
     "venue": "105-07 Metropolitan Ave",
     "date": "2026-03-05",
@@ -4626,7 +4846,7 @@
     "price": "From $42.64"
   },
   {
-    "id": "liz-s-book-bar-wine-between-the-lines-a-deep-dive-on-natural-wine-532",
+    "id": "liz-s-book-bar-wine-between-the-lines-a-deep-dive-on-natural-wine-556",
     "title": "Wine Between the Lines: A Deep Dive on Natural Wine",
     "venue": "Liz's Book Bar",
     "date": "2026-03-06",
@@ -4636,7 +4856,7 @@
     "price": "From $69.24"
   },
   {
-    "id": "rw-prime-rw-prime-x-pat-lafrieda-prime-850-club-exclusive-experience-533",
+    "id": "rw-prime-rw-prime-x-pat-lafrieda-prime-850-club-exclusive-experience-557",
     "title": "RW Prime x Pat LaFrieda Prime 850 Club Exclusive Experience",
     "venue": "RW Prime",
     "date": "2026-03-05",
@@ -4646,7 +4866,7 @@
     "price": "From $215.26"
   },
   {
-    "id": "646-bay-st-a-grown-up-me-traditional-maamoul-cookie-making-experience-534",
+    "id": "646-bay-st-a-grown-up-me-traditional-maamoul-cookie-making-experience-558",
     "title": "A Grown-Up & Me Traditional Maamoul Cookie Making Experience",
     "venue": "646 Bay St",
     "date": "2026-03-07",
@@ -4656,7 +4876,7 @@
     "price": "From $81.88"
   },
   {
-    "id": "murray-s-cheese-shop-20-off-pasta-making-cheese-tasting-535",
+    "id": "murray-s-cheese-shop-20-off-pasta-making-cheese-tasting-559",
     "title": "$20 OFF! Pasta Making & Cheese Tasting",
     "venue": "Murray's Cheese Shop",
     "date": "2026-03-04",
@@ -4666,7 +4886,7 @@
     "price": "From $87.51"
   },
   {
-    "id": "murray-s-cheese-shop-20-off-tour-of-europe-cheese-wine-tasting-536",
+    "id": "murray-s-cheese-shop-20-off-tour-of-europe-cheese-wine-tasting-560",
     "title": "$20 OFF! Tour of Europe Cheese & Wine Tasting",
     "venue": "Murray's Cheese Shop",
     "date": "2026-03-05",
@@ -4676,7 +4896,17 @@
     "price": "From $98.04"
   },
   {
-    "id": "elia-a-taste-of-greece-wine-tasting-in-brooklyn-538",
+    "id": "the-red-room-at-kgb-green-fairy-at-the-the-red-room-march-5th-562",
+    "title": "Green Fairy, at the The Red Room, March 5th",
+    "venue": "The Red Room at KGB",
+    "date": "2026-03-05",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/green-fairy-at-the-the-red-room-march-5th-tickets-1982630690767?aff=ebdssbdestsearch",
+    "time": "9:30 PM",
+    "price": "From $23.18"
+  },
+  {
+    "id": "elia-a-taste-of-greece-wine-tasting-in-brooklyn-563",
     "title": "A Taste of Greece - Wine Tasting  in Brooklyn",
     "venue": "Elia",
     "date": "2026-03-05",
@@ -4686,7 +4916,7 @@
     "price": "From $62.67"
   },
   {
-    "id": "flatbush-central-caribbean-marketplace-x-mangrove-fc-from-new-orleans-to-nyc-a-mardi-gras-dinner-w-mama-cheryl-539",
+    "id": "flatbush-central-caribbean-marketplace-x-mangrove-fc-from-new-orleans-to-nyc-a-mardi-gras-dinner-w-mama-cheryl-564",
     "title": "From New Orleans to NYC: A Mardi Gras Dinner w/ Mama Cheryl",
     "venue": "Flatbush Central Caribbean Marketplace x Mangrove FC",
     "date": "",
@@ -4695,7 +4925,7 @@
     "price": "From $45.00"
   },
   {
-    "id": "murray-s-cheese-shop-burrata-making-540",
+    "id": "murray-s-cheese-shop-burrata-making-565",
     "title": "Burrata Making",
     "venue": "Murray's Cheese Shop",
     "date": "2026-03-07",
@@ -4705,7 +4935,7 @@
     "price": "From $113.82"
   },
   {
-    "id": "whiskey-stories-whiskey-stories-whiskey-in-the-dark-in-person-541",
+    "id": "whiskey-stories-whiskey-stories-whiskey-in-the-dark-in-person-566",
     "title": "Whiskey Stories® : Whiskey in the Dark™ (In Person)",
     "venue": "Whiskey Stories",
     "date": "2026-03-07",
@@ -4715,135 +4945,17 @@
     "price": "From $124.16"
   },
   {
-    "id": "eataly-nyc-flatiron-hands-on-pastas-of-liguria-542",
-    "title": "Hands-On: Pastas of Liguria",
-    "venue": "Eataly NYC Flatiron",
+    "id": "jamieri-dinner-spring-of-the-fire-horse-567",
+    "title": "DINNER: SPRING OF THE FIRE HORSE",
+    "venue": "JAMIERI",
     "date": "2026-03-07",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.com/e/hands-on-pastas-of-liguria-tickets-1982825961828?aff=ebdssbdestsearch",
-    "time": "6:00 PM",
-    "price": "From $175.47"
-  },
-  {
-    "id": "devoci-n-espresso-basics-543",
-    "title": "Espresso Basics",
-    "venue": "Devoción",
-    "date": "2026-03-07",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.com/e/espresso-basics-tickets-1979243854649?aff=ebdssbdestsearch",
-    "time": "10:00 AM",
-    "price": "From $321.96"
-  },
-  {
-    "id": "the-brooklyn-monarch-the-brooklyn-pancakes-booze-art-show-vendor-artist-reservati-545",
-    "title": "The Brooklyn Pancakes & Booze Art Show (Vendor & Artist Reservations Only)",
-    "venue": "The Brooklyn Monarch",
-    "date": "2026-03-12",
     "category": "Food/Drink",
-    "sourceUrl": "https://www.eventbrite.com/e/the-brooklyn-pancakes-booze-art-show-vendor-artist-reservations-only-tickets-1977742164052?aff=ebdssbdestsearch",
-    "time": "7:00 PM"
-  },
-  {
-    "id": "sva-theatre-behind-the-curtain-careers-in-theater-and-live-entertainment-546",
-    "title": "Behind the Curtain: Careers in Theater and Live Entertainment",
-    "venue": "SVA Theatre",
-    "date": "2026-03-09",
-    "category": "Theater",
-    "sourceUrl": "https://www.eventbrite.com/e/behind-the-curtain-careers-in-theater-and-live-entertainment-tickets-1982976452951?aff=ebdssbdestsearch",
-    "time": "6:30 PM",
-    "price": "From $0.00"
-  },
-  {
-    "id": "haswell-green-s-her-voice-her-choice-a-cabaret-547",
-    "title": "Her Voice Her Choice A Cabaret",
-    "venue": "Haswell Green's",
-    "date": "2026-03-08",
-    "category": "Theater",
-    "sourceUrl": "https://www.eventbrite.com/e/her-voice-her-choice-a-cabaret-tickets-1982086472997?aff=ebdssbdestsearch",
-    "time": "7:00 PM",
-    "price": "From $17.85"
-  },
-  {
-    "id": "the-overlook-bar-nyc-s-secret-comedy-show-feat-the-no-static-orchestra-netfli-548",
-    "title": "NYC’s Secret Comedy Show Feat. The No Static Orchestra (Netflix, SNL, HBO)",
-    "venue": "The Overlook Bar",
-    "date": "",
-    "category": "Comedy",
-    "sourceUrl": "https://www.eventbrite.com/e/nycs-secret-comedy-show-feat-the-no-static-orchestra-netflix-snl-hbo-registration-1983236160744?aff=ebdssbdestsearch",
-    "price": "From $50.00"
-  },
-  {
-    "id": "nyla-house-the-art-meetup-feat-black-canvas-open-mic-549",
-    "title": "The Art Meetup feat Black Canvas: OPEN MIC",
-    "venue": "NYLA HOUSE",
-    "date": "2026-03-14",
-    "category": "Music/Performing Arts",
-    "sourceUrl": "https://www.eventbrite.com/e/the-art-meetup-feat-black-canvas-open-mic-tickets-1982802702258?aff=ebdssbdestsearch",
-    "time": "3:00 PM",
-    "price": "From $0.00"
-  },
-  {
-    "id": "high-line-comedy-club-new-talent-night-high-line-comedy-club-550",
-    "title": "New Talent Night @ High Line Comedy Club",
-    "venue": "High Line Comedy Club",
-    "date": "2026-03-14",
-    "category": "Comedy",
-    "sourceUrl": "https://www.eventbrite.com/e/new-talent-night-high-line-comedy-club-tickets-1983449048497?aff=ebdssbdestsearch",
-    "time": "5:00 PM",
-    "price": "From $24.25"
-  },
-  {
-    "id": "the-vincent-astor-gallery-the-new-york-public-library-for-th-mystery-and-wonder-exhibition-gallery-tour-551",
-    "title": "Mystery and Wonder Exhibition Gallery Tour",
-    "venue": "The Vincent Astor Gallery, The New York Public Library for the Performing Arts",
-    "date": "2026-03-14",
-    "category": "Art",
-    "sourceUrl": "https://www.eventbrite.com/e/mystery-and-wonder-exhibition-gallery-tour-tickets-1982977977511?aff=ebdssbdestsearch",
-    "time": "11:00 AM",
-    "price": "From $0.00"
-  },
-  {
-    "id": "caveat-max-davidson-presents-strangers-a-magic-show-552",
-    "title": "Max Davidson Presents - Strangers: A Magic Show",
-    "venue": "Caveat",
-    "date": "2026-03-09",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.com/e/max-davidson-presents-strangers-a-magic-show-tickets-1979749335556?aff=ebdssbdestsearch",
-    "time": "7:00 PM",
-    "price": "From $30.08"
-  },
-  {
-    "id": "union-hall-jamie-lee-my-friend-katy-553",
-    "title": "JAMIE LEE: MY FRIEND KATY",
-    "venue": "Union Hall",
-    "date": "2026-03-08",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.com/e/jamie-lee-my-friend-katy-tickets-1982441058572?aff=ebdssbdestsearch",
-    "time": "5:00 PM",
-    "price": "From $13.61"
-  },
-  {
-    "id": "friends-of-the-high-line-headquarters-artist-talk-saba-khan-in-conversation-with-taylor-zakarin-554",
-    "title": "Artist Talk: Saba Khan in conversation with Taylor Zakarin",
-    "venue": "Friends of the High Line Headquarters",
-    "date": "2026-03-12",
-    "category": "Talk",
-    "sourceUrl": "https://www.eventbrite.com/e/artist-talk-saba-khan-in-conversation-with-taylor-zakarin-tickets-1982712443291?aff=ebdssbdestsearch",
-    "time": "6:30 PM",
-    "price": "From $0.00"
-  },
-  {
-    "id": "glucksman-ireland-house-nyu-launch-of-claire-connolly-s-irish-romanticism-a-literary-his-555",
-    "title": "Launch of Claire Connolly's \"Irish Romanticism: A Literary History\"",
-    "venue": "Glucksman Ireland House NYU",
-    "date": "2026-03-12",
-    "category": "Talk",
-    "sourceUrl": "https://www.eventbrite.com/e/launch-of-claire-connollys-irish-romanticism-a-literary-history-tickets-1978429667393?aff=ebdssbdestsearch",
+    "sourceUrl": "https://www.eventbrite.com/e/dinner-spring-of-the-fire-horse-tickets-1984133402418?aff=ebdssbdestsearch",
     "time": "6:00 PM",
-    "price": "From $0.00"
+    "price": "From $145.90"
   },
   {
-    "id": "la-mama-galleria-opening-reception-of-jewess-by-danielle-durchslag-556",
+    "id": "la-mama-galleria-opening-reception-of-jewess-by-danielle-durchslag-568",
     "title": "Opening reception of JEWESS by Danielle Durchslag",
     "venue": "La MaMa Galleria",
     "date": "2026-03-13",
@@ -4853,7 +4965,125 @@
     "price": "From $0.00"
   },
   {
-    "id": "caveat-books-and-burlesque-557",
+    "id": "the-brooklyn-monarch-the-brooklyn-pancakes-booze-art-show-vendor-artist-reservati-570",
+    "title": "The Brooklyn Pancakes & Booze Art Show (Vendor & Artist Reservations Only)",
+    "venue": "The Brooklyn Monarch",
+    "date": "2026-03-12",
+    "category": "Food/Drink",
+    "sourceUrl": "https://www.eventbrite.com/e/the-brooklyn-pancakes-booze-art-show-vendor-artist-reservations-only-tickets-1977742164052?aff=ebdssbdestsearch",
+    "time": "7:00 PM"
+  },
+  {
+    "id": "sva-theatre-behind-the-curtain-careers-in-theater-and-live-entertainment-571",
+    "title": "Behind the Curtain: Careers in Theater and Live Entertainment",
+    "venue": "SVA Theatre",
+    "date": "2026-03-09",
+    "category": "Theater",
+    "sourceUrl": "https://www.eventbrite.com/e/behind-the-curtain-careers-in-theater-and-live-entertainment-tickets-1982976452951?aff=ebdssbdestsearch",
+    "time": "6:30 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "haswell-green-s-her-voice-her-choice-a-cabaret-572",
+    "title": "Her Voice Her Choice A Cabaret",
+    "venue": "Haswell Green's",
+    "date": "2026-03-08",
+    "category": "Theater",
+    "sourceUrl": "https://www.eventbrite.com/e/her-voice-her-choice-a-cabaret-tickets-1982086472997?aff=ebdssbdestsearch",
+    "time": "7:00 PM",
+    "price": "From $17.85"
+  },
+  {
+    "id": "the-overlook-bar-nyc-s-secret-comedy-show-feat-the-no-static-orchestra-netfli-573",
+    "title": "NYC’s Secret Comedy Show Feat. The No Static Orchestra (Netflix, SNL, HBO)",
+    "venue": "The Overlook Bar",
+    "date": "",
+    "category": "Comedy",
+    "sourceUrl": "https://www.eventbrite.com/e/nycs-secret-comedy-show-feat-the-no-static-orchestra-netflix-snl-hbo-registration-1983236160744?aff=ebdssbdestsearch",
+    "price": "From $50.00"
+  },
+  {
+    "id": "nyla-house-the-art-meetup-feat-black-canvas-open-mic-574",
+    "title": "The Art Meetup feat Black Canvas: OPEN MIC",
+    "venue": "NYLA HOUSE",
+    "date": "2026-03-14",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.eventbrite.com/e/the-art-meetup-feat-black-canvas-open-mic-tickets-1982802702258?aff=ebdssbdestsearch",
+    "time": "3:00 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "high-line-comedy-club-new-talent-night-high-line-comedy-club-575",
+    "title": "New Talent Night @ High Line Comedy Club",
+    "venue": "High Line Comedy Club",
+    "date": "2026-03-14",
+    "category": "Comedy",
+    "sourceUrl": "https://www.eventbrite.com/e/new-talent-night-high-line-comedy-club-tickets-1983449048497?aff=ebdssbdestsearch",
+    "time": "5:00 PM",
+    "price": "From $24.25"
+  },
+  {
+    "id": "the-rat-nyc-en-pointe-576",
+    "title": "En Pointe",
+    "venue": "The Rat NYC",
+    "date": "2026-03-08",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/en-pointe-tickets-1982649194111?aff=ebdssbdestsearch",
+    "time": "7:00 PM",
+    "price": "From $28.52"
+  },
+  {
+    "id": "the-vincent-astor-gallery-the-new-york-public-library-for-th-mystery-and-wonder-exhibition-gallery-tour-577",
+    "title": "Mystery and Wonder Exhibition Gallery Tour",
+    "venue": "The Vincent Astor Gallery, The New York Public Library for the Performing Arts",
+    "date": "2026-03-14",
+    "category": "Art",
+    "sourceUrl": "https://www.eventbrite.com/e/mystery-and-wonder-exhibition-gallery-tour-tickets-1982977977511?aff=ebdssbdestsearch",
+    "time": "11:00 AM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "caveat-max-davidson-presents-strangers-a-magic-show-578",
+    "title": "Max Davidson Presents - Strangers: A Magic Show",
+    "venue": "Caveat",
+    "date": "2026-03-09",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/max-davidson-presents-strangers-a-magic-show-tickets-1979749335556?aff=ebdssbdestsearch",
+    "time": "7:00 PM",
+    "price": "From $30.08"
+  },
+  {
+    "id": "union-hall-jamie-lee-my-friend-katy-579",
+    "title": "JAMIE LEE: MY FRIEND KATY",
+    "venue": "Union Hall",
+    "date": "2026-03-08",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/jamie-lee-my-friend-katy-tickets-1982441058572?aff=ebdssbdestsearch",
+    "time": "5:00 PM",
+    "price": "From $13.61"
+  },
+  {
+    "id": "friends-of-the-high-line-headquarters-artist-talk-saba-khan-in-conversation-with-taylor-zakarin-580",
+    "title": "Artist Talk: Saba Khan in conversation with Taylor Zakarin",
+    "venue": "Friends of the High Line Headquarters",
+    "date": "2026-03-12",
+    "category": "Talk",
+    "sourceUrl": "https://www.eventbrite.com/e/artist-talk-saba-khan-in-conversation-with-taylor-zakarin-tickets-1982712443291?aff=ebdssbdestsearch",
+    "time": "6:30 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "glucksman-ireland-house-nyu-launch-of-claire-connolly-s-irish-romanticism-a-literary-his-581",
+    "title": "Launch of Claire Connolly's \"Irish Romanticism: A Literary History\"",
+    "venue": "Glucksman Ireland House NYU",
+    "date": "2026-03-12",
+    "category": "Talk",
+    "sourceUrl": "https://www.eventbrite.com/e/launch-of-claire-connollys-irish-romanticism-a-literary-history-tickets-1978429667393?aff=ebdssbdestsearch",
+    "time": "6:00 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "caveat-books-and-burlesque-582",
     "title": "Books and Burlesque",
     "venue": "Caveat",
     "date": "2026-03-14",
@@ -4863,27 +5093,17 @@
     "price": "From $30.08"
   },
   {
-    "id": "p-t-knitwear-books-podcasts-elliot-regenstein-presents-readiness-with-shira-mattera-558",
-    "title": "Elliot Regenstein presents Readiness, with Shira Mattera",
-    "venue": "P&T Knitwear Books & Podcasts",
-    "date": "2026-03-09",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.com/e/elliot-regenstein-presents-readiness-with-shira-mattera-tickets-1979748799954?aff=ebdssbdestsearch",
-    "time": "6:30 PM",
-    "price": "From $10.00"
-  },
-  {
-    "id": "forest-hills-high-school-auditorium-popovich-comedy-pet-theater-live-in-queens-12-pm-559",
-    "title": "POPOVICH COMEDY PET THEATER – LIVE IN QUEENS  12 PM",
-    "venue": "Forest Hills High School Auditorium",
+    "id": "brooklyn-art-haus-a-very-musical-high-school-583",
+    "title": "A Very Musical High School",
+    "venue": "Brooklyn Art Haus",
     "date": "2026-03-08",
-    "category": "Comedy",
-    "sourceUrl": "https://www.eventbrite.com/e/popovich-comedy-pet-theater-live-in-queens-12-pm-tickets-1979584147474?aff=ebdssbdestsearch",
-    "time": "12:00 PM",
-    "price": "From $33.85"
+    "category": "Theater",
+    "sourceUrl": "https://www.eventbrite.com/e/a-very-musical-high-school-tickets-1983080916404?aff=ebdssbdestsearch",
+    "time": "2:00 PM",
+    "price": "From $17.95"
   },
   {
-    "id": "littlefield-bashment-in-bk-nyc-s-biggest-dancehall-party-560",
+    "id": "littlefield-bashment-in-bk-nyc-s-biggest-dancehall-party-584",
     "title": "BASHMENT IN BK - NYC's Biggest Dancehall Party",
     "venue": "Littlefield",
     "date": "2026-03-13",
@@ -4893,7 +5113,7 @@
     "price": "From $12.45"
   },
   {
-    "id": "elsewhere-tta-extended-set-jonah-almost-debosh-presents-zlata-jsmn-mor-561",
+    "id": "elsewhere-tta-extended-set-jonah-almost-debosh-presents-zlata-jsmn-mor-585",
     "title": "ØTTA (extended set), Jonah Almost, Debosh presents: ZLATA, JSMN + more",
     "venue": "Elsewhere",
     "date": "2026-03-14",
@@ -4903,7 +5123,7 @@
     "price": "From $29.41"
   },
   {
-    "id": "refuge-refuge-saturdays-w-omri-riche-564",
+    "id": "refuge-refuge-saturdays-w-omri-riche-588",
     "title": "Refuge Saturdays w/ OMRI., RICHE",
     "venue": "Refuge",
     "date": "2026-03-14",
@@ -4913,7 +5133,7 @@
     "price": "From $25.00"
   },
   {
-    "id": "music-for-a-while-friday-feeling-saturday-edition-565",
+    "id": "music-for-a-while-friday-feeling-saturday-edition-589",
     "title": "Friday Feeling [Saturday Edition]",
     "venue": "Music For A While",
     "date": "2026-03-14",
@@ -4923,7 +5143,7 @@
     "price": "From $26.82"
   },
   {
-    "id": "amadeus-night-club-march-madness-amadeus-night-club-566",
+    "id": "amadeus-night-club-march-madness-amadeus-night-club-590",
     "title": "MARCH MADNESS AMADEUS NIGHT CLUB",
     "venue": "Amadeus Night Club",
     "date": "2026-03-14",
@@ -4933,7 +5153,7 @@
     "price": "From $0.00"
   },
   {
-    "id": "harbor-nyc-rooftop-pretty-girls-love-r-b-nyc-2-0-nyc-r-b-exclusive-event-567",
+    "id": "harbor-nyc-rooftop-pretty-girls-love-r-b-nyc-2-0-nyc-r-b-exclusive-event-591",
     "title": "Pretty Girls Love R&B NYC 2.0 (NYC R&B Exclusive Event)",
     "venue": "Harbor NYC Rooftop",
     "date": "2026-03-13",
@@ -4943,7 +5163,7 @@
     "price": "From $24.74"
   },
   {
-    "id": "elsewhere-dr-gabba-nextdimensional-switch-angel-hybrid-dj-set-soo-into-568",
+    "id": "elsewhere-dr-gabba-nextdimensional-switch-angel-hybrid-dj-set-soo-into-592",
     "title": "DR. GABBA, nextdimensional, Switch Angel (Hybrid DJ Set), Soo Intoit",
     "venue": "Elsewhere",
     "date": "2026-03-13",
@@ -4953,7 +5173,7 @@
     "price": "From $29.41"
   },
   {
-    "id": "littlefield-slow-jams-nyc-late-night-slow-jams-rnb-party-in-brooklyn-569",
+    "id": "littlefield-slow-jams-nyc-late-night-slow-jams-rnb-party-in-brooklyn-593",
     "title": "SLOW JAMS NYC - Late Night Slow Jams & RnB Party in Brooklyn",
     "venue": "Littlefield",
     "date": "2026-03-14",
@@ -4963,7 +5183,7 @@
     "price": "From $15.11"
   },
   {
-    "id": "vacations-bk-souper-bowl-2026-570",
+    "id": "vacations-bk-souper-bowl-2026-594",
     "title": "Souper Bowl 2026",
     "venue": "Vacations BK",
     "date": "2026-03-08",
@@ -4973,7 +5193,7 @@
     "price": "From $39.19"
   },
   {
-    "id": "achievement-first-brooklyn-high-school-kings-who-cook-a-tasting-event-571",
+    "id": "achievement-first-brooklyn-high-school-kings-who-cook-a-tasting-event-595",
     "title": "Kings Who Cook: A Tasting Event",
     "venue": "Achievement First Brooklyn High School",
     "date": "2026-03-14",
@@ -4983,47 +5203,7 @@
     "price": "From $28.52"
   },
   {
-    "id": "lost-in-paradise-rooftop-5th-annual-the-notorious-rooftop-brunch-day-party-at-lost-in-572",
-    "title": "5th Annual \"The Notorious Rooftop Brunch & Day Party\" at Lost In Paradise",
-    "venue": "Lost in Paradise Rooftop",
-    "date": "2026-03-08",
-    "category": "Food/Drink",
-    "sourceUrl": "https://www.eventbrite.com/e/5th-annual-the-notorious-rooftop-brunch-day-party-at-lost-in-paradise-tickets-1982556348407?aff=ebdssbdestsearch",
-    "time": "1:00 PM",
-    "price": "From $0.00"
-  },
-  {
-    "id": "stone-street-get-lucked-on-stone-street-573",
-    "title": "GET LUCKED on Stone Street",
-    "venue": "Stone Street",
-    "date": "2026-03-14",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.com/e/get-lucked-on-stone-street-tickets-1982893975258?aff=ebdssbdestsearch",
-    "time": "11:00 AM",
-    "price": "From $23.18"
-  },
-  {
-    "id": "202-merseles-st-bus-tour-with-jersey-city-brew-club-574",
-    "title": "Bus Tour with Jersey City Brew Club",
-    "venue": "202 Merseles St",
-    "date": "2026-03-14",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.com/e/bus-tour-with-jersey-city-brew-club-tickets-1981261831472?aff=ebdssbdestsearch",
-    "time": "11:00 AM",
-    "price": "From $55.20"
-  },
-  {
-    "id": "hop-lee-pressoir-dinner-rh-ne-byob-575",
-    "title": "Pressoir Dinner: Rhône BYOB",
-    "venue": "Hop Lee",
-    "date": "2026-03-13",
-    "category": "Food/Drink",
-    "sourceUrl": "https://www.eventbrite.com/e/pressoir-dinner-rhone-byob-tickets-1982439495898?aff=ebdssbdestsearch",
-    "time": "6:30 PM",
-    "price": "From $136.10"
-  },
-  {
-    "id": "eataly-nyc-downtown-a-night-in-italy-576",
+    "id": "eataly-nyc-downtown-a-night-in-italy-596",
     "title": "A Night In Italy",
     "venue": "Eataly NYC Downtown",
     "date": "2026-03-10",
@@ -5033,7 +5213,47 @@
     "price": "From $100.62"
   },
   {
-    "id": "600-washington-st-women-in-wine-festival-presented-by-no-wine-left-behind-577",
+    "id": "lost-in-paradise-rooftop-5th-annual-the-notorious-rooftop-brunch-day-party-at-lost-in-597",
+    "title": "5th Annual \"The Notorious Rooftop Brunch & Day Party\" at Lost In Paradise",
+    "venue": "Lost in Paradise Rooftop",
+    "date": "2026-03-08",
+    "category": "Food/Drink",
+    "sourceUrl": "https://www.eventbrite.com/e/5th-annual-the-notorious-rooftop-brunch-day-party-at-lost-in-paradise-tickets-1982556348407?aff=ebdssbdestsearch",
+    "time": "1:00 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "stone-street-get-lucked-on-stone-street-598",
+    "title": "GET LUCKED on Stone Street",
+    "venue": "Stone Street",
+    "date": "2026-03-14",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/get-lucked-on-stone-street-tickets-1982893975258?aff=ebdssbdestsearch",
+    "time": "11:00 AM",
+    "price": "From $23.18"
+  },
+  {
+    "id": "202-merseles-st-bus-tour-with-jersey-city-brew-club-599",
+    "title": "Bus Tour with Jersey City Brew Club",
+    "venue": "202 Merseles St",
+    "date": "2026-03-14",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/bus-tour-with-jersey-city-brew-club-tickets-1981261831472?aff=ebdssbdestsearch",
+    "time": "11:00 AM",
+    "price": "From $55.20"
+  },
+  {
+    "id": "hop-lee-pressoir-dinner-rh-ne-byob-600",
+    "title": "Pressoir Dinner: Rhône BYOB",
+    "venue": "Hop Lee",
+    "date": "2026-03-13",
+    "category": "Food/Drink",
+    "sourceUrl": "https://www.eventbrite.com/e/pressoir-dinner-rhone-byob-tickets-1982439495898?aff=ebdssbdestsearch",
+    "time": "6:30 PM",
+    "price": "From $136.10"
+  },
+  {
+    "id": "600-washington-st-women-in-wine-festival-presented-by-no-wine-left-behind-601",
     "title": "Women in Wine Festival — Presented by No Wine Left Behind",
     "venue": "600 Washington St",
     "date": "2026-03-08",
@@ -5043,7 +5263,7 @@
     "price": "From $75.00"
   },
   {
-    "id": "pressoir-wine-tasting-room-clubhouse-pressoir-ap-ro-benjamin-leroux-578",
+    "id": "pressoir-wine-tasting-room-clubhouse-pressoir-ap-ro-benjamin-leroux-602",
     "title": "Pressoir Apéro - Benjamin Leroux",
     "venue": "Pressoir.wine Tasting Room & Clubhouse",
     "date": "2026-03-10",
@@ -5053,7 +5273,7 @@
     "price": "From $190.54"
   },
   {
-    "id": "new-york-city-leprechaun-new-york-city-st-patrick-s-day-pub-crawl-midtown--579",
+    "id": "new-york-city-leprechaun-new-york-city-st-patrick-s-day-pub-crawl-midtown--603",
     "title": "Leprechaun - New York City // St. Patrick's Day Pub Crawl // Midtown NYC",
     "venue": "New York City",
     "date": "2026-03-14",
@@ -5063,7 +5283,7 @@
     "price": "From $10.84"
   },
   {
-    "id": "ciao-evento-italo-disco-pasta-making-dance-party-580",
+    "id": "ciao-evento-italo-disco-pasta-making-dance-party-604",
     "title": "Italo Disco - Pasta Making DANCE Party!",
     "venue": "Ciao Evento",
     "date": "2026-03-14",
@@ -5073,7 +5293,7 @@
     "price": "From $148.35"
   },
   {
-    "id": "290-meserole-st-mon-ami-581",
+    "id": "290-meserole-st-mon-ami-605",
     "title": "MON-Ami",
     "venue": "290 Meserole St",
     "date": "2026-03-14",
@@ -5083,7 +5303,17 @@
     "price": "From $15.00"
   },
   {
-    "id": "williamsburg-williamsburg-st-patricks-bar-fest-2026-582",
+    "id": "chyelle-cup-tasters-bootcamp-3-0-606",
+    "title": "CUP TASTERS BOOTCAMP 3.0",
+    "venue": "Chyelle",
+    "date": "2026-03-11",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/cup-tasters-bootcamp-30-tickets-1982829400112?aff=ebdssbdestsearch",
+    "time": "11:00 AM",
+    "price": "From $55.20"
+  },
+  {
+    "id": "williamsburg-williamsburg-st-patricks-bar-fest-2026-607",
     "title": "Williamsburg St. Patricks Bar Fest 2026",
     "venue": "Williamsburg",
     "date": "2026-03-14",
@@ -5093,7 +5323,7 @@
     "price": "From $9.99"
   },
   {
-    "id": "murray-s-cheese-shop-mediterranean-cheese-wine-tasting-583",
+    "id": "murray-s-cheese-shop-mediterranean-cheese-wine-tasting-608",
     "title": "Mediterranean Cheese & Wine Tasting",
     "venue": "Murray's Cheese Shop",
     "date": "2026-03-14",
@@ -5103,7 +5333,7 @@
     "price": "From $119.09"
   },
   {
-    "id": "murray-s-cheese-shop-pasta-making-cheese-tasting-584",
+    "id": "murray-s-cheese-shop-pasta-making-cheese-tasting-609",
     "title": "Pasta Making & Cheese Tasting",
     "venue": "Murray's Cheese Shop",
     "date": "2026-03-12",
@@ -5113,7 +5343,7 @@
     "price": "From $108.56"
   },
   {
-    "id": "dive-bar-lic-pour-decisions-a-karaoke-brunch-affair-585",
+    "id": "dive-bar-lic-pour-decisions-a-karaoke-brunch-affair-610",
     "title": "Pour Decisions: A Karaoke Brunch Affair",
     "venue": "Dive Bar LIC",
     "date": "2026-03-08",
@@ -5123,7 +5353,7 @@
     "price": "From $12.51"
   },
   {
-    "id": "murray-s-cheese-shop-cheese-101-spotlight-on-women-cheesemakers-586",
+    "id": "murray-s-cheese-shop-cheese-101-spotlight-on-women-cheesemakers-611",
     "title": "Cheese 101 - Spotlight on Women Cheesemakers",
     "venue": "Murray's Cheese Shop",
     "date": "2026-03-08",
@@ -5133,7 +5363,7 @@
     "price": "From $98.04"
   },
   {
-    "id": "murray-s-cheese-shop-mozzarella-making-587",
+    "id": "murray-s-cheese-shop-mozzarella-making-612",
     "title": "Mozzarella Making",
     "venue": "Murray's Cheese Shop",
     "date": "2026-03-14",
@@ -5143,17 +5373,7 @@
     "price": "From $108.56"
   },
   {
-    "id": "murray-s-cheese-shop-pickles-cheese-pairing-588",
-    "title": "Pickles & Cheese Pairing",
-    "venue": "Murray's Cheese Shop",
-    "date": "2026-03-11",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.com/e/pickles-cheese-pairing-tickets-1978911040192?aff=ebdssbdestsearch",
-    "time": "6:30 PM",
-    "price": "From $108.56"
-  },
-  {
-    "id": "120-walker-st-floor-5-hmu-monogamixer-589",
+    "id": "120-walker-st-floor-5-hmu-monogamixer-613",
     "title": "HMU: Monogamixer",
     "venue": "120 Walker St floor 5",
     "date": "2026-03-05",
@@ -5163,7 +5383,7 @@
     "price": "From $23.08"
   },
   {
-    "id": "pier-36-nyc-balam-pichkari-5-0-nyc-s-og-holi-cruise-party-from-pier-36-n-590",
+    "id": "pier-36-nyc-balam-pichkari-5-0-nyc-s-og-holi-cruise-party-from-pier-36-n-614",
     "title": "Balam Pichkari 5.0-NYC'S OG Holi Cruise Party | from PIER 36 NYC",
     "venue": "Pier 36 NYC",
     "date": "2026-03-07",
@@ -5173,7 +5393,7 @@
     "price": "From $28.50"
   },
   {
-    "id": "boyfriend-co-op-caf-bar-queer-speed-matching-singles-mixer-591",
+    "id": "boyfriend-co-op-caf-bar-queer-speed-matching-singles-mixer-615",
     "title": "Queer Speed Matching & Singles Mixer",
     "venue": "BOYFRIEND co-op café + bar",
     "date": "2026-03-07",
@@ -5183,86 +5403,7 @@
     "price": "From $0.00"
   },
   {
-    "id": "lava-shawarma-nyc-ramadan-iftar-in-new-york-592",
-    "title": "Ramadan Iftar in New York",
-    "venue": "Lava Shawarma NYC",
-    "date": "2026-03-06",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.com/e/ramadan-iftar-in-new-york-tickets-1982581722301?aff=ebdssbdestsearch",
-    "time": "6:00 PM",
-    "price": "From $17.85"
-  },
-  {
-    "id": "hotel-1080-chicago-meets-nyc-meet-and-greet-593",
-    "title": "Chicago Meets NYC Meet And Greet",
-    "venue": "Hotel 1080",
-    "date": "2026-03-07",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.com/e/chicago-meets-nyc-meet-and-greet-tickets-1979936870478?aff=ebdssbdestsearch",
-    "time": "4:00 PM",
-    "price": "From $10.00"
-  },
-  {
-    "id": "525-w-22nd-st-woven-connect-for-change-594",
-    "title": "WOVEN Connect for Change",
-    "venue": "525 W 22nd St",
-    "date": "2026-03-05",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.com/e/woven-connect-for-change-registration-1982288688830?aff=ebdssbdestsearch",
-    "time": "5:30 PM"
-  },
-  {
-    "id": "talon-bar-lesbotomy-trad-goth-night-3-07-595",
-    "title": "LESBOTOMY: Trad Goth Night 3.07",
-    "venue": "Talon Bar",
-    "date": "2026-03-07",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.com/e/lesbotomy-trad-goth-night-307-tickets-1983491006996?aff=ebdssbdestsearch",
-    "time": "10:00 PM",
-    "price": "From $12.51"
-  },
-  {
-    "id": "le-du-s-wines-wine-night-lgbtq-networking-cascade-to-coast-nyc-596",
-    "title": "Wine Night LGBTQ Networking: Cascade to Coast - NYC",
-    "venue": "Le Du's Wines",
-    "date": "2026-03-05",
-    "category": "Food/Drink",
-    "sourceUrl": "https://www.eventbrite.com/e/wine-night-lgbtq-networking-cascade-to-coast-nyc-tickets-1979345872788?aff=ebdssbdestsearch",
-    "time": "6:30 PM",
-    "price": "From $54.13"
-  },
-  {
-    "id": "omb-nyc-office-volunteer-with-only-make-believe-on-march-4th-597",
-    "title": "Volunteer With Only Make Believe on March 4th!",
-    "venue": "OMB NYC Office",
-    "date": "2026-03-04",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.com/e/volunteer-with-only-make-believe-on-march-4th-registration-1982447013383?aff=ebdssbdestsearch",
-    "time": "5:30 PM",
-    "price": "From $0.00"
-  },
-  {
-    "id": "625-w-51st-st-winter-warz-2-598",
-    "title": "WINTER WARZ 2",
-    "venue": "625 W 51st St",
-    "date": "2026-03-07",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.com/e/winter-warz-2-tickets-1983439743666?aff=ebdssbdestsearch",
-    "time": "2:00 PM",
-    "price": "From $7.18"
-  },
-  {
-    "id": "italian-american-museum-private-tour-of-italian-american-museum-599",
-    "title": "Private Tour of Italian American Museum",
-    "venue": "Italian American Museum",
-    "date": "2026-03-07",
-    "category": "Art",
-    "sourceUrl": "https://www.eventbrite.com/e/private-tour-of-italian-american-museum-tickets-1982945471284?aff=ebdssbdestsearch",
-    "time": "1:00 PM",
-    "price": "From $17.85"
-  },
-  {
-    "id": "bleu-fin-steamy-pisces-szn-600",
+    "id": "bleu-fin-steamy-pisces-szn-616",
     "title": "STEAMY: Pisces SZN",
     "venue": "Bleu Fin",
     "date": "2026-03-06",
@@ -5272,17 +5413,7 @@
     "price": "From $0.00"
   },
   {
-    "id": "pier-36-nyc-holi-cruise-nyc-festival-of-colors-cruise-party-march-7-601",
-    "title": "Holi Cruise Nyc : Festival of Colors Cruise party March 7",
-    "venue": "Pier 36 NYC",
-    "date": "2026-03-07",
-    "category": "Other",
-    "sourceUrl": "https://www.eventbrite.com/e/holi-cruise-nyc-festival-of-colors-cruise-party-march-7-tickets-1983412529267?aff=ebdssbdestsearch",
-    "time": "12:00 PM",
-    "price": "From $28.50"
-  },
-  {
-    "id": "137-e-25th-st-11th-floor-the-psychedelic-assembly-find-the-others-602",
+    "id": "137-e-25th-st-11th-floor-the-psychedelic-assembly-find-the-others-617",
     "title": "The Psychedelic Assembly: Find the Others",
     "venue": "137 E 25th St 11th floor",
     "date": "2026-03-06",
@@ -5292,7 +5423,96 @@
     "price": "From $30.80"
   },
   {
-    "id": "pier-36-nyc-nyc-s-biggest-festival-of-colors-holi-party-march-7-603",
+    "id": "lava-shawarma-nyc-ramadan-iftar-in-new-york-618",
+    "title": "Ramadan Iftar in New York",
+    "venue": "Lava Shawarma NYC",
+    "date": "2026-03-06",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/ramadan-iftar-in-new-york-tickets-1982581722301?aff=ebdssbdestsearch",
+    "time": "6:00 PM",
+    "price": "From $17.85"
+  },
+  {
+    "id": "hotel-1080-chicago-meets-nyc-meet-and-greet-619",
+    "title": "Chicago Meets NYC Meet And Greet",
+    "venue": "Hotel 1080",
+    "date": "2026-03-07",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/chicago-meets-nyc-meet-and-greet-tickets-1979936870478?aff=ebdssbdestsearch",
+    "time": "4:00 PM",
+    "price": "From $10.00"
+  },
+  {
+    "id": "525-w-22nd-st-woven-connect-for-change-620",
+    "title": "WOVEN Connect for Change",
+    "venue": "525 W 22nd St",
+    "date": "2026-03-05",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/woven-connect-for-change-registration-1982288688830?aff=ebdssbdestsearch",
+    "time": "5:30 PM"
+  },
+  {
+    "id": "talon-bar-lesbotomy-trad-goth-night-3-07-621",
+    "title": "LESBOTOMY: Trad Goth Night 3.07",
+    "venue": "Talon Bar",
+    "date": "2026-03-07",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/lesbotomy-trad-goth-night-307-tickets-1983491006996?aff=ebdssbdestsearch",
+    "time": "10:00 PM",
+    "price": "From $12.51"
+  },
+  {
+    "id": "le-du-s-wines-wine-night-lgbtq-networking-cascade-to-coast-nyc-622",
+    "title": "Wine Night LGBTQ Networking: Cascade to Coast - NYC",
+    "venue": "Le Du's Wines",
+    "date": "2026-03-05",
+    "category": "Food/Drink",
+    "sourceUrl": "https://www.eventbrite.com/e/wine-night-lgbtq-networking-cascade-to-coast-nyc-tickets-1979345872788?aff=ebdssbdestsearch",
+    "time": "6:30 PM",
+    "price": "From $54.13"
+  },
+  {
+    "id": "omb-nyc-office-volunteer-with-only-make-believe-on-march-4th-623",
+    "title": "Volunteer With Only Make Believe on March 4th!",
+    "venue": "OMB NYC Office",
+    "date": "2026-03-04",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/volunteer-with-only-make-believe-on-march-4th-registration-1982447013383?aff=ebdssbdestsearch",
+    "time": "5:30 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "625-w-51st-st-winter-warz-2-624",
+    "title": "WINTER WARZ 2",
+    "venue": "625 W 51st St",
+    "date": "2026-03-07",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/winter-warz-2-tickets-1983439743666?aff=ebdssbdestsearch",
+    "time": "2:00 PM",
+    "price": "From $7.18"
+  },
+  {
+    "id": "italian-american-museum-private-tour-of-italian-american-museum-625",
+    "title": "Private Tour of Italian American Museum",
+    "venue": "Italian American Museum",
+    "date": "2026-03-07",
+    "category": "Art",
+    "sourceUrl": "https://www.eventbrite.com/e/private-tour-of-italian-american-museum-tickets-1982945471284?aff=ebdssbdestsearch",
+    "time": "1:00 PM",
+    "price": "From $17.85"
+  },
+  {
+    "id": "pier-36-nyc-holi-cruise-nyc-festival-of-colors-cruise-party-march-7-626",
+    "title": "Holi Cruise Nyc : Festival of Colors Cruise party March 7",
+    "venue": "Pier 36 NYC",
+    "date": "2026-03-07",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/holi-cruise-nyc-festival-of-colors-cruise-party-march-7-tickets-1983412529267?aff=ebdssbdestsearch",
+    "time": "12:00 PM",
+    "price": "From $28.50"
+  },
+  {
+    "id": "pier-36-nyc-nyc-s-biggest-festival-of-colors-holi-party-march-7-627",
     "title": "NYC'S Biggest Festival of colors Holi  Party March 7",
     "venue": "Pier 36 NYC",
     "date": "2026-03-07",
@@ -5302,7 +5522,7 @@
     "price": "From $28.50"
   },
   {
-    "id": "p-t-knitwear-books-podcasts-lower-east-stories-604",
+    "id": "p-t-knitwear-books-podcasts-lower-east-stories-628",
     "title": "Lower East Stories",
     "venue": "P&T Knitwear Books & Podcasts",
     "date": "2026-03-06",
@@ -5312,7 +5532,7 @@
     "price": "From $12.51"
   },
   {
-    "id": "crossroads-cafe-the-sparkle-a-fresh-take-on-dating-friending-605",
+    "id": "crossroads-cafe-the-sparkle-a-fresh-take-on-dating-friending-629",
     "title": "The Sparkle: A Fresh Take on Dating & Friending",
     "venue": "Crossroads Cafe",
     "date": "2026-03-05",
@@ -5322,7 +5542,265 @@
     "price": "From $23.18"
   },
   {
-    "id": "strand-bookstore-a-natasha-joukovsky-erin-somers-elizabeth-winkler-medium-rar-606",
+    "id": "the-dl-best-rooftop-lounge-nyc-sunday-funday-630",
+    "title": "SUNDAY FUNDAY",
+    "venue": "The DL | Best Rooftop Lounge NYC",
+    "date": "2026-03-08",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/sunday-funday-tickets-1983583566845?aff=ebdssbdestsearch",
+    "time": "5:00 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "1130-linwood-st-big-people-party-2026-631",
+    "title": "BIG PEOPLE PARTY 2026",
+    "venue": "1130 Linwood St",
+    "date": "2026-03-14",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/big-people-party-2026-tickets-1980091881119?aff=ebdssbdestsearch",
+    "time": "8:00 PM",
+    "price": "From $44.52"
+  },
+  {
+    "id": "harborside-pass-the-crown-around-5th-annual-women-s-day-event-jersey-ci-632",
+    "title": "PASS THE CROWN AROUND 5TH ANNUAL WOMEN'S DAY EVENT-JERSEY CITY",
+    "venue": "Harborside",
+    "date": "2026-03-08",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/pass-the-crown-around-5th-annual-womens-day-event-jersey-city-tickets-1980793073404?aff=ebdssbdestsearch",
+    "time": "11:00 AM",
+    "price": "From $150.00"
+  },
+  {
+    "id": "noho-lectures-on-tap-meditation-self-realization-the-mind-body-sy-633",
+    "title": "Lectures on Tap - \"Meditation & Self-Realization: The Mind–Body System\"",
+    "venue": "NoHo",
+    "date": "2026-03-10",
+    "category": "Talk",
+    "sourceUrl": "https://www.eventbrite.com/e/lectures-on-tap-meditation-self-realization-the-mindbody-system-tickets-1982702694131?aff=ebdssbdestsearch",
+    "time": "6:30 PM",
+    "price": "From $41.32"
+  },
+  {
+    "id": "the-general-society-library-a-history-of-queens-rural-county-urban-borough-in-person-634",
+    "title": "A History of Queens: Rural County, Urban Borough IN PERSON",
+    "venue": "The General Society Library",
+    "date": "2026-03-10",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/a-history-of-queens-rural-county-urban-borough-in-person-tickets-1983146608892?aff=ebdssbdestsearch",
+    "time": "6:00 PM",
+    "price": "From $5.00"
+  },
+  {
+    "id": "the-penthouse-at-bogart-house-chicago-meets-nyc-5-yr-anniversary-635",
+    "title": "Chicago Meets NYC 5 Yr Anniversary",
+    "venue": "The Penthouse at Bogart House",
+    "date": "2026-03-08",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/chicago-meets-nyc-5-yr-anniversary-tickets-1977721265544?aff=ebdssbdestsearch",
+    "time": "7:00 PM",
+    "price": "From $10.00"
+  },
+  {
+    "id": "54-e-13th-st-rainbow-prom-636",
+    "title": "Rainbow Prom",
+    "venue": "54 E 13th St",
+    "date": "2026-03-11",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/rainbow-prom-tickets-1981794643126?aff=ebdssbdestsearch",
+    "time": "7:00 PM",
+    "price": "From $50.00"
+  },
+  {
+    "id": "the-dickens-outpro-networking-for-lgbtq-professionals-allies-nyc-637",
+    "title": "OutPro  Networking for LGBTQ Professionals + Allies-  NYC",
+    "venue": "The Dickens",
+    "date": "2026-03-12",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/outpro-networking-for-lgbtq-professionals-allies-nyc-tickets-1980673235967?aff=ebdssbdestsearch",
+    "time": "6:00 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "new-york-sip-sign-mingle-your-career-no-longer-fits-not-sure-what-s-n-638",
+    "title": "Sip, Sign & Mingle: “Your Career No Longer Fits. Not Sure What's Next?",
+    "venue": "New York",
+    "date": "2026-03-08",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/sip-sign-mingle-your-career-no-longer-fits-not-sure-whats-next-tickets-1981542851009?aff=ebdssbdestsearch",
+    "time": "3:00 PM",
+    "price": "From $23.18"
+  },
+  {
+    "id": "4501-glenwood-rd-floral-fearless-every-thread-tells-a-story-7th-women-s-empow-639",
+    "title": "Floral & Fearless: Every Thread Tells a Story 7th Women's Empowerment Event",
+    "venue": "4501 Glenwood Rd",
+    "date": "2026-03-08",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/floral-fearless-every-thread-tells-a-story-7th-womens-empowerment-event-tickets-1980738263466?aff=ebdssbdestsearch",
+    "time": "1:00 PM",
+    "price": "From $65.87"
+  },
+  {
+    "id": "liz-s-book-bar-journal-club-at-liz-s-book-bar-640",
+    "title": "Journal Club at Liz's Book Bar",
+    "venue": "Liz's Book Bar",
+    "date": "2026-03-11",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/journal-club-at-lizs-book-bar-tickets-1982988724656?aff=ebdssbdestsearch",
+    "time": "6:30 PM",
+    "price": "From $28.52"
+  },
+  {
+    "id": "agenda-restaurant-pisces-affair-2k26-the-ultimate-pisces-celebration-nyc-641",
+    "title": "PISCES AFFAIR 2K26 | The Ultimate Pisces Celebration nyc",
+    "venue": "Agenda Restaurant",
+    "date": "2026-03-14",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/pisces-affair-2k26-the-ultimate-pisces-celebration-nyc-tickets-1983653302426?aff=ebdssbdestsearch",
+    "time": "10:00 AM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "new-york-public-library-stephen-a-schwarzman-building-lessons-from-the-stacks-hogtown-nyc-642",
+    "title": "Lessons from the Stacks: Hogtown, NYC",
+    "venue": "New York Public Library - Stephen A. Schwarzman Building",
+    "date": "2026-03-10",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/lessons-from-the-stacks-hogtown-nyc-tickets-1981806897780?aff=ebdssbdestsearch",
+    "time": "5:00 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "colbo-next-door-thinking-through-cool-643",
+    "title": "Thinking Through Cool",
+    "venue": "colbo next door",
+    "date": "2026-03-08",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/thinking-through-cool-tickets-1982890161852?aff=ebdssbdestsearch",
+    "time": "4:00 PM",
+    "price": "From $38.11"
+  },
+  {
+    "id": "liberty-landing-marina-balam-pichkari-nyc-s-og-holi-cruise-party-from-liberty-landi-644",
+    "title": "Balam Pichkari- NYC'S OG Holi Cruise Party | from LIBERTY LANDING MARINA,NJ",
+    "venue": "Liberty Landing Marina",
+    "date": "2026-03-14",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/balam-pichkari-nycs-og-holi-cruise-party-from-liberty-landing-marinanj-tickets-1980399218373?aff=ebdssbdestsearch",
+    "time": "12:00 PM",
+    "price": "From $30.30"
+  },
+  {
+    "id": "italian-charities-of-america-sicilian-italian-music-concert-featuring-amanda-pascali-645",
+    "title": "Sicilian-Italian Music Concert Featuring Amanda Pascali",
+    "venue": "Italian Charities of America",
+    "date": "2026-03-14",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.eventbrite.com/e/sicilian-italian-music-concert-featuring-amanda-pascali-tickets-1982983858100?aff=ebdssbdestsearch",
+    "time": "7:00 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "pen-and-brush-zonta-international-president-s-csw70-midweek-welcome-recept-646",
+    "title": "Zonta International President’s CSW70 Midweek Welcome Reception",
+    "venue": "Pen and Brush",
+    "date": "2026-03-11",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/zonta-international-presidents-csw70-midweek-welcome-reception-tickets-1984204132975?aff=ebdssbdestsearch",
+    "time": "4:00 PM",
+    "price": "From $44.52"
+  },
+  {
+    "id": "the-hub-nyc-the-rest-guide-experience-647",
+    "title": "The Rest Guide Experience",
+    "venue": "The Hub NYC",
+    "date": "2026-03-12",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/the-rest-guide-experience-tickets-1983183688799?aff=ebdssbdestsearch",
+    "time": "7:00 PM",
+    "price": "From $28.52"
+  },
+  {
+    "id": "shirokuro-outside-east-village-rocks-exploring-the-neighborhood-s-rock-music-l-648",
+    "title": "East Village, Rocks! Exploring the Neighborhood's Rock Music Legacy",
+    "venue": "Shirokuro (Outside)",
+    "date": "2026-03-08",
+    "category": "Music/Performing Arts",
+    "sourceUrl": "https://www.eventbrite.com/e/east-village-rocks-exploring-the-neighborhoods-rock-music-legacy-registration-1980115636171?aff=ebdssbdestsearch",
+    "time": "11:00 AM",
+    "price": "From $39.98"
+  },
+  {
+    "id": "metropolitan-pavilion-mocca-fest-2026-649",
+    "title": "MoCCA Fest 2026",
+    "venue": "Metropolitan Pavilion",
+    "date": "",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/mocca-fest-2026-tickets-1977618577401?aff=ebdssbdestsearch",
+    "price": "From $23.18"
+  },
+  {
+    "id": "the-phyllis-harriman-mason-gallery-the-function-of-criticism-650",
+    "title": "The Function of Criticism",
+    "venue": "The Phyllis Harriman Mason Gallery",
+    "date": "2026-03-18",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/the-function-of-criticism-tickets-1712164503119?aff=ebdssbdestsearch",
+    "time": "6:00 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "lang-recital-hall-le-relazioni-spettacolo-teatrale-di-ivana-di-giacomo-e-ilari-651",
+    "title": "LE RELAZIONI Spettacolo Teatrale di Ivana Di Giacomo e Ilaria Ceglia",
+    "venue": "Lang Recital Hall",
+    "date": "2026-03-21",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/le-relazioni-spettacolo-teatrale-di-ivana-di-giacomo-e-ilaria-ceglia-tickets-1982926518596?aff=ebdssbdestsearch",
+    "time": "7:30 PM"
+  },
+  {
+    "id": "the-poetry-project-hanif-abdurraqib-camonghne-felix-652",
+    "title": "Hanif Abdurraqib + Camonghne Felix",
+    "venue": "The Poetry Project",
+    "date": "2026-03-18",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/hanif-abdurraqib-camonghne-felix-tickets-1982218536001?aff=ebdssbdestsearch",
+    "time": "8:00 PM",
+    "price": "From $15.00"
+  },
+  {
+    "id": "pioneer-works-maria-somerville-joanne-robertson-colle-653",
+    "title": "Maria Somerville, Joanne Robertson, Colle",
+    "venue": "Pioneer Works",
+    "date": "2026-03-24",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/maria-somerville-joanne-robertson-colle-tickets-1968333373105?aff=ebdssbdestsearch",
+    "time": "8:00 PM",
+    "price": "From $35.58"
+  },
+  {
+    "id": "the-brooklyn-monarch-black-parade-emo-party-blacklight-edition-654",
+    "title": "BLACK PARADE [EMO PARTY] BLACKLIGHT EDITION",
+    "venue": "The Brooklyn Monarch",
+    "date": "2026-03-20",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/black-parade-emo-party-blacklight-edition-tickets-1982902308182?aff=ebdssbdestsearch",
+    "time": "11:00 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "out-of-ordinary-r-b-after-dark-anthems-slow-jams-no-skips-everyone-free-w-rs-655",
+    "title": "R&B After Dark: Anthems, Slow Jams & No Skips | Everyone Free w/ RSVP",
+    "venue": "OUT OF ORDINARY",
+    "date": "2026-03-21",
+    "category": "Other",
+    "sourceUrl": "https://www.eventbrite.com/e/rb-after-dark-anthems-slow-jams-no-skips-everyone-free-w-rsvp-tickets-1981480509544?aff=ebdssbdestsearch",
+    "time": "11:00 PM",
+    "price": "From $0.00"
+  },
+  {
+    "id": "strand-bookstore-a-natasha-joukovsky-erin-somers-elizabeth-winkler-medium-rar-656",
     "title": "A. Natasha Joukovsky + Erin Somers & Elizabeth Winkler: Medium Rare",
     "venue": "Strand Bookstore",
     "date": "2026-03-04",
@@ -5330,7 +5808,7 @@
     "sourceUrl": "https://www.strandbooks.com/a-natasha-joukovsky-erin-somers-elizabeth-winkler-medium-rare.html"
   },
   {
-    "id": "strand-bookstore-offsite-at-kaufman-music-center-corinne-bailey-rae-put-your--607",
+    "id": "strand-bookstore-offsite-at-kaufman-music-center-corinne-bailey-rae-put-your--657",
     "title": "Offsite at Kaufman Music Center - Corinne Bailey Rae: Put Your Records On",
     "venue": "Strand Bookstore",
     "date": "2026-03-04",
@@ -5338,7 +5816,7 @@
     "sourceUrl": "https://www.strandbooks.com/corinne-bailey-ray-put-your-records-on.html"
   },
   {
-    "id": "strand-bookstore-sold-out-cazzie-david-zosia-mamet-delusions-608",
+    "id": "strand-bookstore-sold-out-cazzie-david-zosia-mamet-delusions-658",
     "title": "SOLD OUT - Cazzie David + Zosia Mamet: Delusions",
     "venue": "Strand Bookstore",
     "date": "2026-03-05",
@@ -5346,7 +5824,7 @@
     "sourceUrl": "https://www.strandbooks.com/cazzie-david-delusions.html"
   },
   {
-    "id": "strand-bookstore-edward-a-new-play-by-ed-schmidt-609",
+    "id": "strand-bookstore-edward-a-new-play-by-ed-schmidt-659",
     "title": "Edward - A New Play by Ed Schmidt",
     "venue": "Strand Bookstore",
     "date": "2026-03-06",
@@ -5354,7 +5832,7 @@
     "sourceUrl": "https://www.strandbooks.com/edward-a-new-play-by-ed-schmidt.html"
   },
   {
-    "id": "strand-bookstore-sold-out-t-kira-madden-carmen-maria-machado-whidbey-610",
+    "id": "strand-bookstore-sold-out-t-kira-madden-carmen-maria-machado-whidbey-660",
     "title": "SOLD OUT - T Kira Madden + Carmen Maria Machado: Whidbey",
     "venue": "Strand Bookstore",
     "date": "2026-03-09",
@@ -5362,7 +5840,7 @@
     "sourceUrl": "https://www.strandbooks.com/t-kira-madden-carmen-maria-machado-whidbey.html"
   },
   {
-    "id": "strand-bookstore-rebecca-serle-jessica-knoll-once-and-again-611",
+    "id": "strand-bookstore-rebecca-serle-jessica-knoll-once-and-again-661",
     "title": "Rebecca Serle + Jessica Knoll: Once and Again",
     "venue": "Strand Bookstore",
     "date": "2026-03-10",
@@ -5370,7 +5848,7 @@
     "sourceUrl": "https://www.strandbooks.com/rebecca-serle-once-and-again.html"
   },
   {
-    "id": "strand-bookstore-natalie-haynes-no-friend-to-this-house-612",
+    "id": "strand-bookstore-natalie-haynes-no-friend-to-this-house-662",
     "title": "Natalie Haynes: No Friend to This House",
     "venue": "Strand Bookstore",
     "date": "2026-03-11",
@@ -5378,7 +5856,7 @@
     "sourceUrl": "https://www.strandbooks.com/natalie-haynes-no-friend-to-this-house.html"
   },
   {
-    "id": "strand-bookstore-alice-hoffman-ann-leary-laura-zigman-the-best-dog-in-the-wor-613",
+    "id": "strand-bookstore-alice-hoffman-ann-leary-laura-zigman-the-best-dog-in-the-wor-663",
     "title": "Alice Hoffman + Ann Leary & Laura Zigman: The Best Dog in the World",
     "venue": "Strand Bookstore",
     "date": "2026-03-12",
@@ -5386,7 +5864,7 @@
     "sourceUrl": "https://www.strandbooks.com/alice-hoffman-the-best-dog-in-the-world.html"
   },
   {
-    "id": "strand-bookstore-jordy-rosenberg-molly-crabapple-morgan-bassichis-night-night-614",
+    "id": "strand-bookstore-jordy-rosenberg-molly-crabapple-morgan-bassichis-night-night-664",
     "title": "Jordy Rosenberg & Molly Crabapple + Morgan Bassichis: Night Night Fawn",
     "venue": "Strand Bookstore",
     "date": "2026-03-13",
@@ -5394,7 +5872,7 @@
     "sourceUrl": "https://www.strandbooks.com/jordy-rosenberg-night-night-fawn.html"
   },
   {
-    "id": "strand-bookstore-feminist-giant-the-strand-present-sheima-benembarek-mona-elt-615",
+    "id": "strand-bookstore-feminist-giant-the-strand-present-sheima-benembarek-mona-elt-665",
     "title": "Feminist Giant & The Strand Present: Sheima Benembarek + Mona Eltahawy",
     "venue": "Strand Bookstore",
     "date": "2026-03-16",
@@ -5402,7 +5880,7 @@
     "sourceUrl": "https://www.strandbooks.com/feminist-giant-the-strand-present-sheima-benembarek-mona-eltahawy.html"
   },
   {
-    "id": "strand-bookstore-sold-out-melissa-auf-der-maur-naomi-fry-even-the-good-girls--616",
+    "id": "strand-bookstore-sold-out-melissa-auf-der-maur-naomi-fry-even-the-good-girls--666",
     "title": "SOLD OUT - Melissa Auf der Maur + Naomi Fry: Even the Good Girls Will Cry",
     "venue": "Strand Bookstore",
     "date": "2026-03-17",
@@ -5410,7 +5888,7 @@
     "sourceUrl": "https://www.strandbooks.com/melissa-auf-der-maur-naomi-fry-even-the-good-girls-will-cry.html"
   },
   {
-    "id": "strand-bookstore-offsite-at-cooper-union-marina-abramovi-live-in-conversation-617",
+    "id": "strand-bookstore-offsite-at-cooper-union-marina-abramovi-live-in-conversation-667",
     "title": "Offsite at Cooper Union: Marina Abramović – Live In Conversation on March 18",
     "venue": "Strand Bookstore",
     "date": "2026-03-18",
@@ -5418,7 +5896,7 @@
     "sourceUrl": "https://www.strandbooks.com/offsite-at-cooper-union-marina-abramovic-live-in-conversation-2.html"
   },
   {
-    "id": "strand-bookstore-felicia-day-the-lost-daughter-of-sparta-618",
+    "id": "strand-bookstore-felicia-day-the-lost-daughter-of-sparta-668",
     "title": "Felicia Day: The Lost Daughter of Sparta",
     "venue": "Strand Bookstore",
     "date": "2026-03-18",
@@ -5426,7 +5904,7 @@
     "sourceUrl": "https://www.strandbooks.com/felicia-day-the-lost-daughter-of-sparta.html"
   },
   {
-    "id": "strand-bookstore-philip-schultz-rosanna-warren-enormous-morning-poems-619",
+    "id": "strand-bookstore-philip-schultz-rosanna-warren-enormous-morning-poems-669",
     "title": "Philip Schultz + Rosanna Warren: Enormous Morning: Poems",
     "venue": "Strand Bookstore",
     "date": "2026-03-20",
@@ -5434,7 +5912,7 @@
     "sourceUrl": "https://www.strandbooks.com/philip-schultz-rosanna-warren-enormous-morning-poems.html"
   },
   {
-    "id": "strand-bookstore-kiran-hargrave-ada-calhoun-almost-life-620",
+    "id": "strand-bookstore-kiran-hargrave-ada-calhoun-almost-life-670",
     "title": "Kiran Hargrave + Ada Calhoun: Almost Life",
     "venue": "Strand Bookstore",
     "date": "2026-03-23",
@@ -5442,7 +5920,7 @@
     "sourceUrl": "https://www.strandbooks.com/kiran-hargrave-eli-rallo-almost-life.html"
   },
   {
-    "id": "strand-bookstore-ham-el-waylly-sohla-el-waylly-hello-home-cooking-621",
+    "id": "strand-bookstore-ham-el-waylly-sohla-el-waylly-hello-home-cooking-671",
     "title": "Ham El-Waylly + Sohla El-Waylly: Hello, Home Cooking",
     "venue": "Strand Bookstore",
     "date": "2026-03-24",
@@ -5450,7 +5928,7 @@
     "sourceUrl": "https://www.strandbooks.com/ham-el-waylly-hello-home-cooking.html"
   },
   {
-    "id": "strand-bookstore-offsite-at-the-cooper-union-s-great-hall-daniel-arsham-futur-622",
+    "id": "strand-bookstore-offsite-at-the-cooper-union-s-great-hall-daniel-arsham-futur-672",
     "title": "Offsite at The Cooper Union's Great Hall - Daniel Arsham: Future Relic",
     "venue": "Strand Bookstore",
     "date": "2026-03-25",
@@ -5458,7 +5936,7 @@
     "sourceUrl": "https://www.strandbooks.com/offsite-at-cooper-union-daniel-arsham-future-relic.html"
   },
   {
-    "id": "strand-bookstore-george-condo-special-guests-the-mad-and-the-lonely-623",
+    "id": "strand-bookstore-george-condo-special-guests-the-mad-and-the-lonely-673",
     "title": "George Condo + Special Guests: The Mad and the Lonely",
     "venue": "Strand Bookstore",
     "date": "2026-03-25",
@@ -5466,7 +5944,7 @@
     "sourceUrl": "https://www.strandbooks.com/george-condo-guests-the-mad-and-the-lonely.html"
   },
   {
-    "id": "strand-bookstore-t-kingfisher-wolf-worm-624",
+    "id": "strand-bookstore-t-kingfisher-wolf-worm-674",
     "title": "T. Kingfisher: Wolf Worm",
     "venue": "Strand Bookstore",
     "date": "2026-03-26",
@@ -5474,7 +5952,7 @@
     "sourceUrl": "https://www.strandbooks.com/t-kingfisher-wolf-worm.html"
   },
   {
-    "id": "strand-bookstore-katrina-manson-project-maven-625",
+    "id": "strand-bookstore-katrina-manson-project-maven-675",
     "title": "Katrina Manson: Project Maven",
     "venue": "Strand Bookstore",
     "date": "2026-03-27",
@@ -5482,7 +5960,7 @@
     "sourceUrl": "https://www.strandbooks.com/katrina-manson-project-maven.html"
   },
   {
-    "id": "strand-bookstore-marlene-zuk-isabella-rossellini-outsider-animals-626",
+    "id": "strand-bookstore-marlene-zuk-isabella-rossellini-outsider-animals-676",
     "title": "Marlene Zuk + Isabella Rossellini: Outsider Animals",
     "venue": "Strand Bookstore",
     "date": "2026-04-02",
@@ -5490,7 +5968,7 @@
     "sourceUrl": "https://www.strandbooks.com/marlene-zuk-isabella-rossellini-outsider-animals.html"
   },
   {
-    "id": "strand-bookstore-jesse-malin-john-varvatos-almost-grown-627",
+    "id": "strand-bookstore-jesse-malin-john-varvatos-almost-grown-677",
     "title": "Jesse Malin + John Varvatos: Almost Grown",
     "venue": "Strand Bookstore",
     "date": "2026-04-08",
@@ -5498,7 +5976,7 @@
     "sourceUrl": "https://www.strandbooks.com/jesse-malin-almost-grown.html"
   },
   {
-    "id": "strand-bookstore-rachel-khong-mary-h-k-choi-my-dear-you-628",
+    "id": "strand-bookstore-rachel-khong-mary-h-k-choi-my-dear-you-678",
     "title": "Rachel Khong + Mary H.K. Choi: My Dear You",
     "venue": "Strand Bookstore",
     "date": "2026-04-09",
@@ -5506,7 +5984,7 @@
     "sourceUrl": "https://www.strandbooks.com/rachel-khong-mary-h-k-choi-my-dear-you.html"
   },
   {
-    "id": "strand-bookstore-offsite-at-cooper-union-director-darren-aronofsky-on-storyte-629",
+    "id": "strand-bookstore-offsite-at-cooper-union-director-darren-aronofsky-on-storyte-679",
     "title": "Offsite at Cooper Union - Director Darren Aronofsky on Storytelling",
     "venue": "Strand Bookstore",
     "date": "2026-04-11",
@@ -5514,7 +5992,7 @@
     "sourceUrl": "https://www.strandbooks.com/offsite-at-cooper-union-director-darren-aronofsky-on-storytelling-live-in-conversation-in-new-york.html"
   },
   {
-    "id": "strand-bookstore-olivia-levin-kelly-keegs-gia-mariano-the-story-of-us-630",
+    "id": "strand-bookstore-olivia-levin-kelly-keegs-gia-mariano-the-story-of-us-680",
     "title": "Olivia Levin + Kelly Keegs & Gia Mariano: The Story of Us",
     "venue": "Strand Bookstore",
     "date": "2026-04-13",
@@ -5522,7 +6000,7 @@
     "sourceUrl": "https://www.strandbooks.com/olivia-levin-the-story-of-us.html"
   },
   {
-    "id": "strand-bookstore-aaww-the-strand-present-amin-ahmad-kirthana-ramisetti-631",
+    "id": "strand-bookstore-aaww-the-strand-present-amin-ahmad-kirthana-ramisetti-681",
     "title": "AAWW & The Strand Present: Amin Ahmad + Kirthana Ramisetti",
     "venue": "Strand Bookstore",
     "date": "2026-04-14",
@@ -5530,7 +6008,7 @@
     "sourceUrl": "https://www.strandbooks.com/amin-ahmad-jafreen-uddin-a-killer-in-the-family.html"
   },
   {
-    "id": "strand-bookstore-sold-out-patrick-radden-keefe-david-marchese-london-falling-632",
+    "id": "strand-bookstore-sold-out-patrick-radden-keefe-david-marchese-london-falling-682",
     "title": "SOLD OUT - Patrick Radden Keefe + David Marchese: London Falling",
     "venue": "Strand Bookstore",
     "date": "2026-04-17",
@@ -5538,7 +6016,7 @@
     "sourceUrl": "https://www.strandbooks.com/patrick-radden-keefe-david-marchese-london-falling.html"
   },
   {
-    "id": "strand-bookstore-sold-out-steve-schirripa-michael-imperioli-willieboy-eats-th-633",
+    "id": "strand-bookstore-sold-out-steve-schirripa-michael-imperioli-willieboy-eats-th-683",
     "title": "SOLD OUT - Steve Schirripa + Michael Imperioli: WillieBoy Eats the World",
     "venue": "Strand Bookstore",
     "date": "2026-04-20",
@@ -5546,7 +6024,7 @@
     "sourceUrl": "https://www.strandbooks.com/steve-schirripa-michael-imperioli-willieboy-eats-the-world.html"
   },
   {
-    "id": "strand-bookstore-jayne-anne-phillips-lily-king-small-town-girls-634",
+    "id": "strand-bookstore-jayne-anne-phillips-lily-king-small-town-girls-684",
     "title": "Jayne Anne Phillips + Lily King: Small Town Girls",
     "venue": "Strand Bookstore",
     "date": "2026-04-21",
@@ -5554,7 +6032,7 @@
     "sourceUrl": "https://www.strandbooks.com/jayne-anne-phillips-lily-king-small-town-girls.html"
   },
   {
-    "id": "strand-bookstore-volume-11-boys-boys-boys-release-panel-635",
+    "id": "strand-bookstore-volume-11-boys-boys-boys-release-panel-685",
     "title": "Volume 11: BOYS! BOYS! BOYS! Release Panel",
     "venue": "Strand Bookstore",
     "date": "2026-04-23",
@@ -5562,7 +6040,7 @@
     "sourceUrl": "https://www.strandbooks.com/boys-boys-boys-panel-volume-11-launch.html"
   },
   {
-    "id": "strand-bookstore-ellen-burstyn-poetry-says-it-better-636",
+    "id": "strand-bookstore-ellen-burstyn-poetry-says-it-better-686",
     "title": "Ellen Burstyn: Poetry Says It Better",
     "venue": "Strand Bookstore",
     "date": "2026-04-28",
@@ -5570,7 +6048,7 @@
     "sourceUrl": "https://www.strandbooks.com/ellen-burstyn-poetry-says-it-better.html"
   },
   {
-    "id": "strand-bookstore-isaac-fitzgerald-american-rambler-637",
+    "id": "strand-bookstore-isaac-fitzgerald-american-rambler-687",
     "title": "Isaac Fitzgerald: American Rambler",
     "venue": "Strand Bookstore",
     "date": "2026-05-12",
@@ -5578,7 +6056,7 @@
     "sourceUrl": "https://www.strandbooks.com/isaac-fitzgerald-american-rambler.html"
   },
   {
-    "id": "strand-bookstore-storytime-with-jill-santopolo-at-usq-638",
+    "id": "strand-bookstore-storytime-with-jill-santopolo-at-usq-688",
     "title": "Storytime with Jill Santopolo at USQ",
     "venue": "Strand Bookstore",
     "date": "2026-05-16",
@@ -5586,7 +6064,7 @@
     "sourceUrl": "https://www.strandbooks.com/storytime-with-jill-santopolo-at-usq.html"
   },
   {
-    "id": "strand-bookstore-mike-schur-joe-posnanski-big-fan-639",
+    "id": "strand-bookstore-mike-schur-joe-posnanski-big-fan-689",
     "title": "Mike Schur & Joe Posnanski: Big Fan",
     "venue": "Strand Bookstore",
     "date": "2026-05-18",
@@ -5594,7 +6072,7 @@
     "sourceUrl": "https://www.strandbooks.com/mike-shur-joe-posnanski-big-fan.html"
   },
   {
-    "id": "strand-bookstore-sara-van-os-rachel-harrison-decomposition-book-640",
+    "id": "strand-bookstore-sara-van-os-rachel-harrison-decomposition-book-690",
     "title": "Sara Van Os + Rachel Harrison: Decomposition Book",
     "venue": "Strand Bookstore",
     "date": "2026-05-21",
@@ -5602,7 +6080,7 @@
     "sourceUrl": "https://www.strandbooks.com/sara-van-os-decomposition-book.html"
   },
   {
-    "id": "strand-bookstore-hugh-ryan-my-bad-641",
+    "id": "strand-bookstore-hugh-ryan-my-bad-691",
     "title": "Hugh Ryan: My Bad",
     "venue": "Strand Bookstore",
     "date": "2026-05-28",
@@ -5610,7 +6088,7 @@
     "sourceUrl": "https://www.strandbooks.com/hugh-ryan-my-bad.html"
   },
   {
-    "id": "strand-bookstore-joseph-osmundson-spawning-season-642",
+    "id": "strand-bookstore-joseph-osmundson-spawning-season-692",
     "title": "Joseph Osmundson: Spawning Season",
     "venue": "Strand Bookstore",
     "date": "2026-05-29",
@@ -5618,7 +6096,7 @@
     "sourceUrl": "https://www.strandbooks.com/joseph-osmundson-spawning-season.html"
   },
   {
-    "id": "its-in-queens-new-kids-class-ice-cream-sundae-decorating-in-astoria-643",
+    "id": "its-in-queens-new-kids-class-ice-cream-sundae-decorating-in-astoria-693",
     "title": "NEW-Kids Class! Ice Cream Sundae Decorating in Astoria",
     "venue": "Its In Queens",
     "date": "2026-01-09",
@@ -5628,7 +6106,7 @@
     "description": "Looking for indoor family fun this winter? Sign up for an ice cream sundae decorating class at the new Tipsy Scoop in Astoria!\n \nDuring this 1.5 hour class we'll show your kids how to make our \"Cool K"
   },
   {
-    "id": "its-in-queens-the-stories-behind-their-names-queens-women-in-action-at-cul-644",
+    "id": "its-in-queens-the-stories-behind-their-names-queens-women-in-action-at-cul-694",
     "title": "The Stories Behind Their Names: Queens Women in Action at Culture Lab LIC",
     "venue": "Its In Queens",
     "date": "2026-02-05",
@@ -5637,7 +6115,7 @@
     "description": "Opening Reception: Thursday, February 5, 6 - 9pm\nOn view: February 6 - March 29 during gallery hours: Thursday & Friday, 5-9pm, and Saturday & Sunday, 2-9pm.\nFree Admission. Donations Welcome.\n​The St"
   },
   {
-    "id": "its-in-queens-modern-ink-crossing-media-blending-cultures-at-culture-lab-l-645",
+    "id": "its-in-queens-modern-ink-crossing-media-blending-cultures-at-culture-lab-l-695",
     "title": "Modern Ink: Crossing Media, Blending Cultures at Culture Lab LIC",
     "venue": "Its In Queens",
     "date": "2026-02-06",
@@ -5646,7 +6124,7 @@
     "description": "Opening Reception: Thursday, February 5, 6 - 9pm\n​On view February 6 - March 29 during gallery hours:  Thursday & Friday, 5-9pm, and Saturday & Sunday, 2-9pm\n​Visual art has been an essential componen"
   },
   {
-    "id": "its-in-queens-sunset-jazz-at-culture-lab-lic-646",
+    "id": "its-in-queens-sunset-jazz-at-culture-lab-lic-696",
     "title": "Sunset Jazz at Culture Lab LIC",
     "venue": "Its In Queens",
     "date": "2026-02-06",
@@ -5656,7 +6134,7 @@
     "description": "LIC's favorite local jazz night is back!\nEnjoy live jazz performances, cool libations, and great vibes in an intimate art gallery space every Friday at 8 PM. Always free and open to the community. Sea"
   },
   {
-    "id": "its-in-queens-how-i-learned-to-carve-and-how-i-don-t-need-to-know-that-any-647",
+    "id": "its-in-queens-how-i-learned-to-carve-and-how-i-don-t-need-to-know-that-any-697",
     "title": "How I learned to carve, and how I don’t need to know that anymore / Amanda Guest /  Jordan Segal / Alexander Zev",
     "venue": "Its In Queens",
     "date": "2026-02-18",
@@ -5666,7 +6144,7 @@
     "description": "How I learned to carve, and how I don’t need to know that anymore\n \nAmanda Guest,  Jordan Segal, Alexander Zev\n \nOpening Saturday, February 21st   6-8pm\n \nOn View: February 21, 2026 - March 14, 2026"
   },
   {
-    "id": "its-in-queens-signs-of-fascism-and-flyering-at-the-greenmarket-648",
+    "id": "its-in-queens-signs-of-fascism-and-flyering-at-the-greenmarket-698",
     "title": "Signs of Fascism and Flyering at the Greenmarket",
     "venue": "Its In Queens",
     "date": "2026-03-01",
@@ -5676,7 +6154,7 @@
     "description": "We’re bringing a calm, visual public action to the Sunday Greenmarket.\nVolunteers will hold clear signs naming the warning signs of fascism such as:\n• Nationalizing elections under one party • Suppres"
   },
   {
-    "id": "its-in-queens-adult-improv-jam-649",
+    "id": "its-in-queens-adult-improv-jam-699",
     "title": "Adult Improv Jam!!",
     "venue": "Its In Queens",
     "date": "2026-03-04",
@@ -5686,7 +6164,7 @@
     "description": "Calling any adult who wants to try their hand at improv!!! Two Jam-Prov Sessions are coming your way on 3/4 and 3/18 from 7:30-8:30 at The Community House (15 Borage Place) in Forest Hills.\n \nSIGN UP"
   },
   {
-    "id": "its-in-queens-liberty-scrap-at-culture-lab-lic-650",
+    "id": "its-in-queens-liberty-scrap-at-culture-lab-lic-700",
     "title": "Liberty Scrap at Culture Lab LIC",
     "venue": "Its In Queens",
     "date": "2026-03-05",
@@ -5695,7 +6173,7 @@
     "description": "Thursdays - Saturdays at 7pm Sundays at 5pm\n​In Liberty Scrap, cash is tight, and the goings are tough, but Katya has managed to eke out a living in a scrap metal warehouse by day, and as an artist by"
   },
   {
-    "id": "its-in-queens-ice-cream-cocktail-mixology-class-queens-651",
+    "id": "its-in-queens-ice-cream-cocktail-mixology-class-queens-701",
     "title": "Ice Cream Cocktail Mixology Class - Queens",
     "venue": "Its In Queens",
     "date": "2026-03-06",
@@ -5705,7 +6183,7 @@
     "description": "Learn how to make boozy ice cream cocktails at the NEW Tipsy Scoop™ Barlour in Queens- 38-15 23rd Ave.\nIn this ice cream cocktail mixology class you'll learn how to make 2 of our Instagram famous booz"
   },
   {
-    "id": "its-in-queens-boozy-sundae-decorating-class-queens-652",
+    "id": "its-in-queens-boozy-sundae-decorating-class-queens-702",
     "title": "Boozy Sundae Decorating Class- Queens",
     "venue": "Its In Queens",
     "date": "2026-03-06",
@@ -5715,7 +6193,7 @@
     "description": "Learn to make Tipsy Scoop's Instagram famous boozy ice cream sundaes at the NEW Tipsy Scoop Barlour in Astoria (38-15 23rd Avenue)\nYou'll learn to make our Bourbon & Baklava sundae (ONLY available at"
   },
   {
-    "id": "its-in-queens-i-want-to-be-a-vet-2-653",
+    "id": "its-in-queens-i-want-to-be-a-vet-2-703",
     "title": "I Want To Be A Vet 2",
     "venue": "Its In Queens",
     "date": "2026-03-07",
@@ -5725,7 +6203,7 @@
     "description": "Do you want to learn about animals and their vet care? Veterinarians provide medical care for different types of animals depending on their patients - zoo animals, farm animals or pets! Children will"
   },
   {
-    "id": "its-in-queens-lucia-cammarata-exhibition-at-queens-college-art-center-654",
+    "id": "its-in-queens-lucia-cammarata-exhibition-at-queens-college-art-center-704",
     "title": "Lucia Cammarata Exhibition at Queens College Art Center",
     "venue": "Its In Queens",
     "date": "2026-03-07",
@@ -5735,7 +6213,7 @@
     "description": "The Queens College School of Arts cordially invites you to the opening reception of the Lucia Cammarata Exhibition on Saturday, March 7th, at 5:30 PM at the QC Art Center (Rosenthal Library, 6th Floor"
   },
   {
-    "id": "its-in-queens-purim-festival-at-central-queens-655",
+    "id": "its-in-queens-purim-festival-at-central-queens-705",
     "title": "Purim Festival at Central Queens",
     "venue": "Its In Queens",
     "date": "2026-03-08",
@@ -5745,7 +6223,7 @@
     "description": "Celebrate Purim with Commonpoint at our Purim Festival on Sunday, March 8 at Commonpoint Central Queens!\nFamilies can enjoy arts & crafts, a Purim puppet show with The Chutzpah Caravan, hamantaschen m"
   },
   {
-    "id": "its-in-queens-second-sunday-castle-tours-656",
+    "id": "its-in-queens-second-sunday-castle-tours-706",
     "title": "Second Sunday Castle Tours",
     "venue": "Its In Queens",
     "date": "2026-03-08",
@@ -5755,7 +6233,7 @@
     "description": "The Bayside Historical Society's staff and volunteers are offering guided tours of The Castle and its exhibitions on the second Sunday of each month from 1pm-3pm. Each tour lasts approximately 45 minu"
   },
   {
-    "id": "its-in-queens-electric-light-orchestra-experience-657",
+    "id": "its-in-queens-electric-light-orchestra-experience-707",
     "title": "ELECTRIC LIGHT ORCHESTRA EXPERIENCE",
     "venue": "Its In Queens",
     "date": "2026-03-08",
@@ -5765,7 +6243,7 @@
     "description": "THE ELECTRIC LIGHT ORCHESTRA EXPERIENCE is a multimedia concert celebration of the music of Jeff Lynne's ELO, one of the most original and successful acts in pop music history! \nFeaturing EVIL WOMAN,"
   },
   {
-    "id": "its-in-queens-vet-tech-101-anatomy-658",
+    "id": "its-in-queens-vet-tech-101-anatomy-708",
     "title": "Vet Tech 101 - Anatomy",
     "venue": "Its In Queens",
     "date": "2026-03-15",
@@ -5775,7 +6253,7 @@
     "description": "Animal anatomy is the foundation of veterinary studies to understand more complex processes of the body. Students will learn about different skeletal structures and how to identify parts of animal bod"
   },
   {
-    "id": "its-in-queens-verse4verse-drag-poetry-659",
+    "id": "its-in-queens-verse4verse-drag-poetry-709",
     "title": "Verse4Verse: Drag + Poetry",
     "venue": "Its In Queens",
     "date": "2026-03-15",
@@ -5785,7 +6263,7 @@
     "description": "Verse4Verse is New York's only drag poetry show! And it's our one year anni-VERSE-ary! To celebrate, we're inviting back past special guests to create an interdisciplinary celebration of the spoken wo"
   },
   {
-    "id": "its-in-queens-the-american-revolution-experience-traveling-exhibit-on-tour-660",
+    "id": "its-in-queens-the-american-revolution-experience-traveling-exhibit-on-tour-710",
     "title": "The American Revolution Experience Traveling Exhibit on Tour",
     "venue": "Its In Queens",
     "date": "2026-03-17",
@@ -5795,7 +6273,7 @@
     "description": "The Bayside Historical Society and the Increase Carpenter Chapter of the Daughters of the American Revolution are proud to host the exciting traveling exhibit, The American Revolution Experience, in p"
   },
   {
-    "id": "its-in-queens-bayside-historical-society-annual-membership-meeting-661",
+    "id": "its-in-queens-bayside-historical-society-annual-membership-meeting-711",
     "title": "Bayside Historical Society Annual Membership Meeting",
     "venue": "Its In Queens",
     "date": "2026-03-18",
@@ -5805,7 +6283,7 @@
     "description": "Bayside Historical Society welcomes members and not-yet-members alike to our Annual Membership Meeting! At this special gathering, we celebrate the dedicated individuals who support our organization t"
   },
   {
-    "id": "its-in-queens-nea-jazz-masters-a-tribute-to-miles-davis-662",
+    "id": "its-in-queens-nea-jazz-masters-a-tribute-to-miles-davis-712",
     "title": "NEA Jazz Masters: A Tribute to Miles Davis",
     "venue": "Its In Queens",
     "date": "2026-03-20",
@@ -5815,7 +6293,7 @@
     "description": "The National Endowment for the Arts Jazz Master is the nation’s highest honor for Jazz, and Flushing Town Hall is proud to continue a tradition we began twenty years ago: our NEA Jazz Masters Concert!"
   },
   {
-    "id": "its-in-queens-project-tag-presents-sarah-at-culture-lab-lic-663",
+    "id": "its-in-queens-project-tag-presents-sarah-at-culture-lab-lic-713",
     "title": "project/tag presents SARAH at Culture Lab LIC",
     "venue": "Its In Queens",
     "date": "2026-03-21",
@@ -5825,7 +6303,7 @@
     "description": "​project/tag presents a duet from SARAH, a work-in-progress examining Kurdish experiences, cultural memory, and political changes in the context of Saddam Hussein’s violent rule and 2005 trial before"
   },
   {
-    "id": "its-in-queens-michael-feinstein-s-tribute-to-tony-bennett-664",
+    "id": "its-in-queens-michael-feinstein-s-tribute-to-tony-bennett-714",
     "title": "Michael Feinstein’s Tribute to Tony Bennett",
     "venue": "Its In Queens",
     "date": "2026-03-21",
@@ -5835,7 +6313,7 @@
     "description": "Michael Feinstein brings the golden age of big band to life in a heartfelt tribute to the legendary Tony Bennett, celebrating Bennett’s 100th birthday year. Backed by the acclaimed Carnegie Hall Ensem"
   },
   {
-    "id": "its-in-queens-green-green-green-665",
+    "id": "its-in-queens-green-green-green-715",
     "title": "Green, Green, Green",
     "venue": "Its In Queens",
     "date": "2026-03-22",
@@ -5845,7 +6323,7 @@
     "description": "Welcome the new season of spring with a fun class about nature’s favorite color. Enjoy a read aloud of Green by Laura Vaccaro Seeger, play a game about camouflage, and make a collage with green materi"
   },
   {
-    "id": "its-in-queens-happy-birthday-dr-seuss-666",
+    "id": "its-in-queens-happy-birthday-dr-seuss-716",
     "title": "Happy Birthday, Dr. Seuss!",
     "venue": "Its In Queens",
     "date": "2026-03-22",
@@ -5855,7 +6333,7 @@
     "description": "Celebrate the creative and zany writing of one of the most popular children’s book authors!  Enjoy reading 2 classic stories by Dr. Seuss, meet a fine-feathered friend from Are You My Mother?, and pla"
   },
   {
-    "id": "its-in-queens-queens-me-neighborhood-stories-beyond-the-data-workshop-668",
+    "id": "its-in-queens-queens-me-neighborhood-stories-beyond-the-data-workshop-718",
     "title": "Queens & Me: Neighborhood Stories: Beyond the Data - Workshop",
     "venue": "Its In Queens",
     "date": "2026-03-22",
@@ -5865,7 +6343,7 @@
     "description": "Queens & Me: Neighborhood Stories - Beyond the Data explores the personal histories embedded in our public spaces. Held during NYC Open Data Week and led by storyteller Kelly Jean Fitzsimmons and prod"
   },
   {
-    "id": "its-in-queens-the-seven-wonders-a-live-tribute-to-fleetwood-mac-669",
+    "id": "its-in-queens-the-seven-wonders-a-live-tribute-to-fleetwood-mac-719",
     "title": "The Seven Wonders - A Live Tribute to Fleetwood Mac",
     "venue": "Its In Queens",
     "date": "2026-03-22",
@@ -5875,7 +6353,7 @@
     "description": "he Seven Wonders are seven world-class musicians paying homage to the music of FLEETWOOD MAC, one of the most popular and best-selling groups in music history and member of the Rock and Roll Hall of F"
   },
   {
-    "id": "its-in-queens-mapping-queens-cultural-leaders-in-conversation-670",
+    "id": "its-in-queens-mapping-queens-cultural-leaders-in-conversation-720",
     "title": "Mapping Queens: Cultural Leaders in Conversation",
     "venue": "Its In Queens",
     "date": "2026-03-25",
@@ -5885,7 +6363,7 @@
     "description": "FREE RSVP\nDate: Wednesday, March 25th\nTime: 6:30 PM Doors Open, 7:00 PM Panel\nLocation: Flushing Town Hall 137-35 Northern Blvd. Flushing, NY 11354\nJoin us for an inside look at The 2025 Queens Cultur"
   },
   {
-    "id": "its-in-queens-speakeasier-language-exchange-at-culture-lab-lic-671",
+    "id": "its-in-queens-speakeasier-language-exchange-at-culture-lab-lic-721",
     "title": "SpeakEasier Language Exchange at Culture Lab LIC",
     "venue": "Its In Queens",
     "date": "2026-03-28",
@@ -5894,7 +6372,7 @@
     "description": "SpeakEasier was created in 2024 by Daniela Cantillo to celebrate and foster multilingualism in New York City.\n\n\n \nIn early 2025, SpeakEasier partnered with Culture Lab LIC to bring to life the monthly"
   },
   {
-    "id": "its-in-queens-queens-says-no-kings-3-672",
+    "id": "its-in-queens-queens-says-no-kings-3-722",
     "title": "QUEENS SAYS NO KINGS 3",
     "venue": "Its In Queens",
     "date": "2026-03-28",
@@ -5904,7 +6382,7 @@
     "description": "Why March in Queens?\nBecause Queens is not a footnote. It’s the future.\n🌎 The Most Diverse Place on the Planet More languages. More cultures. More immigrants. More working families. Queens reflects t"
   },
   {
-    "id": "its-in-queens-seussical-theatre-for-young-audiences-673",
+    "id": "its-in-queens-seussical-theatre-for-young-audiences-723",
     "title": "SEUSSICAL - Theatre for Young Audiences",
     "venue": "Its In Queens",
     "date": "2026-03-28",
@@ -5914,7 +6392,7 @@
     "description": "Now one of the most performed shows in America, Seussical (Theatre for Young Audiences) is a fantastical, magical, musical extravaganza! Sunrise Theater Company and Tony-winners, Lynn Ahrens and Steph"
   },
   {
-    "id": "its-in-queens-ben-s-animals-a-documentary-about-autism-art-and-advocacy-674",
+    "id": "its-in-queens-ben-s-animals-a-documentary-about-autism-art-and-advocacy-724",
     "title": "Ben's Animals - A Documentary about Autism, Art, and Advocacy",
     "venue": "Its In Queens",
     "date": "2026-04-04",
@@ -5924,7 +6402,7 @@
     "description": "Ben's Animals, a heartwarming and visually rich documentary by award-winning filmmaker Evan Beloff. Presented during International Autism Month, this public screening aims to raise awareness of the st"
   },
   {
-    "id": "its-in-queens-nyc-plant-market-at-culture-lab-lic-675",
+    "id": "its-in-queens-nyc-plant-market-at-culture-lab-lic-725",
     "title": "NYC Plant Market at Culture Lab LIC",
     "venue": "Its In Queens",
     "date": "2026-04-19",
@@ -5933,7 +6411,7 @@
     "description": "NYC Plant Market is more than a marketplace for plants. It’s a movement to reconnect New Yorkers with nature.\nWe bring together local plant shops, independent growers, and small nurseries across the c"
   },
   {
-    "id": "its-in-queens-famagusta-film-festival-kick-off-party-676",
+    "id": "its-in-queens-famagusta-film-festival-kick-off-party-726",
     "title": "Famagusta Film Festival Kick Off Party",
     "venue": "Its In Queens",
     "date": "2026-05-09",
@@ -5943,7 +6421,7 @@
     "description": "Join us for an evening where film, music and community members can come together before the screenings for the first Famagusta Film Festival can commence. This special event brings together film lover"
   },
   {
-    "id": "its-in-queens-weapons-of-mass-seduction-at-culture-lab-lic-677",
+    "id": "its-in-queens-weapons-of-mass-seduction-at-culture-lab-lic-727",
     "title": "Weapons of Mass Seduction at Culture Lab LIC",
     "venue": "Its In Queens",
     "date": "2026-06-11",
@@ -5952,7 +6430,7 @@
     "description": "June 11-21\nUnder an even more Trump-than-Trump president — the  bombastic Karen Blare — the United States is waging a  “culture war” against its new enemy: woke Canada.  Determined to win the fight wi"
   },
   {
-    "id": "its-in-queens-famous-food-festival-taste-the-world-long-island-ny-spring-2-678",
+    "id": "its-in-queens-famous-food-festival-taste-the-world-long-island-ny-spring-2-728",
     "title": "Famous Food Festival \" Taste the World\" Long Island, NY - Spring 2026",
     "venue": "Its In Queens",
     "date": "2026-06-19",
@@ -5961,7 +6439,7 @@
     "description": "Famous Food Festival returns on June 19th – June 21st, 2026, to the Tanger Outlets in Deer Park, NY! Featuring 100+ vendors serving food from around the world, live music all day, spirit samplings, gi"
   },
   {
-    "id": "mcnally-jackson-anand-gopal-philip-gourevitch-679",
+    "id": "mcnally-jackson-anand-gopal-philip-gourevitch-729",
     "title": "Anand Gopal & Philip Gourevitch",
     "venue": "McNally Jackson",
     "date": "2026-03-02",
@@ -5970,7 +6448,7 @@
     "time": "6:00pm"
   },
   {
-    "id": "mcnally-jackson-the-art-of-the-crossword-680",
+    "id": "mcnally-jackson-the-art-of-the-crossword-730",
     "title": "The Art of the Crossword",
     "venue": "McNally Jackson",
     "date": "2026-03-02",
@@ -5979,7 +6457,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-short-er-slavic-novels-book-club-with-arya-681",
+    "id": "mcnally-jackson-short-er-slavic-novels-book-club-with-arya-731",
     "title": "Short(er) Slavic Novels Book Club with Arya",
     "venue": "McNally Jackson",
     "date": "2026-03-02",
@@ -5988,7 +6466,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-tanya-bush-helen-rosner-682",
+    "id": "mcnally-jackson-tanya-bush-helen-rosner-732",
     "title": "Tanya Bush & Helen Rosner",
     "venue": "McNally Jackson",
     "date": "2026-03-03",
@@ -5997,7 +6475,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-literary-black-book-club-with-genay-683",
+    "id": "mcnally-jackson-literary-black-book-club-with-genay-733",
     "title": "Literary Black Book Club with Genay",
     "venue": "McNally Jackson",
     "date": "2026-03-03",
@@ -6006,7 +6484,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-nd-book-club-at-mcnally-jackson-684",
+    "id": "mcnally-jackson-nd-book-club-at-mcnally-jackson-734",
     "title": "ND Book Club at McNally Jackson",
     "venue": "McNally Jackson",
     "date": "2026-03-03",
@@ -6015,7 +6493,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-cazzie-david-naomi-fry-685",
+    "id": "mcnally-jackson-cazzie-david-naomi-fry-735",
     "title": "Cazzie David & Naomi Fry",
     "venue": "McNally Jackson",
     "date": "2026-03-04",
@@ -6024,7 +6502,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-dream-couple-romance-book-club-with-831-stories-686",
+    "id": "mcnally-jackson-dream-couple-romance-book-club-with-831-stories-736",
     "title": "Dream Couple: Romance Book Club with 831 Stories",
     "venue": "McNally Jackson",
     "date": "2026-03-04",
@@ -6033,7 +6511,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-new-book-book-club-with-sarah-687",
+    "id": "mcnally-jackson-new-book-book-club-with-sarah-737",
     "title": "New Book Book Club with Sarah",
     "venue": "McNally Jackson",
     "date": "2026-03-05",
@@ -6042,7 +6520,7 @@
     "time": "6:30pm"
   },
   {
-    "id": "mcnally-jackson-private-writings-public-readings-book-club-with-jack-bekah-a-688",
+    "id": "mcnally-jackson-private-writings-public-readings-book-club-with-jack-bekah-a-738",
     "title": "Private Writings, Public Readings Book Club with Jack, Bekah, and Julianne",
     "venue": "McNally Jackson",
     "date": "2026-03-05",
@@ -6051,7 +6529,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-international-literature-book-club-with-yvonne-689",
+    "id": "mcnally-jackson-international-literature-book-club-with-yvonne-739",
     "title": "International Literature Book Club with Yvonne",
     "venue": "McNally Jackson",
     "date": "2026-03-09",
@@ -6060,7 +6538,7 @@
     "time": "6:30pm"
   },
   {
-    "id": "mcnally-jackson-vladimir-nabokov-book-club-with-arya-690",
+    "id": "mcnally-jackson-vladimir-nabokov-book-club-with-arya-740",
     "title": "Vladimir Nabokov Book Club with Arya",
     "venue": "McNally Jackson",
     "date": "2026-03-09",
@@ -6069,7 +6547,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-john-milton-s-paradise-lost-691",
+    "id": "mcnally-jackson-john-milton-s-paradise-lost-741",
     "title": "John Milton’s Paradise Lost",
     "venue": "McNally Jackson",
     "date": "2026-03-10",
@@ -6078,7 +6556,7 @@
     "time": "3:00pm"
   },
   {
-    "id": "mcnally-jackson-andrew-martin-halle-butler-692",
+    "id": "mcnally-jackson-andrew-martin-halle-butler-742",
     "title": "Andrew Martin & Halle Butler",
     "venue": "McNally Jackson",
     "date": "2026-03-10",
@@ -6087,7 +6565,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-hooman-majd-ann-curry-693",
+    "id": "mcnally-jackson-hooman-majd-ann-curry-743",
     "title": "Hooman Majd & Ann Curry",
     "venue": "McNally Jackson",
     "date": "2026-03-11",
@@ -6096,7 +6574,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-unknown-masterpieces-an-nyrb-classics-book-club-694",
+    "id": "mcnally-jackson-unknown-masterpieces-an-nyrb-classics-book-club-744",
     "title": "Unknown Masterpieces: An NYRB Classics Book Club",
     "venue": "McNally Jackson",
     "date": "2026-03-12",
@@ -6105,7 +6583,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-toni-morrison-the-social-the-domestic-695",
+    "id": "mcnally-jackson-toni-morrison-the-social-the-domestic-745",
     "title": "Toni Morrison: The Social & The Domestic",
     "venue": "McNally Jackson",
     "date": "2026-03-12",
@@ -6114,7 +6592,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-tom-junod-susan-morrison-john-seabrook-696",
+    "id": "mcnally-jackson-tom-junod-susan-morrison-john-seabrook-746",
     "title": "Tom Junod, Susan Morrison, & John Seabrook",
     "venue": "McNally Jackson",
     "date": "2026-03-12",
@@ -6123,7 +6601,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-ideas-of-africa-697",
+    "id": "mcnally-jackson-ideas-of-africa-747",
     "title": "Ideas of Africa",
     "venue": "McNally Jackson",
     "date": "2026-03-13",
@@ -6132,7 +6610,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-mcnally-editions-book-club-with-rebecca-698",
+    "id": "mcnally-jackson-mcnally-editions-book-club-with-rebecca-748",
     "title": "McNally Editions Book Club with Rebecca",
     "venue": "McNally Jackson",
     "date": "2026-03-16",
@@ -6141,7 +6619,7 @@
     "time": "6:30pm"
   },
   {
-    "id": "mcnally-jackson-yiyun-li-iva-dixit-699",
+    "id": "mcnally-jackson-yiyun-li-iva-dixit-749",
     "title": "Yiyun Li & Iva Dixit",
     "venue": "McNally Jackson",
     "date": "2026-03-16",
@@ -6150,7 +6628,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-unusual-appetites-book-club-with-melanie-quinn-700",
+    "id": "mcnally-jackson-unusual-appetites-book-club-with-melanie-quinn-750",
     "title": "Unusual Appetites Book Club with Melanie & Quinn",
     "venue": "McNally Jackson",
     "date": "2026-03-16",
@@ -6159,7 +6637,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-wayne-koestenbaum-morgan-bassichis-701",
+    "id": "mcnally-jackson-wayne-koestenbaum-morgan-bassichis-751",
     "title": "Wayne Koestenbaum & Morgan Bassichis",
     "venue": "McNally Jackson",
     "date": "2026-03-17",
@@ -6168,7 +6646,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-ian-buruma-daniel-kehlmann-702",
+    "id": "mcnally-jackson-ian-buruma-daniel-kehlmann-752",
     "title": "Ian Buruma & Daniel Kehlmann",
     "venue": "McNally Jackson",
     "date": "2026-03-18",
@@ -6177,7 +6655,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-jr-thornton-graydon-carter-703",
+    "id": "mcnally-jackson-jr-thornton-graydon-carter-753",
     "title": "JR Thornton & Graydon Carter",
     "venue": "McNally Jackson",
     "date": "2026-03-19",
@@ -6186,7 +6664,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-misfit-mayhem-book-club-with-aj-daniel-704",
+    "id": "mcnally-jackson-misfit-mayhem-book-club-with-aj-daniel-754",
     "title": "Misfit Mayhem Book Club with AJ & Daniel",
     "venue": "McNally Jackson",
     "date": "2026-03-23",
@@ -6195,7 +6673,7 @@
     "time": "6:30pm"
   },
   {
-    "id": "mcnally-jackson-infinite-jest-fest-7-705",
+    "id": "mcnally-jackson-infinite-jest-fest-7-755",
     "title": "Infinite Jest Fest 7",
     "venue": "McNally Jackson",
     "date": "2026-03-23",
@@ -6204,7 +6682,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-nyc-to-its-edges-book-club-with-patrick-706",
+    "id": "mcnally-jackson-nyc-to-its-edges-book-club-with-patrick-756",
     "title": "NYC To Its Edges Book Club with Patrick",
     "venue": "McNally Jackson",
     "date": "2026-03-24",
@@ -6213,7 +6691,7 @@
     "time": "6:30pm"
   },
   {
-    "id": "mcnally-jackson-100-years-of-world-literature-today-707",
+    "id": "mcnally-jackson-100-years-of-world-literature-today-757",
     "title": "100 Years of World Literature Today",
     "venue": "McNally Jackson",
     "date": "2026-03-24",
@@ -6222,7 +6700,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-joan-didion-on-place-708",
+    "id": "mcnally-jackson-joan-didion-on-place-758",
     "title": "Joan Didion on Place",
     "venue": "McNally Jackson",
     "date": "2026-03-24",
@@ -6231,7 +6709,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-crime-wave-book-club-with-andrei-patrick-709",
+    "id": "mcnally-jackson-crime-wave-book-club-with-andrei-patrick-759",
     "title": "Crime Wave Book Club with Andrei & Patrick",
     "venue": "McNally Jackson",
     "date": "2026-03-25",
@@ -6240,7 +6718,7 @@
     "time": "6:30pm"
   },
   {
-    "id": "mcnally-jackson-lynne-tillman-paul-chan-scott-schomburg-710",
+    "id": "mcnally-jackson-lynne-tillman-paul-chan-scott-schomburg-760",
     "title": "Lynne Tillman, Paul Chan, Scott Schomburg",
     "venue": "McNally Jackson",
     "date": "2026-03-26",
@@ -6249,7 +6727,7 @@
     "time": "7:00pm"
   },
   {
-    "id": "mcnally-jackson-minor-works-book-club-with-mandylion-press-711",
+    "id": "mcnally-jackson-minor-works-book-club-with-mandylion-press-761",
     "title": "Minor Works Book Club with Mandylion Press",
     "venue": "McNally Jackson",
     "date": "2026-03-27",
