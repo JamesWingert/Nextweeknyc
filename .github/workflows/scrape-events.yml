@@ -94,22 +94,22 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### General Events — Scraper" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-          grep -E '(Source|---|✓|⚠|⛔|📅|ERROR|ZERO|REPORT|Total|Date range)' /tmp/scrape-general.log 2>/dev/null >> $GITHUB_STEP_SUMMARY || echo "(no scraper report)" >> $GITHUB_STEP_SUMMARY
+          grep -E '(Scraper|Source URL|---|✓|⚠|⛔|📅|ERROR|ZERO|REPORT|Total|Date range)' /tmp/scrape-general.log 2>/dev/null >> $GITHUB_STEP_SUMMARY || echo "(no scraper report)" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### General Events — Validation" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-          grep -E '(Source/Venue|---|TOTAL|VALIDATION|Input|⚠)' /tmp/validate-general.log 2>/dev/null >> $GITHUB_STEP_SUMMARY || echo "(no validation report)" >> $GITHUB_STEP_SUMMARY
+          grep -E '(Source URL|---|TOTAL|VALIDATION|Input|⚠)' /tmp/validate-general.log 2>/dev/null >> $GITHUB_STEP_SUMMARY || echo "(no validation report)" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Film/Arts — Scraper" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-          grep -E '(Source|---|✓|⚠|⛔|📅|ERROR|ZERO|REPORT|Total|Date range)' /tmp/scrape-film.log 2>/dev/null >> $GITHUB_STEP_SUMMARY || echo "(no scraper report)" >> $GITHUB_STEP_SUMMARY
+          grep -E '(Scraper|Source URL|---|✓|⚠|⛔|📅|ERROR|ZERO|REPORT|Total|Date range)' /tmp/scrape-film.log 2>/dev/null >> $GITHUB_STEP_SUMMARY || echo "(no scraper report)" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Film/Arts — Validation" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-          grep -E '(Source/Venue|---|TOTAL|VALIDATION|Input|⚠)' /tmp/validate-film.log 2>/dev/null >> $GITHUB_STEP_SUMMARY || echo "(no validation report)" >> $GITHUB_STEP_SUMMARY
+          grep -E '(Source URL|---|TOTAL|VALIDATION|Input|⚠)' /tmp/validate-film.log 2>/dev/null >> $GITHUB_STEP_SUMMARY || echo "(no validation report)" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
 
       - name: Commit updated data

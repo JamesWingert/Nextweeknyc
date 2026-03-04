@@ -2,15 +2,17 @@
 /**
  * Scrape NYC General Events
  *
- * Sources (8):
+ * Sources (10):
  *   - doNYC              (concerts, nightlife, comedy) — cheerio, per-day URLs
  *   - The Skint           (free/cheap events) — cheerio, homepage + ongoing
- *   - Time Out NY         (curated picks) — cheerio
- *   - Secret NYC          (things to do) — cheerio
  *   - Brooklyn Paper      (Brooklyn events) — cheerio
- *   - NYC Parks           (free outdoor events) — cheerio
+ *   - NYC Parks           (free outdoor events) — cheerio (prd2.nycgovparks.org)
  *   - Eventbrite NYC      (community events) — Playwright (JS-rendered)
  *   - Playbill            (Broadway + Off-Broadway) — cheerio
+ *   - Strand Bookstore    (author events, readings) — Playwright
+ *   - Its In Queens       (Queens events) — Playwright (Timely calendar API)
+ *   - National Arts Club  (events calendar) — cheerio
+ *   - McNally Jackson     (bookstore events) — Playwright
  *
  * Uses cheerio (fetch+parse) by default, Playwright only where needed.
  *
@@ -282,6 +284,7 @@ function push(items, venue, category, fallbackUrl) {
       date,
       category: finalCategory,
       url: item.link || item.url || fallbackUrl,
+      _source: fallbackUrl,
       ...(item.time ? { time: item.time } : {}),
       ...(item.description ? { description: item.description } : {}),
       ...(item.price ? { price: item.price } : {}),
@@ -487,21 +490,32 @@ async function scrapeTheSkint() {
 // neighborhood guides, reviews), not structured events. Our other sources cover
 // actual events better.
 
-async function scrapeSecretNYC() {
+async function scrapeSecretNYC(browser) {
+  // Converted to Playwright — cheerio gets 403 from CI datacenter IPs
+  const page = await browser.newPage();
+  page.setDefaultTimeout(15000);
   try {
-    const { html } = await fetchHTML('https://secretnyc.co/events/');
-    const $ = cheerio.load(html);
-    const items = [];
-    $('article, .event, .post').each((_, el) => {
-      const $el = $(el);
-      const title = $el.find('h2, h3, .title').first().text().trim();
-      const link = $el.find('a').first().attr('href') || '';
-      const rawDate = $el.find('time[datetime]').first().attr('datetime') || '';
-      if (title && title.length > 5 && title.length < 120) items.push({ title, link, date: rawDate });
+    await page.goto('https://secretnyc.co/events/', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(ciWait(5000));
+
+    const items = await page.evaluate(() => {
+      const r = [];
+      document.querySelectorAll('article, .event, .post').forEach(el => {
+        const titleEl = el.querySelector('h2, h3, .title');
+        const title = titleEl ? titleEl.textContent.trim() : '';
+        const linkEl = el.querySelector('a');
+        const link = linkEl ? linkEl.href : '';
+        const timeEl = el.querySelector('time[datetime]');
+        const date = timeEl ? timeEl.getAttribute('datetime') || '' : '';
+        if (title && title.length > 5 && title.length < 120) r.push({ title, link, date });
+      });
+      return r;
     });
+
     push(items, 'Secret NYC', 'Other', 'https://secretnyc.co/events/');
     console.error(`Secret NYC: ${items.length}`);
   } catch (e) { console.error('Secret NYC error:', e.message); }
+  finally { await page.close(); }
 }
 
 async function scrapeBrooklynPaper() {
@@ -530,35 +544,38 @@ async function scrapeBrooklynPaper() {
 }
 
 async function scrapeNYCParks() {
-  try {
-    const { html } = await fetchHTML('https://www.nycgovparks.org/events');
-    const $ = cheerio.load(html);
-    const items = [];
-    // NYC Parks has itemprop="startDate" with ISO dates
-    $('[itemtype*="Event"], .event_listing').each((_, el) => {
-      const $el = $(el);
-      const title = $el.find('[itemprop="name"], h3, h4').first().text().trim();
-      const venue = $el.find('[itemprop="location"], [class*="location"]').first().text().trim();
-      const link = $el.find('a').first().attr('href') || '';
-      const fullLink = link.startsWith('/') ? `https://www.nycgovparks.org${link}` : link;
-      const rawDate = $el.find('[itemprop="startDate"]').first().attr('content')
-        || $el.find('meta[itemprop="startDate"]').first().attr('content') || '';
-      if (title && title.length > 5 && title.length < 120) items.push({ title, venue, link: fullLink, date: rawDate });
-    });
-    // Fallback: generic event rows
-    if (items.length === 0) {
-      $('tr, [class*="event"]').each((_, el) => {
+  // Use prd2.nycgovparks.org — the main domain blocks non-residential IPs,
+  // but prd2 serves the same content without IP restrictions
+  const BASE = 'https://prd2.nycgovparks.org';
+  const allItems = [];
+  // Scrape first 3 pages (50 events each = 150 events)
+  for (let page = 1; page <= 3; page++) {
+    const url = page === 1 ? `${BASE}/events/` : `${BASE}/events/p${page}`;
+    try {
+      const { html } = await fetchHTML(url);
+      const $ = cheerio.load(html);
+      $('[itemscope][itemtype*="Event"]').each((_, el) => {
         const $el = $(el);
-        const title = $el.find('a, h3, h4').first().text().trim();
-        const rawDate = $el.find('[class*="date"]').first().text().trim();
-        const link = $el.find('a').first().attr('href') || '';
-        const fullLink = link.startsWith('/') ? `https://www.nycgovparks.org${link}` : link;
-        if (title && title.length > 5 && title.length < 120) items.push({ title, link: fullLink, date: rawDate });
+        const title = $el.find('[itemprop="name"]').first().text().trim();
+        const link = $el.find('.event-title a').attr('href') || '';
+        const fullLink = link.startsWith('/') ? `${BASE}${link}` : link;
+        const startDate = $el.find('meta[itemprop="startDate"]').attr('content') || '';
+        const date = startDate ? startDate.slice(0, 10) : '';
+        const locationEl = $el.find('[itemprop="location"] [itemprop="name"]');
+        const venue = locationEl.length ? locationEl.first().text().trim() : '';
+        const desc = $el.find('[itemprop="description"]').text().trim().slice(0, 200);
+        // Extract time from the strong tags: "8:00 a.m.–10:00 a.m."
+        const timeText = $el.find('p').first().text().trim();
+        const timeMatch = timeText.match(/(\d{1,2}:\d{2}\s*[ap]\.m\.)/i);
+        const time = timeMatch ? timeMatch[1].replace(/\./g, '') : '';
+        if (title && title.length > 3 && title.length < 120) {
+          allItems.push({ title, link: fullLink, date, venue, time, description: desc });
+        }
       });
-    }
-    push(items, 'NYC Parks', 'Outdoor/Parks', 'https://www.nycgovparks.org/events');
-    console.error(`NYC Parks: ${items.length}`);
-  } catch (e) { console.error('NYC Parks error:', e.message); }
+    } catch (e) { console.error(`NYC Parks page ${page} error:`, e.message); }
+  }
+  push(allItems, 'NYC Parks', 'Outdoor/Parks', `${BASE}/events/`);
+  console.error(`NYC Parks: ${allItems.length}`);
 }
 
 async function scrapePlaybill() {
@@ -602,6 +619,7 @@ async function scrapeEventbrite(browser) {
   const PAGES = [
     'https://www.eventbrite.com/d/ny--new-york/events--this-week/',
     'https://www.eventbrite.com/d/ny--new-york/events--next-week/',
+    'https://www.eventbrite.com/d/ny--new-york/events--this-month/',
     'https://www.eventbrite.com/d/ny--new-york/arts--events--this-week/',
     'https://www.eventbrite.com/d/ny--new-york/music--events--this-week/',
     'https://www.eventbrite.com/d/ny--new-york/food-and-drink--events--this-week/',
@@ -612,6 +630,12 @@ async function scrapeEventbrite(browser) {
     'https://www.eventbrite.com/d/ny--new-york/community--events--next-week/',
     'https://www.eventbrite.com/d/ny--new-york/family--events--this-week/',
     'https://www.eventbrite.com/d/ny--new-york/family--events--next-week/',
+    'https://www.eventbrite.com/d/ny--new-york/nightlife--events--this-week/',
+    'https://www.eventbrite.com/d/ny--new-york/nightlife--events--next-week/',
+    'https://www.eventbrite.com/d/ny--new-york/performing-arts--events--this-week/',
+    'https://www.eventbrite.com/d/ny--new-york/performing-arts--events--next-week/',
+    'https://www.eventbrite.com/d/ny--new-york/arts--events--this-month/',
+    'https://www.eventbrite.com/d/ny--new-york/music--events--this-month/',
   ];
 
   const allItems = [];
@@ -1001,32 +1025,54 @@ async function scrapeMcNally(browser) {
 }
 
 function printReport() {
-  console.error('\n' + '='.repeat(70));
+  console.error('\n' + '='.repeat(90));
   console.error('SCRAPE REPORT — General Events');
-  console.error('='.repeat(70));
+  console.error('='.repeat(90));
   console.error(`Date range: ${RANGE}`);
   console.error(`Total events: ${events.length}`);
-  console.error('-'.repeat(70));
-  console.error('Source'.padEnd(25) + 'Items'.padEnd(8) + 'Dates'.padEnd(8) + 'Time'.padEnd(8) + 'Method'.padEnd(10) + 'Status');
-  console.error('-'.repeat(70));
+
+  // Per-source-name summary (scraper timing)
+  console.error('-'.repeat(90));
+  console.error('Scraper'.padEnd(25) + 'Items'.padEnd(8) + 'Dates'.padEnd(8) + 'Time'.padEnd(8) + 'Status');
+  console.error('-'.repeat(90));
   let failures = 0, zeroResults = 0;
-  const jsNames = new Set(['Eventbrite', 'Strand Bookstore', 'Its In Queens', 'McNally Jackson']);
   for (const s of sourceLog) {
-    const status = s.error ? `ERROR: ${s.error.slice(0, 35)}` : (s.count === 0 ? '⚠ ZERO' : '✓ OK');
+    const status = s.error ? `ERROR: ${s.error.slice(0, 40)}` : (s.count === 0 ? '⚠ ZERO' : '✓ OK');
     if (s.error) failures++;
     if (s.count === 0 && !s.error) zeroResults++;
-    const method = jsNames.has(s.name) ? 'JS' : 'cheerio';
     console.error(
       s.name.padEnd(25) + String(s.count).padEnd(8) + String(s.datesExtracted).padEnd(8) +
-      (s.elapsed + 's').padEnd(8) + method.padEnd(10) + status
+      (s.elapsed + 's').padEnd(8) + status
     );
   }
-  console.error('-'.repeat(70));
+
+  // Per-source-URL breakdown
+  console.error('-'.repeat(90));
+  console.error('Source URL'.padEnd(60) + 'Items'.padEnd(8) + 'Dates');
+  console.error('-'.repeat(90));
+  const byUrl = {};
+  for (const e of events) {
+    const src = e._source || '(unknown)';
+    if (!byUrl[src]) byUrl[src] = { count: 0, dates: 0 };
+    byUrl[src].count++;
+    if (e.date && (/^\d{4}-\d{2}-\d{2}$/.test(e.date) || /^\d{4}-\d{2}-\d{2} to \d{4}-\d{2}-\d{2}$/.test(e.date))) {
+      byUrl[src].dates++;
+    }
+  }
+  const sortedUrls = Object.entries(byUrl).sort((a, b) => b[1].count - a[1].count);
+  for (const [url, s] of sortedUrls) {
+    console.error(url.slice(0, 59).padEnd(60) + String(s.count).padEnd(8) + String(s.dates));
+  }
+
+  console.error('-'.repeat(90));
   if (failures > 0) console.error(`⛔ ${failures} source(s) had errors`);
   if (zeroResults > 0) console.error(`⚠  ${zeroResults} source(s) returned zero items`);
   const totalDates = sourceLog.reduce((n, s) => n + s.datesExtracted, 0);
   console.error(`📅 ${totalDates}/${events.length} events have specific dates`);
-  console.error('='.repeat(70) + '\n');
+  console.error('='.repeat(90) + '\n');
+
+  // Strip _source before JSON output
+  events.forEach(e => delete e._source);
 }
 
 // ---------------------------------------------------------------------------
@@ -1037,13 +1083,12 @@ function printReport() {
   // Cheerio sources (fast, no browser)
   await runSource('doNYC', scrapeDoNYC);
   await runSource('The Skint', scrapeTheSkint);
-  await runSource('Secret NYC', scrapeSecretNYC);
   await runSource('Brooklyn Paper', scrapeBrooklynPaper);
-  await runSource('NYC Parks', scrapeNYCParks);
   await runSource('Playbill', scrapePlaybill);
   await runSource('National Arts Club', scrapeNAC);
+  await runSource('NYC Parks', scrapeNYCParks);
 
-  // Playwright sources (need JS rendering)
+  // Playwright sources (need JS rendering or proxy for CI)
   let browser = null;
   try {
     const { chromium } = require('playwright');

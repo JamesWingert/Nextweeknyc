@@ -356,10 +356,10 @@ function run() {
     process.exit(1);
   }
 
-  // Track per-source stats
+  // Track per-source stats (by sourceUrl)
   const sourceStats = {};
-  function getStat(venue) {
-    const key = venue || '(no venue)';
+  function getStat(sourceUrl) {
+    const key = sourceUrl || '(no source)';
     if (!sourceStats[key]) sourceStats[key] = { input: 0, valid: 0, junk: 0, deduped: 0 };
     return sourceStats[key];
   }
@@ -368,8 +368,8 @@ function run() {
   const allErrors = [];
 
   items.forEach((item, i) => {
-    const venue = (item.venue || item.location || '').replace(/\s*\n\s*/g, ' ').trim();
-    const stat = getStat(venue);
+    const sourceUrl = (item.sourceUrl || item.url || item.link || '').trim();
+    const stat = getStat(sourceUrl);
     stat.input++;
     const result = validateEvent(item, i);
     if (result.valid) {
@@ -385,43 +385,43 @@ function run() {
   const deduped = dedupeEvents(validated);
   const dupeCount = validated.length - deduped.length;
 
-  // Count deduped events per source
-  const dedupedVenueCounts = {};
+  // Count deduped events per source URL
+  const dedupedSourceCounts = {};
   for (const e of deduped) {
-    const key = e.venue || '(no venue)';
-    dedupedVenueCounts[key] = (dedupedVenueCounts[key] || 0) + 1;
+    const key = e.sourceUrl || '(no source)';
+    dedupedSourceCounts[key] = (dedupedSourceCounts[key] || 0) + 1;
   }
   for (const key of Object.keys(sourceStats)) {
-    sourceStats[key].deduped = sourceStats[key].valid - (dedupedVenueCounts[key] || 0);
+    sourceStats[key].deduped = sourceStats[key].valid - (dedupedSourceCounts[key] || 0);
   }
 
   // Print per-source breakdown
-  console.error('\n' + '='.repeat(75));
+  console.error('\n' + '='.repeat(90));
   console.error('VALIDATION REPORT');
-  console.error('='.repeat(75));
-  console.error('Source/Venue'.padEnd(30) + 'Input'.padEnd(8) + 'Junk'.padEnd(8) + 'Dupes'.padEnd(8) + 'Final');
-  console.error('-'.repeat(75));
+  console.error('='.repeat(90));
+  console.error('Source URL'.padEnd(55) + 'Input'.padEnd(8) + 'Junk'.padEnd(8) + 'Dupes'.padEnd(8) + 'Final');
+  console.error('-'.repeat(90));
   const sorted = Object.entries(sourceStats).sort((a, b) => b[1].input - a[1].input);
-  for (const [venue, s] of sorted) {
-    const final = (dedupedVenueCounts[venue] || 0);
+  for (const [src, s] of sorted) {
+    const final = (dedupedSourceCounts[src] || 0);
     const flag = s.junk > 0 || s.deduped > 5 ? ' ⚠' : '';
     console.error(
-      venue.slice(0, 29).padEnd(30) +
+      src.slice(0, 54).padEnd(55) +
       String(s.input).padEnd(8) +
       String(s.junk).padEnd(8) +
       String(s.deduped).padEnd(8) +
       String(final) + flag
     );
   }
-  console.error('-'.repeat(75));
+  console.error('-'.repeat(90));
   console.error(
-    'TOTAL'.padEnd(30) +
+    'TOTAL'.padEnd(55) +
     String(items.length).padEnd(8) +
     String(allErrors.length).padEnd(8) +
     String(dupeCount).padEnd(8) +
     String(deduped.length)
   );
-  console.error('='.repeat(75) + '\n');
+  console.error('='.repeat(90) + '\n');
 
   if (allErrors.length > 0) {
     console.warn(`Warnings (${allErrors.length} invalid/junk entries skipped):`);

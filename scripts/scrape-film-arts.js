@@ -4,7 +4,7 @@
  *
  * Sources (26):
  *   FILM:       Metrograph [JS], Film Forum, IFC Center, Angelika [JS],
- *               Film at Lincoln Center [JS, Cloudflare — may fail]
+ *               Film at Lincoln Center [JS]
  *   MUSEUMS:    The Met, Whitney, Guggenheim [JS], New Museum [JS],
  *               Neue Galerie, Frick (exhibitions), Queens Museum [dropped-403]
  *   CULTURAL:   BAM, Asia Society [dropped-cloudflare], Japan Society [JS],
@@ -252,6 +252,7 @@ function push(items, venue, category, fallbackUrl) {
       date,
       category: item.category || category,
       url: item.link || item.url || fallbackUrl,
+      _source: fallbackUrl,
       ...(item.time ? { time: item.time } : {}),
       ...(item.description ? { description: item.description } : {}),
     });
@@ -262,7 +263,7 @@ function push(items, venue, category, fallbackUrl) {
 // CHEERIO SOURCES — Film
 // ---------------------------------------------------------------------------
 
-async function scrapeFilmForum(browser) {
+async function scrapeFilmForum() {
   // Scrape both now_playing (with date ranges) and coming_soon pages via cheerio
   // The homepage lacks dates; the now_playing page has "Friday, Feb 27 – Thursday, March 12" etc.
   try {
@@ -312,6 +313,75 @@ async function scrapeFilmForum(browser) {
   } catch (e) { console.error('Film Forum error:', e.message); }
 }
 
+// Film Forum /events page is JS-rendered — needs Playwright
+async function scrapeFilmForumEvents(browser) {
+  const page = await browser.newPage();
+  page.setDefaultTimeout(20000);
+  try {
+    await page.goto('https://filmforum.org/events', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(ciWait(6000));
+
+    const items = await page.evaluate(() => {
+      const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11,
+        january:0,february:1,march:2,april:3,june:5,july:6,august:7,september:8,october:9,november:10,december:11};
+      const year = new Date().getFullYear();
+      const results = [];
+      const seen = new Set();
+
+      // Look for event links and their date context
+      document.querySelectorAll('a[href*="/film/"], a[href*="/event/"], a[href*="/series/"]').forEach(el => {
+        const t = el.textContent.trim();
+        if (!t || t.length < 4 || t.length > 120) return;
+        if (/^(watch trailer|see all|more|film forum|showtimes|buy tickets)/i.test(t)) return;
+        const key = t.toLowerCase();
+        if (seen.has(key)) return;
+        seen.add(key);
+
+        const href = el.href || '';
+        // Walk up to find date context
+        let dateText = '';
+        let container = el.parentElement;
+        for (let i = 0; i < 8 && container; i++) {
+          const text = container.textContent.replace(/\s+/g, ' ').trim();
+          // Date range: "Friday, March 6 – Thursday, March 12"
+          const rangeMatch = text.match(/((?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\w*,?\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+\d{1,2}\s*[–—-]\s*(?:(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\w*,?\s+)?(?:(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+)?\d{1,2})/i);
+          if (rangeMatch) { dateText = rangeMatch[1]; break; }
+          // Single date
+          const singleMatch = text.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+\d{1,2}(?:\s*,?\s*\d{4})?)/i);
+          if (singleMatch) { dateText = singleMatch[1]; break; }
+          container = container.parentElement;
+        }
+        results.push({ title: t.replace(/([a-z])([A-Z])/g, '$1 $2'), link: href, date: dateText });
+      });
+
+      // Also try generic event-like elements
+      document.querySelectorAll('[class*="event"], [class*="card"], article').forEach(el => {
+        const titleEl = el.querySelector('h2, h3, h4, [class*="title"]');
+        if (!titleEl) return;
+        const t = titleEl.textContent.trim();
+        if (!t || t.length < 4 || t.length > 120) return;
+        const key = t.toLowerCase();
+        if (seen.has(key)) return;
+        seen.add(key);
+
+        const linkEl = el.querySelector('a');
+        const href = linkEl ? linkEl.href : '';
+        const text = el.textContent.replace(/\s+/g, ' ').trim();
+        let dateText = '';
+        const dateMatch = text.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+\d{1,2}(?:\s*,?\s*\d{4})?)/i);
+        if (dateMatch) dateText = dateMatch[1];
+        results.push({ title: t, link: href, date: dateText });
+      });
+
+      return results;
+    });
+
+    push(items, 'Film Forum', 'Film', 'https://filmforum.org/events');
+    console.error(`Film Forum /events: ${items.length}`);
+  } catch (e) { console.error('Film Forum /events error:', e.message); }
+  finally { await page.close(); }
+}
+
 async function scrapeIFC() {
   try {
     // Use the showtimes page which has per-day structure
@@ -352,10 +422,54 @@ async function scrapeIFC() {
       if (!dateText && currentDate) dateText = currentDate;
       if (title && title.length > 3 && title.length < 100) items.push({ title, link: fullLink, date: dateText });
     });
+    // --- Also scrape /special-events/ for Q&As, 35mm screenings, sneak previews ---
+    const specialItems = [];
+    try {
+      const { html: evHtml } = await fetchHTML('https://www.ifccenter.com/special-events/');
+      const $ev = cheerio.load(evHtml);
+      // Build a map of film title -> link from all film links on the page
+      const titleLinks = {};
+      $ev('a[href*="/films/"]').each((_, el) => {
+        const t = $ev(el).text().trim();
+        const href = $ev(el).attr('href') || '';
+        if (t && t.length > 3 && t.length < 120 && !/buy tickets/i.test(t)) {
+          titleLinks[t] = href.startsWith('/') ? `https://www.ifccenter.com${href}` : href;
+        }
+      });
+      // Walk the text content looking for title/date patterns
+      const textContent = $ev.root().text().replace(/\t/g, ' ');
+      const lines = textContent.split('\n').map(l => l.trim()).filter(Boolean);
+      let curTitle = '';
+      let curLink = '';
+      for (const line of lines) {
+        // Date line: "Tue Mar 3" or "Mon Mar 16" (short, starts with day abbreviation)
+        const dm = line.match(/^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2})$/i);
+        if (dm && curTitle) {
+          const mon = MONTHS[dm[2].toLowerCase()];
+          if (mon !== undefined) {
+            const d = `${year}-${String(mon+1).padStart(2,'0')}-${String(parseInt(dm[3],10)).padStart(2,'0')}`;
+            specialItems.push({ title: curTitle, link: curLink, date: d });
+          }
+          continue;
+        }
+        // Check if this line is a known film title
+        if (titleLinks[line]) {
+          curTitle = line;
+          curLink = titleLinks[line];
+        }
+      }
+      console.error(`IFC Center /special-events/: ${specialItems.length} events`);
+    } catch (e) { console.error('IFC Center /special-events/ error:', e.message); }
+
+    // Dedup screenings and push separately from special events
     const seen = new Set();
-    const deduped = items.filter(i => { const k = i.title.toLowerCase(); if (seen.has(k)) return false; seen.add(k); return true; });
-    push(deduped, 'IFC Center', 'Film', 'https://www.ifccenter.com');
-    console.error(`IFC Center: ${deduped.length}`);
+    const dedupedScreenings = items.filter(i => { const k = i.title.toLowerCase() + '|' + (i.date || ''); if (seen.has(k)) return false; seen.add(k); return true; });
+    push(dedupedScreenings, 'IFC Center', 'Film', 'https://www.ifccenter.com');
+    console.error(`IFC Center screenings: ${dedupedScreenings.length}`);
+    // Push special events with their own source URL, dedup against screenings
+    const dedupedSpecial = specialItems.filter(i => { const k = i.title.toLowerCase() + '|' + (i.date || ''); if (seen.has(k)) return false; seen.add(k); return true; });
+    push(dedupedSpecial, 'IFC Center', 'Film', 'https://www.ifccenter.com/special-events/');
+    console.error(`IFC Center special events: ${dedupedSpecial.length}`);
   } catch (e) { console.error('IFC Center error:', e.message); }
 }
 
@@ -1415,15 +1529,25 @@ async function scrape92NY(stealthBrowser) {
       } catch (_) {}
     });
 
-    // Step 1: First load — triggers Incapsula captcha/challenge, sets cookies
-    console.error('92NY: first load (captcha challenge)...');
-    await page.goto('https://www.92ny.org/whats-on/calendar', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(ciWait(8000));
+    // Step 1: Visit homepage first to get Incapsula cookies (like a real user)
+    console.error('92NY: visiting homepage first...');
+    await page.goto('https://www.92ny.org/', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(ciWait(4000));
+    // Simulate real user: move mouse around
+    await page.mouse.move(400, 300);
+    await page.waitForTimeout(ciWait(2000));
+    await page.mouse.move(700, 450);
+    await page.waitForTimeout(ciWait(1000));
 
-    // Step 2: Refresh — cookies are now set, should get real page
-    console.error('92NY: refreshing after captcha...');
+    // Step 2: Navigate to calendar (cookies should be set now)
+    console.error('92NY: navigating to calendar...');
+    await page.goto('https://www.92ny.org/whats-on/calendar', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(ciWait(3000));
+
+    // Step 3: Refresh to get past any remaining challenge
+    console.error('92NY: refreshing after challenge...');
     await page.reload({ waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(ciWait(10000));
+    await page.waitForTimeout(ciWait(5000));
 
     const pageTitle = await page.title();
     console.error(`92NY page title after refresh: "${pageTitle}"`);
@@ -1587,6 +1711,26 @@ async function scrape92NY(stealthBrowser) {
       return true;
     });
 
+    // DOM fallback — if structured scraping got nothing, try generic selectors
+    if (unique.length === 0) {
+      console.error('  92NY: structured scraping empty, trying generic DOM fallback...');
+      const domItems = await page.evaluate(() => {
+        const r = [];
+        document.querySelectorAll('[class*="event"], [class*="card"], article, .listing-item').forEach(el => {
+          const titleEl = el.querySelector('h2, h3, h4, [class*="title"], [class*="name"]');
+          const title = titleEl ? titleEl.textContent.trim() : '';
+          const linkEl = el.querySelector('a[href*="/event"], a[href*="whats-on"]');
+          const link = linkEl ? linkEl.href : '';
+          const dateEl = el.querySelector('time, [class*="date"], [datetime]');
+          const date = dateEl ? (dateEl.getAttribute('datetime') || dateEl.textContent.trim()) : '';
+          if (title && title.length > 3 && title.length < 200) r.push({ title, link, date });
+        });
+        return r;
+      }).catch(() => []);
+      console.error(`  92NY DOM fallback: ${domItems.length} events`);
+      unique.push(...domItems);
+    }
+
     push(unique, '92NY', 'Music/Performing Arts', 'https://www.92ny.org/whats-on/calendar');
     console.error(`92NY total: ${unique.length}`);
   } catch (e) { console.error('92NY error:', e.message); }
@@ -1602,7 +1746,7 @@ const JS_SOURCES = new Set([
   'Metrograph', 'Guggenheim', 'New Museum', 'Japan Society',
   'NY Philharmonic', 'Carnegie Hall', 'Met Opera', 'NYCB',
   'Joyce Theater', 'Lincoln Center', 'Moving Image', '92NY',
-  'Angelika', 'Film at Lincoln Center', 'ABT'
+  'Angelika', 'Film at Lincoln Center', 'ABT', 'Film Forum Events'
 ]);
 
 // ---------------------------------------------------------------------------
@@ -1748,31 +1892,99 @@ async function scrapeAngelika(browser) {
 }
 
 async function scrapeFilmLinc(browser) {
-  // Film at Lincoln Center — behind Cloudflare, try anyway
+  // Film at Lincoln Center — now accessible with proxy
+  // Scrapes /now-playing/ for current films and /daily/ for Q&As/announcements
   const page = await browser.newPage();
-  page.setDefaultTimeout(20000);
+  page.setDefaultTimeout(30000);
   try {
     await page.goto('https://www.filmlinc.org/now-playing/', { waitUntil: 'networkidle' });
-    await page.waitForTimeout(ciWait(6000));
-    const bodyText = await page.evaluate(() => document.body.textContent.replace(/\s+/g, ' ').trim().slice(0, 200));
+    await page.waitForTimeout(ciWait(8000));
+
+    // Scroll to load lazy content
+    for (let i = 0; i < 8; i++) {
+      await page.evaluate(() => window.scrollBy(0, 800));
+      await page.waitForTimeout(ciWait(800));
+    }
+
+    const bodyText = await page.evaluate(() => document.body.textContent.replace(/\s+/g, ' ').trim().slice(0, 300));
     if (/security verification|enable javascript|just a moment/i.test(bodyText)) {
       console.error('Film at Lincoln Center: blocked by Cloudflare');
       return;
     }
+
     const items = await page.evaluate(() => {
-      const r = [], seen = new Set();
-      document.querySelectorAll('a[href*="/film"]').forEach(el => {
+      const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11,
+        january:0,february:1,march:2,april:3,june:5,july:6,august:7,september:8,october:9,november:10,december:11};
+      const year = new Date().getFullYear();
+      const r = [];
+      const seen = new Set();
+
+      // Find all film/event links — FLC uses links to /films/, /series/, /events/
+      document.querySelectorAll('a[href*="/films/"], a[href*="/series/"], a[href*="/events/"]').forEach(el => {
         const t = el.textContent.trim();
-        if (t && t.length > 3 && t.length < 120 && !seen.has(t.toLowerCase())) {
-          seen.add(t.toLowerCase());
-          const container = el.closest('article, div, li, [class*="card"]');
-          const ctx = container ? container.textContent.replace(/\s+/g, ' ').trim() : '';
-          const dateMatch = ctx.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+\d{1,2}(?:\s*[-–—]\s*(?:(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+)?\d{1,2})?)/i);
-          r.push({ title: t, link: el.href, date: dateMatch ? dateMatch[1] : '' });
+        if (!t || t.length < 3 || t.length > 150) return;
+        if (/^(subscribe|contact|press|privacy|member|become|make flc|be the first)/i.test(t)) return;
+        const key = t.toLowerCase();
+        if (seen.has(key)) return;
+        seen.add(key);
+
+        const href = el.href || '';
+        // Walk up to find date context
+        let container = el.closest('article, section, div, li, [class*="card"], [class*="film"], [class*="event"]');
+        const ctx = container ? container.textContent.replace(/\s+/g, ' ').trim() : '';
+
+        let dateText = '';
+        // "Opens March 20" or "Opens Friday"
+        const opensMatch = ctx.match(/Opens\s+((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+\d{1,2})/i);
+        if (opensMatch) dateText = opensMatch[1];
+        // Date range: "March 5 - 15" or "February 20 - March 4"
+        if (!dateText) {
+          const rangeMatch = ctx.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+\d{1,2})\s*[-–—]\s*((?:(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+)?\d{1,2})/i);
+          if (rangeMatch) dateText = `${rangeMatch[1]} - ${rangeMatch[2]}`;
+        }
+        // Single date: "March 6th"
+        if (!dateText) {
+          const singleMatch = ctx.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+\d{1,2}(?:th|st|nd|rd)?(?:\s*,?\s*\d{4})?)/i);
+          if (singleMatch) dateText = singleMatch[1];
+        }
+
+        r.push({ title: t, link: href, date: dateText });
+      });
+
+      // Also look for h2/h3 headings that might be film titles not wrapped in links
+      document.querySelectorAll('h2, h3, h4').forEach(el => {
+        const t = el.textContent.trim();
+        if (!t || t.length < 3 || t.length > 150) return;
+        if (/^(what's on|subscribe|now playing|the latest)/i.test(t)) return;
+        const key = t.toLowerCase();
+        if (seen.has(key)) return;
+        seen.add(key);
+
+        const linkEl = el.querySelector('a') || el.closest('a');
+        const href = linkEl ? linkEl.href : '';
+        const container = el.closest('article, section, div, li');
+        const ctx = container ? container.textContent.replace(/\s+/g, ' ').trim() : '';
+
+        let dateText = '';
+        const opensMatch = ctx.match(/Opens\s+((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+\d{1,2})/i);
+        if (opensMatch) dateText = opensMatch[1];
+        if (!dateText) {
+          const rangeMatch = ctx.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+\d{1,2})\s*[-–—]\s*((?:(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+)?\d{1,2})/i);
+          if (rangeMatch) dateText = `${rangeMatch[1]} - ${rangeMatch[2]}`;
+        }
+        if (!dateText) {
+          const singleMatch = ctx.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+\d{1,2}(?:th|st|nd|rd)?(?:\s*,?\s*\d{4})?)/i);
+          if (singleMatch) dateText = singleMatch[1];
+        }
+
+        if (href || dateText) {
+          r.push({ title: t, link: href, date: dateText });
         }
       });
-      return r.slice(0, 30);
+
+      return r;
     });
+
     push(items, 'Film at Lincoln Center', 'Film', 'https://www.filmlinc.org');
     console.error(`Film at Lincoln Center: ${items.length}`);
   } catch (e) { console.error('Film at Lincoln Center error:', e.message); }
@@ -1809,26 +2021,46 @@ async function runSource(name, fn, browserOrNull) {
 }
 
 function printReport() {
-  console.error('\n' + '='.repeat(70));
+  console.error('\n' + '='.repeat(90));
   console.error('SCRAPE REPORT — Film/Arts');
-  console.error('='.repeat(70));
+  console.error('='.repeat(90));
   console.error(`Date range: ${RANGE}`);
   console.error(`Total events: ${events.length}`);
-  console.error('-'.repeat(70));
-  console.error('Source'.padEnd(25) + 'Items'.padEnd(8) + 'Dates'.padEnd(8) + 'Time'.padEnd(8) + 'Method'.padEnd(10) + 'Status');
-  console.error('-'.repeat(70));
+
+  // Per-source-name summary (scraper timing)
+  console.error('-'.repeat(90));
+  console.error('Scraper'.padEnd(25) + 'Items'.padEnd(8) + 'Dates'.padEnd(8) + 'Time'.padEnd(8) + 'Status');
+  console.error('-'.repeat(90));
   let failures = 0, zeroResults = 0;
   for (const s of sourceLog) {
-    const status = s.error ? `ERROR: ${s.error.slice(0, 35)}` : (s.count === 0 ? '⚠ ZERO' : '✓ OK');
+    const status = s.error ? `ERROR: ${s.error.slice(0, 40)}` : (s.count === 0 ? '⚠ ZERO' : '✓ OK');
     if (s.error) failures++;
     if (s.count === 0 && !s.error) zeroResults++;
-    const method = JS_SOURCES.has(s.name) ? 'JS' : 'cheerio';
     console.error(
       s.name.padEnd(25) + String(s.count).padEnd(8) + String(s.datesExtracted).padEnd(8) +
-      (s.elapsed + 's').padEnd(8) + method.padEnd(10) + status
+      (s.elapsed + 's').padEnd(8) + status
     );
   }
-  console.error('-'.repeat(70));
+
+  // Per-source-URL breakdown
+  console.error('-'.repeat(90));
+  console.error('Source URL'.padEnd(60) + 'Items'.padEnd(8) + 'Dates');
+  console.error('-'.repeat(90));
+  const byUrl = {};
+  for (const e of events) {
+    const src = e._source || '(unknown)';
+    if (!byUrl[src]) byUrl[src] = { count: 0, dates: 0 };
+    byUrl[src].count++;
+    if (e.date && (/^\d{4}-\d{2}-\d{2}$/.test(e.date) || /^\d{4}-\d{2}-\d{2} to \d{4}-\d{2}-\d{2}$/.test(e.date))) {
+      byUrl[src].dates++;
+    }
+  }
+  const sortedUrls = Object.entries(byUrl).sort((a, b) => b[1].count - a[1].count);
+  for (const [url, s] of sortedUrls) {
+    console.error(url.slice(0, 59).padEnd(60) + String(s.count).padEnd(8) + String(s.dates));
+  }
+
+  console.error('-'.repeat(90));
   if (failures > 0) console.error(`⛔ ${failures} source(s) had errors`);
   if (zeroResults > 0) console.error(`⚠  ${zeroResults} source(s) returned zero items`);
   const totalDates = sourceLog.reduce((n, s) => n + s.datesExtracted, 0);
@@ -1838,8 +2070,11 @@ function printReport() {
   console.error('  MoMA — Cloudflare (try /calendar/exhibitions)');
   console.error('  Asia Society — Cloudflare');
   console.error('  Queens Museum — 403 Forbidden');
-  console.error('  Film at Lincoln Center — Cloudflare (attempted, may fail)');
-  console.error('='.repeat(70) + '\n');
+  console.error('  Film at Lincoln Center — Cloudflare (now using proxy, should work)');
+  console.error('='.repeat(90) + '\n');
+
+  // Strip _source before JSON output
+  events.forEach(e => delete e._source);
 }
 
 // ---------------------------------------------------------------------------
@@ -1867,6 +2102,7 @@ function printReport() {
     });
 
     await runSource('Metrograph', scrapeMetrograph, browser);
+    await runSource('Film Forum Events', scrapeFilmForumEvents, browser);
     await runSource('BAM', scrapeBAM, browser);
     await runSource('Angelika', scrapeAngelika, browser);
     await runSource('Film at Lincoln Center', scrapeFilmLinc, browser);
@@ -1896,7 +2132,7 @@ function printReport() {
       ],
     });
     const stealthContext = await stealthBrowser.newContext({
-      userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+      userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
       viewport: { width: 1280, height: 800 },
       javaScriptEnabled: true,
     });
@@ -1907,6 +2143,18 @@ function printReport() {
 
     await runSource('Moving Image', scrapeMovingImage, stealthContext);
     await runSource('92NY', scrape92NY, stealthContext);
+    // If 92NY got very few events with stealth browser, retry with regular Chromium+proxy
+    const ny92count = events.filter(e => e.venue === '92NY').length;
+    if (ny92count < 20) {
+      console.error(`92NY only got ${ny92count} events with stealth browser, retrying with regular Chromium...`);
+      // Remove the few events from the stealth attempt before retrying
+      const beforeLen = events.length;
+      for (let i = events.length - 1; i >= 0; i--) {
+        if (events[i].venue === '92NY') events.splice(i, 1);
+      }
+      console.error(`  Removed ${beforeLen - events.length} stealth 92NY events before retry`);
+      await runSource('92NY', scrape92NY, browser);
+    }
   } catch (e) {
     console.error('Playwright unavailable, skipping JS sources:', e.message);
   } finally {
