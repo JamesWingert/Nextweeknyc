@@ -2140,6 +2140,32 @@ function printReport() {
       await runSource(name, fn, browser);
     }
 
+    // If proxy tunnel failed for most sources, retry without proxy
+    if (PROXY_CONFIG) {
+      const pwFails = sourceLog.filter(s =>
+        playwrightSources.some(([n]) => n === s.name) && s.count === 0
+      );
+      if (pwFails.length >= 3) {
+        console.error(`\n⚠ ${pwFails.length}/${playwrightSources.length} Playwright sources returned 0 — retrying without proxy...`);
+        let noproxyBrowser = null;
+        try {
+          noproxyBrowser = await chromium.launch({ headless: true, args: BROWSER_ARGS });
+          for (const tf of pwFails) {
+            const src = playwrightSources.find(([n]) => n === tf.name);
+            if (!src) continue;
+            // Remove the failed sourceLog entry so runSource can add a fresh one
+            const idx = sourceLog.indexOf(tf);
+            if (idx !== -1) sourceLog.splice(idx, 1);
+            await runSource(src[0], src[1], noproxyBrowser);
+          }
+        } catch (e) {
+          console.error('No-proxy browser launch failed:', e.message);
+        } finally {
+          try { if (noproxyBrowser) await noproxyBrowser.close(); } catch (_) {}
+        }
+      }
+    }
+
     // Stealth browser for Cloudflare/Incapsula-protected sources
     console.error('\nLaunching stealth browser for protected sources...');
 
@@ -2192,17 +2218,75 @@ function printReport() {
     if (stealthCtx) {
       await runSource('Moving Image', scrapeMovingImage, stealthCtx);
       await runSource('92NY', scrape92NY, stealthCtx);
-      // If 92NY got very few events with stealth browser, retry with regular Chromium+proxy
-      const ny92count = events.filter(e => e.venue === '92NY').length;
-      if (ny92count < 20) {
-        console.error(`92NY only got ${ny92count} events with stealth browser, retrying with regular Chromium...`);
-        const beforeLen = events.length;
-        for (let i = events.length - 1; i >= 0; i--) {
-          if (events[i].venue === '92NY') events.splice(i, 1);
+
+      // If stealth sources got 0, retry without proxy
+      const stealthNames = ['Moving Image', '92NY'];
+      const stealthFails = sourceLog.filter(s =>
+        stealthNames.includes(s.name) && s.count === 0
+      );
+      if (stealthFails.length > 0) {
+        console.error(`⚠ Stealth sources returned 0 — retrying without proxy...`);
+        let noproxyStealth = null;
+        try {
+          noproxyStealth = await chromium.launch({
+            headless: false,
+            args: ['--disable-blink-features=AutomationControlled', ...BROWSER_ARGS, '--window-size=1280,800'],
+          });
+          const noproxyCtx = await noproxyStealth.newContext({
+            userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+            viewport: { width: 1280, height: 800 },
+            javaScriptEnabled: true,
+          });
+          await noproxyCtx.addInitScript(() => {
+            Object.defineProperty(navigator, 'webdriver', { get: () => false });
+          });
+          for (const tf of stealthFails) {
+            const idx = sourceLog.indexOf(tf);
+            if (idx !== -1) sourceLog.splice(idx, 1);
+            const fn = tf.name === 'Moving Image' ? scrapeMovingImage : scrape92NY;
+            await runSource(tf.name, fn, noproxyCtx);
+          }
+        } catch (e) {
+          console.error('No-proxy stealth launch failed, trying headless...', e.message);
+          try {
+            let nph = await chromium.launch({
+              headless: true,
+              args: ['--disable-blink-features=AutomationControlled', ...BROWSER_ARGS],
+            });
+            const nphCtx = await nph.newContext({
+              userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+              viewport: { width: 1280, height: 800 },
+              javaScriptEnabled: true,
+            });
+            await nphCtx.addInitScript(() => {
+              Object.defineProperty(navigator, 'webdriver', { get: () => false });
+            });
+            for (const tf of stealthFails) {
+              const existing = sourceLog.find(s => s.name === tf.name);
+              if (existing) { const i = sourceLog.indexOf(existing); if (i !== -1) sourceLog.splice(i, 1); }
+              const fn = tf.name === 'Moving Image' ? scrapeMovingImage : scrape92NY;
+              await runSource(tf.name, fn, nphCtx);
+            }
+            try { nph.close(); } catch (_) {}
+          } catch (e2) {
+            console.error('Headless no-proxy stealth also failed:', e2.message);
+          }
+        } finally {
+          try { if (noproxyStealth) await noproxyStealth.close(); } catch (_) {}
         }
-        console.error(`  Removed ${beforeLen - events.length} stealth 92NY events before retry`);
-        await ensureBrowser();
-        await runSource('92NY', scrape92NY, browser);
+      } else {
+        // If 92NY got very few events with stealth browser, retry with regular Chromium+proxy
+        const ny92count = events.filter(e => e.venue === '92NY').length;
+        if (ny92count < 20) {
+          console.error(`92NY only got ${ny92count} events with stealth browser, retrying with regular Chromium...`);
+          const beforeLen = events.length;
+          for (let i = events.length - 1; i >= 0; i--) {
+            if (events[i].venue === '92NY') events.splice(i, 1);
+          }
+          console.error(`  Removed ${beforeLen - events.length} stealth 92NY events before retry`);
+          await ensureBrowser();
+          await runSource('92NY', scrape92NY, browser);
+        }
       }
     }
   } catch (e) {
