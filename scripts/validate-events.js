@@ -268,10 +268,16 @@ function validateEvent(raw, index) {
   if (date && !isValidDate(date)) errors.push(`[${index}] invalid date format: "${date}"`);
 
   // Normalize same-day ranges ("2026-03-03 to 2026-03-03") into single dates
+  // Also fix backwards ranges where end < start by swapping
   let normalizedDate = date;
   if (VALID_RANGE_RE.test(date)) {
-    const [s, e] = date.split(' to ');
-    if (s === e) normalizedDate = s;
+    let [s, e] = date.split(' to ');
+    if (s === e) {
+      normalizedDate = s;
+    } else if (s > e) {
+      // End date is before start date — swap them
+      normalizedDate = `${e} to ${s}`;
+    }
   }
 
   if (errors.length > 0) return { valid: false, errors };

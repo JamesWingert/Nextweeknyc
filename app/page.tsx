@@ -34,10 +34,12 @@ function getDateLabel(date: string): string {
   if (range.start.getTime() === range.end.getTime()) {
     return format(range.start, 'EEEE, MMMM d');
   }
-  if (range.start.getMonth() === range.end.getMonth()) {
-    return `${format(range.start, 'MMM d')} – ${format(range.end, 'd')}`;
+  // Swap if end is before start (bad data)
+  const [s, e] = range.start <= range.end ? [range.start, range.end] : [range.end, range.start];
+  if (s.getMonth() === e.getMonth()) {
+    return `${format(s, 'MMM d')} – ${format(e, 'd')}`;
   }
-  return `${format(range.start, 'MMM d')} – ${format(range.end, 'MMM d')}`;
+  return `${format(s, 'MMM d')} – ${format(e, 'MMM d')}`;
 }
 
 function isEventFuture(eventDate: string | null, today: Date): boolean {
@@ -1529,10 +1531,10 @@ function getOnViewDateLabel(event: Event): string {
     if (range.start.getTime() === range.end.getTime()) {
       return format(range.start, 'MMM d');
     }
-    const startStr = format(range.start, 'MMM d');
-    const endMonth = range.end.getMonth();
-    const startMonth = range.start.getMonth();
-    const endStr = startMonth === endMonth ? format(range.end, 'd') : format(range.end, 'MMM d');
+    // Swap if end is before start (bad data)
+    const [s, e] = range.start <= range.end ? [range.start, range.end] : [range.end, range.start];
+    const startStr = format(s, 'MMM d');
+    const endStr = s.getMonth() === e.getMonth() ? format(e, 'd') : format(e, 'MMM d');
     return `${startStr} – ${endStr}`;
   }
   return format(toDate(event.date), 'MMM d');
