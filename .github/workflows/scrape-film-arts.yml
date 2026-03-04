@@ -36,6 +36,9 @@ jobs:
           sed -n '/^\[/,/^\]/p' /tmp/raw-film-full.txt > /tmp/raw-film-arts.json
         env:
           NODE_ENV: production
+          PROXY_SERVER: ${{ secrets.PROXY_SERVER }}
+          PROXY_USERNAME: ${{ secrets.PROXY_USERNAME }}
+          PROXY_PASSWORD: ${{ secrets.PROXY_PASSWORD }}
 
       - name: Show scraper log
         if: always()
@@ -56,7 +59,7 @@ jobs:
 
       - name: Validate and normalize
         run: |
-          node scripts/validate-events.js /tmp/raw-film-arts.json /tmp/validated-film-arts.json
+          node scripts/validate-events.js /tmp/raw-film-arts.json /tmp/validated-film-arts.json 2>&1 | tee /tmp/validate-film.log
           COUNT=$(node -e "console.log(JSON.parse(require('fs').readFileSync('/tmp/validated-film-arts.json','utf8')).length)")
           echo "Film/arts events validated: $COUNT"
           if [ "$COUNT" -ge 50 ]; then

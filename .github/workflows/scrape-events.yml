@@ -33,14 +33,20 @@ jobs:
       - name: Run general events scraper (8 sources)
         run: |
           xvfb-run --auto-servernum node scripts/scrape-general-events.js > /tmp/raw-events-full.txt 2>/tmp/scrape-general.log || true
-          # Extract only the JSON array — Playwright/xvfb may print non-JSON to stdout
           sed -n '/^\[/,/^\]/p' /tmp/raw-events-full.txt > /tmp/raw-events.json
+        env:
+          PROXY_SERVER: ${{ secrets.PROXY_SERVER }}
+          PROXY_USERNAME: ${{ secrets.PROXY_USERNAME }}
+          PROXY_PASSWORD: ${{ secrets.PROXY_PASSWORD }}
 
       - name: Run film/arts scraper (24 sources)
         run: |
           xvfb-run --auto-servernum node scripts/scrape-film-arts.js > /tmp/raw-film-full.txt 2>/tmp/scrape-film.log || true
-          # Extract only the JSON array — Playwright/xvfb may print non-JSON to stdout
           sed -n '/^\[/,/^\]/p' /tmp/raw-film-full.txt > /tmp/raw-film.json
+        env:
+          PROXY_SERVER: ${{ secrets.PROXY_SERVER }}
+          PROXY_USERNAME: ${{ secrets.PROXY_USERNAME }}
+          PROXY_PASSWORD: ${{ secrets.PROXY_PASSWORD }}
 
       - name: Show scraper logs
         if: always()
@@ -50,38 +56,17 @@ jobs:
           echo ""
           echo "=== Film/Arts Log ==="
           cat /tmp/scrape-film.log || true
-          echo ""
-          echo "=== Raw stdout (first 5 lines, general) ==="
-          head -5 /tmp/raw-events-full.txt 2>/dev/null || echo "(no file)"
-          echo ""
-          echo "=== Raw stdout (first 5 lines, film) ==="
-          head -5 /tmp/raw-film-full.txt 2>/dev/null || echo "(no file)"
-
-      - name: Write job summary
-        if: always()
-        run: |
-          echo "## Scrape Report" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### General Events" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          grep -E '(Source|---|✓|⚠|⛔|📅|ERROR|ZERO|REPORT|Total|Date range)' /tmp/scrape-general.log 2>/dev/null || echo "(no report)"
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Film/Arts" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          grep -E '(Source|---|✓|⚠|⛔|📅|ERROR|ZERO|REPORT|Total|Date range)' /tmp/scrape-film.log 2>/dev/null || echo "(no report)"
-          echo '```' >> $GITHUB_STEP_SUMMARY
 
       - name: Validate and normalize general events
         run: |
           if [ -s /tmp/raw-events.json ]; then
-            node scripts/validate-events.js /tmp/raw-events.json /tmp/validated-events.json
+            node scripts/validate-events.js /tmp/raw-events.json /tmp/validated-events.json 2>&1 | tee /tmp/validate-general.log
             COUNT=$(node -e "console.log(JSON.parse(require('fs').readFileSync('/tmp/validated-events.json','utf8')).length)")
             echo "General events validated: $COUNT"
             if [ "$COUNT" -ge 50 ]; then
               cp /tmp/validated-events.json public/data/events.json
             else
-              echo "⚠ Only $COUNT events (min 50) — keeping existing data to avoid overwriting with bad scrape"
+              echo "⚠ Only $COUNT events (min 50) — keeping existing data"
             fi
           else
             echo "General scraper produced no output, keeping existing data"
@@ -90,17 +75,42 @@ jobs:
       - name: Validate and normalize film/arts events
         run: |
           if [ -s /tmp/raw-film.json ]; then
-            node scripts/validate-events.js /tmp/raw-film.json /tmp/validated-film.json
+            node scripts/validate-events.js /tmp/raw-film.json /tmp/validated-film.json 2>&1 | tee /tmp/validate-film.log
             COUNT=$(node -e "console.log(JSON.parse(require('fs').readFileSync('/tmp/validated-film.json','utf8')).length)")
             echo "Film/arts events validated: $COUNT"
             if [ "$COUNT" -ge 50 ]; then
               cp /tmp/validated-film.json public/data/film_museum_events.json
             else
-              echo "⚠ Only $COUNT events (min 50) — keeping existing data to avoid overwriting with bad scrape"
+              echo "⚠ Only $COUNT events (min 50) — keeping existing data"
             fi
           else
             echo "Film/arts scraper produced no output, keeping existing data"
           fi
+
+      - name: Write job summary
+        if: always()
+        run: |
+          echo "## Scrape Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### General Events — Scraper" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          grep -E '(Source|---|✓|⚠|⛔|📅|ERROR|ZERO|REPORT|Total|Date range)' /tmp/scrape-general.log 2>/dev/null >> $GITHUB_STEP_SUMMARY || echo "(no scraper report)" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### General Events — Validation" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          grep -E '(Source/Venue|---|TOTAL|VALIDATION|Input|⚠)' /tmp/validate-general.log 2>/dev/null >> $GITHUB_STEP_SUMMARY || echo "(no validation report)" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Film/Arts — Scraper" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          grep -E '(Source|---|✓|⚠|⛔|📅|ERROR|ZERO|REPORT|Total|Date range)' /tmp/scrape-film.log 2>/dev/null >> $GITHUB_STEP_SUMMARY || echo "(no scraper report)" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Film/Arts — Validation" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          grep -E '(Source/Venue|---|TOTAL|VALIDATION|Input|⚠)' /tmp/validate-film.log 2>/dev/null >> $GITHUB_STEP_SUMMARY || echo "(no validation report)" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
 
       - name: Commit updated data
         run: |

@@ -30,6 +30,13 @@ const IS_CI = !!process.env.CI;
 const WAIT_MULT = IS_CI ? 2.0 : 1.0;
 function ciWait(ms) { return Math.round(ms * WAIT_MULT); }
 
+// Residential proxy config — only used in CI when secrets are set
+const PROXY_CONFIG = (process.env.PROXY_SERVER && process.env.PROXY_USERNAME && process.env.PROXY_PASSWORD)
+  ? { server: process.env.PROXY_SERVER, username: process.env.PROXY_USERNAME, password: process.env.PROXY_PASSWORD }
+  : null;
+if (PROXY_CONFIG) console.error('🌐 Proxy enabled: ' + PROXY_CONFIG.server);
+else if (IS_CI) console.error('⚠ No proxy configured — Playwright sources may be blocked');
+
 // ---------------------------------------------------------------------------
 // Date range — current month + next month
 // ---------------------------------------------------------------------------
@@ -1855,6 +1862,7 @@ function printReport() {
     const { chromium } = require('playwright');
     browser = await chromium.launch({
       headless: true,
+      proxy: PROXY_CONFIG || undefined,
       args: IS_CI ? ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] : [],
     });
 
@@ -1878,6 +1886,7 @@ function printReport() {
     console.error('\nLaunching stealth browser for protected sources...');
     stealthBrowser = await chromium.launch({
       headless: false,
+      proxy: PROXY_CONFIG || undefined,
       args: [
         '--disable-blink-features=AutomationControlled',
         '--no-sandbox',
