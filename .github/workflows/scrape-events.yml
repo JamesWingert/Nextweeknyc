@@ -32,7 +32,7 @@ jobs:
 
       - name: Run general events scraper (8 sources)
         run: |
-          xvfb-run --auto-servernum node scripts/scrape-general-events.js > /tmp/raw-events-full.txt 2>/tmp/scrape-general.log || true
+          xvfb-run --auto-servernum -- bash -c 'node scripts/scrape-general-events.js > /tmp/raw-events-full.txt 2>/tmp/scrape-general.log' || true
           sed -n '/^\[/,/^\]/p' /tmp/raw-events-full.txt > /tmp/raw-events.json
         env:
           PROXY_SERVER: ${{ secrets.PROXY_SERVER }}
@@ -41,7 +41,7 @@ jobs:
 
       - name: Run film/arts scraper (24 sources)
         run: |
-          xvfb-run --auto-servernum node scripts/scrape-film-arts.js > /tmp/raw-film-full.txt 2>/tmp/scrape-film.log || true
+          xvfb-run --auto-servernum -- bash -c 'node scripts/scrape-film-arts.js > /tmp/raw-film-full.txt 2>/tmp/scrape-film.log' || true
           sed -n '/^\[/,/^\]/p' /tmp/raw-film-full.txt > /tmp/raw-film.json
         env:
           PROXY_SERVER: ${{ secrets.PROXY_SERVER }}

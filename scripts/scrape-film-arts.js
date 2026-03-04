@@ -2090,76 +2090,126 @@ function printReport() {
   await runSource('Neue Galerie', scrapeNeueGalerie);
   await runSource('The Frick', scrapeFrick);
 
-  // Playwright sources (headless)
+  // Playwright sources (headless) — with auto-relaunch on browser crash
   let browser = null;
   let stealthBrowser = null;
   try {
     const { chromium } = require('playwright');
-    browser = await chromium.launch({
-      headless: true,
-      proxy: PROXY_CONFIG || undefined,
-      args: IS_CI ? ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] : [],
-    });
+    const BROWSER_ARGS = IS_CI ? ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] : [];
 
-    await runSource('Metrograph', scrapeMetrograph, browser);
-    await runSource('Film Forum Events', scrapeFilmForumEvents, browser);
-    await runSource('BAM', scrapeBAM, browser);
-    await runSource('Angelika', scrapeAngelika, browser);
-    await runSource('Film at Lincoln Center', scrapeFilmLinc, browser);
-    await runSource('Guggenheim', scrapeGuggenheim, browser);
-    await runSource('New Museum', scrapeNewMuseum, browser);
-    await runSource('Japan Society', scrapeJapanSociety, browser);
-    await runSource('NY Philharmonic', scrapeNYPhil, browser);
-    await runSource('Carnegie Hall', scrapeCarnegieHall, browser);
-    await runSource('Met Opera', scrapeMetOpera, browser);
-    await runSource('NYCB', scrapeNYCB, browser);
-    await runSource('Joyce Theater', scrapeJoyce, browser);
-    await runSource('Lincoln Center', scrapeLincolnCenter, browser);
-    await runSource('ABT', scrapeABT, browser);
+    async function launchBrowser() {
+      return chromium.launch({
+        headless: true,
+        proxy: PROXY_CONFIG || undefined,
+        args: BROWSER_ARGS,
+      });
+    }
+
+    async function ensureBrowser() {
+      try {
+        // Quick health check — if browser is dead, newPage() will throw
+        if (browser && browser.isConnected()) return;
+      } catch (_) {}
+      console.error('  ↻ Browser dead, relaunching...');
+      try { if (browser) await browser.close(); } catch (_) {}
+      browser = await launchBrowser();
+    }
+
+    browser = await launchBrowser();
+
+    const playwrightSources = [
+      ['Metrograph', scrapeMetrograph],
+      ['Film Forum Events', scrapeFilmForumEvents],
+      ['BAM', scrapeBAM],
+      ['Angelika', scrapeAngelika],
+      ['Film at Lincoln Center', scrapeFilmLinc],
+      ['Guggenheim', scrapeGuggenheim],
+      ['New Museum', scrapeNewMuseum],
+      ['Japan Society', scrapeJapanSociety],
+      ['NY Philharmonic', scrapeNYPhil],
+      ['Carnegie Hall', scrapeCarnegieHall],
+      ['Met Opera', scrapeMetOpera],
+      ['NYCB', scrapeNYCB],
+      ['Joyce Theater', scrapeJoyce],
+      ['Lincoln Center', scrapeLincolnCenter],
+      ['ABT', scrapeABT],
+    ];
+
+    for (const [name, fn] of playwrightSources) {
+      await ensureBrowser();
+      await runSource(name, fn, browser);
+    }
 
     // Stealth browser for Cloudflare/Incapsula-protected sources
-    // Uses headed mode with anti-detection flags
     console.error('\nLaunching stealth browser for protected sources...');
-    stealthBrowser = await chromium.launch({
-      headless: false,
-      proxy: PROXY_CONFIG || undefined,
-      args: [
-        '--disable-blink-features=AutomationControlled',
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--window-size=1280,800',
-      ],
-    });
-    const stealthContext = await stealthBrowser.newContext({
-      userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-      viewport: { width: 1280, height: 800 },
-      javaScriptEnabled: true,
-    });
-    // Remove webdriver flag
-    await stealthContext.addInitScript(() => {
-      Object.defineProperty(navigator, 'webdriver', { get: () => false });
-    });
 
-    await runSource('Moving Image', scrapeMovingImage, stealthContext);
-    await runSource('92NY', scrape92NY, stealthContext);
-    // If 92NY got very few events with stealth browser, retry with regular Chromium+proxy
-    const ny92count = events.filter(e => e.venue === '92NY').length;
-    if (ny92count < 20) {
-      console.error(`92NY only got ${ny92count} events with stealth browser, retrying with regular Chromium...`);
-      // Remove the few events from the stealth attempt before retrying
-      const beforeLen = events.length;
-      for (let i = events.length - 1; i >= 0; i--) {
-        if (events[i].venue === '92NY') events.splice(i, 1);
+    async function launchStealthContext() {
+      const sb = await chromium.launch({
+        headless: false,
+        proxy: PROXY_CONFIG || undefined,
+        args: [
+          '--disable-blink-features=AutomationControlled',
+          ...BROWSER_ARGS,
+          '--window-size=1280,800',
+        ],
+      });
+      const ctx = await sb.newContext({
+        userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+        viewport: { width: 1280, height: 800 },
+        javaScriptEnabled: true,
+      });
+      await ctx.addInitScript(() => {
+        Object.defineProperty(navigator, 'webdriver', { get: () => false });
+      });
+      return { sb, ctx };
+    }
+
+    let stealthCtx = null;
+    try {
+      ({ sb: stealthBrowser, ctx: stealthCtx } = await launchStealthContext());
+    } catch (e) {
+      console.error('Stealth browser launch failed, retrying headless...', e.message);
+      // Fallback: launch headless with same anti-detection flags
+      try {
+        stealthBrowser = await chromium.launch({
+          headless: true,
+          proxy: PROXY_CONFIG || undefined,
+          args: ['--disable-blink-features=AutomationControlled', ...BROWSER_ARGS],
+        });
+        stealthCtx = await stealthBrowser.newContext({
+          userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+          viewport: { width: 1280, height: 800 },
+          javaScriptEnabled: true,
+        });
+        await stealthCtx.addInitScript(() => {
+          Object.defineProperty(navigator, 'webdriver', { get: () => false });
+        });
+      } catch (e2) {
+        console.error('Headless stealth fallback also failed:', e2.message);
       }
-      console.error(`  Removed ${beforeLen - events.length} stealth 92NY events before retry`);
-      await runSource('92NY', scrape92NY, browser);
+    }
+
+    if (stealthCtx) {
+      await runSource('Moving Image', scrapeMovingImage, stealthCtx);
+      await runSource('92NY', scrape92NY, stealthCtx);
+      // If 92NY got very few events with stealth browser, retry with regular Chromium+proxy
+      const ny92count = events.filter(e => e.venue === '92NY').length;
+      if (ny92count < 20) {
+        console.error(`92NY only got ${ny92count} events with stealth browser, retrying with regular Chromium...`);
+        const beforeLen = events.length;
+        for (let i = events.length - 1; i >= 0; i--) {
+          if (events[i].venue === '92NY') events.splice(i, 1);
+        }
+        console.error(`  Removed ${beforeLen - events.length} stealth 92NY events before retry`);
+        await ensureBrowser();
+        await runSource('92NY', scrape92NY, browser);
+      }
     }
   } catch (e) {
     console.error('Playwright unavailable, skipping JS sources:', e.message);
   } finally {
-    if (browser) await browser.close();
-    if (stealthBrowser) await stealthBrowser.close();
+    try { if (browser) await browser.close(); } catch (_) {}
+    try { if (stealthBrowser) await stealthBrowser.close(); } catch (_) {}
   }
 
   printReport();
